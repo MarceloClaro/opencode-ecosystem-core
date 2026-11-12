@@ -1,10 +1,42 @@
 {
-  "repository": "https://github.com/MarceloClaro/rea",
-  "commit": "4daea941bfeeb426886f2d048aed7f3cb2dbf97b",
+  "repository": "https://github.com/morluto/rea",
   "package": "rea-agents",
-  "version": "6.4.0",
+  "version": "6.8.0",
+  "skill_version": "49",
+  "tool_count": 229,
   "source_directory": "skills/reverse-engineer-anything",
+  "installed_from": "/home/marceloclaro/.local/share/opencode-core/rea-6.8.0/skills/reverse-engineer-anything",
   "license": "MIT",
   "coordinator": "marceloclaro",
-  "note": "Instruções e referências copiadas da build identificada; instalação da skill não comprova conexão MCP nem disponibilidade de providers."
+  "installed_at": "2026-11-12T23:12:10.316502+00:00",
+  "skill_sha256": "8818b645c9fd348399a50a8678b91cff20215690adad484e70282ff9f2ef91ee",
+  "files": {
+    "LICENSE": "798f9e4d18e49b30bf2f12696c8ced73dc4e1413da375a333d01281543a1ea8b",
+    "SKILL.md": "8818b645c9fd348399a50a8678b91cff20215690adad484e70282ff9f2ef91ee",
+    "references/android-applications.md": "24ecaa1798eb4f28591884a7deb68df31e90313865515a23e3b466403f1abc39",
+    "references/connection-and-recovery.md": "4754441e63e4252a0b230cf5aa12b78c0716463905305059bb7dea6713ba0bfc",
+    "references/environments.md": "83e041f0a5243172af69eaadf62da0699617add3ff1d46b294e4bba7ece9d95f",
+    "references/evidence-workflows.md": "f44b68acc6ebaa60c1f5d0670e4f9ff7212d351a0ecc6e6ca77ce38b9177ea57",
+    "references/javascript-applications.md": "619cfd15ffdf466452cc32002ae357fefec59d5dcad4c9dfc27630138f0f719d",
+    "references/native-and-artifacts.md": "cf394568ae91e9017d63056adb8872fb1df9e2f6bbe544a95d0fd9f064b06dd5",
+    "references/runtime-observation.md": "852bd1e25e9f83f0e8c7d4f8441a043e2b2a7d5e39f729bf22ac77259a0207bd"
+  },
+  "backup": {
+    "path": ".opencode/skills/.archive/reverse-engineer-anything-v37",
+    "skill_version": "37",
+    "skill_sha256": "6715cfb03512db108e0151e5429fb2c305ae17ea75266dbf2b1454285ea37b4e",
+    "files": {
+      "LICENSE": "798f9e4d18e49b30bf2f12696c8ced73dc4e1413da375a333d01281543a1ea8b",
+      "SKILL.md": "6715cfb03512db108e0151e5429fb2c305ae17ea75266dbf2b1454285ea37b4e",
+      "origin.json": "97a4c82d8f3949310ea9829f0cbf71a11a07496099f86718f705f0ddb9e2f9ac",
+      "references/android-applications.md": "412d9cb462d85b07f6fdbc2453dd741ca3da2c0dbba627867d5624df94afa74c",
+      "references/connection-and-recovery.md": "668e421e2a27b63058f42ebd36bec04db73404c136e5f47611119ab9d4b4f607",
+      "references/evidence-workflows.md": "dd23217d55342bbe3e98a2bf47a7f208b35a4b41c98645ac160a4d0aac5316f9",
+      "references/javascript-applications.md": "04cc298e2485d1db7925b8789097fc5fdd042e937ed11980d3eabc29cb176e59",
+      "references/native-and-artifacts.md": "1947af57448ba7be6a0736ffbe976c7ecdab4105f315ecc06c830727cc5205fe",
+      "references/runtime-observation.md": "b3eea94dd7d0c6474634de22ac3ccae317f42ba1ba2389d93535ee8dae7d94e1",
+      "references/search-before-reconstruction.md": "5707fcb6ebb6230866a90d8834f3af8f92ae3c2cda88efda61268c6a2e6d9745"
+    }
+  },
+  "note": "Instruções e referências copiadas da build 6.8.0; instalação da skill não comprova conexão MCP nem disponibilidade de providers."
 }

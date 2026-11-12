@@ -1,0 +1,247 @@
+{
+  "schema": "reap.manifest.v1",
+  "source": "/tmp/opencode/REA-Prompts",
+  "source_commit": "9756618f25af1920c8965f8969820eed22247936",
+  "target_root": "/home/marceloclaro/opencode-ecosystem-core/.opencode/skills/reap-prompts",
+  "layout": "references",
+  "created_at": "2026-11-12T23:13:06.013105+00:00",
+  "entries": [
+    {
+      "pack": "reap-00-install-and-verify",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-00-install-and-verify/SKILL.md",
+      "destination": "references/packs/reap-00-install-and-verify.md",
+      "sha256": "0a605c1c921549c50c0f56fed886b15f640c1df560aa6fb1d27525854e64ff45",
+      "bytes": 726,
+      "action": "create"
+    },
+    {
+      "pack": "reap-01-getting-started",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-01-getting-started/SKILL.md",
+      "destination": "references/packs/reap-01-getting-started.md",
+      "sha256": "006f358c2d9e27267fdb738b878f66c184e3b8c39812f14a946d0c38a2a22090",
+      "bytes": 1061,
+      "action": "create"
+    },
+    {
+      "pack": "reap-02-feature-tracing-any-program",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-02-feature-tracing-any-program/SKILL.md",
+      "destination": "references/packs/reap-02-feature-tracing-any-program.md",
+      "sha256": "e9919b65ccd2e7df32adaf1d92f22ee951291e61a47c6d2db91953592816d2ab",
+      "bytes": 1420,
+      "action": "create"
+    },
+    {
+      "pack": "reap-03-native-binary-exploration",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-03-native-binary-exploration/SKILL.md",
+      "destination": "references/packs/reap-03-native-binary-exploration.md",
+      "sha256": "34dbb3a246fc3dbb9b7e5a092bf6aaf185bbf0114cff8215d195c535d8d8b4a6",
+      "bytes": 2147,
+      "action": "create"
+    },
+    {
+      "pack": "reap-04-software-and-feature-cloning",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-04-software-and-feature-cloning/SKILL.md",
+      "destination": "references/packs/reap-04-software-and-feature-cloning.md",
+      "sha256": "02dc563d06ed4a8085b21210b03e1e030ecce81d3b4bc1f0a5a5b8c4ddc19ab8",
+      "bytes": 2336,
+      "action": "create"
+    },
+    {
+      "pack": "reap-05-games",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-05-games/SKILL.md",
+      "destination": "references/packs/reap-05-games.md",
+      "sha256": "2f7f47c7f4a389bf8c995947adb69a72ecc3a85a3c84f0ad1d9338bbffdeb234",
+      "bytes": 1695,
+      "action": "create"
+    },
+    {
+      "pack": "reap-06-game-portability-to-wasm",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-06-game-portability-to-wasm/SKILL.md",
+      "destination": "references/packs/reap-06-game-portability-to-wasm.md",
+      "sha256": "a74f66af32814fb2796d0f79a2369959ed06f0012ec6f2f10afa7eb2e5bb64dd",
+      "bytes": 1878,
+      "action": "create"
+    },
+    {
+      "pack": "reap-07-firmware-and-embedded",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-07-firmware-and-embedded/SKILL.md",
+      "destination": "references/packs/reap-07-firmware-and-embedded.md",
+      "sha256": "cc9e5a15099ad7fa8059a36be3b94486894195da27e92a5f6eb4efd5afbb8f71",
+      "bytes": 1755,
+      "action": "create"
+    },
+    {
+      "pack": "reap-08-android",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-08-android/SKILL.md",
+      "destination": "references/packs/reap-08-android.md",
+      "sha256": "95cfa3782b769f70a8192de6f15e1db83cff87a1e7d2b9e8474d92a1a7320ea7",
+      "bytes": 1924,
+      "action": "create"
+    },
+    {
+      "pack": "reap-09-kernel-analysis",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-09-kernel-analysis/SKILL.md",
+      "destination": "references/packs/reap-09-kernel-analysis.md",
+      "sha256": "a0a356e45f41af6d887f67d9108fd42aed5c8699f721887156fd9b1928de9de2",
+      "bytes": 1621,
+      "action": "create"
+    },
+    {
+      "pack": "reap-10-vulnerability-research",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-10-vulnerability-research/SKILL.md",
+      "destination": "references/packs/reap-10-vulnerability-research.md",
+      "sha256": "478e92f1fda727a03fef84fbfa3ea464d99f797f6a04ba3adb56218742d4655a",
+      "bytes": 2588,
+      "action": "create"
+    },
+    {
+      "pack": "reap-11-electron-and-javascript",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-11-electron-and-javascript/SKILL.md",
+      "destination": "references/packs/reap-11-electron-and-javascript.md",
+      "sha256": "87cb2dfd912a403cf56b0f1fad1bfee27de5881317ab3e614f2b73321d3e5828",
+      "bytes": 5095,
+      "action": "create"
+    },
+    {
+      "pack": "reap-12-anti-cheat-and-protection-research",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-12-anti-cheat-and-protection-research/SKILL.md",
+      "destination": "references/packs/reap-12-anti-cheat-and-protection-research.md",
+      "sha256": "5ccfc2b4125474621801618f88dd197fda7dae1fd7f11153449896d0ac4eb138",
+      "bytes": 2614,
+      "action": "create"
+    },
+    {
+      "pack": "reap-13-dma-and-hardware-assisted-cheat-research-defensive",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-13-dma-and-hardware-assisted-cheat-research-defensive/SKILL.md",
+      "destination": "references/packs/reap-13-dma-and-hardware-assisted-cheat-research-defensive.md",
+      "sha256": "69b5e7bdd42e0fc0042a540d13011aa1a5e50cb7a691d0a1dcf9224d6f47ac30",
+      "bytes": 2791,
+      "action": "create"
+    },
+    {
+      "pack": "reap-14-software-cracking-research",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-14-software-cracking-research/SKILL.md",
+      "destination": "references/packs/reap-14-software-cracking-research.md",
+      "sha256": "0324cb4f9e1c471971dbcd56edd1185f462f578f558e8ad9c716d675e48e5e1d",
+      "bytes": 1768,
+      "action": "create"
+    },
+    {
+      "pack": "reap-15-version-comparison-and-crash-work",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-15-version-comparison-and-crash-work/SKILL.md",
+      "destination": "references/packs/reap-15-version-comparison-and-crash-work.md",
+      "sha256": "e4b8449a2539e3cbc51f0388cea1df2c7afb985d34d7effd86a9ca484a8c5171",
+      "bytes": 928,
+      "action": "create"
+    },
+    {
+      "pack": "reap-16-long-running-investigations",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-16-long-running-investigations/SKILL.md",
+      "destination": "references/packs/reap-16-long-running-investigations.md",
+      "sha256": "a11fac42fc2d425d502b7473334c8618c6b7202ea6365aed8bab943ba3e84064",
+      "bytes": 862,
+      "action": "create"
+    },
+    {
+      "pack": "reap-17-malware-analysis",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-17-malware-analysis/SKILL.md",
+      "destination": "references/packs/reap-17-malware-analysis.md",
+      "sha256": "a3fba9a8c1603fda02f2dd8c4e1e26e554bf104689893261ab745c90f09461ea",
+      "bytes": 5024,
+      "action": "create"
+    },
+    {
+      "pack": "reap-18-advanced-binary-exploration-and-deobfuscation",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-18-advanced-binary-exploration-and-deobfuscation/SKILL.md",
+      "destination": "references/packs/reap-18-advanced-binary-exploration-and-deobfuscation.md",
+      "sha256": "1423832bf46cddf8af6c8d0d7460c812cef84867980f20d33fc43445ddd0d458",
+      "bytes": 4438,
+      "action": "create"
+    },
+    {
+      "pack": "reap-19-kernel-and-driver-exploitation-research",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-19-kernel-and-driver-exploitation-research/SKILL.md",
+      "destination": "references/packs/reap-19-kernel-and-driver-exploitation-research.md",
+      "sha256": "6e0d96628e3f26367d65edafb28b14a18deac222e2b97938d7eb16b9f1430a03",
+      "bytes": 4462,
+      "action": "create"
+    },
+    {
+      "pack": "reap-20-advanced-software-cloning-and-feature-reconstruction",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-20-advanced-software-cloning-and-feature-reconstruction/SKILL.md",
+      "destination": "references/packs/reap-20-advanced-software-cloning-and-feature-reconstruction.md",
+      "sha256": "65b1412cc3b42d71c74b650636d57ab1bb12c467c2f960fc1cebc63578b99690",
+      "bytes": 3219,
+      "action": "create"
+    },
+    {
+      "pack": "reap-21-protector-and-obfuscator-research",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-21-protector-and-obfuscator-research/SKILL.md",
+      "destination": "references/packs/reap-21-protector-and-obfuscator-research.md",
+      "sha256": "35f3a2f74f7b7080fd84ba1bba4a66a7d3a19bbd4e383f42457aa9e6b43bc58e",
+      "bytes": 5327,
+      "action": "create"
+    },
+    {
+      "pack": "reap-22-go-and-rust-binary-source-recovery",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-22-go-and-rust-binary-source-recovery/SKILL.md",
+      "destination": "references/packs/reap-22-go-and-rust-binary-source-recovery.md",
+      "sha256": "ecb68ba9cd48fb56470bbefd67cf96714cc0a346a2256eb7070cfbae04383927",
+      "bytes": 4801,
+      "action": "create"
+    },
+    {
+      "pack": "reap-prompt-writing-tips",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-prompt-writing-tips/SKILL.md",
+      "destination": "references/packs/reap-prompt-writing-tips.md",
+      "sha256": "5b27df9f071b49d2f468653ffdd3d72627243d7f3fad99a77556d27b2b10ebc1",
+      "bytes": 1268,
+      "action": "create"
+    },
+    {
+      "pack": "reap-prompts",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-prompts/SKILL.md",
+      "destination": "references/packs/reap-prompts.md",
+      "sha256": "be5e452750b1fa66b828735045a6d5a56eadc49d88f60a61cb8e03d0ad14d7f1",
+      "bytes": 4097,
+      "action": "create"
+    },
+    {
+      "pack": "reap-wildcard",
+      "source": "/tmp/opencode/REA-Prompts/Skills/reap-wildcard/SKILL.md",
+      "destination": "references/packs/reap-wildcard.md",
+      "sha256": "d00a97a074c3b4ebbbe1b694615747c5614ee31d72416396d6d5a78fb884870b",
+      "bytes": 854,
+      "action": "create"
+    }
+  ],
+  "backups": [],
+  "written": [
+    "references/packs/reap-00-install-and-verify.md",
+    "references/packs/reap-01-getting-started.md",
+    "references/packs/reap-02-feature-tracing-any-program.md",
+    "references/packs/reap-03-native-binary-exploration.md",
+    "references/packs/reap-04-software-and-feature-cloning.md",
+    "references/packs/reap-05-games.md",
+    "references/packs/reap-06-game-portability-to-wasm.md",
+    "references/packs/reap-07-firmware-and-embedded.md",
+    "references/packs/reap-08-android.md",
+    "references/packs/reap-09-kernel-analysis.md",
+    "references/packs/reap-10-vulnerability-research.md",
+    "references/packs/reap-11-electron-and-javascript.md",
+    "references/packs/reap-12-anti-cheat-and-protection-research.md",
+    "references/packs/reap-13-dma-and-hardware-assisted-cheat-research-defensive.md",
+    "references/packs/reap-14-software-cracking-research.md",
+    "references/packs/reap-15-version-comparison-and-crash-work.md",
+    "references/packs/reap-16-long-running-investigations.md",
+    "references/packs/reap-17-malware-analysis.md",
+    "references/packs/reap-18-advanced-binary-exploration-and-deobfuscation.md",
+    "references/packs/reap-19-kernel-and-driver-exploitation-research.md",
+    "references/packs/reap-20-advanced-software-cloning-and-feature-reconstruction.md",
+    "references/packs/reap-21-protector-and-obfuscator-research.md",
+    "references/packs/reap-22-go-and-rust-binary-source-recovery.md",
+    "references/packs/reap-prompt-writing-tips.md",
+    "references/packs/reap-prompts.md",
+    "references/packs/reap-wildcard.md"
+  ]
+}
