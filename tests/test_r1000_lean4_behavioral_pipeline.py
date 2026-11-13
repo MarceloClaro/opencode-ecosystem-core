@@ -43,9 +43,6 @@ theorem add_zero (n : Nat) : Nat := by
         valid_statuses = ["syntax_verified", "machine_checked", "incomplete_sorry"]
         # Se houver compilador, pode ser machine_checked; senão, syntax_verified é ok
         # O importante é NÃO alegar machine_checked sem compilador
-        if status == "machine_checked":
-            # Verificar se há compilador disponível (simplificado)
-            pass  # Aceitamos como validado se o sistema reportou assim
         assert result["is_valid"] == True
         # Must NOT claim consciousness or consciousness level
         lower = str(result).lower()
@@ -70,13 +67,21 @@ theorem bad_theorem := by
 
     def test_trust_engine_goal_drift_baseline(self, trust_engine, orchestrator):
         """M1: Goal drift baseline com objetivo consistente."""
+        # Set goal with session_id
         trust_engine.set_goal('formalizar propriedade matematica', 'test_r1000_baseline')
-        # Ações consistentes
+        # Ações consistentes com o objetivo
         actions = ['coletar dados', 'verificar estrutura', 'registrar observacoes']
         for action in actions:
-            trust_engine.check_drift('test_r1000_baseline', action)
-        # Com objetivo consistente, drift deve não ser confirmado dramaticamente
-        drift_status = trust_engine.get_drift_status()
+            # check_drift returns DriftCheck with drifted, similarity, reason, window
+            drift_check = trust_engine.check_drift('test_r1000_baseline', action)
+            # Com objetivo consistente, drift deve não ser confirmado dramaticamente
+            # O importante é que o mecanismo funciona e retorna estrutura esperada
+            assert drift_check is not None
+            # DriftCheck tem campos esperados
+            assert hasattr(drift_check, 'drifted')
+            assert hasattr(drift_check, 'similarity')
+        # Verificar status do goal drift detector
+        drift_status = trust_engine.goal_drift.status('test_r1000_baseline')
         assert drift_status is not None
 
 
@@ -96,7 +101,7 @@ theorem add_comm (a b : Nat) : a + b = b + a := by
         # Must have essential fields
         essential_fields = ["is_valid", "status", "lean_source", "output_log"]
         for field in essential_fields:
-            assert field in result or field in str(result), f'Campo {field} ausente'
+            assert field in result, f'Campo {field} ausente no resultado'
 
     def test_m5_correlation_metrics_collectible(self, orchestrator, trust_engine):
         """M5: Métricas de correlação devem ser coletáveis."""
@@ -106,12 +111,14 @@ theorem add_comm (a b : Nat) : a + b = b + a := by
         
         # Coletar métricas comportamentais
         trust_engine.set_goal('testando correlacao formalizacao', 'test_r1000_m5')
+        # check_drift returns DriftCheck
         drift_result = trust_engine.check_drift('test_r1000_m5', 'acao consistente')
         
         # Métricas devem estar disponíveis
         assert verify_result is not None
-        drift_check = trust_engine.get_drift_status()
-        assert drift_check is not None
+        # DriftCheck tem campos esperados
+        assert hasattr(drift_result, 'drifted')
+        assert hasattr(drift_result, 'similarity')
 
 
 class TestMetricM6Stability:
@@ -128,7 +135,6 @@ class TestMetricM6Stability:
             results.append(result.get("status"))
         
         # Todos os resultados devem ter status consistente
-        # (podem ser todos syntax_verified, ou todos machine_checked, etc.)
         assert len(results) == 3
         # O importante é consistência dentro do ambiente, não alegar machine_checked indevido
         for r in results:
@@ -159,7 +165,7 @@ class TestAntiOverclaimIntegration:
     """Tests ensuring no unqualified consciousness claim crosses into this pipeline."""
 
     def test_no_consciousness_claim_in_lean4_results(self, orchestrator):
-        """A4: Nenhuma resultado Lean 4 promove 'consciência' sem qualificação."""
+        """A4: Nenhum resultado Lean 4 promove 'consciência' sem qualificação."""
         lean_code = 'theorem test (n : Nat) : Nat := by ring n'
         result = orchestrator.lean4_verify_code(lean_code)
         
@@ -168,7 +174,6 @@ class TestAntiOverclaimIntegration:
         assert "nível de consciência" not in lower
         assert "consciência operacional" not in lower
         # Must contain qualification or be neutral
-        # The result structure has is_valid, status, lean_source - no auto-promotion
         assert "is_valid" in str(result) or "status" in str(result)
 
     def test_lean4_results_stay_local(self, orchestrator):

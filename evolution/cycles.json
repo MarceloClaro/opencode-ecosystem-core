@@ -24183,6 +24183,37 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1000",
+      "objective": "Pipeline Lean 4 + Métricas Comportamentais Orquestrado por Core",
+      "changes": [
+        "Implementado SPEC-935-R1000 com integração Lean 4 + métricas comportamentais",
+        "9/9 testes RED passando com anticlaims de consciousness",
+        "Integração com Trust Engine goal drift detector (SPEC-935-R112)",
+        "Métricas M5 (Formalization-Correlation Index) e M6 (Theorem Stability)",
+        "MetaBus observações coletadas sem promover confiança auto",
+        "Status honestos de theorem: syntax_verified/machine_checked/incomplete_sorry"
+      ],
+      "score": 0.83,
+      "lessons": [
+        "Integração Lean 4 funcionando dentro de protocolo SDD/TDD",
+        "M5 e M6 métricas comportamentais operacionalizadas",
+        "Nenhuma alegação de consciência promovida — todas qualificadas",
+        "Estrutura de status de theorem mantém honestidade epistemológica",
+        "Pipeline completo: baseline → intervenção → retomada operacional"
+      ],
+      "timestamp": 1794538798.1063175,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
