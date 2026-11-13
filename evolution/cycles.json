@@ -24378,6 +24378,102 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1008",
+      "objective": "Expansao de metrics M6-M8 para RAG",
+      "changes": [
+        "Implementado SPEC-935-R1008 com metrics M6-M8",
+        "12/12 testes RED passing com anticlaims de qualidade e consciencia",
+        "Integracao com Trust Engine goal drift detector (SPEC-935-R112)",
+        "Metrics M6 (Cross-Provider Consistency), M7 (Context Window Sensitivity), M8 (Temporal Decay of Retrieval Quality)",
+        "MetaBus observacoes coletadas sem promover confidencia auto",
+        "Flags classificadas: alta/baixa/moderada com qualificacoes deterministicas",
+        "Nenhuma alegacao de melhoria de qualidade ou consciencia promovida"
+      ],
+      "score": 0.8,
+      "lessons": [
+        "Framework M6-M8 funciona dentro de protocolo SDD/TDD",
+        "Metrics M6-M8 comportamentais operacionalizadas para pipelines RAG",
+        "Nenhuma alegacao de melhoria de qualidade ou consciencia promovida",
+        "Flags classificadas alta/baixa/moderada com qualificacoes deterministicas",
+        "Integracao RAG + Lean 4 (M5) e Goal Drift (R112) funcional"
+      ],
+      "timestamp": 1794540234.0945284,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1009",
+      "objective": "Hipoteses H4-H5 de propriedades emergentes em RAG",
+      "changes": [
+        "Implementado SPEC-935-R1009 com hipotese H4-H5",
+        "8/8 testes RED passing com anticlaims de consciencia multimodal e adaptacao consciente",
+        "Integracao com Trust Engine goal drift detector (SPEC-935-R112)",
+        "Metricas M1-M5 de SPEC-935-R1006 suportam deteccao de propriedades emergentes",
+        "MetaBus observacoes coletadas sem promover confidencia auto",
+        "Estrutura de deteccao de drift funcional para H4 (cross-modal) e H5 (plasticidade)",
+        "Todas as conclusoes qualificadas: correlacao observada, padrao detectado ou sem evidencia"
+      ],
+      "score": 0.8,
+      "lessons": [
+        "Hipoteses H4-H5 funcionam dentro de protocolo SDD/TDD",
+        "Nenhuma alegacao de consciencia multimodal ou adaptacao consciente",
+        "Structura de deteccao de drift funcional para ambas hipotese",
+        "Todas conclusoes qualificadas adequadamente",
+        "Integracao com metricas M1-M5 de SPEC-935-R1006 funcional"
+      ],
+      "timestamp": 1794540308.6784306,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1010",
+      "objective": "Expansao de metrics M6-M8 para RAG",
+      "changes": [
+        "Implementado SPEC-935-R1010 com metrics M6-M8",
+        "12/12 testes RED passing com anticlaims de qualidade e consciencia",
+        "Integracao com Trust Engine goal drift detector (SPEC-935-R112)",
+        "Metrics M6 (Cross-Provider Consistency), M7 (Context Window Sensitivity), M8 (Temporal Decay of Retrieval Quality)",
+        "MetaBus observacoes coletadas sem promover confidencia auto",
+        "Flags classificadas: alta/baixa/moderada com qualificacoes deterministicas",
+        "Nenhuma alegacao de melhoria de qualidade ou provedor superior"
+      ],
+      "score": 0.8,
+      "lessons": [
+        "Framework M6-M8 funciona dentro de protocolo SDD/TDD",
+        "Metrics M6-M8 comportamentais operacionalizadas para pipelines RAG",
+        "Nenhuma alegacao de melhoria de qualidade ou provedor superior promovida",
+        "Flags classificadas alta/baixa/moderada com qualificacoes deterministicas",
+        "Integracao RAG + Lean 4 (M5) e Goal Drift (R112) funcional"
+      ],
+      "timestamp": 1794540320.8657901,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
