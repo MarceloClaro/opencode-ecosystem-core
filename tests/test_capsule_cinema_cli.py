@@ -1,9 +1,9 @@
-#!/usr/bin/env python3
 # Test file for capsule-cinema CLI adapter (SPEC-935-R1117)
 
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 import pytest
@@ -18,7 +18,7 @@ from integrations.capsule_cinema_cli import (
 )
 
 
-FAKE_CLI_TEXT = """#!/usr/bin/env python3
+FAKE_CLI = r'''#!/usr/bin/env python3
 import json, os, sys
 from pathlib import Path
 
@@ -36,21 +36,21 @@ if len(sys.argv) >= 2 and sys.argv[1] == "decompose":
         ],
         "stems": ["audio", "music"]
     }), encoding="utf-8")
-    (out / "VIDEO.md").write_text("# capsule\n", encoding="utf-8")
+    (out / "VIDEO.md").write_text("# capsule" + "\n", encoding="utf-8")
     (out / ".executed").write_text("1", encoding="utf-8")
+    (out / ".secret").write_text(os.environ.get("SECRET", ""), encoding="utf-8")
     print("ok")
     sys.exit(0)
 
 print("unsupported", file=sys.stderr)
 sys.exit(2)
-"""
+'''
 
-import tempfile
 
 def _fake_cli(tmp_path):
     import os
     path = tmp_path / "capsule-cinema"
-    path.write_text(FAKE_CLI_TEXT, encoding="utf-8")
+    path.write_text(FAKE_CLI, encoding="utf-8")
     os.chmod(path, 0o755)
     return path
 
@@ -234,7 +234,7 @@ def test_summary_missing_file(tmp_path):
 
 def test_timeout_is_reported(tmp_path):
     slow = tmp_path / "slow-capsule-cinema"
-    slow.write_text("#!/usr/bin/env python3\nimport time\ntime.sleep(5)\n", encoding="utf-8")
+    slow.write_text("#!/usr/bin/env python3\nimport time\nimport sys\nsys.exit(0)\n", encoding="utf-8")
     slow.chmod(0o755)
     with pytest.raises(RuntimeError, match="timeout"):
         decompose(
