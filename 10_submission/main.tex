@@ -1,0 +1,173 @@
+%=============================================================================
+% MAIN.TEX — ARTIGO: Assinatura Cognitiva em Sistemas Orquestrados Agentico
+%=============================================================================
+% Padrão: SPEC-1053 - síntese quantitativa human-gated e pacote de submissão
+% Compilar com: pdflatex main.tex (duas vezes)
+% Formato: ABNT com revisão crítica de referências
+%=============================================================================
+
+\documentclass[12pt,a4paper]{article}
+
+% Pacotes essenciais
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+% Configurações de página
+\geometry{margin=2.5cm}
+\onehalfspacing
+\setlength{\parindent}{1.5cm}
+\setlength{\parskip}{0.3cm}
+
+% Cabeçalho e rodapé
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Assinatura Cognitiva em Sistemas Orquestrados Agentico}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Títulos
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+% Hiperlinks
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue,
+    bookmarks=true,
+    pdfauthor={MarceloClaro},
+    pdftitle={Assinatura Cognitiva em Sistemas Orquestrados Agentico},
+    pdfsubject={Sistemas Multi-Agente, Próteses Cognitivas},
+    pdfkeywords={assinatura cognitiva, prótese cognitiva, sistemas multi-agente, Core OpenCode, autoria estendida, responsabilidade ética, publicação científica}
+}
+
+% Início do documento
+\begin{document}
+
+% Título e autores
+\input{modules/00-preamble}
+
+% Resumo
+\input{modules/01-resumo}
+
+% Nova página
+\newpage
+\setcounter{page}{1}
+
+% Introdução
+\input{modules/02-introducao}
+
+% Fundamentação Teórica
+\input{modules/03-fundamentacao}
+
+% Caracterização Técnica
+\input{modules/04-caracterizacao}
+
+% Implicações para Autoria e Responsabilidade
+\input{modules/05-implicacoes}
+
+% Seleção de Periódicos
+\input{modules/06-periodicos}
+
+% Considerações Metodológicas e Limites
+\input{modules/07-metodologicas}
+
+% Conclusão
+\input{modules/08-conclusao}
+
+% ---------------------------------------------------------------------------
+% FIGURAS
+% ---------------------------------------------------------------------------
+\clearpage
+\section*{Figuras}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/fig1_sdd_tdd_cycle}
+\caption{Protocolo SDD/TDD das seis fases (Perceber → Especificar → Delegar → Executar → Verificar → Refletir) observando a assinatura cognitiva prótese.}
+\label{fig:dd_cycle}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/trust_engine_profile}
+\caption{Perfil do Trust Engine demonstrando pontuação de confiança (0 a 1) e agentes com trust < 0,3 exigindo supervisão.}
+\label{fig:trust_engine}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/evolution_registry}
+\caption{Contagem de ciclos no Evolution Registry (854 ciclos totais) demonstrando a evolução da assinatura cognitiva ao longo do tempo.}
+\label{fig:evolution_registry}
+\end{figure}
+
+% Referências
+\clearpage
+\renewcommand{\refname}{Referências}
+\bibliographystyle{abnt-name-year}
+\bibliography{references}
+
+% ---------------------------------------------------------------------------
+% MATÉRIA COMPLEMENTAR
+% ---------------------------------------------------------------------------
+
+% Contribuição do Autor
+\clearpage
+\section*{Contribuição do Autor}
+
+\textbf{MarceloClaro}: Conceitualização, Orquestragem Central Metacognitiva, Escrita -- Rascunho Original, Revisão e Edição, Supervisão do Projeto.
+
+O autor confirma responsabilidade sobre o modelo de assinatura cognitiva prótese, a infraestrutura de rastreabilidade (Trust Engine, Evolution Registry, Spec Engine) e as implicações éticas da autoria estendida em sistemas multiagente.
+
+% Declaração de Disponibilidade dos Dados
+\section*{Declaração de Disponibilidade dos Dados}
+
+Os dados técnicos analisados neste artigo provêm do ecossistema OpenCode Ecosystem Core e são de domínio público dentro do projeto: Evolution Registry (854 ciclos), MetaBus (17 entradas episódicas), Trust Engine scores e Spec Engine compliance rates. Nenhum dado de participantes humanos diretos foi utilizado (análise de sistema/artefato). Os metadados estão registrados em `evolution/cycles.json`, `sdd/spec_engine.py` outputs e `mci/metacognitive_evaluator.py` classifications. Todo o código gerado para esta pesquisa está disponível em \url{https://github.com/MarceloClaro/opencode-ecosystem-core}.
+
+% Disponibilidade do Código
+\section*{Disponibilidade do Código}
+
+Todo o código experimental, incluindo extração do Evolution Registry, análise do Trust Engine, classificação via `classify_metacognitive_tier()` e geração de figuras, está publicamente disponível em \url{https://github.com/MarceloClaro/opencode-ecosystem-core}. O pipeline de análise foi implementado em Python 3.12 usando Whoosh3 para indexação, Pandas para manipulação de dados de confiança, Matplotlib para visualização de scores e métricas, e LaTeX para compilação dos artefatos. A semente aleatória foi fixada em 42 para reprodutibilidade das análises estatísticas.
+
+% Financiamento
+\section*{Financiamento}
+
+Esta pesquisa não recebeu nenhum financiamento específico de agências de fomento nos setores público, comercial ou sem fins lucrativos. Os recursos foram provenientes da manutenção contínua do OpenCode Ecosystem Core.
+
+% Conflitos de Interesse
+\section*{Conflitos de Interesse}
+
+O autor declara não haver conflitos de interesse na concepção, execução ou divulgação deste artigo. O modelo de assinatura cognitiva prótese é de propriedade do OpenCode Ecosystem Core e seu uso para submissão a periódicos independentes não envolve interesses financeiros diretos.
+
+% Declaração de Ética
+\section*{Aprovação em Comitê de Ética}
+
+Este estudo utilizou dados técnicos de domínio público dentro do ecossistema OpenCode. Não foi necessária aprovação de comitê de ética em pesquisa, pois o estudo não envolveu pesquisa com seres humanos, experimentos animais ou coleta de informações pessoais identificáveis. Os dados analisados são de registros de sistema (Evolution Registry, MetaBus, Trust Engine, Spec Engine) e não caracterizam experimentação científica primária com participantes humanos.
+
+% Agradecimentos
+\section*{Agradecimentos}
+
+Ao ecossistema OpenCode Ecosystem pela infraestrutura de orquestração agente, Trust Engine, Evolution Registry e Spec Engine que tornaram possível a análise da assinatura cognitiva prótese. À skill `pesquisa-artigo-qualis-a1` pela estrutura modular M0-M7. À comunidade de Filosofia da Tecnologia e HCI por referências fundamentais (Clark & Chalmers, 1998; Ihde, 1990; Hayles, 1999; Verbeek, 2005).
+
+% ---------------------------------------------------------------------------
+% FIM DO DOCUMENTO
+% ---------------------------------------------------------------------------
+\end{document}

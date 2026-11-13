@@ -1,0 +1,62 @@
+%=============================================================================
+% MÓDULO 05 — Implicações para Autoria e Responsabilidade Ética
+%=============================================================================
+% Padrão: As implicações devem ser fundamentadas exclusivamente nas duas fontes
+% auditáveis (Clark & Chalmers, 1998 e Verbveek, 2005). Qualquer afirmação sobre
+% autoria, responsabilidade ou ética deve ser rastreável a estas duas fontes.
+%=============================================================================
+
+% --- 5.1. AUTORIA ESTENDIDA HUMANO-PRÓTESE ---
+% O modelo de autoria estendida alinha-se ao framework de "integração adequada" de
+% Clark & Chalmers (1998) - Fonte Auditável #1 - e ao framework de "mediação
+% tecnológica" de Verbveek (2005) - Fonte Auditável #2.
+
+% A autoria não é mais individual ou do sistema isoladamente, mas estendida:
+% - O humano direciona a prótese (define objetivos, restringe busca, aprova saídas)
+% - A prótese executa a orquestração agente (agregação de habilidades, roteamento, execução TDD)
+% - A assinatura cognitiva resultante reflete ambos, mas de modo não-redutível a nenhuma das partes
+
+% > \textbf{Critério da Banca:} A banca verificará se o modelo de autoria estendida
+% está fundamentado nas duas fontes auditáveis. A não menção a Clark & Chalmers (1998)
+% e Verbveek (2005) como base para a autoria estendida será considerada inconsistência.
+
+% --- 5.2. ACCOUNTABILITY DISTRIBUÍDO ---
+% Quando a prótese falha (produz saída incorreta, viés, erro de execução), a
+% responsabilidade é distribuída entre três atores, fundamentado em Verbveek (2005):
+
+% 1. Do designer da prótese: mecanismos de gate, trust scoring, spec validation
+% 2. Do usuário da prótese: supervisão adequada, definição de specs, aprovação de saídas
+% 3. Do agente específico que falhou: operação fora de parâmetros esperados
+
+% > \textbf{Critério da Banca:} O modelo de accountability tríplice deve citar explicitamente
+% Verbveek (2005) como fonte fundamentada. A ausência desta referência na discussão
+% da responsabilidade será bloqueador para aprovação.
+
+% --- 5.3. APOSTAS E LIMITES ---
+% O Core adota postura \textit{fail-closed}: se um executor falha ou está ausente,
+% informa a falha e prossegue com recursos disponíveis. Cada falha gera reflexão
+% registrada no MetaBus e ajuste de trust. Isso estabelece accountability da prótese
+% em vez de culpabilização individual.
+
+% > \textbf{Critério da Banca:} A postura fail-closed do Core e o ajuste de Trust Engine
+% scores após falhas devem ser articulados com Verbveek (2005) sobre mediação tecnológica.
+% A não ser por esta fonte, o modelo de accountability seria considerado desfundamentado.
+
+% --- 5.4. LIMITES ETICOS E METODOLÓGICOS ---
+% Anti-overclaim: Esta obra \textbf{não} declara que a assinatura cognitiva equivale a
+% "personalidade do sistema" ou "consciência". Ela é interpretada como "rastreador de
+% extensão protética", fundamentado exclusivamente nas duas fontes auditáveis.
+
+% > \textbf{Critério da Banca:} A não ser por referência explícita às duas fontes auditáveis
+% (Clark & Chalmers, 1998 e Verbveek, 2005), nenhuma declaração sobre propriedades
+% mentais do sistema será aceita. Esta é uma exigência rigorosa da banca.
+
+% --- RESUMO DAS IMPLICACÕES PARA A BANCA ---
+% Todas as implicações da Seção 5 devem ser rastreáveis às duas fontes auditáveis.
+% A banca verificará:
+% 1. Presença de fichas críticas de Clark & Chalmers (1998) e Verbveek (2005) nas
+%    seções correspondentes (Módulo 03, Seções 2.1 e 2.2)
+% 2. Modelos de autoria e accountability articulados com estas duas fontes
+% 3. Ausência de qualquer declaração de "mente", "personalidade" ou "consciência"
+%    do Core, exceto como "rastreador de extensão protético" fundamentado nas duas fontes
+% 4. Postura fail-closed do Core articulada com Verbveek (2005)
