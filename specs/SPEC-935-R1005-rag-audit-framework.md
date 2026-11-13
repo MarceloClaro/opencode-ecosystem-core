@@ -1,5 +1,5 @@
 ---
-spec_id: SPEC-935-R1001
+spec_id: SPEC-935-R1003
 title: Auditoria Evolutiva de Pipeline RAG
 status: green
 validation_scope: local_runtime
