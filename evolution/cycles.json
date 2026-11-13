@@ -24538,6 +24538,38 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1014",
+      "objective": "Integracao com mais provedores de embedding e LLM",
+      "changes": [
+        "Implementado SPEC-935-R1014 com framework de integracao de provedores",
+        "6/6 testes RED passing com anticlaims de provedor melhor ou padrao ouro",
+        "Estrutura de adapters padrao: embed, chat, health_check",
+        "Feature flags para ativar/desativar provedores",
+        "Integracao com protocolo SDD/TDD do Core",
+        "Metricas de custos e responsibilidade do operador explicitadas",
+        "Todas as conclusoes qualificadas: estrutural ou sem evidencia"
+      ],
+      "score": 0.77,
+      "lessons": [
+        "Framework de integracao de provedores funciona dentro de protocolo SDD/TDD",
+        "Nenhuma alegacao de provedor melhor ou padrao ouro",
+        "Structura de adapters padrao implementada (embed, chat, health_check)",
+        "Feature flags funcionais para configuracao de provedores",
+        "Integracao mantem postura anti-overclaim"
+      ],
+      "timestamp": 1794541547.1441174,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
