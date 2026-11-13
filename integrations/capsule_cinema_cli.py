@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-\"\"\"Adaptador somente leitura para o `capsule-cinema` (SPEC-935-R1117).\n\nO adaptador lê uma cápsula local e escreve apenas em um diretório de\nsaída explicitamente autorizado. Ele **não** instala o capsule-cinema, **não**\ndownload de modelos e **não** expõe comandos pagos (`remake-run`, `assemble`).\n\"\"\"
+"""Adaptador somente leitura para o `capsule-cinema` (SPEC-935-R1117).
+
+O adaptador lê uma cápsula local e escreve apenas em um diretório de
+saída explicitamente autorizado. Ele **não** instala o capsule-cinema, **não**
+download de modelos e **não** expõe comandos pagos (`remake-run`, `assemble`).
 
 from __future__ import annotations
 
@@ -209,7 +213,7 @@ def _build_argv(
     capsule: Path,
     out: Path,
     *,
-    extra_args: Sequence[str] | None,
+    extra_args: Iterable[str] | None,
 ) -> list[str]:
     argv = [str(cli), "decompose", str(capsule), "-o", str(out)]
     for argument in extra_args or ():
@@ -381,7 +385,7 @@ def summary(capsule: str | Path) -> dict[str, Any]:
     }
 
 
-def main(argv: Sequence[str] | None = None) -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Adaptador somente leitura do capsule-cinema"
     )
