@@ -1,0 +1,37 @@
+<svg width="500" height="150" viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="500" height="150" fill="white"/>
+  <!-- Trust Engine score gradient -->
+  <defs>
+    <linearGradient id="trustGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4caf50"/>
+      <stop offset="0.3" stop-color="#8bc34a"/>
+      <stop offset="0.5" stop-color="#ffeb3b"/>
+      <stop offset="0.7" stop-color="#f44336"/>
+      <stop offset="1" stop-color="#d32f2f"/>
+    </linearGradient>
+  </defs>
+  <!-- Trust score line -->
+  <path d="M 20 80 Q 100 30 200 30 Q 300 50 350 60 Q 400 80 450 90" 
+        fill="none" stroke="url(#trustGradient)" stroke-width="4"/>
+  <!-- Score annotations -->
+  <g fill="#2d3a4b" font-family="Arial" font-size="10">
+    <text x="50" y="90">0.9</text>
+    <text x="150" y="35">0.7</text>
+    <text x="250" y="55">0.5</text>
+    <text x="350" y="65">0.3</text>
+    <text x="450" y="95">0.1</text>
+  </g>
+  <!-- Threshold line at 0.3 -->
+  <line x1="20" y1="110" x2="480" y2="110" stroke="#f44336" stroke-width="2"/>
+  <text x="50" y="115" fill="#f44336">0.3 (supervisão necessária)</text>
+  <!-- Annotation boxes -->
+  <rect x="50" y="30" width="80" height="40" fill="#e3f2fd" rx="5"/>
+  <text x="90" y="50" fill="#2d3a4b" font-family="Arial" font-size="10">Confiança alta</text>
+  <rect x="250" y="30" width="80" height="40" fill="#fff3e0" rx="5"/>
+  <text x="330" y="50" fill="#2d3a4b" font-family="Arial" font-size="10">Área de atenção</text>
+  <rect x="400" y="30" width="80" height="40" fill="#ffeb3b" rx="5"/>
+  <text x="480" y="50" fill="#2d3a4b" font-family="Arial" font-size="10">Baixa confiança</text>
+  <!-- Title -->
+  <text x="250" y="15" text-anchor="middle" font-family="Arial" font-size="14" fill="#2d3a4b">Perfil do Trust Engine</text>
+</svg>

@@ -1,0 +1,32 @@
+<svg width="600" height="100" viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="600" height="100" fill="white"/>
+  <!-- Six phases of SDD/TDD -->
+  <g fill="#4a90e2">
+    <rect x="0" y="15" width="100" height="70" rx="5"/>
+    <rect x="100" y="15" width="100" height="70" rx="5"/>
+    <rect x="200" y="15" width="100" height="70" rx="5"/>
+    <rect x="300" y="15" width="100" height="70" rx="5"/>
+    <rect x="400" y="15" width="100" height="70" rx="5"/>
+    <rect x="500" y="15" width="100" height="70" rx="5"/>
+  </g>
+  <!-- Phase labels -->
+  <g fill="#2d3a4b" font-family="Arial" font-size="12">
+    <text x="50" y="40" text-anchor="middle">Perceber</text>
+    <text x="150" y="40" text-anchor="middle">Especificar</text>
+    <text x="250" y="40" text-anchor="middle">Delegar</text>
+    <text x="350" y="40" text-anchor="middle">Executar</text>
+    <text x="450" y="40" text-anchor="middle">Verificar</text>
+    <text x="550" y="40" text-anchor="middle">Refletir</text>
+  </g>
+  <!-- Arrows between phases -->
+  <g stroke="#2d3a4b" stroke-width="2">
+    <line x1="100" y1="50" x2="100" y2="50"/>
+    <line x1="200" y1="50" x2="200" y2="50"/>
+    <line x1="300" y1="50" x2="300" y2="50"/>
+    <line x1="400" y1="50" x2="400" y2="50"/>
+    <line x1="500" y1="50" x2="500" y2="50"/>
+  </g>
+  <!-- Title -->
+  <text x="300" y="15" text-anchor="middle" font-family="Arial" font-size="14" fill="#2d3a4b">Protocolo SDD/TDD: 6 Fases</text>
+</svg>
