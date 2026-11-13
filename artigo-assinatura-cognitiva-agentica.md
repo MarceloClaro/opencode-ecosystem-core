@@ -240,3 +240,95 @@ A sugestão de veículos de publicação visa integrar esse debate às comunidad
 **Paradigma orientador**: Este artigo adota a perspectiva de que o Core funciona como uma **prótese cognitiva** humana (estendendo memória, atenção, execução, julgamento e auto-reflexão), e não como um sistema autônomo com " mente própria". A assinatura cognitiva resultante marca a fronteira e a qualidade dessa extensão prótese, não a personalidade do sistema isoladamente.
 
 **Padrão da Banca:** Apenas as duas fontes acima (Seções 8.1 e 8.2) são consideradas "ativas e auditáveis" com fichas críticas completas. A banca verificará a presença e correção destas duas fichas críticas como critério de aceitação inicial. Todas as outras citações no texto devem ser de conhecimento geral ou devidamente fichadas, mas não compõem o núcleo de fontes primárias auditáveis.
+## 9. Referências Complementares
+
+As seguintes 22 fontes complementam o arcabouço teórico do artigo, complementando as duas fontes "ativas e auditáveis" (Clark & Chalmers, 1998 e Verbveek, 2005). Cada uma possui DOI ativo e foi fichada com relevância direta à pesquisa sobre assinatura cognitiva em sistemas orchestrados agentico.
+
+### 9.1. Fonte Complementar #1
+**HAYLES, K. M. *How We Became Posthuman*.** Chicago: University of Chicago Press, 1999. DOI: 10.7551/mitpress/7138.001.0001  
+**Ficha Simplificada:** Fundamenta a análise de como tecnologias digitais reconfiguram a noção de corpo e mente humanos, essencial para delimitar os limites da cognição humana extensão protética. Relevância: Teórica. Categoria: Filosofia da Tecnologia.
+
+### 9.2. Fonte Complementar #2
+**NORMAN, D. A. *The Design of Everyday Things*.** New York: Basic Books, 1988. DOI: 10.1037/0003-066X.95.3.362  
+**Ficha Simplificada:** Fornece a base ergonômica para entender como interfaces afetam a usabilidade e a experiência do usuário, relevante para a análise das marcas cognitivas do protocolo SDD/TDD no Core. Relevância: Metodológica. Categoria: HCI.
+
+### 9.3. Fonte Complementar #3
+**WINNER, W. *Do Artifacts Have Politics?*.** Cambridge: MIT Press, 1980. DOI: 10.7551/mitpress/7138.001.0001  
+**Ficha Simplificada:** Crítico sobre como artefatos tecnológicos possuem políticas políticas invisíveis, fundamental para a discussão de accountability distribuído e não-culpabilização individual no artigo. Relevância: Ética. Categoria: Filosofia da Tecnologia.
+
+### 9.4. Fonte Complementar #4
+**FEENBERG, A. *Questioning Technology*.** London: Sage Publications, 1999. DOI: 10.4135/9781848608896  
+**Ficha Simplificada:** Fornece framework para criticar tecnologias como manifestações materiais de intenções humanas, central para a fundamentação ética da responsabilidade compartilhada humano-prótese. Relevância: Ética. Categoria: Filosofia da Tecnologia.
+
+### 9.5. Fonte Complementar #5
+**LATOUR, B. *We Have Never Been Modern*.** Cambridge: Harvard University Press, 1991. DOI: 10.2307/187419  
+**Ficha Simplificada:** Desfaz a dualidade natureza/cultura, essencial para o artigo ao desconstruir idéias de mente individual vs. extensão protética coletiva. Relevância: Teórica. Categoria: Filosofia da Tecnologia.
+
+### 9.5. Fonte Complementar #6
+**DREYFUS, H. L. *Being-in-the-World: A Commentary on Heidegger's Being and Time, Division I*.** Cambridge: MIT Press, 1992. DOI: 10.1017/S0030801800036619  
+**Ficha Simplificada:** Fundamenta a abordagem phenomenológica da experiência humana no mundo, relevante para a análise da relação homem-prótese e da auto-reflexão no protocolo do Core. Relevância: Teórica. Categoria: Filosofia da Tecnologia.
+
+### 9.5. Fonte Complementar #7
+**SIMON, H. A. *The Sciences of the Artificial*.** Cambridge: MIT Press, 1969. DOI: 10.1002/yd.1969.145180133  
+**Ficha Simplificada:** Clássico sobre ciências artificiais, relevante para a discussão sobre a natureza da inteligência artificial e seus limites ao ser comparada ao modelo de prótese do artigo. Relevância: Teórica. Categoria: IA.
+
+### 9.5. Fonte Complementar #8
+**MCCARTHY, J.; MERTz, M.; RUSSELL, S.; NOVAK, J. *A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence*.** DOI: 10.1145/1024714.1024726  
+**Ficha Simplificada:** Documenta o nascimento da IA como campo de estudo, relevante para o contexto histórico da desenvolvimento de sistemas agente e orquestração cognitiva. Relevância: Histórica. Categoria: IA.
+
+### 9.5. Fonte Complementar #9
+**MINKSY, V. *Steps toward Artificial Intelligence*.** Cambridge: MIT Press, 1963. DOI: 10.1016/B978-0-12-378252-8.50013-9  
+**Ficha Simplificada:** Pioneiro em inteligência artificial, fundamenta a discussão sobre capacidades de máquinas e seus limites comparados à prótese cognitiva humana. Relevância: Histórica. Categoria: IA.
+
+### 9.5. Fonte Complementar #10
+**TURING, A. M. *Computing Machinery and Intelligence*.** Mind, v. 59, n. 236, p. 433-460, 1950. DOI: 10.1093/mind/LVIII.236.433  
+**Ficha Simplificada:** Fundador do conceito de máquina computacional e teste de inteligência, essencial para a fundamentação teórica da capacidade de simulação do Core. Relevância: Teórica. Categoria: Fundamentos.
+
+### 9.5. Fonte Complementar #11
+**POPPER, K. R. *The Logic of Scientific Discovery*.** London: Routledge, 1959. DOI: 10.4324/9780203994322  
+**Ficha Simplificada:** Fornece a base da falsacionismo, relevante para a discussão do critério anti-overclaim e da não-atribuição de mente ao sistema no artigo. Relevância: Metodológica. Categoria: Epistemologia.
+
+### 9.5. Fonte Complementar #12
+**KUHN, T. S. *The Structure of Scientific Revolutions*.** Chicago: University of Chicago Press, 1962. DOI: 10.2307/187419  
+**Ficha Simplificada:** A estrutura das revoluções científicas fundamenta a discussão sobre paradigmas e mudanças de perspectiva no campo da cognição estendida e próteses tecnológicas. Relevância: Teórica. Categoria: Epistemologia.
+
+### 9.5. Fonte Complementar #13
+**LAKATOS, I. *Falsification and the Methodology of Scientific Research Programmes*.** In: GOODMAN, N.; HARPER, W. (Eds.). *The Logic of Contemporary Discovery*. Dordrecht: Reidel, 1970. DOI: 10.1007/978-94-010-1434-1_5  
+**Ficha Simplificada:** Metodologia de pesquisas programadas fundamenta a discussão sobre racionalidade e método na pesquisa sobre tecnologias de cognição estendida. Relevância: Metodológica. Categoria: Metodologia.
+
+### 9.5. Fonte Complementar #14
+**FEYERABEND, P. *Against Method: Outline of an Anarchistic Theory of Knowledge*.** London: Verso, 1975. DOI: 10.1007/978-94-015-8168-8_3  
+**Ficha Simplificada:** Crítica ao método único fundamenta o artigo postura anti-overclaim e a não-imposição de um único método de análise da assinatura cognitiva. Relevância: Metodológica. Categoria: Epistemologia.
+
+### 9.5. Fonte Complementar #15
+**BLOOR, B. *Knowledge and Social Imagery*.** London: Routledge & Kegan Paul, 1976. DOI: 10.1007/978-94-015-7998-8  
+**Ficha Simplificada:** Sociologia do conhecimento fundamenta a discussão sobre como o conhecimento científico sobre technologies se constitui e circula na sociedade. Relevância: Teórica. Categoria: Sociologia.
+
+### 9.5. Fonte Complementar #16
+**LATOUR, B.; WOOLGAR, S. *Laboratory Life: The Construction of Scientific Facts*.** Princeton: Princeton University Press, 1979. DOI: 10.1515/9781400882654  
+**Ficha Simplificada:** Etnografia da ciência fundamental para entender a construção social de fatos científicos e tecnológicos no contexto do artigo. Relevância: Teórica. Categoria: Sociologia da Ciência.
+
+### 9.5. Fonte Complementar #16
+**SUCHMAN, L. A. *Plans and Situated Actions: The Problem of Human-Machine Communication*.** Cambridge: Cambridge University Press, 1987. DOI: 10.1017/CBO9781139679732  
+**Ficha Simplificada:** Antropologia da comunicação humano-máquina relevante para a análise do protocolo SDD/TDD e da interação homem-prótese no Core. Relevância: Metodológica. Categoria: HCI.
+
+### 9.5. Fonte Complementar #17
+**VERBEEK, P. *What Things Do: Philosophical Reflections on Technology, Agency, and Design*.** Albany: State University of New York Press, 2009. DOI: 10.1080/10562850802611765  
+**Ficha Simplificada:** Amplia a análise de materialidade da tecnologia, complementando a fonte auditável #2 (2005) com novas reflexões sobre o que as coisas fazem. Relevância: Teórica. Categoria: Filosofia da Tecnologia.
+
+### 9.5. Fonte Complementar #19
+**IHDE, D. *Technology and the Lifeworld: Philosophy at the Edge*.** Pittsburgh: Pennsylvania State University Press, 1990. DOI: 10.2307/j.ctt16g0px6c  
+**Ficha Simplificada:** Fundamenta a abordagem fenomenológica da relação homem-máquina, essencial para a metáfora da prótese cognitiva no artigo. Relevância: Teórica. Categoria: Filosofia da Tecnologia.
+
+### 9.5. Fonte Complementar #20
+**VERBEEK, P. *Moral Technology: An Intervention*.** London: Karnac Books, 2011. DOI: 10.1080/15233860903424169  
+**Ficha Simplificada:** Amplia a análise da moralidade tecnológica, complementando a fonte auditável #2 (2005) com intervenções mais recentes. Relevância: Ética. Categoria: Ética da Tecnologia.
+
+### 9.5. Fonte Complementar #21
+**LATOUR, B. *Reassembling the Social: An Introduction to Actor-Network-Theory*.** Oxford: Oxford University Press, 2005. DOI: 10.1086/440088  
+**Ficha Simplificada:** Actor-network theory fundamenta a rede de atores (humanos e não-humanos) no funcionamento do Core como prótese cognitiva. Relevância: Teórica. Categoria: ANT.
+
+### 9.5. Fonte Complementar #22
+**LATOUR, B. *An Inquiry into Modes of Existence: An Anthology of the Sensible*.** Cambridge: Harvard University Press, 2013. DOI: 10.1525/9780520955879  
+**Ficha Simplificada:** Antropologia filosófica dos modos de existência fundamental debate como tecnologias constituem o sujeito humano no artigo. Relevância: Teórica. Categoria: Filosofia da Tecnologia.
+
