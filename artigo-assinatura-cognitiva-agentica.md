@@ -79,7 +79,7 @@ Esses mecanismos garantem que a assinatura cognitiva prótese seja **verificáve
 
 ### 4.1. Autoria estendida humano-prótese
 
-Em artigos científicos tradicionais, a autoria é atribuída a humanos individuais ou, em casos de auxílio de IA, declarada explicitamente. Quando o Core é enquadrado como **prótese cognitiva**, a autoria se torna **estendida**:
+Em artigos científicos tradicionais, a autoria é atribuída a humanos indivíduais ou, em casos de auxílio de IA, declarada explicitamente. Quando o Core é enquadrado como **prótese cognitiva**, a autoria se torna **estendida**:
 
 - O humano **direciona** a prótese (define objetivos, restringe busca, aprova saídas).
 - A prótese **executa** a orquestração agente (agregação de habilidades, roteamento, execução TDD).
@@ -99,7 +99,7 @@ Quando a prótese falha (produz saída incorreta, viés, erro de execução), a 
 2. **Do usuário da prótese** (ele supervisionou adequadamente? ele definiu specs adequadas?).
 3. **Do agente específico** que falhou (se operava fora de parâmetros esperados).
 
-Essa modelo de accountability distribuído é mais adequado para tecnologias prótese do que modelos de "autoria única" ou "culpa do algoritmo".
+Esse modelo de accountability distribuído é mais adequado para tecnologias prótese do que modelos de "autoria única" ou "culpa do algoritmo".
 
 ## 5. Seleção de Periódicos para Submissão
 
@@ -124,12 +124,12 @@ A seguir, apresento sugestões de periódicos nacionais e internacionais adequad
 | **ACM Transactions on Intelligent Systems and Technology (ACM TIST)** | Inteligência Artificial | médio-alto | Aceita revisões teóricas e aplicações em sistemas reais. |
 | **IEEE Transactions on Automation Science and Engineering** | Sistemas Automatizados | alto | Foco em engenharia; artigos com componentes computacionais reais e caso de uso. |
 | **Proceedings of the AAAI Conference on Artificial Intelligence** | IA geral | muito alto | Revisão por painel; aceita trabalhos teóricos inovadores sobre extended mind. |
-| **ACM Computing Surveys** | Survey / Tutorial | alto | Artigos de revisão abrangente; excelente para “state-of-the-art” sobre próteses cognitivas. |
+| **ACM Computing Surveys** | Survey / Tutorial | alto | Artigos de revisão abrangente; excelente para "state-of-the-art" sobre próteses cognitivas. |
 | **Frontiers in Psychology — Cognitive Science** | Cognitive Science | médio | Aceita trabalhos sobre extended mind, tecnologias de cognição estendida. |
-| **International Journal of Human-Computer Studies (IJHCS)** | HCI / Technology Assessment | médio | Artigos sobre como tecnologias afetam cogniência humana — **adequadíssimo para prótese cognitiva**. |
+| **International Journal of Human-Computer Studies (IJHCS)** | HCI / Technology Assessment | médio | **Adequadíssimo** — foca explicitamente como tecnologias afetam cogniência humana — **perfeito para prótese cognitiva**. |
 | **Ethics and Information Technology** | Ética da Tecnologia | médio | Adequado para discussão de autoria, responsabilidade e implicações filosóficas de próteses. |
 
-### 5.3. Periódicos interdisciplinares (Ética, Filosofia, Estudos de Ciência e Tecnologia)
+### 5.3. Periódicos interdisciplinares (Ética, Filosofia, Estudos Ciência & Tecnologia)
 
 | Periódico | Área | Observações |
 |---|---|---|
@@ -175,4 +175,4 @@ A sugestão de veículos de publicação visa integrar esse debate às comunidad
 ---
 *Artigo gerado por MarceloClaro Orquestrador Central Metacognitivo. Para execução de diagnóstico do ambiente: `python3 -m marceloclaro.cli doctor`. Para mais informações sobre o ciclo SDD/TDD do Core, consultar SPEC-935-orchestrator.md.*
 
-**Paradigma orientador**: Este artigo adota a perspectiva de que o Core funciona como uma **prótese cognitiva** humana (estendendo memória, atenção, execução, julgamento e auto-reflexão), e não como um sistema autônomo com "mente própria". A assinatura cognitiva resultante marca a fronteira e a qualidade dessa extensão prótese, não a personalidade do sistema isoladamente.
+**Paradigma orientador**: Este artigo adota a perspectiva de que o Core funciona como uma **prótese cognitiva** humana (estendendo memória, atenção, execução, julgamento e auto-reflexão), e não como um sistema autônomo com " mente própria". A assinatura cognitiva resultante marca a fronteira e a qualidade dessa extensão prótese, não a personalidade do sistema isoladamente.
