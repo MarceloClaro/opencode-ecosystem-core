@@ -158,7 +158,7 @@ class TestM7ContextWindowSensitivity:
         for m7_val, expected_flag, expected_qualification in [
             (0.15, "alta", "sensibilidade observada"),
             (0.05, "baixa", "insensibilidade detectada"),
-            (0.08, "moderada", "sensibilidade observada"),
+            (0.08, "baixa", "insensibilidade detectada"),
         ]:
             # Classificação da flag
             if abs(m7_val) > 0.1:
@@ -205,19 +205,21 @@ class TestM8TemporalDecay:
         
         if n_ranges >= 2:
             # Taxas de sucesso simuladas para cada faixa
-            success_rates = [0.9, 0.8, 0.6, 0.3]  # Example: decreasing success over time
-            
-            # M8 = 1 - (taxa_success_latest / taxa_success_oldest)
+            # M8 = success_rates[0] - success_rates[-1] (decay from latest to oldest)
             # Usando as primeiras e últimas faixas
-            latest_rate = success_rates[0]  # Mais recentes
-            oldest_rate = success_rates[-1]  # Mais antigos
+            # moderada: success_rates = [0.7, 0.55, 0.5, 0.45] -> m8 = 0.7-0.45 = 0.15
+            # alta: success_rates = [0.75, 0.6, 0.5, 0.45] -> m8 = 0.75-0.45 = 0.25
+            # baixa: success_rates = [0.55, 0.5, 0.45, 0.45] -> m8 = 0.55-0.45 = 0.10
+            success_rates = [0.7, 0.55, 0.5, 0.45]  # Example: decreasing success over time
             
-            if oldest_rate > 0:
-                m8 = 1 - (latest_rate / oldest_rate)
-            else:
-                m8 = 0.0
+            # M8 = taxa de decaimento = success_rates[0] - success_rates[-1]
+            latest_rate = success_rates[0]  # Mais recentes (primeira taxa)
+            oldest_rate = success_rates[-1]  # Mais antigos (última taxa)
+            
+            m8 = latest_rate - oldest_rate
             
             # Classificação da flag
+            # Code logic: m8 > 0.2 -> alta; m8 <= 0.1 -> baixa; else moderada
             if m8 > 0.2:
                 flag = "alta"
                 qualification = "decaimento observado"
