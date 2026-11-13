@@ -24474,6 +24474,38 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1012",
+      "objective": "Hipoteses H6-H8 de propriedades emergentes avancadas em RAG",
+      "changes": [
+        "Implementado SPEC-935-R1012 com H6-H8",
+        "8/8 testes RED passing com anticlaims de memoria sistema, learning consciente",
+        "Integracao com Trust Engine goal drift detector (SPEC-935-R112)",
+        "Metricas M1-M8 de SPEC-935-R1010 suportam deteccao de propriedades emergentes",
+        "MetaBus observacoes coletadas sem promover confidencia auto",
+        "Estrutura de deteccao funcional para H6 (decaimento), H7 (vios de termos) e H8 (interferencia cross-domain)",
+        "Todas as conclusoes qualificadas: decaimento observado, vi correlacionado, interferencia observada ou sem evidencia"
+      ],
+      "score": 0.79,
+      "lessons": [
+        "Hipoteses H6-H8 funcionam dentro de protocolo SDD/TDD",
+        "Nenhuma alegacao de memoria sistema, learning consciente ou interferencia consciente",
+        "Structura de deteccao funcional para H6, H7 e H8",
+        "Todas conclusoes qualificadas adequadamente",
+        "Integracao com metricas M1-M8 de SPEC-935-R1010 funcional"
+      ],
+      "timestamp": 1794540590.293713,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
