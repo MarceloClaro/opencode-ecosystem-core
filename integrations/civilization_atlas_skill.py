@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 
 # Base directory - the civilization-atlas-skill repo
-BASE_DIR = Path(__file__).parent / ".." / ".." / "integrations"
+BASE_DIR = Path(__file__).parent
 
 # SKILL metadata
 SKILL = {
@@ -13,6 +13,7 @@ SKILL = {
     "description": "Skill de pesquisa histórica e sistemas complexos: comparacao de sociedades, mecanismos, condicoes de transferencia, base rates e decisoes.",
     "version": "1.0.0",
     "license": "MIT",
+    "references": "WDI (World Development Indicators, CC BY 4.0); Seshat (global history databank, MIT); NASA GISTEMP (citation required); COW (licença restrita, não redistribuído)",
 }
 
 # Base rates - vendorized subset

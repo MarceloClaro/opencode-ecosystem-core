@@ -24121,6 +24121,39 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1117-R1118-EVOL",
+      "objective": "Implementar SPEC-935-R1117 e R1118: adaptadores e vendorização de skills",
+      "changes": [
+        "SPEC-935-R1117: adaptador somente leitura do capsule-cinema com 14 testes passando",
+        "SPEC-935-R1118: vendorização do civilization-atlas-skill com 5 testes passando",
+        "14 novos testes passando no total (capsule-cinema)",
+        "5 novos testes passando no total (civilization-atlas)",
+        "Module integrations/capsule_cinema_cli.py implementado",
+        "Module integrations/civilization_atlas_skill.py implementado",
+        "Tests/test_capsule_cinema_cli.py: 14 testes passando",
+        "Tests/test_civilization_atlas_skill.py: 5 testes passando"
+      ],
+      "score": 8.5,
+      "lessons": [
+        "Adaptadores de ferramentas externas devem separar análise local de comandos pagos; bloquear por padrão.",
+        "Vendorizar skills requer separar programa (MIT) de dados de terceiros com licenças próprias.",
+        "Allowlist de ambiente impede vazamento de segredos para subprocessos.",
+        "Dry-run sem escrita e pré-condição para consentimento explícito.",
+        "Raízes de saída autorizadas evitam escrita fora do sandbox."
+      ],
+      "timestamp": 1794529046.774456,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
