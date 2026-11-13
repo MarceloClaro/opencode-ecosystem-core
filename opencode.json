@@ -1841,6 +1841,26 @@
             ]
           },
           "tool_call": true
+        },
+        "qwen2.5-0.5b-q4-cpu": {
+          "name": "Qwen2.5 0.5B Instruct Q4 CPU",
+          "limit": {
+            "context": 4096,
+            "output": 2048
+          },
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "tool_call": true,
+          "attachment": true,
+          "options": {
+            "reasoning_effort": "none"
+          }
         }
       }
     },
