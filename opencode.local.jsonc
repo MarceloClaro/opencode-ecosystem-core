@@ -28,6 +28,8 @@
 // Medicoes em specs/SPEC-935-R607.md. Alem dos agentes, listar aqui apenas o
 // minimo de skills/MCP que a tarefa exigir: o tamanho do prompt escala com o
 // que for declarado.
+//
+// NOVO: Modelo Qwen2.5 0.5B Q4 para CPU local (SPEC-935-R1199)
 {
   "$schema": "https://opencode.ai/config.json",
   "provider": {
@@ -54,11 +56,19 @@
           "tool_call": true,
           "attachment": true,
           "options": {"reasoning_effort": "none"}
+        },
+        "qwen2.5-0.5b-q4-cpu": {
+          "name": "Qwen2.5 0.5B Instruct Q4 CPU (Q4_K_M)",
+          "limit": {"context": 4096, "output": 2048},
+          "modalities": {"input": ["text"], "output": ["text"]},
+          "tool_call": true,
+          "attachment": true,
+          "options": {"reasoning_effort": "none"}
         }
       }
     }
   },
-  "model": "ollama-local/gemma4:e2b-tuned",
+  "model": "ollama-local/qwen2.5-0.5b-q4-cpu",
   "agent": {
     "build": {
       "description": "Agente minimo de codigo para a LLM local",
