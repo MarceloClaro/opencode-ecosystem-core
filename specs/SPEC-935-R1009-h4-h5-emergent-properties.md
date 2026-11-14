@@ -1,5 +1,5 @@
 ---
-spec_id: SPEC-935-R1007
+spec_id: SPEC-935-R1009
 title: Hipóteses H4-H5 de Propriedades Emergentes em Sistemas RAG
 status: green
 validation_scope: local_runtime
@@ -8,7 +8,7 @@ component: marceloclaro/orchestrator + mci.metacognitive_loop + trust.trust_engi
 test_file: tests/test_r1007_h4_h5_emergent_properties.py
 ---
 
-# SPEC-935-R1007 — Hipóteses H4-H5 de Propriedades Emergentes em Sistemas RAG
+# SPEC-935-R1009 — Hipóteses H4-H5 de Propriedades Emergentes em Sistemas RAG
 
 ## 1. Introdução
 
