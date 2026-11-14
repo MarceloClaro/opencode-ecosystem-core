@@ -1,5 +1,5 @@
 ---
-spec_id: SPEC-935-R1010
+spec_id: SPEC-935-R1010-METRICS
 title: Expansão de Métricas M6-M8 para RAG
 status: green
 validation_scope: local_runtime
@@ -8,7 +8,7 @@ component: marceloclaro/orchestrator + mci.metacognitive_loop + trust.trust_engi
 test_file: tests/test_r1008_metrics_expansion.py
 ---
 
-# SPEC-935-R1010 — Expansão de Métricas M6-M8 para RAG
+# SPEC-935-R1010-METRICS — Expansão de Métricas M6-M8 para RAG
 
 ## 1. Introdução
 
