@@ -11156,7 +11156,10 @@
       "command": [
         "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/reference-node/node_modules/.bin/latexmk-mcp"
       ],
-      "enabled": true
+      "enabled": true,
+      "environment": {
+        "PATH": "/home/marceloclaro/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      }
     },
     "artigo-academico-mcp": {
       "type": "local",
@@ -11275,7 +11278,10 @@
       "command": [
         "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/reference-node/node_modules/.bin/mcp-server-sequential-thinking"
       ],
-      "enabled": true
+      "enabled": true,
+      "environment": {
+        "PATH": "/home/marceloclaro/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      }
     },
     "filesystem": {
       "type": "local",
@@ -11283,7 +11289,10 @@
         "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/reference-node/node_modules/.bin/mcp-server-filesystem",
         "/home/marceloclaro/opencode-ecosystem-core"
       ],
-      "enabled": true
+      "enabled": true,
+      "environment": {
+        "PATH": "/home/marceloclaro/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      }
     },
     "colab-mcp": {
       "type": "local",
@@ -11326,7 +11335,10 @@
         "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/node/node_modules/.bin/mcp-server-memory"
       ],
       "enabled": true,
-      "timeout": 120000
+      "timeout": 120000,
+      "environment": {
+        "PATH": "/home/marceloclaro/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      }
     },
     "context7": {
       "type": "local",
@@ -11336,7 +11348,10 @@
         "stdio"
       ],
       "enabled": true,
-      "timeout": 120000
+      "timeout": 120000,
+      "environment": {
+        "PATH": "/home/marceloclaro/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      }
     },
     "chroma": {
       "type": "local",
@@ -11373,7 +11388,10 @@
         "--isolated"
       ],
       "enabled": true,
-      "timeout": 120000
+      "timeout": 120000,
+      "environment": {
+        "PATH": "/home/marceloclaro/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      }
     }
   },
   "command": {
