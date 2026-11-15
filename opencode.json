@@ -11073,17 +11073,6 @@
     }
   },
   "mcp": {
-    "tiangong-hdr": {
-      "type": "local",
-      "command": [
-        ".venv/bin/python",
-        "-m",
-        "integrations.tiangong_mcp"
-      ],
-      "cwd": "/home/marceloclaro/opencode-ecosystem-core",
-      "enabled": true,
-      "timeout": 30000
-    },
     "rea": {
       "type": "local",
       "command": [
@@ -11157,7 +11146,7 @@
     "arxiv-mcp": {
       "type": "local",
       "command": [
-        "uvx",
+        "/home/marceloclaro/.local/bin/uvx",
         "arxiv-mcp-server"
       ],
       "enabled": true
@@ -11165,9 +11154,7 @@
     "latexmk-mcp": {
       "type": "local",
       "command": [
-        "npx",
-        "-y",
-        "latexmk-mcp"
+        "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/reference-node/node_modules/.bin/latexmk-mcp"
       ],
       "enabled": true
     },
@@ -11264,10 +11251,21 @@
       "enabled": true,
       "timeout": 180000
     },
+    "tiangong-hdr": {
+      "type": "local",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "integrations.tiangong_mcp"
+      ],
+      "cwd": "/home/marceloclaro/opencode-ecosystem-core",
+      "enabled": true,
+      "timeout": 30000
+    },
     "fetch": {
       "type": "local",
       "command": [
-        "uvx",
+        "/home/marceloclaro/.local/bin/uvx",
         "mcp-server-fetch"
       ],
       "enabled": true
@@ -11275,21 +11273,44 @@
     "sequential-thinking": {
       "type": "local",
       "command": [
-        "npx",
-        "-y",
-        "@modelcontextprotocol/server-sequential-thinking"
+        "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/reference-node/node_modules/.bin/mcp-server-sequential-thinking"
       ],
       "enabled": true
     },
     "filesystem": {
       "type": "local",
       "command": [
-        "npx",
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
+        "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/reference-node/node_modules/.bin/mcp-server-filesystem",
         "/home/marceloclaro/opencode-ecosystem-core"
       ],
       "enabled": true
+    },
+    "colab-mcp": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "colab-mcp"
+      ],
+      "enabled": true,
+      "timeout": 660000
+    },
+    "servers": {
+      "editor-local": {
+        "type": "local",
+        "command": [
+          "/home/marceloclaro/opencode-ecosystem-core/.venv/bin/python",
+          "-m",
+          "integrations.video_editor_mcp"
+        ],
+        "environment": {
+          "EDITOR_PROJECT_ROOT": "/home/marceloclaro/opencode-ecosystem-core/editor-workspace"
+        }
+      },
+      "opencode_console": {
+        "type": "remote",
+        "url": "http://127.0.0.1:8765/mcp",
+        "oauth": false
+      }
     },
     "mcp-time": {
       "type": "local",
@@ -11353,33 +11374,6 @@
       ],
       "enabled": true,
       "timeout": 120000
-    },
-    "servers": {
-      "editor-local": {
-        "type": "local",
-        "command": [
-          "/home/marceloclaro/opencode-ecosystem-core/.venv/bin/python",
-          "-m",
-          "integrations.video_editor_mcp"
-        ],
-        "environment": {
-          "EDITOR_PROJECT_ROOT": "/home/marceloclaro/opencode-ecosystem-core/editor-workspace"
-        }
-      },
-      "opencode_console": {
-        "type": "remote",
-        "url": "http://127.0.0.1:8765/mcp",
-        "oauth": false
-      }
-    },
-    "colab-mcp": {
-      "type": "local",
-      "command": [
-        "uvx",
-        "colab-mcp"
-      ],
-      "enabled": true,
-      "timeout": 660000
     }
   },
   "command": {
@@ -11563,20 +11557,20 @@
       "agent": "marceloclaro",
       "description": "gjq (JSON Query) — executor externo orchestrável para filtros e transformações JSON. Ex: /gjq '.[] | .campos', /gjq status, /gjq doctor"
     },
-    "mindspore-validate": {
-      "template": "Validar configs MindSpore: {filepaths}",
-      "description": "Valida arquivos JSON de configuração MindSpore usando schemas conhecidos",
-      "use": "skills/mindspore-config/scripts/mindspore-validate.py"
+    "mindspore-hccl-advanced": {
+      "template": "Validar config HCCL avançada com para_plane",
+      "description": "Valida configs HCCL com campos extras (para_plane, hccl_config_json_spec)",
+      "use": "skills/mindspore-config/scripts/hccl-advanced.py"
     },
     "mindspore-summary": {
       "template": "Gerar resumo automatizado de configs MindSpore",
       "description": "Gera relatório estatístico da distribuição e validade de configs",
       "use": ".opencode/skills/mindspore-summary/scripts/mindspore-summary.py"
     },
-    "mindspore-hccl-advanced": {
-      "template": "Validar config HCCL avançada com para_plane",
-      "description": "Valida configs HCCL com campos extras (para_plane, hccl_config_json_spec)",
-      "use": "skills/mindspore-config/scripts/hccl-advanced.py"
+    "mindspore-validate": {
+      "template": "Validar configs MindSpore: {filepaths}",
+      "description": "Valida arquivos JSON de configuração MindSpore usando schemas conhecidos",
+      "use": "skills/mindspore-config/scripts/mindspore-validate.py"
     }
   },
   "skill": {
