@@ -1197,6 +1197,44 @@ def build_config() -> Dict[str, Any]:
     # Só entram versões atuais aprovadas por instalação + probe + smoke.
     for name, entry in _federation_activated_mcp().items():
         config["mcp"].setdefault(name, entry)
+
+    # R662: customizacoes locais explicitamente autorizadas.
+    # MCPs continuam sob a governanca do gerador e do gate R1015.
+    try:
+        with open(CONFIG_PATH, "r", encoding="utf-8") as stream:
+            local_cfg = json.load(stream)
+    except (OSError, json.JSONDecodeError):
+        local_cfg = {}
+
+    if isinstance(local_cfg, dict):
+        local_commands = local_cfg.get("command")
+        if isinstance(local_commands, dict):
+            for name in (
+                "gjq",
+                "mindspore-hccl-advanced",
+                "mindspore-summary",
+                "mindspore-validate",
+            ):
+                value = local_commands.get(name)
+                if isinstance(value, dict) and name not in config["command"]:
+                    config["command"][name] = value
+
+        providers = local_cfg.get("provider")
+        if isinstance(providers, dict):
+            ollama = providers.get("ollama-local")
+            if isinstance(ollama, dict):
+                models = ollama.get("models")
+                if isinstance(models, dict):
+                    name = "qwen2.5-0.5b-q4-cpu"
+                    model = models.get(name)
+                    if isinstance(model, dict):
+                        config["provider"]["ollama-local"]["models"].setdefault(
+                            name, model
+                        )
+
+        if isinstance(local_cfg.get("skill"), dict):
+            config["skill"] = local_cfg["skill"]
+
     return config
 
 
