@@ -124,7 +124,30 @@ async def ecosystem_integration_status() -> dict[str, Any]:
 
     Não inicia servidores, importa scripts de plugins ou comprova inferência.
     """
-    return await asyncio.to_thread(lambda: get_library_orchestrator().integration_status())
+
+    # SPEC-935-R662: reconciliation of configured MCP counts.
+    status = await asyncio.to_thread(
+        lambda: get_library_orchestrator().integration_status()
+    )
+
+    components = status.get("components", {})
+    mcp_status = components.get("mcp", {})
+    entries = mcp_status.get("entries")
+
+    if isinstance(entries, list) and all(
+        isinstance(entry, dict) for entry in entries
+    ):
+        mcp_status["configured_count"] = len(entries)
+        mcp_status["local_count"] = sum(
+            entry.get("kind") == "local"
+            for entry in entries
+        )
+        mcp_status["remote_count"] = sum(
+            entry.get("kind") == "remote"
+            for entry in entries
+        )
+
+    return status
 
 
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=False))
