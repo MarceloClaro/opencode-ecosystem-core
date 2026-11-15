@@ -1,6 +1,315 @@
 {
   "spec_id": "SPEC-935-R662",
-  "success": false,
-  "error_type": "RuntimeError",
-  "error": "CLI integracoes status falhou."
+  "ts": "2026-11-15T00:30:01.676209+00:00",
+  "evidence_kind": "real_local_cli_stdio_and_disk_artifacts",
+  "skill_scripts_executed": false,
+  "llm_inference": false,
+  "code_sha256": {
+    "marceloclaro/integration_service.py": "15a3ba51ea09c1f919052c9b1e1381cd8fbb5beb9c72f7d56909c3ca7073084d",
+    "marceloclaro/integration_cli.py": "fe2a25ca320ca730746178aa201a6650e26846d27403adfac3353246e74ed98b",
+    "marceloclaro/orchestrator.py": "56443c1befef44fdd7cfb8b1f6ea9ab0dce2b827bafdaa02f70b6eaf1e2c7220",
+    "integrations/ecosystem_mcp.py": "a40f77494285c39cc2b7607e78c498eda915ae233c2e348f4a62071799508377",
+    "integrations/opencode_cli.py": "364904d0c12bac66ad149f247f4604626d6376ca12a365058293a27363583c45",
+    "opencode.json": "3621d83b9427bc5ce7d9176deb412592b19fbf22f2abe627f42a42cccb46cc24"
+  },
+  "configuration_reproduced": true,
+  "disk_pipeline": {
+    "artifact_id": "codex:skill:first_party:core-hooks",
+    "source_path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/skills/core-hooks/SKILL.md",
+    "source_file_sha256": "d7154a684b1f3ec3fd80bae0c994ced709d1c44742191f6049bfbd4825e69eb2",
+    "emitted_file_sha256": "9cf7282d2ba6ef81f29d43a035a159902a4ee8a1f875efd6645e998e6622f542",
+    "execution_mode": "read-and-execute",
+    "support_file_count": 0,
+    "emitted": true,
+    "installed_in_host": false,
+    "executed": false,
+    "temporary_destination_removed": true
+  },
+  "cli_status": {
+    "spec_id": "SPEC-935-R662",
+    "orchestrator": "marceloclaro",
+    "status": "config_checked",
+    "executed": false,
+    "execution_verified": false,
+    "components": {
+      "agents": {
+        "configured_count": 337,
+        "primary": "marceloclaro"
+      },
+      "hooks": {
+        "events": [
+          "PreToolUse",
+          "PostToolUse",
+          "SessionStart",
+          "SessionEnd"
+        ],
+        "verification": "contract_only"
+      },
+      "mcp": {
+        "configured_count": 32,
+        "entries": [
+          {
+            "name": "rea",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "ecosystem-network",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "litert-lm",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "metacognitive-interconnect",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "antigravity-bridge",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "pypi-search",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "colibri-mcp",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "scanners-mcp",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "arxiv-mcp",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "latexmk-mcp",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "artigo-academico-mcp",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "caed-spaece-data",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "educacao-legislacao",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "remotion-audit",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "storage-operator",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "desktop-operator",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "scientific-data",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "polymath-labs-mcp",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "web-deploy-mcp",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "oa-resolver",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "tiangong-hdr",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "fetch",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "sequential-thinking",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "filesystem",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "colab-mcp",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "servers.editor-local",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "servers.opencode_console",
+            "kind": "remote",
+            "verification": "configuration_only"
+          },
+          {
+            "name": "mcp-time",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "mcp-memory",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "context7",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "chroma",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "qdrant",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          },
+          {
+            "name": "playwright",
+            "kind": "local",
+            "launcher_installed": true,
+            "verification": "configuration_only"
+          }
+        ]
+      },
+      "cli": {
+        "command_count": 39,
+        "verification": "configuration_only"
+      },
+      "plugins": {
+        "count": 75,
+        "verification": "discovery_only"
+      },
+      "skills": {
+        "count": 95,
+        "verification": "discovery_only"
+      }
+    },
+    "issues": [],
+    "ecosystems_present": [
+      "antigravity",
+      "chatgpt",
+      "claude",
+      "codex"
+    ],
+    "ecosystems_missing": []
+  },
+  "mcp_stdio": {
+    "tools": [
+      "ecosystem_agent_profile",
+      "ecosystem_artifact_handoff",
+      "ecosystem_browser",
+      "ecosystem_code_context",
+      "ecosystem_dataset_custom",
+      "ecosystem_dataset_download",
+      "ecosystem_gemini_notebook",
+      "ecosystem_integration_status",
+      "ecosystem_knowledge_plan",
+      "ecosystem_knowledge_query",
+      "ecosystem_library_search",
+      "ecosystem_local_ci",
+      "ecosystem_production",
+      "ecosystem_quantum_catalog",
+      "ecosystem_rea",
+      "ecosystem_route",
+      "ecosystem_run",
+      "ecosystem_scientific_plugins",
+      "ecosystem_scientific_run",
+      "ecosystem_scientific_runtime",
+      "ecosystem_scientific_verify",
+      "ecosystem_skill_plan",
+      "ecosystem_status",
+      "ecosystem_text_spec",
+      "ecosystem_workflow",
+      "ecosystem_workflow_status"
+    ],
+    "read_only_annotations": {
+      "ecosystem_integration_status": true,
+      "ecosystem_artifact_handoff": true,
+      "ecosystem_skill_plan": true
+    },
+    "status_matches_cli": true,
+    "skill_matches_cli": true,
+    "skill_file_sha256": "d7154a684b1f3ec3fd80bae0c994ced709d1c44742191f6049bfbd4825e69eb2",
+    "handoff_status": "ready",
+    "invalid_path_rejected": true,
+    "library_status": "missing",
+    "orchestrator": "marceloclaro"
+  },
+  "success": true
 }

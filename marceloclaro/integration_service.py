@@ -96,7 +96,36 @@ class CoreIntegrationService:
                 issue("command_agent_missing", "agents", "Comando sem agente configurado: " + name)
 
         mcp_entries = []
-        for name, server in servers.items():
+        mcp_to_check = []
+
+        # R662: reconhecer o contêiner legado mcp.servers.
+        # Seus filhos continuam sujeitos à validação normal.
+        for name, entry in servers.items():
+            if name == "servers":
+                if not isinstance(entry, dict):
+                    issue(
+                        "mcp_config_invalid", "mcp",
+                        "Mapa mcp.servers inválido."
+                    )
+                else:
+                    for child_name, child in entry.items():
+                        if not isinstance(child_name, str) or not child_name:
+                            issue(
+                                "mcp_config_invalid", "mcp",
+                                "Nome de servidor aninhado inválido."
+                            )
+                        else:
+                            mcp_to_check.append(
+                                (f"servers.{child_name}", child)
+                            )
+                continue
+
+            if name == "timeout" and isinstance(entry, dict):
+                continue
+
+            mcp_to_check.append((name, entry))
+
+        for name, server in mcp_to_check:
             if not isinstance(server, dict):
                 issue("mcp_config_invalid", "mcp", "Servidor inválido: " + name)
                 continue
