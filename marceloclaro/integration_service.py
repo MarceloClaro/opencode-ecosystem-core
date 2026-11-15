@@ -163,7 +163,18 @@ class CoreIntegrationService:
         components = {
             "agents": {"configured_count": len(agents), "primary": primary},
             "hooks": {"events": list(EVENTS), "verification": "contract_only"},
-            "mcp": {"configured_count": len(servers), "entries": mcp_entries},
+            "mcp": {
+                "configured_count": len(mcp_entries),
+                "local_count": sum(
+                    entry.get("kind") == "local"
+                    for entry in mcp_entries
+                ),
+                "remote_count": sum(
+                    entry.get("kind") == "remote"
+                    for entry in mcp_entries
+                ),
+                "entries": mcp_entries,
+            },
             "cli": {"command_count": len(commands), "verification": "configuration_only"},
             "plugins": {"count": by_kind.get("plugin", 0), "verification": "discovery_only"},
             "skills": {"count": by_kind.get("skill", 0), "verification": "discovery_only"},
