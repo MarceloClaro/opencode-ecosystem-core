@@ -5,6 +5,10 @@ modelos; execução é limitada por passos e tempo e registra resultados reais.
 """
 from __future__ import annotations
 
+# SPEC-935-R662: rebuild FastMCP Settings
+from mcp.server.fastmcp.server import Settings as _R662Settings
+_R662Settings.model_rebuild()
+
 import asyncio
 import json
 import re
