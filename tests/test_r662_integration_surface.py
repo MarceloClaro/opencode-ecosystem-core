@@ -150,8 +150,28 @@ def test_local_mcp_launchers_use_project_runtime_and_resolve_fetch(monkeypatch):
     monkeypatch.setattr(HarnessRuntime, "resolve_cli_path", lambda self, name: "/isolated/bin/" + name)
     config = opencode_cli.build_config()
     for name, server in config["mcp"].items():
-        if any(arg.endswith(".py") for arg in server["command"]):
-            assert server["command"][0] == ".venv/bin/python", name
+        if name == "servers":
+            assert isinstance(server, dict)
+            for child_name, child in server.items():
+                assert isinstance(child, dict), child_name
+                assert child.get("type") in {"local", "remote"}, child_name
+                if child["type"] == "local" and child.get("enabled", True):
+                    cmd = child.get("command")
+                    assert isinstance(cmd, list) and cmd, child_name
+            continue
+
+        if name == "timeout":
+            assert isinstance(server, dict)
+            continue
+
+        assert isinstance(server, dict), name
+        if server.get("type") == "remote":
+            continue
+
+        command = server.get("command")
+        assert isinstance(command, list) and command, name
+        if any(arg.endswith(".py") for arg in command):
+            assert command[0] == ".venv/bin/python", name
     assert config["mcp"]["fetch"]["command"][0] == "/isolated/bin/uvx"
 
 
@@ -160,3 +180,40 @@ def test_mcp_rejects_bad_handoff_before_orchestrator(monkeypatch):
     monkeypatch.setattr(surface, "get_library_orchestrator", lambda: pytest.fail("sem delegação inválida"))
     with pytest.raises(ValueError):
         asyncio.run(surface.ecosystem_artifact_handoff("../../secret"))
+
+
+def test_nested_mcp_servers_validation(tmp_path):
+    config = fixture_repo(tmp_path)
+    config["mcp"]["servers"] = {
+        "editor-local": {
+            "type": "local",
+            "command": ["python3", "server.py"],
+            "enabled": True,
+        },
+        "broken": {
+            "type": "local",
+            "command": [],
+            "enabled": True,
+        },
+    }
+
+    config_path = tmp_path / "opencode.json"
+    config_path.write_text(json.dumps(config), encoding="utf-8")
+
+    result = service(tmp_path).status()
+    assert result["status"] == "error"
+    assert any(
+        issue["code"] == "mcp_command_invalid"
+        and "servers.broken" in issue["detail"]
+        for issue in result["issues"]
+    )
+
+    del config["mcp"]["servers"]["broken"]
+    config_path.write_text(json.dumps(config), encoding="utf-8")
+
+    result = service(tmp_path).status()
+    assert result["status"] == "config_checked"
+    assert "servers.editor-local" in {
+        item["name"]
+        for item in result["components"]["mcp"]["entries"]
+    }
