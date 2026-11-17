@@ -1,4 +1,4 @@
-"""Gate metodológico da SPEC-935-R1119.
+"""Gate metodológico da SPEC-935-R1118.
 
 Adapta apenas a disciplina auditável observada em repositórios externos:
 proveniência explícita, baseline, métrica, orçamento, holdout, replay do
@@ -11,7 +11,7 @@ from __future__ import annotations
 from collections.abc import Mapping
 from typing import Any
 
-SPEC_ID = "SPEC-935-R1119"
+SPEC_ID = "SPEC-935-R1118"
 
 PROVENANCE: dict[str, Any] = {
     "repositories": {

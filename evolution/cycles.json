@@ -24635,6 +24635,35 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1200",
+      "objective": "Integrar metodologicamente repositórios externos (skills, paper-orchestra, inference-optimisation) como gate auditável Core-native, sem copiar código ou executar APIs externas",
+      "changes": [
+        "Diagnosticou e desbloqueou o doctor via venv local a partir de requirements.txt (Whoosh 2.7.4)",
+        "Usou REA 6.8.0 para custódia: status, catalog (229 tools), session e layers",
+        "Implementou skills/tooling/inference_optimisation_gate.py com proveniência e bloqueios explícitos",
+        "Executou tests/test_r1118_inference_optimisation_gate.py em RED e GREEN (15 testes)",
+        "Verificou testes Whoosh (25) e doctor com checks_failed=0"
+      ],
+      "score": 0.86,
+      "lessons": [
+        "REA não possui camada pronta para código-fonte Python; seu papel aqui foi custódia, não reparo.",
+        "Debian system Python desabilita ensurepip; venv local com requirements.txt é caminho seguro e auditável.",
+        "Sempre verificar colisão de IDs de SPEC antes de criar arquivo; arquivos rastreados existentes não devem ser renomeados.",
+        "Adotar metodologia externa sem copiar código preserva licenças e evita execução de hooks/scripts de terceiros."
+      ],
+      "timestamp": 1794958932.906482,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
