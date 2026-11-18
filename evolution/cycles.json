@@ -24752,6 +24752,34 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1221",
+      "objective": "R1220: tornar o túnel MCP completo persistente no Windows via launcher idempotente do Core",
+      "changes": [
+        "Adicionadas acoes ensure --confirm e install-windows ao runner integrations/chatgpt_tunnel_full_mcp.py",
+        "Criados tests/test_r1220_chatgpt_tunnel_persistente.py com RED .FFFFFFFF e GREEN final",
+        "Corrigidos WorkingDirectory Windows, decoding cp1252/cp850 e envio PowerShell por -EncodedCommand",
+        "Criados 00-ATIVAR-MCP-COMPLETO.cmd e dois atalhos Windows; runtime permanece polling_confirmado sem duplicacao"
+      ],
+      "score": 8.6,
+      "lessons": [
+        "PowerShell no WSL nao deve receber script com acento por stdin; -EncodedCommand UTF-16LE e estavel",
+        "Saida do PowerShell pode vir em encoding de console; decodificar com errors=replace evita falso negativo",
+        "Mensagem do launcher antigo sobre tunnel-client existente nao deve encerrar runtime gerenciado pelo Core",
+        "Chamada ecosystem_integration_status no Chat confirma apenas config_checked; prova do MCP completo exige ferramenta exclusiva do completo"
+      ],
+      "timestamp": 1794982112.644578,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
