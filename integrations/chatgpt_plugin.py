@@ -95,6 +95,11 @@ def build_plugin(core_root: Path, destination: Path, *, target: str = 'linux', d
                  server_module: str = 'integrations.ecosystem_mcp') -> dict:
     server = server_config(core_root, target=target, distro=distro, server_module=server_module)
     destination = Path(destination)
+    mapping = None
+    if app_id is not None:
+        if not isinstance(app_id, str) or not re.fullmatch(r'[A-Za-z0-9_.-]{4,128}', app_id):
+            raise ValueError('app_id inválido: use o ID real retornado pelo ChatGPT')
+        mapping = {'apps': {NAME: {'id': app_id}}}
     # Um pacote existente exige decisão explícita de versão; nunca apagar conteúdo alheio.
     destination.mkdir(parents=True, exist_ok=False)
     interface = {'displayName':'OpenCode Ecosystem Core', 'shortDescription':'Orquestre o Core local',
@@ -113,10 +118,7 @@ def build_plugin(core_root: Path, destination: Path, *, target: str = 'linux', d
     contents = {'plugin.json':manifest, 'mcp.json':mcp, '.mcp.json':{'mcpServers':mcp['mcpServers']},
                 '.codex-plugin/plugin.json':overlay, 'skills/core-orchestrator/SKILL.md':SKILL}
     files = list(PACKAGE_FILES)
-    if app_id is not None:
-        if not isinstance(app_id, str) or not re.fullmatch(r'[A-Za-z0-9_.-]{4,128}', app_id):
-            raise ValueError('app_id inválido: use o ID real retornado pelo ChatGPT')
-        mapping = {'apps':{NAME:{'id':app_id}}}
+    if mapping is not None:
         contents[APP_FILE] = mapping
         manifest['apps'] = mapping['apps']
         overlay['apps'] = './.app.json'

@@ -1,6 +1,6 @@
 # SPEC-935-R1222 — Compatibilidade de descoberta MCP e plugin WSL com status direto
 
-- **Status**: proposto; RED em execução.
+- **Status**: implementado; GREEN local; ativação no Chat ainda manual e pendente.
 - **Data**: 2026-11-18
 - **Origem**: health do túnel R1218 permaneceu `components.mcp.tools_list.ok=false` embora o servidor local liste 26 ferramentas; plugin `opencode-ecosystem-core@marceloclaro-core-global` não expõe ferramenta própria invocável no ChatGPT Chat.
 - **Escopo**: (1) responder `server/discover` no stdio do túnel sem modificar `tunnel-client` nem `app.asar`; (2) preparar pacote de plugin WSL capaz de mapear uma conexão MCP registrada no ChatGPT para uma ferramenta direta.
@@ -36,8 +36,8 @@ Adicionar um bridge stdio delgado à frente do MCP completo:
    - `capabilities` contendo `tools`, `resources` e `prompts`;
    - `_meta["io.modelcontextprotocol.serverInfo"]` com `name="ecosystem-network"` e `version="1.28.1"`;
    - `ttlMs=0` e `cacheScope="private"`.
-2. `process_line(line, send)` deve:
-   - responder `server/discover` sem encaminhar ao filho;
+2. `process_line(line, send_to_child, send_to_client=None)` deve:
+   - responder `server/discover` ao cliente sem encaminhar ao filho;
    - encaminhar qualquer outro JSON-RPC, incluindo `initialize`, `notifications/initialized` e `tools/list`;
    - encaminhar linhas inválidas sem levantar exceção no bridge.
 3. `python -B -m integrations.ecosystem_mcp_tunnel` deve:
@@ -61,4 +61,13 @@ Adicionar um bridge stdio delgado à frente do MCP completo:
 
 ## Evidência R1222
 
-- Pendente.
+- RED registrado antes da implementação: `ModuleNotFoundError: No module named 'integrations.ecosystem_mcp_tunnel'` e falhas em `MCP_MODULE`/`app_id`.
+- GREEN final: `.venv/bin/python -B -m pytest -q tests/test_r1222_mcp_discovery_bridge.py tests/test_r912_chatgpt_plugin.py tests/test_r1218_chatgpt_tunnel_full_mcp.py tests/test_r1220_chatgpt_tunnel_persistente.py` → `46 passed`.
+- Teste end-to-end via subprocess: `server/discover` responde `2025-11-25`, `initialize` negocia `2025-11-25`, `tools/list` devolve `26` ferramentas com `ecosystem_integration_status`.
+- Runner padrão: `integrations/chatgpt_tunnel_full_mcp.py::MCP_MODULE = "integrations.ecosystem_mcp_tunnel"`; `validate_core()` exige o bridge; R1218/R1220 permanecem verdes.
+- Gerador de plugin: `--app-id` e `--server-module` disponíveis; `.app.json` e `apps` surgem somente com ID explícito; ID inválido não cria diretório; ZIP inclui `.app.json`.
+- Pacotes candidatos sem `app_id` (instalados/executados = `false`):
+  - `/tmp/opencode/r1222/opencode-ecosystem-core-status-wsl.zip` SHA-256 `e872ec7307e2c0b843a22efad8e1320aa52a55f51e3c9ba8e4eeb19d7322bf9e` (`integrations.chatgpt_status_mcp`).
+  - `/tmp/opencode/r1222/opencode-ecosystem-core-full-wsl.zip` SHA-256 `aae5b0b1586a4bee483cefcd86d42d8ab20a0b4e5afc00b00b66721e774784a5` (`integrations.ecosystem_mcp_tunnel`).
+- Doctor pós-implementação: `overall=degraded`, `0 falhas`, `6 avisos`, `314 specs`, `859/859 ciclos`, `29 entradas episódicas`, `337 agentes` — sem elevação de confiança.
+- Pendente: reiniciar runtime com o bridge, confirmar `tools_list.ok=true` no health e obter chamada real no ChatGPT; nenhuma dessas condições está provada nesta spec.
