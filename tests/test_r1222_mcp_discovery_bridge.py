@@ -9,6 +9,7 @@ from pathlib import Path
 import select
 import subprocess
 import sys
+import zipfile
 
 import pytest
 
@@ -31,6 +32,8 @@ def core(tmp_path):
     root = tmp_path / 'core'
     (root / 'integrations').mkdir(parents=True)
     (root / 'integrations/ecosystem_mcp.py').write_text('# fixture\n')
+    (root / 'integrations/ecosystem_mcp_tunnel.py').write_text('# fixture\n')
+    (root / 'integrations/chatgpt_status_mcp.py').write_text('# fixture\n')
     (root / '.venv/bin').mkdir(parents=True)
     (root / '.venv/bin/python').write_text('# fixture\n')
     return root
@@ -49,10 +52,14 @@ def test_discover_result_advertises_only_legacy_protocol(bridge):
 
 
 def test_process_line_answers_discover_without_child(bridge):
-    sent = []
+    to_child = []
+    to_client = []
 
-    async def send(line):
-        sent.append(line)
+    async def send_child(line):
+        to_child.append(line)
+
+    async def send_client(line):
+        to_client.append(line)
 
     line = json.dumps({
         'jsonrpc': '2.0',
@@ -60,12 +67,13 @@ def test_process_line_answers_discover_without_child(bridge):
         'method': 'server/discover',
         'params': {'_meta': {'io.modelcontextprotocol.clientInfo': {}}},
     }) + '\n'
-    response = asyncio.run(bridge.process_line(line, send))
+    response = asyncio.run(bridge.process_line(line, send_child, send_client))
     parsed = json.loads(response)
     assert parsed['id'] == 9
     assert parsed['result']['supportedVersions'] == ['2025-11-25']
-    assert len(sent) == 1
-    assert json.loads(sent[0]) == parsed
+    assert to_child == []
+    assert len(to_client) == 1
+    assert json.loads(to_client[0]) == parsed
 
 
 def test_process_line_forwards_all_other_messages(bridge):
@@ -182,3 +190,30 @@ def test_plugin_with_explicit_app_id_maps_apps_sdk(plugin, core, tmp_path):
     assert main['apps'] == app['apps']
     assert overlay['apps'] == './.app.json'
     assert '.app.json' in result['files']
+
+
+def test_server_config_can_target_status_only(plugin, core):
+    config = plugin.server_config(
+        core, target='windows-wsl', server_module='integrations.chatgpt_status_mcp')
+    assert config['command'] == 'wsl.exe'
+    assert config['args'][-1] == 'integrations.chatgpt_status_mcp'
+    with pytest.raises(ValueError):
+        plugin.server_config(core, server_module='integrations.modulo_nao_permitido')
+
+
+def test_invalid_app_id_does_not_create_directory(plugin, core, tmp_path):
+    dest = tmp_path / 'plugin-id-invalido'
+    with pytest.raises(ValueError):
+        plugin.build_plugin(core, dest, app_id='x')
+    assert not dest.exists()
+
+
+def test_archive_includes_app_file(plugin, core, tmp_path):
+    dest = tmp_path / 'plugin-archive'
+    archive = tmp_path / 'plugin.zip'
+    plugin.build_plugin(core, dest, app_id='plugin_asdk_exemplo')
+    result = plugin.archive_plugin(dest, archive)
+    with zipfile.ZipFile(archive) as package:
+        names = set(package.namelist())
+    assert '.app.json' in names
+    assert result['sha256']
