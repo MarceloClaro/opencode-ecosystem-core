@@ -8,6 +8,7 @@ passada por referência `file:` ao control plane.
 from __future__ import annotations
 
 import argparse
+import base64
 import hashlib
 import http.client
 import json
@@ -400,7 +401,8 @@ def _to_windows_path(path: Path | str) -> str:
 
 
 def render_shortcut_setup_ps1(cmd_path: str, desktop_link: str, startup_link: str) -> str:
-    workdir = str(Path(cmd_path).parent)
+    # cmd_path já está em notação Windows; Path do Linux não entende '\\'.
+    workdir = cmd_path.rsplit("\\", 1)[0]
     return "\r\n".join([
         "$ErrorActionPreference = 'Stop'",
         "$shell = New-Object -ComObject WScript.Shell",
@@ -448,14 +450,17 @@ def install_windows(args: argparse.Namespace) -> int:
     os.chmod(ps1_path.parent, 0o700)
     ps1_path.write_text(setup, encoding="utf-8", newline="")
     os.chmod(ps1_path, 0o600)
+    # PowerShell em Windows responde em encoding de console (por exemplo
+    # cp1252); decodificar como utf-8 faria falhar mesmo após sucesso.
     completed = subprocess.run(
         [str(POWERSHELL), "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", "-"],
-        input=setup,
+        input=setup.encode("utf-8"),
         capture_output=True,
-        text=True,
         timeout=60,
         check=False,
     )
+    stdout = completed.stdout.decode("utf-8", "replace") if isinstance(completed.stdout, bytes) else str(completed.stdout)
+    stderr = completed.stderr.decode("utf-8", "replace") if isinstance(completed.stderr, bytes) else str(completed.stderr)
     result = {
         "acao": "install-windows",
         "modo": "aplicado",
@@ -463,13 +468,14 @@ def install_windows(args: argparse.Namespace) -> int:
         "desktop": str(desktop_link),
         "startup": str(startup_link),
         "powershell_exit": completed.returncode,
+        "powershell_saida": stdout[-500:],
         "launcher_existe": cmd_path.is_file(),
         "desktop_existe": desktop_link.is_file(),
         "startup_existe": startup_link.is_file(),
     }
     print(json.dumps(result, ensure_ascii=False, indent=2))
     if completed.returncode != 0:
-        print(completed.stderr[-2000:], file=sys.stderr)
+        print(stderr[-2000:], file=sys.stderr)
         return 1
     if not all((result["launcher_existe"], result["desktop_existe"], result["startup_existe"])):
         print("Um dos artefatos Windows não foi confirmado após a criação.", file=sys.stderr)
@@ -484,12 +490,19 @@ def _parser() -> argparse.ArgumentParser:
     common.add_argument("--core-dir", type=Path, default=CORE_DIR)
     common.add_argument("--key-file", type=Path, default=KEY_FILE)
     common.add_argument("--bundle", type=Path, default=BUNDLE)
+    common.add_argument("--windows-dir", type=Path, default=WINDOWS_DIR)
+    common.add_argument("--desktop-dir", type=Path, default=DESKTOP_DIR)
+    common.add_argument("--startup-dir", type=Path, default=STARTUP_DIR)
     parser = argparse.ArgumentParser(description=__doc__, parents=[common])
     sub = parser.add_subparsers(dest="action")
     sub.add_parser("status", parents=[common])
     sub.add_parser("plan", parents=[common])
     start_parser = sub.add_parser("start", parents=[common])
     start_parser.add_argument("--confirm", action="store_true")
+    ensure_parser = sub.add_parser("ensure", parents=[common])
+    ensure_parser.add_argument("--confirm", action="store_true")
+    windows_parser = sub.add_parser("install-windows", parents=[common])
+    windows_parser.add_argument("--confirm", action="store_true")
     sub.add_parser("stop", parents=[common])
     return parser
 
@@ -502,6 +515,10 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         if args.action == "start":
             return start(args)
+        if args.action == "ensure":
+            return ensure(args)
+        if args.action == "install-windows":
+            return install_windows(args)
         if args.action == "stop":
             print(json.dumps(stop(args.state_dir), ensure_ascii=False, indent=2))
             return 0

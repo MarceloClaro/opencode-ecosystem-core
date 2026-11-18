@@ -104,8 +104,37 @@ def test_render_ps1_cria_apenas_dois_atalhos():
     assert "WScript.Shell" in script
     assert script.count("CreateShortcut") == 2
     assert "WindowStyle = 7" in script
+    assert "WorkingDirectory = 'C:\\Users\\marce\\AppData\\Local\\OpenCodeEcosystemCore\\Tunnel-v0.0.21'" in script
     for forbidden in ("config.toml", "app.asar", "auth", "chatgpt_status_mcp", "runtime.key"):
         assert forbidden not in script
+
+
+def test_install_windows_confirm_decodifica_saida_nao_utf8(tmp_path, monkeypatch, capsys):
+    class Resultado:
+        returncode = 0
+        stdout = b"R1220: atalhos criados \xc6"
+        stderr = b""
+
+    monkeypatch.setattr(mod.subprocess, "run", lambda *_a, **_k: Resultado())
+    windows = tmp_path / "windows"
+    desktop = tmp_path / "desktop"
+    startup = tmp_path / "startup"
+    for directory in (windows, desktop, startup):
+        directory.mkdir()
+    (windows / mod.LAUNCHER_NAME).write_text("x", encoding="ascii")
+    (desktop / mod.LINK_NAME).write_text("x", encoding="ascii")
+    (startup / mod.LINK_NAME).write_text("x", encoding="ascii")
+    code = mod.main([
+        "install-windows", "--confirm",
+        "--state-dir", str(tmp_path / "state"),
+        "--core-dir", str(ROOT),
+        "--windows-dir", str(windows),
+        "--desktop-dir", str(desktop),
+        "--startup-dir", str(startup),
+    ])
+    out = capsys.readouterr().out
+    assert code == 0
+    assert "atalhos criados" in out
 
 
 def test_install_windows_dry_run_nao_chama_powershell(tmp_path, monkeypatch, capsys):
