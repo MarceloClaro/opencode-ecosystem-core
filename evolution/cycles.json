@@ -24723,6 +24723,35 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1219",
+      "objective": "SPEC-935-R1218: expor o MCP completo do Core no chat via Secure MCP Tunnel, com risco de ferramentas destructivas/openWorld aceito explicitamente.",
+      "changes": [
+        "RED/TDD: criadas SPEC-935-R1218 e tests/test_r1218_chatgpt_tunnel_full_mcp.py; runner integrado em integrations/chatgpt_tunnel_full_mcp.py.",
+        "GREEN final com 13 testes aprovados, cobrindo plano sem processo, start sem confirm, chave 0600, hash do bundle, status e stop seguro.",
+        "Runtime iniciado com --confirm: PID 578646, MCP integrations.ecosystem_mcp, readyz=true e polling_confirmado.",
+        "Corrigido status para aceitar details.observed_at do runtime v0.0.21, além do legado last_success.",
+        "Specs R1216 e R1218 atualizadas; nenhuma alteração em config.toml, auth, modelos ou permissões."
+      ],
+      "score": 8.5,
+      "lessons": [
+        "Configurar túnel é infraestrutura observável; ativação real no chat exige verificação manual da ferramenta em conversa Chat.",
+        "Health v0.0.21 publica observed_at, não last_success; contratos de status precisam versionar o schema de saúde.",
+        "MCP completo inclui superfícies destructive/openWorld; exposição só é legítima após aceitação explícita e plano sanitizado.",
+        "Referência file: para runtime.key evita leitura de segredo, mas exige validação rigorosa de modo 0600 e propriedade."
+      ],
+      "timestamp": 1794981456.9753878,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [

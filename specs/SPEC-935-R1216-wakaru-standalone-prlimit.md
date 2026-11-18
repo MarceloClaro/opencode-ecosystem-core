@@ -2,7 +2,7 @@
 
 ## Status
 
-`proposto` — criado antes da implementação, conforme SDD/TDD do Core.
+`concluído` — criado antes da implementação, conforme SDD/TDD do Core; validado com smoke REA e GREEN de R1215+R1216 (`14 passed`).
 
 ## Contexto
 

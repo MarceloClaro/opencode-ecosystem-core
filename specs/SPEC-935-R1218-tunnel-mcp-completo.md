@@ -1,6 +1,6 @@
 # SPEC-935-R1218 — Túnel ChatGPT com MCP completo
 
-- **Status**: proposto
+- **Status**: implementado; runtime iniciado com `polling_confirmado`, verificação no chat ainda manual
 - **Data**: 2026-11-18
 - **Origem**: decisão explícita do operador pela opção 3 (“MCP completo”), com aceitação de risco para navegador/download/execução externa.
 - **Escopo**: expor ao chat via Secure MCP Tunnel o módulo completo `integrations.ecosystem_mcp`, sem modificar o pacote `tunnel-client`, a configuração do Codex, auth, modelos ou permissões.
@@ -44,3 +44,12 @@ O atalho `OpenCode Ecosystem Tunnel (WSL)` usa `integrations/chatgpt_status_mcp.
 - `stop` recusa PID que não pertença ao binário gerenciado/túnel.
 - Comando final contém `integrations.ecosystem_mcp`, não `chatgpt_status_mcp`.
 - `doctor` continua `verification: installation_only` e nenhuma alegação de ativação no chat é feita sem confirmação humana.
+
+## Validação observada
+
+- RED: importação do runner ausente, seguida de implementação e GREEN com `13 passed`.
+- `plan`: plano sanitizado, sem processo, sem rede e sem leitura da chave.
+- `start --confirm`: PID `578646`, `readyz=true`, posteriormente `polling_confirmado` com último poll `2026-11-18T05:55:37.058039313Z`.
+- Correção de compatibilidade: o health v0.0.21 publica `details.observed_at`; o status passou a aceitar `last_success` ou `observed_at`.
+- `runtime.key` permaneceu com modo `0600` e foi passado apenas como referência `file:<caminho>`.
+- `~/.codex/config.toml` não foi modificado.
