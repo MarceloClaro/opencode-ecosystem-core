@@ -64,18 +64,23 @@ def is_discover_request(payload: Any) -> bool:
     )
 
 
-async def process_line(line: str, send: Send) -> str | None:
+async def process_line(
+    line: str,
+    send_to_child: Send,
+    send_to_client: Send | None = None,
+) -> str | None:
     """Processa uma linha; retorna a resposta gerada ou ``None`` se repassou."""
     try:
         payload = json.loads(line)
     except (TypeError, ValueError):
-        await send(line)
+        await send_to_child(line)
         return None
     if not is_discover_request(payload):
-        await send(line)
+        await send_to_child(line)
         return None
     response = json.dumps(make_discover_result(payload["id"]), ensure_ascii=False)
-    await send(response + "\n")
+    destination = send_to_client if send_to_client is not None else send_to_child
+    await destination(response + "\n")
     return response
 
 
@@ -114,14 +119,18 @@ def main() -> int:
     for thread in threads:
         thread.start()
 
-    async def send(line: str) -> None:
+    async def send_to_child(line: str) -> None:
         assert child.stdin is not None
         child.stdin.write(line)
         child.stdin.flush()
 
+    async def send_to_client(line: str) -> None:
+        sys.stdout.write(line)
+        sys.stdout.flush()
+
     try:
         for line in sys.stdin:
-            asyncio.run(process_line(line, send))
+            asyncio.run(process_line(line, send_to_child, send_to_client))
     except (BrokenPipeError, KeyboardInterrupt):
         pass
     finally:
