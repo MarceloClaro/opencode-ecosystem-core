@@ -111,7 +111,8 @@ def test_manifest_registra_standalone_e_verificacao() -> None:
     assert isinstance(standalone, dict), "manifest sem bloco standalone"
     assert standalone.get("asset_url") == EXPECTED_URL
     assert standalone.get("asset_sha256") == EXPECTED_ASSET_SHA256
-    assert standalone.get("command") == str(find_standalone_executable())
+    assert standalone.get("executable_path") == str(find_standalone_executable())
+    assert standalone.get("command") == str(BIN)
     assert standalone.get("execution_under_rea_prlimit_verified") is True
     assert data.get("spec") in {"SPEC-935-R1215", "SPEC-935-R1216"}
 

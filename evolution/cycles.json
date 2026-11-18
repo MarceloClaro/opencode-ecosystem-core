@@ -24694,6 +24694,35 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1217",
+      "objective": "SPEC-935-R1216: viabilizar recuperação JavaScript da REA 6.8.0 com Wakaru executável sob limites fixos de prlimit, sem patch da REA e sem alterar configuração do Codex/ChatGPT.",
+      "changes": [
+        "RED/TDD: criadas SPEC-935-R1216 e tests/test_r1216_wakaru_standalone_prlimit.py; RED com 6 falhas e 1 passe.",
+        "Baixado asset oficial wakaru-linux-x64.tar.gz v1.14.0 com SHA-256 db0e620034723195ab426e94d00d55dbd8fd0106a928ada2563f1103196d09fa.",
+        "Extraído binário ELF standalone e substituído o wrapper ativo; wrapper Node preservado como .bak para rollback.",
+        "Manifestado standalone/verificação e registrado smoke recover_javascript_sources: status complete, exit_code 0, 2 módulos, 0 falhas.",
+        "GREEN: 14 testes aprovados entre R1215 e R1216; doctor manteve verification installation_only e overall degraded por providers ausentes."
+      ],
+      "score": 8.5,
+      "lessons": [
+        "Instalação verificada não implica execução sob as restrições reais do consumidor; sempre testar o comando dentro dos mesmos limites de recurso.",
+        "Node 24/V8 não respeita teto de 1 GiB de address space da REA para recover; binário standalone oficial evita patch de terceiros.",
+        "DECLASSIFIED REA recovery outputs continuam observed-untrusted: smoke test prova only bounded execution, não equivalência runtime nem cobertura integral.",
+        "REA_WAKARU_COMMAND deve permanecer inline_only_not_persisted até decisão explícita de configuração durável."
+      ],
+      "timestamp": 1794970067.2791636,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
