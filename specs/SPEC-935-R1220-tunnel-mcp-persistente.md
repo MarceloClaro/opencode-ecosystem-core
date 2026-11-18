@@ -1,6 +1,6 @@
 # SPEC-935-R1220 — Persistência Windows do túnel MCP completo
 
-- **Status**: proposto
+- **Status**: concluído; GREEN 23 testes (R1218+R1220), `.cmd` e dois atalhos criados, túnel permanece `polling_confirmado`.
 - **Data**: 2026-11-18
 - **Origem**: operador respondeu `faça` após oferta de criar atalho/serviço persistente para o túnel MCP completo.
 - **Escopo**: tornar o runtime R1218 reiniciável e persistente no Windows por atalho de desktop + entrada de Startup, usando apenas o runner gerenciado do Core.
@@ -50,3 +50,18 @@ Adicionar ao runner `integrations/chatgpt_tunnel_full_mcp.py` a ação `ensure -
 - Após execução, os dois atalhos existem no Windows e apontam para o `.cmd` gerado.
 - Estado atual do túnel permanece `polling_confirmado`.
 - `doctor` permanece `installation_only`; nenhuma alegação de ativação no chat sem confirmação humana.
+
+## Evidência R1220 (2026-11-18)
+
+- RED inicial: `.FFFFFFFF` (`1 passed`, `8 failed`) com ações/helpers ausentes.
+- GREEN final: `23 passed` para `tests/test_r1218_chatgpt_tunnel_full_mcp.py` + `tests/test_r1220_chatgpt_tunnel_persistente.py`.
+- Correções durante GREEN:
+  - `WorkingDirectory` dos atalhos passou a derivar da string Windows, preservando `C:\Users\marce\AppData\Local\OpenCodeEcosystemCore\Tunnel-v0.0.21`.
+  - Saída do PowerShell passou a ser decodificada com `errors="replace"`, evitando `UnicodeDecodeError` em cp1252/cp850.
+  - Script enviado por `-EncodedCommand` (UTF-16LE/base64), preservando `Área de Trabalho` sem depender de encoding de stdin.
+- `install-windows --confirm` executado:
+  - `launcher_existe=true`, `desktop_existe=true`, `startup_existe=true`, `powershell_exit=0`.
+  - Tamanhos observados: `.cmd` 526 bytes; atalho desktop 1487 bytes; atalho Startup 1495 bytes.
+- `ensure --confirm` reexecutado após a instalação: `tunel=polling_confirmado`, `mcp=integrations.ecosystem_mcp`, `pid=578646`, sem duplicação.
+- Registro de evento: `atalhos_windows_instalados` em `/home/marceloclaro/.local/state/opencode-core-tunnel-full/eventos.jsonl`.
+- Não alterados: `00-ATIVAR.cmd`, atalho antigo, `launcher.py`, `app.asar`, `~/.codex/config.toml`, auth/modelos/permissões.

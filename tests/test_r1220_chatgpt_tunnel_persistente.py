@@ -115,7 +115,13 @@ def test_install_windows_confirm_decodifica_saida_nao_utf8(tmp_path, monkeypatch
         stdout = b"R1220: atalhos criados \xc6"
         stderr = b""
 
-    monkeypatch.setattr(mod.subprocess, "run", lambda *_a, **_k: Resultado())
+    capturado: dict = {}
+
+    def fake_run(argv, **_kwargs):
+        capturado["argv"] = argv
+        return Resultado()
+
+    monkeypatch.setattr(mod.subprocess, "run", fake_run)
     windows = tmp_path / "windows"
     desktop = tmp_path / "desktop"
     startup = tmp_path / "startup"
@@ -135,6 +141,7 @@ def test_install_windows_confirm_decodifica_saida_nao_utf8(tmp_path, monkeypatch
     out = capsys.readouterr().out
     assert code == 0
     assert "atalhos criados" in out
+    assert "-EncodedCommand" in capturado["argv"]
 
 
 def test_install_windows_dry_run_nao_chama_powershell(tmp_path, monkeypatch, capsys):

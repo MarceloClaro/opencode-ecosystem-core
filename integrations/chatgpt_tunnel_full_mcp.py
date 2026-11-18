@@ -450,11 +450,11 @@ def install_windows(args: argparse.Namespace) -> int:
     os.chmod(ps1_path.parent, 0o700)
     ps1_path.write_text(setup, encoding="utf-8", newline="")
     os.chmod(ps1_path, 0o600)
-    # PowerShell em Windows responde em encoding de console (por exemplo
-    # cp1252); decodificar como utf-8 faria falhar mesmo após sucesso.
+    # PowerShell em Windows usa encoding de console (cp1252/cp850); UTF-16LE
+    # em -EncodedCommand preserva 'Área de Trabalho' sem depender do stdin.
+    encoded = base64.b64encode(setup.encode("utf-16le")).decode("ascii")
     completed = subprocess.run(
-        [str(POWERSHELL), "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", "-"],
-        input=setup.encode("utf-8"),
+        [str(POWERSHELL), "-NoProfile", "-ExecutionPolicy", "Bypass", "-EncodedCommand", encoded],
         capture_output=True,
         timeout=60,
         check=False,
