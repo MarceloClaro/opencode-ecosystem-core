@@ -64,7 +64,8 @@ def test_process_line_answers_discover_without_child(bridge):
     parsed = json.loads(response)
     assert parsed['id'] == 9
     assert parsed['result']['supportedVersions'] == ['2025-11-25']
-    assert sent == []
+    assert len(sent) == 1
+    assert json.loads(sent[0]) == parsed
 
 
 def test_process_line_forwards_all_other_messages(bridge):
