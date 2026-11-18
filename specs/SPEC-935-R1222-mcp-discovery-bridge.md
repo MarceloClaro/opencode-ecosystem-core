@@ -1,6 +1,6 @@
 # SPEC-935-R1222 — Compatibilidade de descoberta MCP e plugin WSL com status direto
 
-- **Status**: implementado; GREEN local; ativação no Chat ainda manual e pendente.
+- **Status**: implementado; GREEN local; chamada real no Chat executada em 18/11/2026; verificação limitada ao tool call, não à execução de tarefas do orquestrador.
 - **Data**: 2026-11-18
 - **Origem**: health do túnel R1218 permaneceu `components.mcp.tools_list.ok=false` embora o servidor local liste 26 ferramentas; plugin `opencode-ecosystem-core@marceloclaro-core-global` não expõe ferramenta própria invocável no ChatGPT Chat.
 - **Escopo**: (1) responder `server/discover` no stdio do túnel sem modificar `tunnel-client` nem `app.asar`; (2) preparar pacote de plugin WSL capaz de mapear uma conexão MCP registrada no ChatGPT para uma ferramenta direta.
@@ -26,7 +26,7 @@ Adicionar um bridge stdio delgado à frente do MCP completo:
 - Não modificar `tunnel-client`, `app.asar`, `00-ATIVAR.cmd`, atalhos ou credenciais.
 - Não ler/imprimir/copiar `runtime.key`; o runner continua usando apenas `file:<caminho>`.
 - Não gerar `asdk_app_...` localmente nem alegar que um ID inventado foi registrado no ChatGPT.
-- Não declarar `chatgpt_chat` verificado sem chamada manual no Chat.
+- Não declarar `chatgpt_chat` verificado sem chamada manual no Chat; chamada registrada em 18/11/2026, com escopo limitado ao `tools/call` de diagnóstico.
 
 ## Contrato
 
@@ -71,5 +71,9 @@ Adicionar um bridge stdio delgado à frente do MCP completo:
   - `/tmp/opencode/r1222/opencode-ecosystem-core-full-wsl.zip` SHA-256 `aae5b0b1586a4bee483cefcd86d42d8ab20a0b4e5afc00b00b66721e774784a5` (`integrations.ecosystem_mcp_tunnel`).
 - Doctor pós-implementação: `overall=degraded`, `0 falhas`, `6 avisos`, `314 specs`, `860/860 ciclos` (inclui ciclo `R1222`, `score=8.7`), `29 entradas episódicas`, `337 agentes` — sem elevação de confiança.
 - Runtime reiniciado explicitamente (`stop` + `start --confirm`): PID `719476`, health `http://127.0.0.1:38091`, `tunel=polling_confirmado`, `mcp=integrations.ecosystem_mcp_tunnel`.
-- Health após reinício: `live=true`, `ready=true`, `control-plane=polling`, `mcp.state=not_observed`, `initialize_epoch=0`, `tools_list.ok=false`. A descoberta ainda não foi reemitida pelo control-plane/WebSocket após o restart; portanto `tools_list.ok=true` **não** está provado.
-- Pendente: descoberta/acordo emitidos pelo ChatGPT e chamada manual de `ecosystem_integration_status` na conversa; nenhuma dessas condições está provada nesta spec.
+- Health imediatamente após o reinício: `live=true`, `ready=true`, `control-plane=polling`, `mcp.state=not_observed`, `initialize_epoch=0`, `tools_list.ok=false`.
+- Após a chamada real no Chat: health `mcp.status=ok`, `mcp.state=initialized`, `initialize_epoch=1`, `tools_list.ok=false`; log `08:42:26`/`08:42:36` registrou `dispatcher forwarded command to MCP server` e `CallToolRequest` processado às `08:42:27`.
+- Chamada real no Chat: `ecosystem_integration_status` via plugin `OpenCode Core Status — Chat` respondeu `spec_id=SPEC-935-R662`, `status=config_checked`, `executed=false`, `execution_verified=false`, `issues=[]`, `mcp.configured_count=33`, `local_count=32`, `remote_count=1`.
+- Comparação com chamada direta no Core WSL (`ecosystem-network_ecosystem_integration_status`): mesmos `spec_id`, `orchestrator`, `status`, `executed`, `execution_verified`, `issues` e contagens MCP; a resposta direta inclui ainda `components` (`agents=337`, `cli=39`, `plugins=75`, `skills=95`) e `ecosystems_present=[antigravity,chatgpt,claude,codex]`. A versão do Chat foi resumida na transcrição fornecida; não afirmar igualdade byte a byte.
+- `executed=false` e `execution_verified=false` são semântica do diagnóstico, não falha do tool call: a resposta ter chegado ao Chat prova o roteamento ChatGPT → WSL → Core para esta ferramenta; não prova execução de tarefas nem conectividade operacional dos 33 MCPs.
+- Pendente: provar execução dos plugins Desktop e Local e, se necessário, `tools_list.ok=true`; nenhuma dessas condições está provada nesta spec.

@@ -24809,6 +24809,35 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1223",
+      "objective": "R1223: verificar chamada real ecosystem_integration_status do Chat ao Core WSL e comparar com chamada direta",
+      "changes": [
+        " Chamada real no Chat pelo plugin OpenCode Core Status — Chat executada pelo usuário",
+        " Chamada direta equivalente executada via MCP ecosystem-network no Core WSL",
+        " Confirmação no log do túnel PID 719476: dispatcher encaminhou comando e CallToolRequest foi processado",
+        " Health passou a mcp.status=ok/state=initialized/initialize_epoch=1 após a chamada",
+        " Spec R1222 e memória R1222-MCP-Discovery-Bridge atualizadas com a verificação e seus limites"
+      ],
+      "score": 9.0,
+      "lessons": [
+        " A resposta ter chegado ao Chat prova roteamento ponta a ponta para o tool call, mas não prova execução de tarefas do orquestrador",
+        " executed=false e execution_verified=false são campos semânticos do diagnóstico, não evidência de falha do MCP",
+        " tools_list.ok=false pode coexistir com tools/call real; não usar um como negação automática do outro",
+        " Comparação de respostas exige distinguir transcrição resumida do Chat de payload completo do Core WSL"
+      ],
+      "timestamp": 1795003046.1078176,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
