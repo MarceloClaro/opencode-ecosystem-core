@@ -34,6 +34,14 @@ BUNDLE = Path(
 BUNDLE_SHA256 = "fa53182b766aeaceb652d86aee291c48daf7b90b5d73586dba370f4c1801325e"
 MCP_MODULE = "integrations.ecosystem_mcp"
 BASE_ENV = {"PATH": "/usr/bin:/bin", "LANG": "C.UTF-8", "HOME": str(Path.home())}
+WINDOWS_DIR = Path("/mnt/c/Users/marce/AppData/Local/OpenCodeEcosystemCore/Tunnel-v0.0.21")
+DESKTOP_DIR = Path("/mnt/c/Users/marce/OneDrive/Área de Trabalho")
+STARTUP_DIR = Path(
+    "/mnt/c/Users/marce/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup"
+)
+POWERSHELL = Path("/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/powershell.exe")
+LAUNCHER_NAME = "00-ATIVAR-MCP-COMPLETO.cmd"
+LINK_NAME = "OpenCode Ecosystem Tunnel - MCP Completo (WSL).lnk"
 
 
 class UserError(Exception):
@@ -327,6 +335,147 @@ def start(args: argparse.Namespace) -> int:
         outcome = status(args.state_dir)
     print(json.dumps(outcome, ensure_ascii=False, indent=2))
     return 0 if outcome.get("tunel") == "polling_confirmado" else 1
+
+
+def _proc_pids() -> list[int]:
+    try:
+        return [int(p.name) for p in Path("/proc").iterdir() if p.name.isdigit()]
+    except OSError:
+        return []
+
+
+def external_tunnel_pids(exclude_pid: int | None = None) -> list[int]:
+    """PIDs de tunnel-client com o mesmo ID fora do controle deste runner."""
+    needle = TUNNEL_ID.encode()
+    found: list[int] = []
+    for pid in _proc_pids():
+        if pid == exclude_pid:
+            continue
+        cmdline = b" ".join(_proc_cmdline(pid))
+        if needle in cmdline and b"tunnel-client-runtime" in cmdline:
+            found.append(pid)
+    return found
+
+
+def ensure(args: argparse.Namespace) -> int:
+    if not args.confirm:
+        print("ensure exige --confirm; nada foi iniciado.", file=sys.stderr)
+        return 2
+    current = status(args.state_dir)
+    externals = external_tunnel_pids(exclude_pid=current.get("pid"))
+    if externals:
+        raise UserError(
+            "Já há tunnel-client externo com este ID; encerre-o pelo gerenciador de origem."
+        )
+    if current.get("tunel") != "parado":
+        print(json.dumps(current, ensure_ascii=False, indent=2))
+        return 0
+    return start(args)
+
+
+def render_launcher_cmd(core_dir: Path | str = CORE_DIR) -> str:
+    root = Path(core_dir)
+    python = root / ".venv/bin/python"
+    return "\r\n".join([
+        "@echo off",
+        "setlocal",
+        f'wsl.exe --distribution Ubuntu --cd "{root}" --exec "{python}" -B '
+        "-m integrations.chatgpt_tunnel_full_mcp ensure --confirm",
+        'set "RESULT=%ERRORLEVEL%"',
+        "echo(",
+        "echo Status do tunel MCP completo:",
+        f'wsl.exe --distribution Ubuntu --cd "{root}" --exec "{python}" -B '
+        "-m integrations.chatgpt_tunnel_full_mcp status",
+        "echo(",
+        "exit /b %RESULT%",
+        "",
+    ])
+
+
+def _to_windows_path(path: Path | str) -> str:
+    value = str(path)
+    if value.startswith("/mnt/c/") or value.startswith("/mnt/C/"):
+        return "C:\\" + value[7:].replace("/", "\\")
+    return value.replace("/", "\\")
+
+
+def render_shortcut_setup_ps1(cmd_path: str, desktop_link: str, startup_link: str) -> str:
+    workdir = str(Path(cmd_path).parent)
+    return "\r\n".join([
+        "$ErrorActionPreference = 'Stop'",
+        "$shell = New-Object -ComObject WScript.Shell",
+        f"$desktop = $shell.CreateShortcut('{desktop_link}')",
+        f"$desktop.TargetPath = '{cmd_path}'",
+        f"$desktop.WorkingDirectory = '{workdir}'",
+        "$desktop.WindowStyle = 7",
+        "$desktop.Save()",
+        f"$startup = $shell.CreateShortcut('{startup_link}')",
+        f"$startup.TargetPath = '{cmd_path}'",
+        f"$startup.WorkingDirectory = '{workdir}'",
+        "$startup.WindowStyle = 7",
+        "$startup.Save()",
+        "Write-Output 'R1220: atalhos criados'",
+        "",
+    ])
+
+
+def install_windows(args: argparse.Namespace) -> int:
+    script = render_launcher_cmd(args.core_dir)
+    cmd_path = Path(args.windows_dir) / LAUNCHER_NAME
+    desktop_link = Path(args.desktop_dir) / LINK_NAME
+    startup_link = Path(args.startup_dir) / LINK_NAME
+    setup = render_shortcut_setup_ps1(
+        _to_windows_path(cmd_path),
+        _to_windows_path(desktop_link),
+        _to_windows_path(startup_link),
+    )
+    if not args.confirm:
+        print(json.dumps({
+            "acao": "install-windows",
+            "modo": "dry-run",
+            "launcher": str(cmd_path),
+            "desktop": str(desktop_link),
+            "startup": str(startup_link),
+            "cmd": script,
+            "powershell": setup,
+            "efeitos": "nenhum arquivo escrito; use --confirm para aplicar",
+        }, ensure_ascii=False, indent=2))
+        return 0
+    cmd_path.parent.mkdir(parents=True, exist_ok=True)
+    cmd_path.write_text(script, encoding="utf-8", newline="")
+    ps1_path = Path(args.state_dir) / "install-shortcuts.ps1"
+    ps1_path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+    os.chmod(ps1_path.parent, 0o700)
+    ps1_path.write_text(setup, encoding="utf-8", newline="")
+    os.chmod(ps1_path, 0o600)
+    completed = subprocess.run(
+        [str(POWERSHELL), "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", "-"],
+        input=setup,
+        capture_output=True,
+        text=True,
+        timeout=60,
+        check=False,
+    )
+    result = {
+        "acao": "install-windows",
+        "modo": "aplicado",
+        "launcher": str(cmd_path),
+        "desktop": str(desktop_link),
+        "startup": str(startup_link),
+        "powershell_exit": completed.returncode,
+        "launcher_existe": cmd_path.is_file(),
+        "desktop_existe": desktop_link.is_file(),
+        "startup_existe": startup_link.is_file(),
+    }
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    if completed.returncode != 0:
+        print(completed.stderr[-2000:], file=sys.stderr)
+        return 1
+    if not all((result["launcher_existe"], result["desktop_existe"], result["startup_existe"])):
+        print("Um dos artefatos Windows não foi confirmado após a criação.", file=sys.stderr)
+        return 1
+    record(args.state_dir, "atalhos_windows_instalados", result)
+    return 0
 
 
 def _parser() -> argparse.ArgumentParser:
