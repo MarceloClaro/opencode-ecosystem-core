@@ -1,6 +1,7 @@
 import hashlib
 import os
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 from zipfile import ZipFile
 
@@ -104,6 +105,23 @@ def test_status_sem_pid_retorna_parado(tmp_path):
     result = mod.status(tmp_path)
     assert result["tunel"] == "parado"
     assert result["mcp"] == "integrations.ecosystem_mcp"
+
+
+def test_status_aceita_observed_at_do_v0_0_21(tmp_path, monkeypatch):
+    (tmp_path / "tunnel.pid").write_text(f"{os.getpid()}\n", encoding="ascii")
+    (tmp_path / "health-url").write_text("http://127.0.0.1:36135", encoding="ascii")
+    observed = datetime.now(timezone.utc).isoformat()
+    monkeypatch.setattr(mod, "_alive", lambda _pid: True)
+
+    def fake_fetch(_base, path, *, json_body=False):
+        if path == "/readyz":
+            return 200
+        return {"details": {"observed_at": observed, "consecutive_failures": 0}}
+
+    monkeypatch.setattr(mod, "_fetch", fake_fetch)
+    result = mod.status(tmp_path)
+    assert result["tunel"] == "polling_confirmado"
+    assert result["ultimo_poll_utc"] == observed
 
 
 def test_stop_recusa_pid_desconhecido(tmp_path, monkeypatch):
