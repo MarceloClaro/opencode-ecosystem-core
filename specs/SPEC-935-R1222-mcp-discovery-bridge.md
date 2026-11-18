@@ -69,5 +69,7 @@ Adicionar um bridge stdio delgado à frente do MCP completo:
 - Pacotes candidatos sem `app_id` (instalados/executados = `false`):
   - `/tmp/opencode/r1222/opencode-ecosystem-core-status-wsl.zip` SHA-256 `e872ec7307e2c0b843a22efad8e1320aa52a55f51e3c9ba8e4eeb19d7322bf9e` (`integrations.chatgpt_status_mcp`).
   - `/tmp/opencode/r1222/opencode-ecosystem-core-full-wsl.zip` SHA-256 `aae5b0b1586a4bee483cefcd86d42d8ab20a0b4e5afc00b00b66721e774784a5` (`integrations.ecosystem_mcp_tunnel`).
-- Doctor pós-implementação: `overall=degraded`, `0 falhas`, `6 avisos`, `314 specs`, `859/859 ciclos`, `29 entradas episódicas`, `337 agentes` — sem elevação de confiança.
-- Pendente: reiniciar runtime com o bridge, confirmar `tools_list.ok=true` no health e obter chamada real no ChatGPT; nenhuma dessas condições está provada nesta spec.
+- Doctor pós-implementação: `overall=degraded`, `0 falhas`, `6 avisos`, `314 specs`, `860/860 ciclos` (inclui ciclo `R1222`, `score=8.7`), `29 entradas episódicas`, `337 agentes` — sem elevação de confiança.
+- Runtime reiniciado explicitamente (`stop` + `start --confirm`): PID `719476`, health `http://127.0.0.1:38091`, `tunel=polling_confirmado`, `mcp=integrations.ecosystem_mcp_tunnel`.
+- Health após reinício: `live=true`, `ready=true`, `control-plane=polling`, `mcp.state=not_observed`, `initialize_epoch=0`, `tools_list.ok=false`. A descoberta ainda não foi reemitida pelo control-plane/WebSocket após o restart; portanto `tools_list.ok=true` **não** está provado.
+- Pendente: descoberta/acordo emitidos pelo ChatGPT e chamada manual de `ecosystem_integration_status` na conversa; nenhuma dessas condições está provada nesta spec.

@@ -24780,6 +24780,35 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1222",
+      "objective": "R1222: compatibilidade server/discover no túnel ChatGPT e plugin WSL com Apps SDK opcional",
+      "changes": [
+        "bridge integrations/ecosystem_mcp_tunnel.py responde server/discover e repassa initialize/tools/list ao MCP completo",
+        "runner R1218/R1220 passou a usar o bridge por padrão e valida o novo módulo",
+        "gerador de plugin aceita --server-module e --app-id, grava .app.json somente com ID real e inclui o arquivo no ZIP",
+        "spec e testes R1222 atualizados; 46 testes verdes nos conjuntos R1222/R912/R1218/R1220",
+        "runtime reiniciado com PID 719476 e mcp=integrations.ecosystem_mcp_tunnel; descoberta pelo Chat ainda pendente"
+      ],
+      "score": 8.7,
+      "lessons": [
+        "fastmcp 1.28.1 não reconhece server/discover; bridge stdio é necessário sem alterar tunnel-client",
+        "resposta de descoberta deve ser escrita ao cliente, nunca reencaminhada ao filho",
+        "app_id é dado externo da UI do ChatGPT; nunca deve ser inventado ou reutilizado",
+        "descoberta local e health de runtime não provam roteamento no Chat; exige chamada manual real"
+      ],
+      "timestamp": 1794992783.2874935,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
