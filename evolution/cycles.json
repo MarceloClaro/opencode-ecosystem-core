@@ -24664,6 +24664,36 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1201",
+      "objective": "Verificar licenças/upstreams dos três repositórios e tentar a suíte completa após o desbloqueio do doctor",
+      "changes": [
+        "Confirmou paper-orchestra como Apache-2.0 no LICENSE e no metadata do GitHub, upstream google-research/paper-orchestra",
+        "Confirmou inference-optimisation-skill como MIT no LICENSE e no metadata do GitHub, upstream sybil-solutions/inference-optimisation-skill",
+        "Confirmou que MarceloClaro/skills e seu upstream anthropics/skills não têm LICENSE na raiz; 18 diretórios com LICENSE.txt Apache-2.0 e doc-coauthoring sem licença declarada",
+        "Registrou THIRD_PARTY_NOTICES.md com componentes BSD-2-Clause e GPL-3.0/FFmpeg 7.0.2",
+        "Instalou requirements-dev, pandas, pillow e psutil no venv local e executou testes direcionados: R1118 15 passed e R893 25 passed",
+        "A suíte completa não ficou verde: 6 erros de coleta por colibri ausente/arquivos de dados ausentes e falhas preexistentes fora do escopo; execução ampliada interrompida por timeout após 43%"
+      ],
+      "score": 0.8,
+      "lessons": [
+        "Sem LICENSE root, a licença de MarceloClaro/skills precisa ser avaliada por skill; doc-coauthoring permanece sem licença verificável.",
+        "THIRD_PARTY_NOTICES de skills inclui GPL-3.0/FFmpeg: copiar qualquer parte do repositório exigiria revisão legal adicional.",
+        "Falhas da suíte completa são majoritariamente pré-existentes ou ambientais e não devem ser atribuídas ao gate R1118 sem reprodução isolada.",
+        "Testes direcionados continuam sendo a evidência válida para a entrega R1118; suíte completa é um follow-up separado."
+      ],
+      "timestamp": 1794961634.1670403,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": false,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
