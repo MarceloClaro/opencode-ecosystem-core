@@ -9,9 +9,15 @@ import re
 import zipfile
 
 NAME = 'opencode-ecosystem-core'
-VERSION = '1.0.1'
+VERSION = '1.0.2'
 PACKAGE_FILES = ('plugin.json', 'mcp.json', '.mcp.json',
                  '.codex-plugin/plugin.json', 'skills/core-orchestrator/SKILL.md')
+APP_FILE = '.app.json'
+SERVER_MODULES = frozenset({
+    'integrations.ecosystem_mcp',
+    'integrations.ecosystem_mcp_tunnel',
+    'integrations.chatgpt_status_mcp',
+})
 
 SKILL = '''---
 name: core-orchestrator
@@ -63,11 +69,15 @@ não equivale a revisão humana ou validação científica externa.
 '''
 
 
-def server_config(core_root: Path, *, target: str = 'linux', distro: str = 'Ubuntu') -> dict:
+def server_config(core_root: Path, *, target: str = 'linux', distro: str = 'Ubuntu',
+                  server_module: str = 'integrations.ecosystem_mcp') -> dict:
     root = Path(core_root).resolve(strict=True)
     if target not in {'linux', 'windows-wsl'}:
         raise ValueError('Destino suportado: linux ou windows-wsl')
-    if not (root/'integrations/ecosystem_mcp.py').is_file():
+    if server_module not in SERVER_MODULES:
+        raise ValueError('Módulo MCP não permitido no pacote do plugin')
+    module_path = root/'integrations'/f'{server_module.rsplit(".", 1)[-1]}.py'
+    if not module_path.is_file():
         raise ValueError('O servidor MCP do Core não foi encontrado')
     python = root/'.venv/bin/python'
     if not python.is_file():
@@ -76,12 +86,14 @@ def server_config(core_root: Path, *, target: str = 'linux', distro: str = 'Ubun
         if not isinstance(distro, str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{0,63}', distro):
             raise ValueError('Distribuição WSL inválida')
         return {'type':'stdio', 'command':'wsl.exe',
-                'args':['-d', distro, '--cd', str(root), '--exec', str(python), '-m', 'integrations.ecosystem_mcp']}
-    return {'type':'stdio', 'command':str(python), 'args':['-m','integrations.ecosystem_mcp'], 'cwd':str(root)}
+                'args':['-d', distro, '--cd', str(root), '--exec', str(python), '-m', server_module]}
+    return {'type':'stdio', 'command':str(python), 'args':['-m',server_module], 'cwd':str(root)}
 
 
-def build_plugin(core_root: Path, destination: Path, *, target: str = 'linux', distro: str = 'Ubuntu') -> dict:
-    server = server_config(core_root, target=target, distro=distro)
+def build_plugin(core_root: Path, destination: Path, *, target: str = 'linux', distro: str = 'Ubuntu',
+                 app_id: str | None = None,
+                 server_module: str = 'integrations.ecosystem_mcp') -> dict:
+    server = server_config(core_root, target=target, distro=distro, server_module=server_module)
     destination = Path(destination)
     # Um pacote existente exige decisão explícita de versão; nunca apagar conteúdo alheio.
     destination.mkdir(parents=True, exist_ok=False)
@@ -100,13 +112,23 @@ def build_plugin(core_root: Path, destination: Path, *, target: str = 'linux', d
                'skills':'./skills/', 'mcpServers':'./.mcp.json'}
     contents = {'plugin.json':manifest, 'mcp.json':mcp, '.mcp.json':{'mcpServers':mcp['mcpServers']},
                 '.codex-plugin/plugin.json':overlay, 'skills/core-orchestrator/SKILL.md':SKILL}
+    files = list(PACKAGE_FILES)
+    if app_id is not None:
+        if not isinstance(app_id, str) or not re.fullmatch(r'[A-Za-z0-9_.-]{4,128}', app_id):
+            raise ValueError('app_id inválido: use o ID real retornado pelo ChatGPT')
+        mapping = {'apps':{NAME:{'id':app_id}}}
+        contents[APP_FILE] = mapping
+        manifest['apps'] = mapping['apps']
+        overlay['apps'] = './.app.json'
+        files.append(APP_FILE)
     for relative, value in contents.items():
         path = destination/relative
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(value if isinstance(value,str) else json.dumps(value,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     return {'name':NAME, 'version':VERSION, 'destination':str(destination.resolve()),
-            'files':{name:hashlib.sha256((destination/name).read_bytes()).hexdigest() for name in PACKAGE_FILES},
-            'installed':False, 'executed':False, 'target':target}
+            'files':{name:hashlib.sha256((destination/name).read_bytes()).hexdigest() for name in files},
+            'installed':False, 'executed':False, 'target':target, 'server_module':server_module,
+            'app_id_configured':app_id is not None}
 
 
 def archive_plugin(source: Path, archive: Path) -> dict:
@@ -116,13 +138,16 @@ def archive_plugin(source: Path, archive: Path) -> dict:
     archive = archive.resolve()
     if archive.is_relative_to(source):
         raise ValueError('O ZIP precisa ficar fora do pacote')
-    for name in PACKAGE_FILES:
+    files = list(PACKAGE_FILES)
+    if (source/APP_FILE).exists():
+        files.append(APP_FILE)
+    for name in files:
         path=source/name
         if path.is_symlink() or not path.is_file() or not path.resolve().is_relative_to(source):
             raise ValueError('Componente ausente ou simbólico: '+name)
     archive.parent.mkdir(parents=True,exist_ok=True)
     with zipfile.ZipFile(archive,'x',compression=zipfile.ZIP_DEFLATED) as output:
-        for name in sorted(PACKAGE_FILES):
+        for name in sorted(files):
             info=zipfile.ZipInfo(name,date_time=(2026,10,17,0,0,0))
             info.compress_type=zipfile.ZIP_DEFLATED
             info.external_attr=0o100644 << 16
@@ -137,8 +162,13 @@ def main(argv=None):
     parser.add_argument('--target',choices=['linux','windows-wsl'],default='linux')
     parser.add_argument('--distro',default='Ubuntu')
     parser.add_argument('--archive',type=Path)
+    parser.add_argument('--app-id',default=None,
+                        help='ID real do app MCP registrado no ChatGPT; nunca inventar.')
+    parser.add_argument('--server-module',default='integrations.ecosystem_mcp',
+                        choices=sorted(SERVER_MODULES))
     args=parser.parse_args(argv)
-    result=build_plugin(args.core_root,args.destination,target=args.target,distro=args.distro)
+    result=build_plugin(args.core_root,args.destination,target=args.target,distro=args.distro,
+                        app_id=args.app_id,server_module=args.server_module)
     if args.archive:result.update(archive_plugin(args.destination,args.archive))
     print(json.dumps(result,ensure_ascii=False))
 

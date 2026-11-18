@@ -26,7 +26,7 @@ def test_spec_r1218_existe():
 
 def test_constantes_sao_fechadas():
     assert mod.TUNNEL_ID == "tunnel_6af9e26d203c8191ab67eb7e9aa3d805"
-    assert mod.MCP_MODULE == "integrations.ecosystem_mcp"
+    assert mod.MCP_MODULE == "integrations.ecosystem_mcp_tunnel"
     assert mod.BUNDLE_SHA256 == "fa53182b766aeaceb652d86aee291c48daf7b90b5d73586dba370f4c1801325e"
     assert mod.STATE_DIR.name == "opencode-core-tunnel-full"
     assert mod.KEY_FILE.name == "runtime.key"
@@ -104,7 +104,7 @@ def test_extract_runtime_valida_hash_e_modo(tmp_path):
 def test_status_sem_pid_retorna_parado(tmp_path):
     result = mod.status(tmp_path)
     assert result["tunel"] == "parado"
-    assert result["mcp"] == "integrations.ecosystem_mcp"
+    assert result["mcp"] == "integrations.ecosystem_mcp_tunnel"
 
 
 def test_status_aceita_observed_at_do_v0_0_21(tmp_path, monkeypatch):

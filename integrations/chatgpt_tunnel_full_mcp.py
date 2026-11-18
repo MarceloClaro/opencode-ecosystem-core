@@ -2,8 +2,10 @@
 
 Este runner não substitui o pacote `tunnel-client`: apenas monta a linha de
 comando oficial do binário vendored com `--mcp.command` apontando para
-`integrations.ecosystem_mcp`. Nenhuma credencial é lida ou impressa; a chave é
-passada por referência `file:` ao control plane.
+`integrations.ecosystem_mcp_tunnel`, bridge R1222 que responde `server/discover`
+e encaminha os demais métodos ao MCP completo `integrations.ecosystem_mcp`.
+Nenhuma credencial é lida ou impressa; a chave é passada por referência
+`file:` ao control plane.
 """
 from __future__ import annotations
 
@@ -33,7 +35,7 @@ BUNDLE = Path(
     "tunnel-client-runtime-v0.0.21-linux-amd64.zip"
 )
 BUNDLE_SHA256 = "fa53182b766aeaceb652d86aee291c48daf7b90b5d73586dba370f4c1801325e"
-MCP_MODULE = "integrations.ecosystem_mcp"
+MCP_MODULE = "integrations.ecosystem_mcp_tunnel"
 BASE_ENV = {"PATH": "/usr/bin:/bin", "LANG": "C.UTF-8", "HOME": str(Path.home())}
 WINDOWS_DIR = Path("/mnt/c/Users/marce/AppData/Local/OpenCodeEcosystemCore/Tunnel-v0.0.21")
 DESKTOP_DIR = Path("/mnt/c/Users/marce/OneDrive/Área de Trabalho")
@@ -112,9 +114,13 @@ def validate_core(core_dir: Path | str) -> Path:
     required = (
         root / ".venv/bin/python",
         root / "integrations/ecosystem_mcp.py",
+        root / "integrations/ecosystem_mcp_tunnel.py",
     )
     if not root.is_absolute() or not all(p.is_file() for p in required):
-        raise UserError("Confira a raiz do Core, a .venv e o módulo integrations.ecosystem_mcp.")
+        raise UserError(
+            "Confira a raiz do Core, a .venv e os módulos "
+            "integrations.ecosystem_mcp[_tunnel]."
+        )
     return root
 
 
