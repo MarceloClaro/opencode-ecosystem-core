@@ -1,3 +1,12 @@
+---
+spec_id: SPEC-935-R1224
+title: Clareza entre configuração e prontidão operacional de integrações
+status: green
+validation_scope: local_runtime
+component: marceloclaro/integration_service.py + integrations/ecosystem_mcp.py
+test_file: tests/test_r662_integration_surface.py
+---
+
 # SPEC-935-R1224 — Clareza entre configuração e prontidão operacional de integrações
 
 - **Status:** implementada; testes locais verdes; limitações de prontidão externa preservadas
@@ -44,6 +53,13 @@ verificação e lacunas operacionais explicitamente.
 5. O diagnóstico continua read-only e não executa nenhum processo configurado.
 6. Testes R662 e superfície MCP existente continuam passando.
 
+## Critérios de aceitação executáveis
+
+- `R1224-CONFIG-ONLY` Configuração sem erro preserva `status=config_checked` e declara `readiness.state=CONFIG_ONLY`.
+- `R1224-CONFIG-INVALID` Configuração com erro declara `readiness.state=CONFIG_INVALID`.
+- `R1224-NOT-PROBED` O resultado enumera os estágios não sondados e mantém `executed=false` e `execution_verified=false`.
+- `R1224-MCP-SURFACE` A superfície MCP propaga a prontidão no processo recém-iniciado sem executar integração externa.
+
 ## Plano de verificação
 
 - RED: adicionar teste da nova semântica e observar falha antes da implementação.
@@ -65,3 +81,4 @@ verificação e lacunas operacionais explicitamente.
 - Revisão externa independente solicitada via `ecosystem_workflow`/`ecosystem_run` ficou bloqueada: workflow parou no pré-gate SDD (`spec_id_required`) e a execução direta não encontrou agente elegível; não houve inferência/revisão externa concluída. O diagnóstico `ecosystem_status` mostrou Codex e Antigravity disponíveis por instalação, mas não com execução autenticada verificada.
 - Reflexão persistida no MetaBus (`256989cb-a823-4626-a035-331db2680393`), com score interno `0.4`; confidence ledger de `marceloclaro` passou de `0.605` para `0.5435` pela EMA. Ciclo `R1225` foi registrado com score interno `7.0`, `legacy=true` e lições explícitas; esses scores são registros heurísticos, não validação externa.
 - Nenhum slashing de stake foi aplicado à revisão bloqueada: o workflow não atribuiu agente e não há posição de stake aceita para esse task_id; penalizar um agente sem stake/execução seria incorreto. A redução do ledger foi registrada como ajuste metacognitivo do processo, não como prova de qualidade.
+- A propagação para os consumidores MCP ativos foi concluída posteriormente em `SPEC-935-R1226`; a sessão OpenCode e o bridge renovados retornam `readiness`. O UI ChatGPT externo permanece fora da observação local.

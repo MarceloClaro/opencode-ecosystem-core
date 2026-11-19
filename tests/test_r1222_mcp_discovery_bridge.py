@@ -152,6 +152,25 @@ def test_bridge_end_to_end_discover_initialize_and_tools(bridge):
         names = {item['name'] for item in tools['result']['tools']}
         assert len(names) == 26
         assert 'ecosystem_integration_status' in names
+        _write(proc, {
+            'jsonrpc': '2.0',
+            'id': 4,
+            'method': 'tools/call',
+            'params': {
+                'name': 'ecosystem_integration_status',
+                'arguments': {},
+            },
+        })
+        called = _read_response(proc, 4)
+        result = called['result']
+        assert result.get('isError') is not True
+        report = result.get('structuredContent')
+        if not isinstance(report, dict):
+            report = json.loads(result['content'][0]['text'])
+        assert report['readiness']['state'] == 'CONFIG_ONLY'
+        assert report['readiness']['external_clients'] == 'not_observable'
+        assert report['executed'] is False
+        assert report['execution_verified'] is False
     finally:
         if proc.poll() is None:
             proc.terminate()
