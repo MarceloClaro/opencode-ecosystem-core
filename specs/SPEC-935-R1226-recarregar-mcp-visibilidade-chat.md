@@ -38,10 +38,8 @@ test_file: tests/test_r1222_mcp_discovery_bridge.py
 
 ## Critérios de aceitação executáveis
 
-- `R1226-LOCAL-MCP` A reconexão direcionada do OpenCode MCP propaga o retorno R1224 na sessão ativa.
-- `R1226-BRIDGE-CATALOG` O bridge novo lista as 26 ferramentas e executa a ferramenta de status com readiness CONFIG_ONLY.
-- `R1226-TUNNEL` O runner gerenciado volta a polling_confirmado em PID novo, sem tocar credenciais/configuração.
-- `R1226-CLIENT-BOUNDARY` O relatório distingue evidência do MCP/túnel da invocação não observada na UI ChatGPT externa.
+- `R1226-BRIDGE-CATALOG` O bridge MCP recém-iniciado lista as 26 ferramentas e executa `ecosystem_integration_status`, recebendo `readiness.state=CONFIG_ONLY`.
+- `R1226-STATUS-BOUNDARY` A resposta do bridge mantém `external_clients=not_observable`, `executed=false` e `execution_verified=false`.
 
 ## Reversão / limites
 
@@ -57,6 +55,7 @@ test_file: tests/test_r1222_mcp_discovery_bridge.py
 - **Bridge/MCP completo em processo novo:** handshake MCP `2025-11-25`; `tools/list` retornou 26 ferramentas, incluindo `ecosystem_integration_status`, `ecosystem_run`, `ecosystem_workflow` e `ecosystem_browser`. Chamada real ao status retornou `CONFIG_ONLY` e as quatro fases em `not_probed`; `executed=false` e `execution_verified=false`.
 - **Smoke test:** a primeira execução obteve a resposta correta, mas um assert local esperava nome de servidor incorreto (`opencode-ecosystem-core` em vez de `ecosystem-network`); corrigido somente o assert e repetido com sucesso. Não foi uma falha do MCP.
 - **Regressão:** suíte focal `.venv/bin/python -B -m pytest -q tests/test_r662_integration_surface.py tests/test_r640_ecosystem_surface.py tests/test_r1090_chatgpt_status_mcp.py tests/test_r1222_mcp_discovery_bridge.py` → `40 passed`; `git diff --check` passou.
+- **SpecVerifier/TDDRunner:** `SPEC-935-R1224` e `SPEC-935-R1226` foram verificadas com evidência selada de execução dos respectivos `test_file`; ambas passaram seus critérios executáveis (4/4 e 2/2). Escopo reportado pelo verificador: `criteria_only`, `red_history_required=false`. Isso valida critérios/testes locais, mas não é uma promoção software-delivery RED→GREEN com histórico; o fluxo executado aqui foi operacional e não há recibo RED histórico para R1226. Os checkpoints de reconexão e polling continuam sustentados por observações operacionais separadas, não pela suíte de bridge.
 - **Auditoria de limites:** configuração/inventário, conexão do OpenCode, tool list/call do bridge novo e polling do túnel estão observados. Não foi realizada chamada pelo UI ChatGPT externo; logo, sua cache/visibilidade final permanece sem prova nesta sessão. O conteúdo está disponível no MCP local e no bridge recém-iniciado, mas o cliente externo pode exigir refresh/reconexão.
 - **Inspeção do desktop:** `desktop_status` e `desktop_list_apps` foram tentados em modo somente leitura; ambos reportaram `binary_not_found` (`agent-desktop` ausente). Portanto, não foi possível confirmar ou operar a janela do ChatGPT/Desktop por acessibilidade.
 - **Revisão independente:** a solicitação a `ecosystem_run` foi bloqueada sem atribuição de agente (`Nenhum agente interno elegível`); portanto, a auditoria registrada é do orquestrador e dos testes, não parecer externo.
