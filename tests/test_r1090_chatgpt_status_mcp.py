@@ -72,6 +72,10 @@ def test_fresh_process_rejects_execution_and_returns_real_status():
                     assert report["orchestrator"] == "marceloclaro"
                     assert report["executed"] is False
                     assert report["execution_verified"] is False
+                    assert report["readiness"]["state"] == "CONFIG_ONLY"
+                    assert report["readiness"]["checked"] == ["configuration", "inventory"]
+                    assert "tool_discovery" in report["readiness"]["not_probed"]
+                    assert report["readiness"]["external_clients"] == "not_observable"
                     assert set(report["components"]) == {
                         "agents", "hooks", "mcp", "cli", "plugins", "skills"
                     }
