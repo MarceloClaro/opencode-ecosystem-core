@@ -20,6 +20,22 @@ MCP nem modelos. O comando retorna erro quando encontra referências quebradas.
 Um iniciador ausente aparece como aviso. A existência do iniciador não comprova
 que o servidor ou o modelo consiga executar uma solicitação.
 
+O retorno R662 mantém `status=config_checked` para compatibilidade e acrescenta
+`readiness.state=CONFIG_ONLY`: configuração e inventário foram inspecionados,
+mas transporte, descoberta de ferramentas, invocação e execução de tarefa não
+foram sondados. Portanto, `issues=[]` significa somente que não foram achados
+problemas de configuração. Plugins em outros aplicativos (ChatGPT/Desktop) não
+são observáveis por esse diagnóstico.
+
+Para verificar camadas diferentes, use a superfície correspondente: `opencode
+mcp list` mostra o estado das conexões MCP do OpenCode; no túnel gerenciado, o
+comando `.venv/bin/python -B -m integrations.chatgpt_tunnel_full_mcp status`
+é read-only e observa polling/health do control plane, não a lista de ferramentas
+visível no Chat. A exposição no cliente externo requer uma chamada real a uma
+ferramenta exclusiva da integração completa; um resultado do plugin Status —
+Chat prova somente a rota desse tool de status. Não extrapole um nível para o
+seguinte.
+
 O comando OpenCode `/integracoes` usa o agente primário `marceloclaro`. O servidor
 `ecosystem-network` oferece três ferramentas de consulta:
 

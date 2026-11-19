@@ -179,9 +179,19 @@ class CoreIntegrationService:
             "plugins": {"count": by_kind.get("plugin", 0), "verification": "discovery_only"},
             "skills": {"count": by_kind.get("skill", 0), "verification": "discovery_only"},
         }
+        has_config_errors = any(i["severity"] == "error" for i in issues)
         return {"spec_id": "SPEC-935-R662", "orchestrator": "marceloclaro",
-                "status": "error" if any(i["severity"] == "error" for i in issues) else "config_checked",
+                "status": "error" if has_config_errors else "config_checked",
                 "executed": False, "execution_verified": False,
+                "readiness": {
+                    "state": "CONFIG_INVALID" if has_config_errors else "CONFIG_ONLY",
+                    "checked": ["configuration", "inventory"],
+                    "not_probed": [
+                        "transport", "tool_discovery", "tool_invocation", "task_execution"
+                    ],
+                    "external_clients": "not_observable",
+                    "issues_semantics": "configuration_findings_only",
+                },
                 "components": components, "issues": issues,
                 "ecosystems_present": inventory.get("ecosystems_present", []),
                 "ecosystems_missing": inventory.get("ecosystems_missing", [])}

@@ -46,6 +46,30 @@ def test_status_covers_six_components_without_claiming_execution(tmp_path):
     assert result["components"]["plugins"]["count"] == 1
 
 
+def test_clean_config_is_explicitly_config_only_not_operationally_ready(tmp_path):
+    fixture_repo(tmp_path)
+    result = service(tmp_path).status()
+
+    assert result["issues"] == []
+    assert result["readiness"]["state"] == "CONFIG_ONLY"
+    assert result["readiness"]["checked"] == ["configuration", "inventory"]
+    assert result["readiness"]["not_probed"] == [
+        "transport", "tool_discovery", "tool_invocation", "task_execution"
+    ]
+    assert result["readiness"]["external_clients"] == "not_observable"
+    assert result["executed"] is result["execution_verified"] is False
+
+
+def test_invalid_config_has_invalid_readiness_without_claiming_runtime_probe(tmp_path):
+    (tmp_path / "opencode.json").write_text("{}", encoding="utf-8")
+    result = service(tmp_path).status()
+
+    assert result["status"] == "error"
+    assert result["readiness"]["state"] == "CONFIG_INVALID"
+    assert "transport" in result["readiness"]["not_probed"]
+    assert result["executed"] is result["execution_verified"] is False
+
+
 def test_config_detects_broken_agent_and_file_before_any_execution(tmp_path):
     config = fixture_repo(tmp_path)
     config["command"]["integracoes"]["agent"] = "inexistente"
