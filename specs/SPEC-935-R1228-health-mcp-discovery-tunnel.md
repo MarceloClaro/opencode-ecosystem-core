@@ -1,7 +1,7 @@
 ---
 spec_id: SPEC-935-R1228
 title: Expor observabilidade MCP no status do túnel ChatGPT
-status: draft
+status: green
 validation_scope: local_runtime
 component: integrations/chatgpt_tunnel_full_mcp.py
 test_file: tests/test_r1228_chatgpt_tunnel_health_mcp.py
