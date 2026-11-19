@@ -24892,6 +24892,35 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1229",
+      "objective": "Expor a observabilidade /health/mcp separada do polling do túnel ChatGPT",
+      "changes": [
+        "specs/SPEC-935-R1228-health-mcp-discovery-tunnel.md",
+        "integrations/chatgpt_tunnel_full_mcp.py",
+        "tests/test_r1228_chatgpt_tunnel_health_mcp.py",
+        "tests/test_r1218_chatgpt_tunnel_full_mcp.py"
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Polling do control plane e /readyz não comprovam initialize/tools/list; manter sinais MCP separados e falhas locais de health sem rebaixar o polling.",
+        "Projeção read-only de /health/mcp deve ser limitada por allowlist e tamanho; endpoint indisponível ou inválido não pode ser confundido com descoberta.",
+        "TDD RED/GREEN local aceito: RED tdd-bc83784bbad94220800a4013ed5c6234 e GREEN tdd-39e62d8945804e19ac4afa9407bb0fb4; SpecVerifier passou 5/5. Recibos estão no estado privado /tmp/opencode/r1228-tdd-state e não constituem validação externa.",
+        "A revisão independente via ecosystem_workflow foi bloqueada antes de execução por preflight spec_id_required (0 etapas); CFP permaneceu sem voluntários e não houve executor/agente a penalizar. Uma primeira tentativa de RED rejeitada foi corrigida usando o baseline f70b571; registrar a falha sem promovê-la como evidência.",
+        "O status real segue polling_confirmado e state=not_observed, initialize_epoch=0; sem chamada na UI ChatGPT, não afirmar descoberta externa."
+      ],
+      "timestamp": 1795095599.3684132,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
