@@ -1,6 +1,6 @@
 # SPEC-935-R1224 — Clareza entre configuração e prontidão operacional de integrações
 
-- **Status:** especificada
+- **Status:** implementada; testes locais verdes; limitações de prontidão externa preservadas
 - **Data:** 2026-11-19
 - **Componente:** `marceloclaro/integration_service.py` e superfície MCP R662
 - **Contexto:** diagnóstico `SPEC-935-R662` pode retornar `config_checked` e `issues=[]`, enquanto transporte, descoberta e invocação não foram sondados.
@@ -50,3 +50,13 @@ verificação e lacunas operacionais explicitamente.
 - GREEN: acrescentar somente metadados de prontidão ao retorno R662.
 - Regressão: executar os testes R662, fachada MCP/Chat e doctor disponível no
   ambiente; informar bloqueios de dependências sem ocultá-los.
+
+## Evidência observada
+
+- RED: os dois novos testes falharam por `KeyError: 'readiness'` antes da alteração.
+- GREEN/regressão: `.venv/bin/python -B -m pytest -q tests/test_r662_integration_surface.py tests/test_r640_ecosystem_surface.py tests/test_r1090_chatgpt_status_mcp.py tests/test_r1222_mcp_discovery_bridge.py` → `40 passed`.
+- `git diff --check` → sem erros de whitespace.
+- Doctor via `.venv/bin/python -m marceloclaro.cli doctor` → `overall=degraded`, `0` falhas, `6` avisos; chaves/provedores e CLIs opcionais ausentes. `python3` do sistema não importa `whoosh`; o runtime `.venv` do projeto funciona.
+- Sonda read-only do runner `integrations.chatgpt_tunnel_full_mcp status` → `polling_confirmado`, PID `719476`, último poll `2026-11-19T08:47:23.297932449Z`. Isso comprova health/polling do control plane observado, não catálogo MCP no cliente nem execução de tarefa.
+- A chamada MCP `ecosystem_integration_status` retorna `config_checked`, `executed=false`, `execution_verified=false`; com R1224, `readiness.state=CONFIG_ONLY`. O diagnóstico não ativa nem sonda os plugins externos.
+- Permanecem não verificados: catálogo completo visível no Chat, executor WSL independente, plugins Desktop/Core Local em seus clientes próprios e execução de ferramenta exclusiva por cada transporte.
