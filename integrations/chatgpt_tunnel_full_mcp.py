@@ -194,7 +194,13 @@ def _alive(pid: int) -> bool:
     return True
 
 
-def _fetch(base: str, path: str, *, json_body: bool = False) -> Any:
+def _fetch(
+    base: str,
+    path: str,
+    *,
+    json_body: bool = False,
+    require_success: bool = False,
+) -> Any:
     try:
         port = int(base.rsplit(":", 1)[1])
     except (AttributeError, IndexError, ValueError):
@@ -205,6 +211,8 @@ def _fetch(base: str, path: str, *, json_body: bool = False) -> Any:
         response = connection.getresponse()
         if not json_body:
             return response.status
+        if require_success and not 200 <= response.status < 300:
+            return {}
         body = response.read(65_537)
         if len(body) <= 65_536:
             value = json.loads(body)
@@ -216,10 +224,89 @@ def _fetch(base: str, path: str, *, json_body: bool = False) -> Any:
     return {} if json_body else None
 
 
+def _unavailable_mcp_discovery() -> dict[str, Any]:
+    return {
+        "available": False,
+        "status": "unavailable",
+        "state": "unavailable",
+        "initialize_epoch": None,
+        "initialize": None,
+        "tools_list": None,
+    }
+
+
+def _bounded_string_list(value: Any) -> list[str]:
+    if not isinstance(value, list):
+        return []
+    return [item[:128] for item in value[:100] if isinstance(item, str)][:100]
+
+
+def _health_section(section: Any, *, name_field: str) -> dict[str, Any] | None:
+    if not isinstance(section, dict):
+        return None
+    result: dict[str, Any] = {
+        "ok": section.get("ok") if type(section.get("ok")) is bool else None,
+        "limited": (
+            section.get("limited")
+            if type(section.get("limited")) is bool
+            else None
+        ),
+        name_field: _bounded_string_list(section.get(name_field)),
+    }
+    if name_field == "capability_names":
+        result["identity_complete"] = (
+            section.get("identity_complete")
+            if type(section.get("identity_complete")) is bool
+            else None
+        )
+    else:
+        retained_count = section.get("retained_count")
+        result["retained_count"] = (
+            retained_count
+            if type(retained_count) is int and retained_count >= 0
+            else None
+        )
+        for field in ("complete", "partial"):
+            result[field] = (
+                section.get(field) if type(section.get(field)) is bool else None
+            )
+    return result
+
+
+def _mcp_discovery_status(health: Any) -> dict[str, Any]:
+    """Projeta somente os campos de descoberta MCP necessários ao status."""
+    if (
+        not isinstance(health, dict)
+        or health.get("component") != "mcp"
+        or not isinstance(health.get("state"), str)
+        or not isinstance(health.get("details"), dict)
+    ):
+        return _unavailable_mcp_discovery()
+
+    details = health["details"]
+    epoch = details.get("initialize_epoch")
+    return {
+        "available": True,
+        "status": health.get("status") if isinstance(health.get("status"), str) else "unknown",
+        "state": health["state"],
+        "initialize_epoch": epoch if type(epoch) is int and epoch >= 0 else None,
+        "initialize": _health_section(
+            details.get("initialize"), name_field="capability_names"
+        ),
+        "tools_list": _health_section(
+            details.get("tools_list"), name_field="tool_names"
+        ),
+    }
+
+
 def status(state_dir: Path | str = STATE_DIR) -> dict[str, Any]:
     state = Path(state_dir)
     pid = _pid(state)
-    result: dict[str, Any] = {"tunel": "parado", "mcp": MCP_MODULE}
+    result: dict[str, Any] = {
+        "tunel": "parado",
+        "mcp": MCP_MODULE,
+        "mcp_discovery": _unavailable_mcp_discovery(),
+    }
     if pid is None or not _alive(pid):
         return result
     result["pid"] = pid
@@ -232,6 +319,10 @@ def status(state_dir: Path | str = STATE_DIR) -> dict[str, Any]:
         return {**result, "tunel": "aguardando_listener"}
     ready = _fetch(base, "/readyz") == 200
     health = _fetch(base, "/health/control-plane", json_body=True)
+    mcp_health = _fetch(
+        base, "/health/mcp", json_body=True, require_success=True
+    )
+    result["mcp_discovery"] = _mcp_discovery_status(mcp_health)
     details = health.get("details") if isinstance(health.get("details"), dict) else {}
     # v0.0.21 passou a publicar `observed_at`; versões anteriores usavam
     # `last_success`. Ambos indicam o último poll observado com sucesso.

@@ -113,7 +113,7 @@ def test_status_aceita_observed_at_do_v0_0_21(tmp_path, monkeypatch):
     observed = datetime.now(timezone.utc).isoformat()
     monkeypatch.setattr(mod, "_alive", lambda _pid: True)
 
-    def fake_fetch(_base, path, *, json_body=False):
+    def fake_fetch(_base, path, *, json_body=False, require_success=False):
         if path == "/readyz":
             return 200
         return {"details": {"observed_at": observed, "consecutive_failures": 0}}

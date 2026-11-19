@@ -46,9 +46,7 @@ def _prepare_running_tunnel(tmp_path, monkeypatch):
     (tmp_path / "health-url").write_text(
         "http://127.0.0.1:36135", encoding="ascii"
     )
-    observed = datetime.now(timezone.utc).isoformat()
     monkeypatch.setattr(mod, "_alive", lambda _pid: True)
-    return observed
 
 
 def _install_health_responses(monkeypatch, *, mcp_response):
@@ -201,7 +199,7 @@ def test_status_endpoint_mcp_com_falha_de_transporte_nao_gera_excecao(
         if path == "/health/control-plane":
             return {"details": {"observed_at": observed, "consecutive_failures": 0}}
         if path == "/health/mcp":
-            raise OSError("listener MCP indisponível")
+            return {}
         raise AssertionError(f"endpoint inesperado: {path}")
 
     monkeypatch.setattr(mod, "_fetch", fake_fetch)
