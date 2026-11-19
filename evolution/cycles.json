@@ -24838,6 +24838,33 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1225",
+      "objective": "Mitigar ambiguidade entre inventário MCP configurado e prontidão operacional (R1224)",
+      "changes": [
+        "Adicionado readiness CONFIG_ONLY/CONFIG_INVALID com estágios não sondados ao status R662.",
+        "Documentados limites entre configuração, polling do túnel e descoberta/invocação nos clientes externos.",
+        "Testes R662 e MCP cobrem propagação do campo readiness; 40 testes passaram."
+      ],
+      "score": 7.0,
+      "lessons": [
+        "Configuração válida e issues vazias não provam transporte, descoberta, invocação ou execução.",
+        "Após alterar contrato MCP, o consumidor de longa duração pode continuar servindo schema antigo; não reiniciar automaticamente sem autorização operacional.",
+        "A revisão externa deve receber spec_id aceito pelo preflight SDD; neste ciclo o workflow ficou bloqueado e nenhum executor concluiu revisão.",
+        "Polling confirmado é evidência de health do control plane, não de catálogo de ferramentas no ChatGPT/Desktop."
+      ],
+      "timestamp": 1795078995.0247543,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
