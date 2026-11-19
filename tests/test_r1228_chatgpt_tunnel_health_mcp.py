@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import os
+import json
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -79,7 +80,7 @@ def test_status_preserva_polling_e_expoe_not_observed_separadamente(
     assert result["tunel"] == "polling_confirmado"
     assert result["ultimo_poll_utc"]
     assert result["mcp"] == mod.MCP_MODULE
-    assert result["mcp_discovery"] == {
+    assert result.get("mcp_discovery") == {
         "available": True,
         "status": "unknown",
         "state": "not_observed",
@@ -139,7 +140,7 @@ def test_status_projeta_initialize_e_tools_list_sem_corpo_bruto(
     result = mod.status(tmp_path)
 
     assert result["tunel"] == "polling_confirmado"
-    assert result["mcp_discovery"] == {
+    assert result.get("mcp_discovery") == {
         "available": True,
         "status": "ok",
         "state": "tools_list_observed",
@@ -177,7 +178,7 @@ def test_status_mcp_indisponivel_nao_rebaixa_polling(
     result = mod.status(tmp_path)
 
     assert result["tunel"] == "polling_confirmado"
-    assert result["mcp_discovery"] == {
+    assert result.get("mcp_discovery") == {
         "available": False,
         "status": "unavailable",
         "state": "unavailable",
@@ -207,40 +208,62 @@ def test_status_endpoint_mcp_com_falha_de_transporte_nao_gera_excecao(
     result = mod.status(tmp_path)
 
     assert result["tunel"] == "polling_confirmado"
-    assert result["mcp_discovery"]["state"] == "unavailable"
+    assert result.get("mcp_discovery", {}).get("state") == "unavailable"
 
 
-def test_fetch_rejeita_http_nao_2xx_quando_exigido(monkeypatch):
+def test_status_http_503_na_saude_mcp_nao_falsifica_descoberta(
+    tmp_path, monkeypatch
+):
+    _prepare_running_tunnel(tmp_path, monkeypatch)
+    observed = datetime.now(timezone.utc).isoformat()
+    seen = []
+
     class Response:
-        status = 503
+        def __init__(self, status, body=b""):
+            self.status = status
+            self.body = body
 
-        @staticmethod
-        def read(_limit):
-            return b'{"component":"mcp","state":"tools_list_observed"}'
+        def read(self, _limit):
+            return self.body
 
     class Connection:
         def __init__(self, *_args, **_kwargs):
-            self.closed = False
+            self.path = ""
+
+        def request(self, _method, path):
+            self.path = path
+            seen.append(path)
+
+        def getresponse(self):
+            if self.path == "/readyz":
+                return Response(200)
+            if self.path == "/health/control-plane":
+                body = json.dumps({
+                    "details": {
+                        "observed_at": observed,
+                        "consecutive_failures": 0,
+                    }
+                }).encode()
+                return Response(200, body)
+            if self.path == "/health/mcp":
+                return Response(
+                    503,
+                    b'{"component":"mcp","state":"tools_list_observed"}',
+                )
+            raise AssertionError(f"endpoint inesperado: {self.path}")
 
         @staticmethod
-        def request(*_args):
+        def close():
             pass
-
-        @staticmethod
-        def getresponse():
-            return Response()
-
-        def close(self):
-            self.closed = True
 
     monkeypatch.setattr(mod.http.client, "HTTPConnection", Connection)
 
-    assert mod._fetch(
-        "http://127.0.0.1:36135",
-        "/health/mcp",
-        json_body=True,
-        require_success=True,
-    ) == {}
+    result = mod.status(tmp_path)
+
+    assert result["tunel"] == "polling_confirmado"
+    assert result.get("mcp_discovery", {}).get("available") is False
+    assert result.get("mcp_discovery", {}).get("state") == "unavailable"
+    assert seen == ["/readyz", "/health/control-plane", "/health/mcp"]
 
 
 def test_status_sem_processo_nao_consulta_listener_e_mcp_fica_indisponivel(
@@ -255,4 +278,4 @@ def test_status_sem_processo_nao_consulta_listener_e_mcp_fica_indisponivel(
     result = mod.status(tmp_path)
 
     assert result["tunel"] == "parado"
-    assert result["mcp_discovery"]["state"] == "unavailable"
+    assert result.get("mcp_discovery", {}).get("state") == "unavailable"
