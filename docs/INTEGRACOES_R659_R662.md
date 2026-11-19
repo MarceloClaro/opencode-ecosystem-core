@@ -27,8 +27,8 @@ foram sondados. Portanto, `issues=[]` significa somente que não foram achados
 problemas de configuração. Plugins em outros aplicativos (ChatGPT/Desktop) não
 são observáveis por esse diagnóstico.
 
-Para verificar camadas diferentes, use a superfície correspondente: `opencode
-mcp list` mostra o estado das conexões MCP do OpenCode; no túnel gerenciado, o
+Para verificar camadas diferentes, use a superfície correspondente:
+`opencode mcp list` mostra o estado das conexões MCP do OpenCode; no túnel gerenciado, o
 comando `.venv/bin/python -B -m integrations.chatgpt_tunnel_full_mcp status`
 é read-only e observa polling/health do control plane, não a lista de ferramentas
 visível no Chat. A exposição no cliente externo requer uma chamada real a uma
