@@ -1,6 +1,6 @@
 # SPEC-935-R1226 — Propagar status R1224 aos consumidores MCP ativos
 
-- **Status:** especificada
+- **Status:** executada e validada nas superfícies locais; interface ChatGPT externa não observável por esta sessão
 - **Data:** 2026-11-19
 - **Origem:** pedido explícito para resolver a pendência, auditar e tornar o novo status visível no Chat.
 - **Escopo:** renovar somente os consumidores `ecosystem-network` do OpenCode v2 e o túnel MCP completo gerenciado, que ainda mantêm processos anteriores à mudança R1224.
@@ -32,3 +32,14 @@
 - Se o túnel não voltar a polling, não iniciar outro processo fora do runner; registrar o estado e parar.
 - A reconexão de um único MCP pode produzir uma breve indisponibilidade desse servidor, autorizada pelo pedido do operador; não reiniciar o serviço OpenCode inteiro.
 - A interface ChatGPT/plug-in não é controlada pela sessão local. Se o ChatGPT mantiver cache/estado de conexão antigo, será necessária ação de refresh/reconexão no cliente; não alegar visibilidade antes de uma chamada real no Chat.
+
+## Evidências e auditoria
+
+- **MCP OpenCode v2:** usando a API oficial `POST /api/experimental/mcp/{server}/disconnect` e `/connect`, com `location.directory=/home/marceloclaro/opencode-ecosystem-core`, foi renovado somente `ecosystem-network`. O processo mudou de PID `829562` para `839995`; os 33 MCPs aparecem `connected` depois da operação.
+- **Chamada pela ferramenta da sessão atual:** `ecosystem_integration_status` agora retorna `status=config_checked`, `readiness.state=CONFIG_ONLY`, `executed=false`, `execution_verified=false`, `configured_mcp_count=33` e `issues_count=0`.
+- **Túnel gerenciado:** PID anterior `719476` foi encerrado pelo runner, e o novo PID `840190` usa `integrations.ecosystem_mcp_tunnel`. O primeiro retorno de `start --confirm` foi `aguardando_polling` com `readyz=true`; em seguida, o health local registrou sucesso e `consecutive_failures=0`. Status posterior: `polling_confirmado`, último poll `2026-11-19T09:21:45.345032783Z`.
+- **Bridge/MCP completo em processo novo:** handshake MCP `2025-11-25`; `tools/list` retornou 26 ferramentas, incluindo `ecosystem_integration_status`, `ecosystem_run`, `ecosystem_workflow` e `ecosystem_browser`. Chamada real ao status retornou `CONFIG_ONLY` e as quatro fases em `not_probed`; `executed=false` e `execution_verified=false`.
+- **Smoke test:** a primeira execução obteve a resposta correta, mas um assert local esperava nome de servidor incorreto (`opencode-ecosystem-core` em vez de `ecosystem-network`); corrigido somente o assert e repetido com sucesso. Não foi uma falha do MCP.
+- **Regressão:** suíte focal `.venv/bin/python -B -m pytest -q tests/test_r662_integration_surface.py tests/test_r640_ecosystem_surface.py tests/test_r1090_chatgpt_status_mcp.py tests/test_r1222_mcp_discovery_bridge.py` → `40 passed`; `git diff --check` passou.
+- **Auditoria de limites:** configuração/inventário, conexão do OpenCode, tool list/call do bridge novo e polling do túnel estão observados. Não foi realizada chamada pelo UI ChatGPT externo; logo, sua cache/visibilidade final permanece sem prova nesta sessão. O conteúdo está disponível no MCP local e no bridge recém-iniciado, mas o cliente externo pode exigir refresh/reconexão.
+- **Revisão independente:** a solicitação a `ecosystem_run` foi bloqueada sem atribuição de agente (`Nenhum agente interno elegível`); portanto, a auditoria registrada é do orquestrador e dos testes, não parecer externo.
