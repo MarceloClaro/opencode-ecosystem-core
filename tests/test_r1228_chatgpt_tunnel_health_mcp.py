@@ -1,8 +1,8 @@
 """R1228: o status do túnel separa polling de observação MCP."""
 from __future__ import annotations
 
-import os
 import json
+import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -108,6 +108,51 @@ def test_status_preserva_polling_e_expoe_not_observed_separadamente(
     assert seen[-1] == ("/health/mcp", True, True)
 
 
+def test_status_preserva_readiness_e_http_legados_quando_polling_falha(
+    tmp_path, monkeypatch
+):
+    _prepare_running_tunnel(tmp_path, monkeypatch)
+    observed = datetime.now(timezone.utc).isoformat()
+    mcp = _health_mcp(
+        state="tools_list_observed",
+        details={
+            "initialize_epoch": 2,
+            "initialize": {"ok": True, "identity_complete": True},
+            "tools_list": {
+                "ok": True,
+                "tool_names": ["ecosystem_integration_status"],
+                "retained_count": 1,
+                "complete": True,
+                "partial": False,
+            },
+        },
+    )
+
+    def fake_fetch(_base, path, *, json_body=False, require_success=False):
+        if path == "/readyz":
+            return 503
+        if path == "/health/control-plane":
+            return {
+                "details": {
+                    "observed_at": observed,
+                    "consecutive_failures": 1,
+                    "http_status": 503,
+                }
+            }
+        if path == "/health/mcp":
+            return mcp
+        raise AssertionError(f"endpoint inesperado: {path}")
+
+    monkeypatch.setattr(mod, "_fetch", fake_fetch)
+
+    result = mod.status(tmp_path)
+
+    assert result["tunel"] == "aguardando_polling"
+    assert result["readyz"] is False
+    assert result["http"] == 503
+    assert result.get("mcp_discovery", {}).get("state") == "tools_list_observed"
+
+
 def test_status_projeta_initialize_e_tools_list_sem_corpo_bruto(
     tmp_path, monkeypatch
 ):
@@ -211,8 +256,16 @@ def test_status_endpoint_mcp_com_falha_de_transporte_nao_gera_excecao(
     assert result.get("mcp_discovery", {}).get("state") == "unavailable"
 
 
-def test_status_http_503_na_saude_mcp_nao_falsifica_descoberta(
-    tmp_path, monkeypatch
+@pytest.mark.parametrize(
+    "mcp_status,mcp_body",
+    [
+        (503, b'{"component":"mcp","state":"tools_list_observed"}'),
+        (200, b"{malformed-json"),
+    ],
+    ids=["http-503", "json-invalido"],
+)
+def test_status_http_ou_json_invalido_na_saude_mcp_nao_falsifica_descoberta(
+    tmp_path, monkeypatch, mcp_status, mcp_body
 ):
     _prepare_running_tunnel(tmp_path, monkeypatch)
     observed = datetime.now(timezone.utc).isoformat()
@@ -246,10 +299,7 @@ def test_status_http_503_na_saude_mcp_nao_falsifica_descoberta(
                 }).encode()
                 return Response(200, body)
             if self.path == "/health/mcp":
-                return Response(
-                    503,
-                    b'{"component":"mcp","state":"tools_list_observed"}',
-                )
+                return Response(mcp_status, mcp_body)
             raise AssertionError(f"endpoint inesperado: {self.path}")
 
         @staticmethod
