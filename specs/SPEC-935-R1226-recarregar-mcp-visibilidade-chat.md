@@ -1,3 +1,12 @@
+---
+spec_id: SPEC-935-R1226
+title: Propagar status R1224 aos consumidores MCP ativos
+status: green
+validation_scope: local_runtime
+component: OpenCode v2 MCP lifecycle + integrations/chatgpt_tunnel_full_mcp.py + integrations/ecosystem_mcp_tunnel.py
+test_file: tests/test_r1222_mcp_discovery_bridge.py
+---
+
 # SPEC-935-R1226 — Propagar status R1224 aos consumidores MCP ativos
 
 - **Status:** executada e validada nas superfícies locais; interface ChatGPT externa não observável por esta sessão
@@ -27,6 +36,13 @@
 4. Nenhuma configuração, credencial, permissão, plugin externo ou serviço global é modificado.
 5. O relatório separa evidência local/túnel de visibilidade efetivamente confirmada na interface do ChatGPT.
 
+## Critérios de aceitação executáveis
+
+- `R1226-LOCAL-MCP` A reconexão direcionada do OpenCode MCP propaga o retorno R1224 na sessão ativa.
+- `R1226-BRIDGE-CATALOG` O bridge novo lista as 26 ferramentas e executa a ferramenta de status com readiness CONFIG_ONLY.
+- `R1226-TUNNEL` O runner gerenciado volta a polling_confirmado em PID novo, sem tocar credenciais/configuração.
+- `R1226-CLIENT-BOUNDARY` O relatório distingue evidência do MCP/túnel da invocação não observada na UI ChatGPT externa.
+
 ## Reversão / limites
 
 - Se o túnel não voltar a polling, não iniciar outro processo fora do runner; registrar o estado e parar.
@@ -43,3 +59,4 @@
 - **Regressão:** suíte focal `.venv/bin/python -B -m pytest -q tests/test_r662_integration_surface.py tests/test_r640_ecosystem_surface.py tests/test_r1090_chatgpt_status_mcp.py tests/test_r1222_mcp_discovery_bridge.py` → `40 passed`; `git diff --check` passou.
 - **Auditoria de limites:** configuração/inventário, conexão do OpenCode, tool list/call do bridge novo e polling do túnel estão observados. Não foi realizada chamada pelo UI ChatGPT externo; logo, sua cache/visibilidade final permanece sem prova nesta sessão. O conteúdo está disponível no MCP local e no bridge recém-iniciado, mas o cliente externo pode exigir refresh/reconexão.
 - **Revisão independente:** a solicitação a `ecosystem_run` foi bloqueada sem atribuição de agente (`Nenhum agente interno elegível`); portanto, a auditoria registrada é do orquestrador e dos testes, não parecer externo.
+- **Registro evolutivo:** `R1227` registrado com score interno `7.5` (`legacy=true`, não é validação externa). Reflexão MetaBus `828bb42b-a3c2-41d6-a44e-950416cc8575` registrada com score interno `0.6`; ledger atualizado pela EMA para `0.56045`. O score é metacognitivo heurístico e não promove evidência de visibilidade externa.

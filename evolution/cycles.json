@@ -24865,6 +24865,33 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1227",
+      "objective": "Renovar MCP OpenCode e túnel gerenciado para propagar readiness R1224 às superfícies atuais (R1226)",
+      "changes": [
+        "Reconectado somente o MCP ecosystem-network no OpenCode v2 por endpoints oficiais de disconnect/connect.",
+        "Reiniciado o túnel MCP completo pelo runner gerenciado; novo processo alcançou polling_confirmado.",
+        "Validada chamada pela sessão atual e bridge stdio com tool list de 26 ferramentas e readiness CONFIG_ONLY."
+      ],
+      "score": 7.5,
+      "lessons": [
+        "Para atualizar código carregado em MCP de longa duração, reconectar somente esse servidor reduz o impacto em relação a reiniciar todo o serviço.",
+        "Após reiniciar um túnel, readyz pode retornar antes do primeiro polling bem-sucedido; validar status novamente até observar polling_confirmado, sem iniciar processo duplicado.",
+        "Uma resposta MCP correta pode ser reprovada por uma asserção local que pressupõe serverInfo.name incorreto; corrigir o assert, preservar e registrar a primeira saída.",
+        "A chamada no MCP/bridge local e o polling não comprovam visualização/invocação pelo UI externo do ChatGPT."
+      ],
+      "timestamp": 1795080257.3511555,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
