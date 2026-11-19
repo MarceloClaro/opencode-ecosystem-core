@@ -220,7 +220,10 @@ def _fetch(
     except (OSError, ValueError, http.client.HTTPException, RecursionError):
         pass
     finally:
-        connection.close()
+        try:
+            connection.close()
+        except OSError:
+            pass
     return {} if json_body else None
 
 
@@ -238,7 +241,7 @@ def _unavailable_mcp_discovery() -> dict[str, Any]:
 def _bounded_string_list(value: Any) -> list[str]:
     if not isinstance(value, list):
         return []
-    return [item[:128] for item in value[:100] if isinstance(item, str)][:100]
+    return [item[:128] for item in value[:100] if isinstance(item, str)]
 
 
 def _health_section(section: Any, *, name_field: str) -> dict[str, Any] | None:
@@ -285,10 +288,11 @@ def _mcp_discovery_status(health: Any) -> dict[str, Any]:
 
     details = health["details"]
     epoch = details.get("initialize_epoch")
+    status = health.get("status")
     return {
         "available": True,
-        "status": health.get("status") if isinstance(health.get("status"), str) else "unknown",
-        "state": health["state"],
+        "status": status[:64] if isinstance(status, str) else "unknown",
+        "state": health["state"][:128],
         "initialize_epoch": epoch if type(epoch) is int and epoch >= 0 else None,
         "initialize": _health_section(
             details.get("initialize"), name_field="capability_names"
