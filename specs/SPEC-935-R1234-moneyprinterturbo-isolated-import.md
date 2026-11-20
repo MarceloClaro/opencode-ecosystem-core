@@ -16,7 +16,7 @@ evidence_contract:
     R1234-IMPORT:
       - tests/test_r1234_moneyprinterturbo_import.py::test_import_copies_mp4_and_creates_single_clip_project
       - tests/test_r1234_moneyprinterturbo_import.py::test_import_preserves_audio_and_accepts_explicit_silent_media
-      - tests/test_r1234_moneyprinterturbo_import.py::test_import_rejects_traversal_symlink_non_mp4_and_invalid_project_id
+      - tests/test_r1234_moneyprinterturbo_import.py::test_import_rejects_traversal_nested_intermediate_non_mp4_and_invalid_id
       - tests/test_r1234_moneyprinterturbo_import.py::test_import_refuses_existing_project_and_hash_collision
     R1234-BOUNDARIES:
       - tests/test_r1234_moneyprinterturbo_import.py::test_import_does_not_launch_mpt_or_render_or_publish
@@ -118,8 +118,12 @@ acrescentadas a `requirements.txt`.
   execução pytest manual, não um recibo RED do `TDDHistory`; o histórico formal
   não deve ser alegado retrospectivamente.
 - GREEN focal: `./.venv/bin/python -m pytest
-  tests/test_r1234_moneyprinterturbo_import.py -q` → `21 passed` (um aviso de
+  tests/test_r1234_moneyprinterturbo_import.py -q` → `16 passed` (um aviso de
   Pydantic/FastMCP de dependência, sem falha).
+- Execução dos alvos do contrato pelo `TDDRunner.run_spec_test` → `15/15
+  nodeid(s)` aprovados; `SpecVerifier` → `5/5` critérios aprovados em modo
+  `criteria_only` (`require_red_history=false`). Isso não valida nem substitui
+  o pareamento formal RED→GREEN do `TDDHistory`.
 - Regressão do editor: cinco suítes R1042/R1043/R1046 → `66 passed` (o mesmo
   aviso de dependência).
 - Instalação: wheel obtido do PyPI e SHA-256 confrontado com o manifesto, sem
@@ -133,5 +137,6 @@ acrescentadas a `requirements.txt`.
 - `git diff --check` sem erro de whitespace. Não houve render, geração,
   publicação, alteração de dependências do `.venv` Core nem mudança em dados
   do usuário.
-- O gate `TDDHistory` e revisão independente não têm recibo nesta sessão; o
-  resultado acima comprova testes locais executados, não validação externa.
+- O gate estrito de RED→GREEN do `TDDHistory` e revisão independente não têm
+  recibo nesta sessão; os resultados acima comprovam testes locais executados,
+  não validação externa nem conclusão desse gate estrito.
