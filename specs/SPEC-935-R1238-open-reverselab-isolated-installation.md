@@ -87,7 +87,7 @@ Não copiar conteúdo upstream para o Core nem alterar o `opencode.json` ativo.
 8. Testes usam fixtures e runners mockados/offline: sem clonar, instalar, baixar
    dependências, iniciar MCP, chamar ferramentas MCP ou analisar amostras/alvos.
 
-## Critérios executáveis
+## Critérios de aceitação executáveis
 
 - `R1238-PLAN`: o plano fixa origem/commit/blob e separa ambientes; o caminho
   sem confirmação não cria diretórios nem invoca subprocessos.
