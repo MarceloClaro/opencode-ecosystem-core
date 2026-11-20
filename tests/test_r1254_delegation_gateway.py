@@ -106,7 +106,7 @@ def test_mcp_workflow_schema_documents_spec_id_and_node_budget():
 
     tool = asyncio.run(get_tool())
     node_schema = tool.inputSchema["properties"]["nodes"]["items"]
-    node_properties = node_schema["properties"]
+    node_properties = node_schema.get("properties", {})
     assert "spec_id" in node_properties
     assert "per_node_max_steps" in node_properties
     assert "spec_id" in tool.description
@@ -117,7 +117,9 @@ def test_non_strict_mode_keeps_legacy_workflow_without_spec_id():
     orchestrator = SimpleNamespace(strict_sdd=False, sdd_preflight=lambda _spec_id: None)
     autonomous = AutonomousCoordinator(orchestrator=orchestrator)
 
-    result = autonomous.preflight_spec(None)
+    preflight = getattr(autonomous, "preflight_spec", None)
+    assert callable(preflight)
+    result = preflight(None)
 
     assert result["ready"] is True
     assert result["verification_scope"] == "legacy_compatible"
@@ -132,6 +134,8 @@ def test_spec_preflight_delegates_known_and_unknown_ids():
 
     autonomous = AutonomousCoordinator(orchestrator=SimpleNamespace(strict_sdd=True, sdd_preflight=sdd_preflight))
 
-    assert autonomous.preflight_spec("SPEC-KNOWN")["ready"] is True
-    assert autonomous.preflight_spec("SPEC-UNKNOWN")["error"] == "spec_not_found"
+    preflight = getattr(autonomous, "preflight_spec", None)
+    assert callable(preflight)
+    assert preflight("SPEC-KNOWN")["ready"] is True
+    assert preflight("SPEC-UNKNOWN")["error"] == "spec_not_found"
     assert calls == ["SPEC-KNOWN", "SPEC-UNKNOWN"]
