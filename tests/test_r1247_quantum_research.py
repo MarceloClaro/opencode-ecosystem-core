@@ -65,6 +65,8 @@ def test_catalog_covers_nisq_methods_and_preserves_tiangong_labels():
     assert next(row for row in apps if row["label"] == "CA")["label"] == "CA"
     assert next(row for row in apps if row["label"] == "VRP")["local_harness_status"] == "classical_only"
     assert next(row for row in apps if row["label"] == "HDR")["local_harness_status"] == "preprocessing_only"
+    routes = {row["id"] for row in catalog["existing_local_routes"]}
+    assert {"qubo_ising_qaoa_planning", "vrp_classical_baseline", "hdr_preprocessing"} <= routes
 
 
 def test_plan_is_gap_aware_deterministic_and_never_claims_execution():
@@ -102,6 +104,13 @@ def test_plan_reports_common_and_method_specific_gaps_without_recommendation():
     assert {"state_space", "local_rule", "boundary_conditions", "evolution_validity"} <= set(qca["missing_inputs"])
     assert result["automatic_method_recommendation"] is None
     assert result["execution_authorized"] is False
+
+
+def test_explicitly_declaring_no_constraints_is_not_a_gap():
+    payload = _complete_payload()
+    payload["constraints"] = []
+    result = qr.build_research_plan(payload)
+    assert "constraints" not in {item["field"] for item in result["gaps"]}
 
 
 @pytest.mark.parametrize("mutate", [

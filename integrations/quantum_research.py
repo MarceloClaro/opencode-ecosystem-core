@@ -80,7 +80,7 @@ _METHODS: tuple[dict[str, Any], ...] = (
     },
     {
         "id": "quantum_annealing",
-        "name": "Cozi­mento quântico / annealing",
+        "name": "Cozimento quântico / annealing",
         "family": "annealing",
         "required_inputs": [
             "qubo_or_ising_encoding", "penalty_validation", "embedding_or_connectivity",
@@ -173,6 +173,29 @@ def research_catalog() -> dict[str, Any]:
     return {
         "schema_version": 1,
         "methods": copy.deepcopy(list(_METHODS)),
+        "existing_local_routes": [
+            {
+                "id": "qubo_ising_qaoa_planning",
+                "entrypoint": "integrations.quantum_optimization.qaoa_plan",
+                "scope": "Validação QUBO, conversão Ising, IR QAOA e baseline clássico exato em até 16 variáveis.",
+                "execution": "planning_only; no simulator or QPU execution",
+                "limits": {"qubo_variables": 20, "exact_classical_variables": 16, "qaoa_depth": 4},
+            },
+            {
+                "id": "vrp_classical_baseline",
+                "entrypoint": "integrations.tiangong_mcp.vrp_handler",
+                "scope": "Heurística local clássica CVRP; não modela todas as variantes de roteamento.",
+                "execution": "local_classical_only",
+                "limits": {"nodes": 200, "vehicles": 64},
+            },
+            {
+                "id": "hdr_preprocessing",
+                "entrypoint": "integrations.tiangong_mcp.hdr_handler",
+                "scope": "Validação/pré-processamento local; reconhecimento do backend indisponível.",
+                "execution": "local_preprocessing_only",
+                "limits": {"image_bytes": 2_000_000, "image_dimension": 1024},
+            },
+        ],
         "method_semantics": "candidatos para investigação; não são recomendações automáticas",
         "network": False,
         "execution_attempted": False,
@@ -326,6 +349,7 @@ def _normalize_payload(payload: Any) -> dict[str, Any]:
         "method_inputs": method_inputs,
         "resource_limits": resource_limits,
         "seed": seed,
+        "constraints_declared": "constraints" in payload,
     }
 
 
@@ -350,7 +374,10 @@ def build_research_plan(payload: Any) -> dict[str, Any]:
     )
     for field, description, next_step, *severity in common_fields:
         value = request[field]
-        missing = value is None if field in {"question", "problem_class", "objective"} else not value
+        if field == "constraints":
+            missing = not request["constraints_declared"]
+        else:
+            missing = value is None if field in {"question", "problem_class", "objective"} else not value
         if missing:
             gaps.append(_gap(field, description, next_step, severity[0] if severity else "high"))
 
@@ -382,7 +409,11 @@ def build_research_plan(payload: Any) -> dict[str, Any]:
         missing_inputs = [field for field in method["required_inputs"] if field not in declared]
         method_common_missing = [
             field for field in ("question", "problem_class", "objective", "constraints", "baseline_methods", "evaluation_metrics", "evidence_refs")
-            if (request[field] is None if field in {"question", "problem_class", "objective"} else not request[field])
+            if (
+                not request["constraints_declared"] if field == "constraints"
+                else request[field] is None if field in {"question", "problem_class", "objective"}
+                else not request[field]
+            )
         ]
         if method_id != "classical_baselines" and not request["resource_limits"]:
             method_common_missing.append("resource_limits")
@@ -425,6 +456,7 @@ def build_research_plan(payload: Any) -> dict[str, Any]:
         "seed": request["seed"],
         "methods": methods,
         "gaps": gaps,
+        "existing_local_routes": research_catalog()["existing_local_routes"],
         "study_sequence": [
             "Fechar a definição do problema, proveniência, dados e métricas.",
             "Implementar e validar baseline(s) clássico(s) antes de comparar métodos quânticos.",
