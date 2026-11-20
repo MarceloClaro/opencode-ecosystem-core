@@ -280,6 +280,8 @@ def test_memory_network_reads_sqlite_events_and_episodes(isolated_metabus, tmp_p
     snapshot = CoreMemoryNetworkSource(tmp_path).snapshot()
     node_ids = {node["id"] for node in snapshot["nodes"]}
     assert "task:task-db" in node_ids
-    assert any(node.get("source") == "agent-db" for node in snapshot["nodes"])
+    assert "agent:agent-db" in node_ids
+    assert any(node["type"] == "memoria" and node["label"] == "SQLite episode"
+               for node in snapshot["nodes"])
     assert snapshot["mode"] == "observed"
     assert not snapshot["externally_validated"]
