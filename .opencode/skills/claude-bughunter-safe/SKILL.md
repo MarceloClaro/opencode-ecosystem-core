@@ -1,5 +1,5 @@
 ---
-name: claude-bughunter-safe
+name: Claude BugHunter — escopo defensivo
 description: Ajuda a definir autorização e limites de uma revisão defensiva, analisar código fornecido pelo usuário e redigir correções e relatórios responsáveis; não executa nem ensina exploração.
 metadata:
   round: R1235

@@ -24976,6 +24976,34 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1236",
+      "objective": "Integrar Claude-BugHunter ao Core com superfície defensiva e referência somente leitura",
+      "changes": [
+        "SPEC-935-R1235 formalizou proveniência, escopo de segurança e licenças declaradas",
+        "Skill de projeto claude-bughunter-safe com gate de autorização/escopo e apoio defensivo sem testes ativos",
+        "Manifesto federado fixa commit observado e mantém instalação, execução e Burp MCP desabilitados",
+        "Quatro testes offline; RED/GREEN aceitos em worktree isolado; SpecVerifier local 3/3 aprovado"
+      ],
+      "score": 0.7,
+      "lessons": [
+        "Autorizar a integração de um repositório não equivale a autorizar testes contra ativos; o escopo foi limitado a revisão defensiva e documentação.",
+        "Licenças upstream observadas na branch main não foram verificadas contra o commit fixado; registre essa lacuna e não redistribua conteúdo.",
+        "Mudanças concorrentes fora do escopo alteraram arquivos durante a verificação no checkout principal; o gate TDD foi executado em worktree isolado com cópias exatas dos artefatos e SpecVerifier passou.",
+        "A revisão independente não ocorreu devido à restrição regional do executor; não alegar auditoria externa."
+      ],
+      "timestamp": 1795157001.4256816,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
