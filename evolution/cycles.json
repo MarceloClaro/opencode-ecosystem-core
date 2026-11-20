@@ -25351,6 +25351,34 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1252",
+      "objective": "Instalar e validar o SDK Tiangong PyPI em ambiente Python isolado Linux",
+      "changes": [
+        "Criada SPEC-935-R1251 e teste de aceitação; RED tdd-03a20bb8d4dd4862b7b76dd49f56198c aceito.",
+        "Instalado gjq-client==0.2.2 e dependências por wheels em /tmp/opencode/gjq-client-venv (Python 3.12.3), sem alteração do .venv do Core.",
+        "Smoke import offline 4/4, pip check sem requisitos quebrados, SpecVerifier GREEN 4/4; regressão quantum/Tiangong 120 passed, 1 skipped.",
+        "Sem API key, autenticação, cliente cloud, consulta de backend ou submissão de job; revisão A2A bloqueada antes de execução por falta de RED."
+      ],
+      "score": 0.7,
+      "lessons": [
+        "Em Linux, preferir o wheel PyPI documentado ao checkout editável que declara bloqueio Windows x64.",
+        "Conter dependências em venv temporário, pin de versão e somente wheels reduz impacto e evita contaminar o projeto-base.",
+        "Importação e pip check comprovam apenas instalação/importabilidade local; não provam serviço, acesso, disponibilidade de hardware ou execução quântica.",
+        "Falha de preflight anterior à execução não penaliza agente; o route/run interrompido deve ser reportado como não executado."
+      ],
+      "timestamp": 1795192330.919276,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [

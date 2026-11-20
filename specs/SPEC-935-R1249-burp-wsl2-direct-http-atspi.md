@@ -15,7 +15,7 @@ evidence_contract:
     R1249-SAFETY:
       - tests/test_r1249_burp_wsl2_adaptation.py::test_plan_remains_loopback_only_and_does_not_claim_target_activity
     R1249-AT-SPI:
-      - tests/test_r1249_burp_wsl2_adaptation.py::test_atspi_backend_is_available_after_typelib_install
+      - tests/test_r1249_burp_wsl2_adaptation.py::test_atspi_backend_is_available_after_typelib_staging
 ---
 
 # SPEC-935-R1249 — adaptação WSL2 do Burp MCP oficial
@@ -87,7 +87,7 @@ prova de execução local após o BApp estar instalado.
    verificar handshake/lista de ferramentas apenas; nenhuma tool de request,
    scanner ou escrita será chamada sem escopo/autorização separados.
 
-## Critérios de aceitação
+## Critérios de aceitação executáveis
 
 - `R1249-TRANSPORT`: catálogo valida a proveniência declarada e seleciona
   Streamable HTTP em loopback sem exigir Java ou JAR proxy.
