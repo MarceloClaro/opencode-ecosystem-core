@@ -23,7 +23,7 @@ from integrations import video_editor
 
 VERSION = "R1230-1"
 MAX_TIMELINE_BYTES = 2 * 1024 * 1024
-MAX_CHUNKS = 100_000
+MAX_CHUNKS = 10_000
 MAX_LOG_CHARS = 4_000
 VERSION_TIMEOUT_SECONDS = 10
 AUTO_EDITOR_TIMEOUT_SECONDS = 300
@@ -373,27 +373,20 @@ def propose_auto_editor_cuts(path: str | Path, *, probe_fn: Callable | None = No
     with tempfile.TemporaryDirectory(prefix="video-analysis-") as temporary:
         temp_root = Path(temporary)
         export_path = temp_root / "proposal.v1"
-        stdout_path = temp_root / "stdout.log"
-        stderr_path = temp_root / "stderr.log"
         argv = [str(executable), str(source), "--export", "v1", "-o", str(export_path)]
         try:
-            with stdout_path.open("wb") as stdout_stream, stderr_path.open("wb") as stderr_stream:
-                proc = runner(
-                    argv, stdin=subprocess.DEVNULL, stdout=stdout_stream,
-                    stderr=stderr_stream, timeout=timeout, shell=False,
-                    check=False, cwd=str(temp_root),
-                )
+            proc = runner(
+                argv, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL, timeout=timeout, shell=False,
+                check=False, cwd=str(temp_root),
+            )
         except subprocess.TimeoutExpired as exc:
             raise RuntimeError("auto-editor export timed out") from exc
         except OSError as exc:
             raise RuntimeError(f"auto-editor could not execute: {exc}") from exc
         returncode = getattr(proc, "returncode", None)
         if returncode != 0:
-            try:
-                error = stderr_path.read_text(encoding="utf-8", errors="replace")[:MAX_LOG_CHARS]
-            except OSError:
-                error = ""
-            raise RuntimeError(f"auto-editor export failed ({returncode}): {error}")
+            raise RuntimeError(f"auto-editor export failed (exit code {returncode})")
         if _sha256_file(source) != original_hash:
             raise RuntimeError("source media changed during Auto-Editor export")
         try:

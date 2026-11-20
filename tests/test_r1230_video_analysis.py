@@ -242,7 +242,7 @@ def test_auto_editor_runner_reports_timeout_and_missing_cli(tmp_path, monkeypatc
     monkeypatch.setattr(m.shutil, "which", lambda name: "/opt/bin/auto-editor")
     def timeout(*args, **kwargs):
         raise subprocess.TimeoutExpired(args[0], kwargs["timeout"])
-    with pytest.raises(RuntimeError, match="timeout"):
+    with pytest.raises(RuntimeError, match="timed out"):
         m.propose_auto_editor_cuts(source, probe_fn=probe, runner=timeout)
 
 
@@ -273,7 +273,7 @@ def test_mcp_exposes_confined_analysis_and_review_proposal_tools(tmp_path, monke
         "sources": {"media/source.mp4": {
             "path": str(source), "sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
             "frames": 120, "fps": [30, 1]}},
-        "tracks": [],
+        "tracks": [{"id": "v1", "kind": "video", "clips": []}],
     }
     (root / "editor-projects/demo.json").write_text(json.dumps(project), encoding="utf-8")
     monkeypatch.setattr(video_analysis, "detect_scene_markers", lambda path, **kwargs: {

@@ -29,7 +29,8 @@ def test_catalog_and_root_required(tmp_path, monkeypatch):
     tools = asyncio.run(server.list_tools())
     assert {t.name for t in tools} == {
         'editor_open', 'editor_list_projects', 'editor_plan',
-        'editor_render', 'editor_status'}
+        'editor_render', 'editor_status', 'editor_analyze_scenes',
+        'editor_propose_auto_cuts'}
     for tool in tools:
         assert tool.annotations.openWorldHint is False
         assert 'command' not in tool.inputSchema.get('properties', {})
