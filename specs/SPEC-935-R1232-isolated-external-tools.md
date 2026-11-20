@@ -12,9 +12,15 @@ evidence_contract:
       - tests/test_r1232_isolated_external_tools.py::test_manifest_pins_sources_licenses_and_isolation_states
       - tests/test_r1232_isolated_external_tools.py::test_reference_only_and_blocked_entries_have_no_install_or_execution_claim
       - tests/test_r1232_isolated_external_tools.py::test_prompts_chat_is_catalog_only_with_dual_license_boundary
+      - tests/test_r1232_isolated_external_tools.py::test_manifest_records_license_and_adoption_states_without_collapsing_them
+      - tests/test_r1232_isolated_external_tools.py::test_manifest_policy_validation_fails_closed_for_contradictory_states
+      - tests/test_r1232_isolated_external_tools.py::test_status_is_read_only_local_inventory
     R1232-RUST:
       - tests/test_r1232_isolated_external_tools.py::test_rust_anything_install_plan_isolated_and_integrity_pinned
       - tests/test_r1232_isolated_external_tools.py::test_rust_anything_runner_never_uses_shell_or_global_install
+      - tests/test_r1232_isolated_external_tools.py::test_install_without_confirmation_is_plan_only
+      - tests/test_r1232_isolated_external_tools.py::test_npm_integrity_mismatch_stops_before_install
+      - tests/test_r1232_isolated_external_tools.py::test_npm_install_uses_only_tarball_verified_against_pinned_integrity
     R1232-UOS:
       - tests/test_r1232_isolated_external_tools.py::test_universal_os_isolated_and_mcp_disabled_by_default
       - tests/test_r1232_isolated_external_tools.py::test_universal_os_never_accepts_iso_or_vm_execution_in_this_scope
@@ -62,11 +68,15 @@ exige revisão jurídica humana explícita.
 
 1. O manifesto `federation/repository-curation-r1232.json` distingue `installed`,
    `executed`, `enabled`, `license_status` e `integration_status`; desconhecido,
-   planejado, bloqueado e observado não podem ser colapsados em `ready`.
-2. Rust Anything, Universal OS e Caveman usam diretórios/ambientes isolados e
-   versões/integridades fixadas. Adapters usam `subprocess` com argv fechado,
-   sem shell e com timeout; comandos de instalação são ações explícitas e não
-   são chamados por `status`, por doctor ou por testes.
+   planejado, bloqueado e observado não podem ser colapsados em `ready`. A
+   validação falha fechada diante de estados ausentes ou contraditórios.
+2. Rust Anything, Universal OS e Caveman usam diretórios/ambientes isolados.
+   Pacotes npm são obtidos por `npm pack --ignore-scripts`; o SRI reportado e o
+   SHA-512 local do tarball precisam coincidir com o pin antes de instalar o
+   tarball local. Universal OS fixa o commit completo e configura `UV_TOOL_DIR`,
+   `UV_TOOL_BIN_DIR` e cache privados. Subprocessos usam argv fechado, sem shell
+   e com timeout; instalação só ocorre por chamada explícita confirmada. `status`,
+   doctor e testes não instalam nem consultam serviços externos.
 3. Nenhum MCP de terceiros é adicionado automaticamente ao `opencode.json` nem
    iniciado. A ativação futura exige configuração separada e consentimento
    explícito; essa entrega pode apenas preparar a configuração desabilitada.
@@ -77,11 +87,14 @@ exige revisão jurídica humana explícita.
    `.gemini`, `.config/opencode` ou `opencode.json`. Os comandos proibidos
    incluem setup/login, instalação de hooks/extensões, mudança de provider,
    Auto/cloud e execução de agentes-alvo. O executor injeta os quatro controles
-   ambientais definidos acima e não herda segredos do ambiente do Core.
+   ambientais definidos acima, configura cache/arquivos npm privados e não
+   herda segredos do ambiente do Core.
 6. As duas skills Anthropic são importadas em diretórios próprios, cada uma com
    `SKILL.md`, `LICENSE.txt`, `source.json` (repo, commit, caminho, SHA-256,
-   política de ativação) e os arquivos de suporte necessários. Não executar
-   scripts ou instruções que produzam efeitos durante a importação.
+   política de ativação) e todos os arquivos regulares do respectivo diretório
+   de skill no commit pinado. O overlay local do frontmatter desliga invocação
+   implícita; os hashes upstream e importados são reconciliáveis. Scripts ficam
+   sem bit executável e não são executados durante importação ou testes.
 7. Awesome REA, CC Switch e prompts.chat são entradas `reference_only`;
    OpenReverseLab é `blocked_legal_review`. Não se copia conteúdo desses itens.
 8. REA 6.8.0 permanece como implementação canônica de reverse engineering; o
@@ -93,7 +106,8 @@ exige revisão jurídica humana explícita.
 1. O manifesto JSON é validado por schema/testes, registra proveniência e
    mantém estados de instalação, execução e ativação separados.
 2. O plano de Rust Anything fixa pacote, versão, integridade, diretório e
-   tamanho estimado; nenhuma instalação global ou análise de alvo ocorre.
+   tamanho estimado; a instalação aborta antes de extrair se SRI/metadados/hash
+   local divergirem. Nenhuma instalação global ou análise de alvo ocorre.
 3. Universal OS fica isolado e desabilitado; os testes provam que ISO, QEMU,
    VM, MCP e comandos de reconstrução não são invocados.
 4. Caveman fica isolado, com telemetria e rede de cloud desativadas no processo,
@@ -106,8 +120,9 @@ exige revisão jurídica humana explícita.
    instalação nem uso; prompts.chat mantém separadas as licenças do código e do
    corpus de prompts.
 7. REA existente é reutilizado sem alteração da versão, instalação ou MCP.
-8. Testes focais, regressões pertinentes, `python3 -m marceloclaro.cli doctor`
-   com `.venv` e revisão de diff passam; todo estado externo não observado é
+8. Testes focais, regressões pertinentes, `python -m marceloclaro.cli doctor`
+   com o Python de `.venv` e revisão de diff passam; testes de instalação usam
+   runners mockados e não baixam pacotes. Todo estado externo não observado é
    relatado como não observado.
 
 ## Fora de escopo

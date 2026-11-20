@@ -227,6 +227,7 @@ def isolated_environment(
             "npm_config_audit": "false",
             "npm_config_fund": "false",
             "npm_config_update_notifier": "false",
+            "npm_config_ignore_scripts": "true",
         })
     elif tool_id == "universal-os":
         env["UOS_HOME"] = str(private_home)

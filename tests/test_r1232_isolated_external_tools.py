@@ -126,6 +126,9 @@ def test_caveman_environment_disables_telemetry_cloud_and_global_state(tmp_path)
     assert environment["CAVEMAN_HOME"] == str((tmp_path / "caveman" / "home").resolve())
     assert environment["HOME"] != "/home/real"
     assert "CAVE_TOKEN" not in environment
+    assert environment["npm_config_registry"] == "https://registry.npmjs.org/"
+    assert environment["npm_config_userconfig"].startswith(environment["CAVEMAN_HOME"])
+    assert environment["npm_config_ignore_scripts"] == "true"
 
 
 def test_caveman_runner_rejects_setup_login_and_agent_install_commands(tmp_path):
@@ -136,6 +139,7 @@ def test_caveman_runner_rejects_setup_login_and_agent_install_commands(tmp_path)
 
 def test_only_selected_anthropic_skills_are_imported_with_license_and_hashes():
     root = ROOT / ".opencode" / "skills"
+    manifest_entries = _entries()
     for slug in ("mcp-builder", "skill-creator"):
         directory = root / slug
         assert (directory / "SKILL.md").is_file()
@@ -145,6 +149,10 @@ def test_only_selected_anthropic_skills_are_imported_with_license_and_hashes():
         assert source["commit"] == "e4bb5d960d87126ff3b3a8af1a104b7db67560ba"
         assert source["license"] == "Apache-2.0"
         assert source["sha256"]
+        entry = manifest_entries[f"anthropic-{slug}"]["source"]
+        assert source["sha256"] == entry["imported_skill_sha256"]
+        assert hashlib.sha256((directory / "source.json").read_bytes()).hexdigest() == entry["source_manifest_sha256"]
+        assert len(source["files"]) == entry["imported_file_count"]
         assert source["resources_imported"].startswith("all regular files")
         for relative, record in source["files"].items():
             file_path = directory / relative
@@ -176,6 +184,16 @@ def test_catalog_does_not_expose_unapproved_mcp_servers():
     entries = ext.load_manifest()["repositories"]
     assert all(item["runtime"]["mcp_enabled"] is False for item in entries if item["id"] != "rea")
     assert all(item.get("mcp_config") is None for item in entries)
+
+
+def test_status_is_read_only_local_inventory(monkeypatch):
+    def should_not_run(*args, **kwargs):
+        raise AssertionError("status must not launch an external process")
+
+    monkeypatch.setattr(ext.subprocess, "run", should_not_run)
+    result = ext.status()
+    assert result["verification"] == "local_inventory_only"
+    assert {item["id"] for item in result["repositories"]} >= {"rust-anything", "universal-os", "caveman"}
 
 
 def test_install_without_confirmation_is_plan_only(tmp_path):
