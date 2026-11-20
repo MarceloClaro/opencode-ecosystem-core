@@ -25004,6 +25004,37 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1237",
+      "objective": "SPEC-935-R1234: instalar MoneyPrinterTurbo v1.3.10 isolado e integrar importação confinada de MP4 ao editor de vídeo",
+      "changes": [
+        "Adicionado integrations/moneyprinterturbo.py com plano de instalação isolada e import task_id/final-N.mp4 para novo projeto do editor.",
+        "Integrada a ferramenta MCP editor_import_mpt_output atrás de MPT_OUTPUT_ROOT ou MPT_HOME/storage/tasks existente, sem geração/render/publicação.",
+        "Registrado MoneyPrinterTurbo output importer no video_toolchain com papel restrito asset_import.",
+        "Instalado mpt==1.3.10 no venv privado Python 3.12; wheel SHA-256 conferido; pip check limpo; preparado MPT_HOME/storage/tasks vazio.",
+        "TDDHistory RED→GREEN aceito; SpecVerifier aprovou 5/5 critérios em software_delivery_gate."
+      ],
+      "score": 7.0,
+      "lessons": [
+        "Uma release com saída final única deve ser integrada como asset, não como timeline inferida; não assumir scene_clips de main posterior.",
+        "Isolar dependências com pin incompatível com o Core é obrigatório; verificar wheel/hash, pip check e fronteira física do venv.",
+        "Importação de mídia deve ser atômica, confinada, hash-verificada e criar projeto não sobrescrevível; rollback remove asset órfão após falha de probe.",
+        "A primeira tentativa formal RED editou o condicional errado e foi rejeitada; inspecionar receipt e apontar o ramo exato antes de confiar no histórico.",
+        "Distribuição PyPI não precisa expor namespace importável homônimo; verificar importlib.metadata e entry points sem iniciar o aplicativo.",
+        "A pontuação do ciclo é heurística interna; revisão externa independente não ocorreu e nenhuma qualidade foi validada externamente."
+      ],
+      "timestamp": 1795160758.6201208,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [

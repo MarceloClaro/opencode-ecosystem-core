@@ -113,7 +113,7 @@ def validate_manifest(data: Mapping[str, Any]) -> list[str]:
         if not isinstance(license_status, str) or license_status not in {"source_declared_unreviewed", "human_review_required"}:
             errors.append(f"{tool_id}: license_status inválido ou ausente")
         integration_status = entry.get("integration_status")
-        if not isinstance(integration_status, str) or integration_status not in {"planned_isolated", "reference_only", "blocked_legal_review", "imported_explicit_only", "existing_reuse"}:
+        if not isinstance(integration_status, str) or integration_status not in {"planned_isolated", "installed_isolated", "reference_only", "blocked_legal_review", "imported_explicit_only", "existing_reuse"}:
             errors.append(f"{tool_id}: integration_status inválido ou ausente")
             integration_status = None
         if adoption == "reference_only" and integration_status != "reference_only":
@@ -124,8 +124,6 @@ def validate_manifest(data: Mapping[str, Any]) -> list[str]:
             errors.append(f"{tool_id}: bloqueio legal deve permanecer fail-closed")
         if adoption == "selected_skill" and integration_status != "imported_explicit_only":
             errors.append(f"{tool_id}: skill selecionada deve permanecer explicit-only")
-        if adoption == "isolated_cli" and integration_status != "planned_isolated":
-            errors.append(f"{tool_id}: CLI isolada precisa distinguir plano de instalação")
         if adoption == "existing_reuse" and integration_status != "existing_reuse":
             errors.append(f"{tool_id}: integração existente deve ser marcada como reutilizada")
         runtime = entry.get("runtime")
@@ -138,6 +136,33 @@ def validate_manifest(data: Mapping[str, Any]) -> list[str]:
         if adoption in {"reference_only", "blocked_legal_review"}:
             if runtime.get("installed") or runtime.get("executed") or runtime.get("enabled") or runtime.get("mcp_enabled"):
                 errors.append(f"{tool_id}: fonte {adoption} não pode alegar instalação/execução/ativação")
+        if adoption == "isolated_cli":
+            if integration_status == "planned_isolated":
+                if runtime.get("installed") or entry.get("installation_observation") is not None:
+                    errors.append(f"{tool_id}: plano não pode alegar instalação observada")
+            elif integration_status == "installed_isolated":
+                observation = entry.get("installation_observation")
+                if not runtime.get("installed") or runtime.get("executed") or runtime.get("enabled") or runtime.get("mcp_enabled"):
+                    errors.append(f"{tool_id}: estado instalado deve manter execução/ativação/MCP desligados")
+                if not isinstance(observation, Mapping):
+                    errors.append(f"{tool_id}: instalação observada sem recibo")
+                else:
+                    if observation.get("status") != "installed" or observation.get("returncode") != 0:
+                        errors.append(f"{tool_id}: recibo de instalação sem sucesso observado")
+                    if observation.get("target_executed") is not False or observation.get("mcp_enabled") is not False:
+                        errors.append(f"{tool_id}: recibo não pode alegar execução do alvo ou ativação MCP")
+                    if not isinstance(observation.get("observed_at"), str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z", observation["observed_at"]):
+                        errors.append(f"{tool_id}: timestamp de instalação inválido")
+                    if not isinstance(observation.get("target"), str) or not observation["target"].startswith("~/.local/share/opencode-core/external-tools/r1232/"):
+                        errors.append(f"{tool_id}: prefixo de instalação fora do destino isolado")
+                    if tool_id in {"rust-anything", "caveman"} and observation.get("integrity_verified") is not True:
+                        errors.append(f"{tool_id}: SRI do pacote não foi observado/verificado")
+                    if tool_id == "rust-anything" and observation.get("unpacked_size_verified") is not True:
+                        errors.append("rust-anything: tamanho desempacotado não foi verificado")
+                    if tool_id == "universal-os" and observation.get("source_commit") != source.get("commit"):
+                        errors.append("universal-os: commit instalado diverge do pin")
+            else:
+                errors.append(f"{tool_id}: CLI isolada exige estado planejado ou instalado isoladamente")
         if adoption != "existing_reuse" and runtime.get("mcp_enabled"):
             errors.append(f"{tool_id}: MCP externo não pode estar habilitado por esta integração")
         if entry.get("mcp_config") is not None:
@@ -150,6 +175,34 @@ def _entry(tool_id: str) -> dict[str, Any]:
         if entry["id"] == tool_id:
             return entry
     raise ValueError(f"Ferramenta não registrada em R1232: {tool_id}")
+
+
+def _is_managed_npm_install(tool_id: str, target: Path) -> bool:
+    """Allow a safe repair only when the prefix contains the exact pinned package."""
+    if tool_id not in {"rust-anything", "caveman"} or target.is_symlink():
+        return False
+    item = _entry(tool_id)
+    package_spec = item["source"]["package"]
+    package_name, _, version = package_spec.rpartition("@")
+    package_dir = target / "node_modules" / Path(*package_name.split("/"))
+    root_manifest = target / "package.json"
+    installed_manifest = package_dir / "package.json"
+    try:
+        if any(path.is_symlink() or not path.is_file() for path in (root_manifest, installed_manifest)):
+            return False
+        root_data = json.loads(root_manifest.read_text(encoding="utf-8"))
+        package_data = json.loads(installed_manifest.read_text(encoding="utf-8"))
+        dependencies = root_data.get("dependencies")
+        return (
+            isinstance(dependencies, Mapping)
+            and set(dependencies) == {package_name}
+            and isinstance(dependencies[package_name], str)
+            and dependencies[package_name].startswith("file:")
+            and package_data.get("name") == package_name
+            and package_data.get("version") == version
+        )
+    except (OSError, json.JSONDecodeError, TypeError, ValueError):
+        return False
 
 
 def status() -> dict[str, Any]:
@@ -366,7 +419,8 @@ def install_tool(
         raise ValueError(f"timeout deve estar entre 1 e {MAX_TIMEOUT_SECONDS} segundos")
     base = Path(plan["root"])
     target = Path(plan["target"])
-    if target.is_symlink() or (target.exists() and (not target.is_dir() or any(target.iterdir()))):
+    managed_npm_prefix = _is_managed_npm_install(tool_id, target)
+    if target.is_symlink() or (target.exists() and (not target.is_dir() or (any(target.iterdir()) and not managed_npm_prefix))):
         return {**plan, "dry_run": False, "status": "target_not_empty", "stderr": "O destino existe e não está vazio; nenhuma instalação foi iniciada."}
     invoke = runner or subprocess.run
 
@@ -445,9 +499,31 @@ def install_tool(
                             "stderr": "Tamanho desempacotado diverge do valor fixado; instalação bloqueada.",
                         }
                 target.mkdir(parents=True, exist_ok=True)
+                verified_dir = target / "verified-packages"
+                if verified_dir.is_symlink() or (verified_dir.exists() and not verified_dir.is_dir()):
+                    return {**plan, "dry_run": False, "status": "verified_package_path_conflict", "stderr": "Destino persistente do tarball não é um diretório regular."}
+                verified_dir.mkdir(mode=0o700, parents=True, exist_ok=True)
+                durable_tarball = verified_dir / filename
+                if durable_tarball.is_symlink() or (durable_tarball.exists() and not durable_tarball.is_file()):
+                    return {**plan, "dry_run": False, "status": "verified_package_path_conflict", "stderr": "Tarball persistente existente não é um arquivo regular."}
+                if durable_tarball.exists():
+                    if _sha512_sri(durable_tarball) != expected_integrity:
+                        return {**plan, "dry_run": False, "status": "verified_package_conflict", "stderr": "Tarball persistente existente diverge do SRI fixado."}
+                else:
+                    fd, temporary_copy_name = tempfile.mkstemp(prefix=".verified-", dir=str(verified_dir))
+                    temporary_copy = Path(temporary_copy_name)
+                    try:
+                        with os.fdopen(fd, "wb") as copied, tarball.open("rb") as source_stream:
+                            shutil.copyfileobj(source_stream, copied)
+                        os.chmod(temporary_copy, 0o600)
+                        if _sha512_sri(temporary_copy) != expected_integrity:
+                            return {**plan, "dry_run": False, "status": "verified_copy_mismatch", "stderr": "Cópia persistente do tarball divergiu do SRI; instalação bloqueada."}
+                        os.replace(temporary_copy, durable_tarball)
+                    finally:
+                        temporary_copy.unlink(missing_ok=True)
                 install_argv = [
                     shutil.which("npm") or "npm", "install", "--prefix", str(target), "--ignore-scripts",
-                    "--no-audit", "--no-fund", "--save-exact", str(tarball),
+                    "--no-audit", "--no-fund", "--save-exact", str(durable_tarball),
                 ]
                 installed = run_command(install_argv, target, plan["environment"])
                 code = int(getattr(installed, "returncode", 1))

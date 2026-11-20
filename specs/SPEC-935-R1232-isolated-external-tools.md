@@ -23,6 +23,7 @@ evidence_contract:
       - tests/test_r1232_isolated_external_tools.py::test_npm_integrity_mismatch_stops_before_install
       - tests/test_r1232_isolated_external_tools.py::test_npm_install_uses_only_tarball_verified_against_pinned_integrity
       - tests/test_r1232_isolated_external_tools.py::test_npm_install_blocks_unexpected_unpacked_size_before_install
+      - tests/test_r1232_isolated_external_tools.py::test_npm_installer_repairs_only_a_matching_managed_prefix
     R1232-UOS:
       - tests/test_r1232_isolated_external_tools.py::test_universal_os_isolated_and_mcp_disabled_by_default
       - tests/test_r1232_isolated_external_tools.py::test_universal_os_never_accepts_iso_or_vm_execution_in_this_scope
@@ -36,6 +37,9 @@ evidence_contract:
       - tests/test_r1232_isolated_external_tools.py::test_existing_rea_install_is_reused_without_upgrade_or_duplicate
     R1232-REGRESSION:
       - tests/test_r1232_isolated_external_tools.py::test_catalog_does_not_expose_unapproved_mcp_servers
+    R1232-INSTALL:
+      - tests/test_r1232_isolated_external_tools.py::test_install_observations_record_completed_isolated_installs
+      - tests/test_r1232_isolated_external_tools.py::test_npm_installer_retains_verified_tarball_inside_isolated_prefix
 ---
 
 # SPEC-935-R1232 — Integrações externas isoladas e referências curadas
@@ -126,6 +130,10 @@ exige revisão jurídica humana explícita.
 - `R1232-REGRESSION` — Nenhum MCP de terceiro fica registrado; testes usam
   runners mockados sem baixar pacotes; integração de referência não executa
   fontes nem alvos.
+- `R1232-INSTALL` — Instalações autorizadas registram código de saída, origem,
+  timestamp e integridade observada. O status diferencia instalação de execução:
+  CLIs e MCPs permanecem desativados. Tarballs npm usados como dependência local
+  permanecem no prefixo isolado, sem referências para staging temporário.
 
 ## Fora de escopo
 

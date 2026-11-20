@@ -38,6 +38,30 @@ def test_manifest_pins_sources_licenses_and_isolation_states():
     assert all(item.get("integration_status") for item in manifest["repositories"])
 
 
+def test_install_observations_record_completed_isolated_installs():
+    entries = _entries()
+    for tool_id in ("rust-anything", "universal-os", "caveman"):
+        item = entries[tool_id]
+        observation = item["installation_observation"]
+        assert item["integration_status"] == "installed_isolated"
+        assert item["runtime"] == {
+            "installed": True,
+            "executed": False,
+            "enabled": False,
+            "mcp_enabled": False,
+        }
+        assert observation["status"] == "installed"
+        assert observation["returncode"] == 0
+        assert observation["target_executed"] is False
+        assert observation["mcp_enabled"] is False
+        assert observation["target"].startswith("~/.local/share/opencode-core/external-tools/r1232/")
+        assert observation["observed_at"].endswith("Z")
+    assert entries["rust-anything"]["installation_observation"]["integrity_verified"] is True
+    assert entries["rust-anything"]["installation_observation"]["unpacked_size_verified"] is True
+    assert entries["caveman"]["installation_observation"]["integrity_verified"] is True
+    assert entries["universal-os"]["installation_observation"]["source_commit"] == entries["universal-os"]["source"]["commit"]
+
+
 def test_reference_only_and_blocked_entries_have_no_install_or_execution_claim():
     entries = _entries()
     for repo_id in ("awesome-reverse-engineer-anything", "cc-switch", "prompts-chat"):
@@ -265,7 +289,10 @@ def test_npm_install_uses_only_tarball_verified_against_pinned_integrity(tmp_pat
                 "",
             )
         assert argv[1] == "install"
-        assert argv[-1].endswith("rust-anything-2.1.0.tgz")
+        tarball = Path(argv[-1])
+        assert tarball.name == "rust-anything-2.1.0.tgz"
+        assert tarball.is_relative_to((tmp_path / "rust-anything" / "verified-packages").resolve())
+        assert tarball.read_bytes() == tarball_bytes
         assert str((tmp_path / "rust-anything").resolve()) in argv
         assert kwargs["env"]["HOME"] == str((tmp_path / "rust-anything" / "home").resolve())
         return ext.CompletedResult(0, "ok", "")
@@ -275,6 +302,79 @@ def test_npm_install_uses_only_tarball_verified_against_pinned_integrity(tmp_pat
     assert result["integrity_verified"] is True
     assert result["unpacked_size_verified"] is True
     assert [call[0][1] for call in calls] == ["pack", "install"]
+
+
+def test_npm_installer_retains_verified_tarball_inside_isolated_prefix(tmp_path, monkeypatch):
+    tarball_bytes = b"durable-verified-package"
+    expected = "sha512-" + base64.b64encode(hashlib.sha512(tarball_bytes).digest()).decode("ascii")
+    original_entry = ext._entry
+
+    def entry_with_test_integrity(tool_id):
+        item = original_entry(tool_id)
+        if tool_id == "rust-anything":
+            item = deepcopy(item)
+            item["source"]["integrity"] = expected
+        return item
+
+    monkeypatch.setattr(ext, "_entry", entry_with_test_integrity)
+    calls = []
+
+    def fake_runner(argv, **kwargs):
+        calls.append(argv)
+        if argv[1] == "pack":
+            destination = Path(argv[argv.index("--pack-destination") + 1])
+            (destination / "rust-anything-2.1.0.tgz").write_bytes(tarball_bytes)
+            return ext.CompletedResult(0, json.dumps([{
+                "integrity": expected,
+                "filename": "rust-anything-2.1.0.tgz",
+                "unpackedSize": 126965553,
+            }]), "")
+        tarball = Path(argv[-1])
+        assert tarball.exists()
+        assert tarball.is_relative_to((tmp_path / "rust-anything" / "verified-packages").resolve())
+        return ext.CompletedResult(0, "ok", "")
+
+    result = ext.install_tool("rust-anything", root=tmp_path, yes=True, runner=fake_runner)
+    assert result["status"] == "installed"
+    assert calls[-1][-1].endswith("verified-packages/rust-anything-2.1.0.tgz")
+
+
+def test_npm_installer_repairs_only_a_matching_managed_prefix(tmp_path, monkeypatch):
+    target = tmp_path / "rust-anything"
+    package_dir = target / "node_modules" / "rust-anything"
+    package_dir.mkdir(parents=True)
+    (target / "package.json").write_text(json.dumps({
+        "dependencies": {"rust-anything": "file:../.rust-anything-verified-old/rust-anything-2.1.0.tgz"}
+    }), encoding="utf-8")
+    (package_dir / "package.json").write_text(json.dumps({"name": "rust-anything", "version": "2.1.0"}), encoding="utf-8")
+    tarball_bytes = b"repair-existing-managed-prefix"
+    expected = "sha512-" + base64.b64encode(hashlib.sha512(tarball_bytes).digest()).decode("ascii")
+    original_entry = ext._entry
+
+    def entry_with_test_integrity(tool_id):
+        item = original_entry(tool_id)
+        if tool_id == "rust-anything":
+            item = deepcopy(item)
+            item["source"]["integrity"] = expected
+        return item
+
+    monkeypatch.setattr(ext, "_entry", entry_with_test_integrity)
+
+    def fake_runner(argv, **kwargs):
+        if argv[1] == "pack":
+            destination = Path(argv[argv.index("--pack-destination") + 1])
+            (destination / "rust-anything-2.1.0.tgz").write_bytes(tarball_bytes)
+            return ext.CompletedResult(0, json.dumps([{
+                "integrity": expected,
+                "filename": "rust-anything-2.1.0.tgz",
+                "unpackedSize": 126965553,
+            }]), "")
+        assert Path(argv[-1]).is_file()
+        assert "verified-packages" in argv[-1]
+        return ext.CompletedResult(0, "repaired", "")
+
+    result = ext.install_tool("rust-anything", root=tmp_path, yes=True, runner=fake_runner)
+    assert result["status"] == "installed"
 
 
 def test_npm_install_blocks_unexpected_unpacked_size_before_install(tmp_path, monkeypatch):
@@ -333,6 +433,12 @@ def test_manifest_policy_validation_fails_closed_for_contradictory_states():
     prompts["license_status"] = "approved"
     assert any("prompts-chat: license_status" in error for error in ext.validate_manifest(broken))
 
+    broken = deepcopy(manifest)
+    rust = next(item for item in broken["repositories"] if item["id"] == "rust-anything")
+    rust["integration_status"] = "installed_isolated"
+    rust["runtime"]["installed"] = True
+    assert any("rust-anything" in error for error in ext.validate_manifest(broken))
+
 
 def test_formal_spec_contract_is_valid_and_maps_all_criteria():
     from sdd.spec_engine import spec_registry
@@ -342,6 +448,6 @@ def test_formal_spec_contract_is_valid_and_maps_all_criteria():
     assert spec.evidence_contract_valid is True
     assert {criterion.criterion_id for criterion in spec.criteria} == {
         "R1232-CATALOG", "R1232-RUST", "R1232-UOS", "R1232-CAVEMAN",
-        "R1232-SKILLS", "R1232-REA", "R1232-REGRESSION",
+        "R1232-SKILLS", "R1232-REA", "R1232-REGRESSION", "R1232-INSTALL",
     }
     assert set(spec.criterion_test_targets) == {criterion.criterion_id for criterion in spec.criteria}
