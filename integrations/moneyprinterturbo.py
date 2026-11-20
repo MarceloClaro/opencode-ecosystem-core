@@ -141,6 +141,24 @@ def _write_asset(source: Path, editor_root: Path, expected_sha: str) -> tuple[Pa
     return target, created
 
 
+def _create_project(project_dir: Path, project_file: Path, serialized: str) -> None:
+    """Atomically create a project without replacing an existing path."""
+    fd, temp_name = tempfile.mkstemp(prefix=".mpt-project-", suffix=".tmp",
+                                     dir=project_dir)
+    temp = Path(temp_name)
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as stream:
+            stream.write(serialized)
+            stream.flush()
+            os.fsync(stream.fileno())
+        try:
+            os.link(temp, project_file)
+        except FileExistsError as exc:
+            raise ValueError("project already exists; refusing overwrite") from exc
+    finally:
+        temp.unlink(missing_ok=True)
+
+
 def import_task_output(
     mpt_output_root: str | Path,
     editor_root: str | Path,
@@ -181,38 +199,36 @@ def import_task_output(
         raise ValueError("silent MPT output requires allow_silent=true")
 
     asset_path, created_asset = _write_asset(source, destination_root, initial_sha)
-    media_probe = probe_fn(asset_path, allow_silent=True)
-    if media_probe.get("sha256") != initial_sha:
-        if created_asset:
-            asset_path.unlink(missing_ok=True)
-        raise ValueError("copied asset integrity mismatch")
+    try:
+        media_probe = probe_fn(asset_path, allow_silent=True)
+        if media_probe.get("sha256") != initial_sha:
+            raise ValueError("copied asset integrity mismatch")
+        if isinstance(media_probe.get("audio"), dict) != has_audio:
+            raise ValueError("source audio metadata changed during import")
 
-    relative_asset = str(asset_path.relative_to(destination_root))
-    project = video_editor.project_from_probe(
-        relative_asset, media_probe, project_id=project_id, allow_silent=allow_silent
-    )
-    project["root"] = str(destination_root)
-    video_track = next(track for track in project["tracks"] if track["kind"] == "video")
-    audio_track = next(track for track in project["tracks"] if track["kind"] == "audio")
-    frames = project["sources"][relative_asset]["frames"]
-    video_track["clips"].append({
-        "id": "mpt-video-1", "track": video_track["id"], "source": relative_asset,
-        "in_frame": 0, "out_frame": frames, "start_frame": 0,
-        "speed": 1.0, "volume": 1.0,
-    })
-    if has_audio:
-        audio_track["clips"].append({
-            "id": "mpt-audio-1", "track": audio_track["id"], "source": relative_asset,
+        relative_asset = str(asset_path.relative_to(destination_root))
+        project = video_editor.project_from_probe(
+            relative_asset, media_probe, project_id=project_id, allow_silent=allow_silent
+        )
+        project["root"] = str(destination_root)
+        video_track = next(track for track in project["tracks"] if track["kind"] == "video")
+        audio_track = next(track for track in project["tracks"] if track["kind"] == "audio")
+        frames = project["sources"][relative_asset]["frames"]
+        video_track["clips"].append({
+            "id": "mpt-video-1", "track": video_track["id"], "source": relative_asset,
             "in_frame": 0, "out_frame": frames, "start_frame": 0,
             "speed": 1.0, "volume": 1.0,
         })
-    serialized = video_editor.dumps_project(project)
-
-    try:
+        if has_audio:
+            audio_track["clips"].append({
+                "id": "mpt-audio-1", "track": audio_track["id"], "source": relative_asset,
+                "in_frame": 0, "out_frame": frames, "start_frame": 0,
+                "speed": 1.0, "volume": 1.0,
+            })
+        serialized = video_editor.dumps_project(project)
         project_dir.mkdir(parents=True, exist_ok=True)
         project_file = _confined(destination_root, f"editor-projects/{project_id}.json")
-        with project_file.open("x", encoding="utf-8") as stream:
-            stream.write(serialized)
+        _create_project(project_dir, project_file, serialized)
     except Exception:
         if created_asset:
             asset_path.unlink(missing_ok=True)

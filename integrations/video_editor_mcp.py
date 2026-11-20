@@ -34,7 +34,11 @@ def create_server(root=None, *, mpt_output_root=None):
     root = Path(value).absolute()
     if root.is_symlink() or any(p.is_symlink() for p in root.parents):
         raise ValueError('symlink root not allowed')
-    configured_mpt_root = mpt_output_root or os.environ.get('MPT_OUTPUT_ROOT')
+    configured_mpt_root = mpt_output_root
+    if configured_mpt_root is None:
+        configured_mpt_root = os.environ.get('MPT_OUTPUT_ROOT')
+    if configured_mpt_root is None and os.environ.get('MPT_HOME'):
+        configured_mpt_root = Path(os.environ['MPT_HOME']) / 'storage' / 'tasks'
     if configured_mpt_root is not None:
         configured_mpt_root = Path(configured_mpt_root).expanduser().absolute()
         if (configured_mpt_root.is_symlink()

@@ -160,6 +160,27 @@ def test_import_refuses_existing_project_and_hash_collision(tmp_path, monkeypatc
     assert colliding.read_bytes() == b"different-content"
 
 
+def test_probe_failure_rolls_back_new_asset_without_partial_project(tmp_path):
+    mpt_root, editor_root, _ = roots(tmp_path)
+    calls = 0
+
+    def probe(path, **kwargs):
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            return probe_for(path)
+        raise RuntimeError("probe failure")
+
+    with pytest.raises(RuntimeError, match="probe failure"):
+        api().import_task_output(
+            mpt_root, editor_root,
+            "8f4f8a75-1c27-47ed-b2d3-45a9940e9ed1/final-1.mp4",
+            "mpt-probe-failure", probe_fn=probe)
+    asset_dir = editor_root / "editor-assets" / "moneyprinterturbo"
+    assert not list(asset_dir.glob("*.mp4"))
+    assert not (editor_root / "editor-projects" / "mpt-probe-failure.json").exists()
+
+
 def test_import_does_not_launch_mpt_or_render_or_publish(tmp_path, monkeypatch):
     from integrations import video_editor
 
@@ -228,10 +249,26 @@ def test_mcp_import_creates_project_from_configured_local_root(tmp_path, monkeyp
     assert video["clips"][0]["source"] == "editor-assets/moneyprinterturbo/" + digest(source) + ".mp4"
 
 
-def test_mpt_mcp_tool_is_not_exposed_without_explicit_output_root(tmp_path):
+def test_mpt_mcp_tool_is_not_exposed_without_explicit_output_root(tmp_path, monkeypatch):
     from integrations import video_editor_mcp
 
     _mpt_root, editor_root, _ = roots(tmp_path)
+    monkeypatch.delenv("MPT_OUTPUT_ROOT", raising=False)
+    monkeypatch.delenv("MPT_HOME", raising=False)
     server = video_editor_mcp.create_server(editor_root)
     tools = asyncio.run(server.list_tools())
     assert "editor_import_mpt_output" not in {tool.name for tool in tools}
+
+
+def test_mpt_home_configures_only_its_tasks_directory(tmp_path, monkeypatch):
+    from integrations import video_editor_mcp
+
+    _mpt_root, editor_root, _ = roots(tmp_path)
+    mpt_home = tmp_path / "configured-home"
+    tasks = mpt_home / "storage" / "tasks"
+    tasks.mkdir(parents=True)
+    monkeypatch.delenv("MPT_OUTPUT_ROOT", raising=False)
+    monkeypatch.setenv("MPT_HOME", str(mpt_home))
+    server = video_editor_mcp.create_server(editor_root)
+    tools = asyncio.run(server.list_tools())
+    assert "editor_import_mpt_output" in {tool.name for tool in tools}

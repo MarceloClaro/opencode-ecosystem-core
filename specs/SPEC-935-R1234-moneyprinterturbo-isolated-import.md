@@ -21,8 +21,12 @@ evidence_contract:
     R1234-BOUNDARIES:
       - tests/test_r1234_moneyprinterturbo_import.py::test_import_does_not_launch_mpt_or_render_or_publish
       - tests/test_r1234_moneyprinterturbo_import.py::test_release_import_contract_does_not_assume_scene_clips
+      - tests/test_r1234_moneyprinterturbo_import.py::test_probe_failure_rolls_back_new_asset_without_partial_project
     R1234-EDITOR-INTEGRATION:
       - tests/test_r1234_moneyprinterturbo_import.py::test_mcp_import_creates_project_from_configured_local_root
+      - tests/test_r1234_moneyprinterturbo_import.py::test_mcp_exposes_only_local_import_not_generation
+      - tests/test_r1234_moneyprinterturbo_import.py::test_mpt_mcp_tool_is_not_exposed_without_explicit_output_root
+      - tests/test_r1234_moneyprinterturbo_import.py::test_mpt_home_configures_only_its_tasks_directory
       - tests/test_r1234_moneyprinterturbo_import.py::test_toolchain_registers_only_confined_asset_import
 ---
 
@@ -82,7 +86,8 @@ acrescentadas a `requirements.txt`.
    contém o clipe em timeline; apenas copiar o arquivo ou abrir projeto vazio
    não satisfaz o contrato. A ferramenta só aparece quando `MPT_OUTPUT_ROOT`
    (ou parâmetro de inicialização equivalente) aponta para diretório local
-   existente e não symlink.
+   existente e não symlink, por `MPT_OUTPUT_ROOT`, `MPT_HOME/storage/tasks` ou
+   parâmetro de inicialização explícito.
 5. Evidência pós-instalação limita-se a `pip show`/`pip check` no venv isolado,
    SHA-256 do pacote instalado e diagnóstico do Core. Não executar MPT.
 
