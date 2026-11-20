@@ -75,7 +75,7 @@ def _fraction(value, name: str) -> Fraction:
 
 def _finite_number(value, name: str) -> Fraction:
     if isinstance(value, bool) or not isinstance(value, (int, float)):
-        raise ValueError(f"{name} must be finite numeric data")
+        raise TypeError(f"{name} must be finite numeric data")
     try:
         number = float(value)
         exact = Fraction(str(value))

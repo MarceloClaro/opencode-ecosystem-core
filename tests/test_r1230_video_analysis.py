@@ -189,7 +189,7 @@ def test_auto_editor_v1_becomes_pending_cut_proposal_without_frame_drift(tmp_pat
 def test_auto_editor_parser_rejects_invalid_or_unmapped_chunks(tmp_path, chunks):
     m = api()
     source = media_file(tmp_path)
-    with pytest.raises(ValueError):
+    with pytest.raises((TypeError, ValueError)):
         m.parse_auto_editor_v1(
             auto_v1(source, chunks=chunks),
             source_path=source,
