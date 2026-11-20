@@ -114,19 +114,20 @@ acrescentadas a `requirements.txt`.
 
 ## Evidência observada (2026-11-20)
 
-- RED inicial observado antes do módulo: a suíte focal falhou com `16 failed`
-  porque `integrations.moneyprinterturbo` ainda não existia. Esse primeiro
-  resultado foi manual, não recibo formal. Para o par verificável, o
-  `TDDHistory` registrou depois o baseline pré-feature da ferramenta MCP
-  desabilitada: RED `3 failed / 12 passed / 0 errors`; os três failures são
-  asserções de ausência da integração.
-- GREEN focal: `./.venv/bin/python -m pytest
-  tests/test_r1234_moneyprinterturbo_import.py -q` → `16 passed` (um aviso de
-  Pydantic/FastMCP de dependência, sem falha).
-- GREEN formal `TDDHistory` → `16/16 passed`, pareado ao RED acima. Execução
-  adicional do `TDDRunner.run_delivery_test` → `16/16 nodeid(s)` aprovados;
-  `SpecVerifier` → `5/5` critérios, `software_delivery_gate`,
-  `red_history_valid=true`.
+- RED manual inicial, antes de existir `integrations.moneyprinterturbo.py`:
+  `16 failed`; não foi recibo formal. Um par formal anterior cobriu apenas 15
+  nodeids e é histórico, não prova do contrato ampliado com teste de symlink.
+- Uma tentativa GREEN no checkout principal executou 16/16, mas seu recibo foi
+  rejeitado porque um auto-checkpoint mudou o `HEAD` durante a execução, embora
+  os arquivos de código monitorados não tivessem mudado. O par final foi
+  reexecutado em worktree destacado para manter estável o snapshot do Git.
+- RED formal do contrato atual (16 nodeids) → `3 failed / 13 passed / 0
+  errors`; os failures são asserções de que a ferramenta MCP ainda não está
+  exposta quando a integração está desabilitada.
+- GREEN focal: suíte completa → `16 passed` (um aviso Pydantic/FastMCP de
+  dependência, sem falha). GREEN formal `TDDHistory` → `16/16 passed`, pareado
+  ao RED acima. `TDDRunner.run_delivery_test` e `SpecVerifier` → `5/5`
+  critérios, `software_delivery_gate`, `red_history_valid=true`.
 - Regressão do editor: cinco suítes R1042/R1043/R1046 → `66 passed` (o mesmo
   aviso de dependência).
 - Instalação: wheel obtido do PyPI e SHA-256 confrontado com o manifesto, sem
@@ -146,5 +147,5 @@ acrescentadas a `requirements.txt`.
   publicação, alteração de dependências do `.venv` Core nem mudança em dados
   do usuário.
 - A revisão independente não tem recibo nesta sessão; os resultados acima são
-  validação local e não validação externa. O par TDD formal cobre os 15 alvos
+  validação local e não validação externa. O par TDD final cobre os 16 alvos
   vinculados na spec, sem promover o resultado para revisão externa.
