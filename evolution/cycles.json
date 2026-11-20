@@ -25379,6 +25379,35 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1253",
+      "objective": "Fechamento R1246: validar MetaBus SQLite e preservar proveniência legada",
+      "changes": [
+        "Par TDD RED/GREEN válido; delivery test aprovado e SpecVerifier 4/4 em worktree isolado.",
+        "Regressão relevante executada em checkout isolado: 408 testes passaram.",
+        "Auditoria SQLite do estado real somente leitura: integrity_check=ok; marcador de migração presente; primeiro prefixo importado de eventos coincide.",
+        "Hashes atuais das fontes legadas divergem do marcador histórico; memória legado atual tem 49 episódios versus 50 importados; fontes foram preservadas e a divergência ficou explícita.",
+        "Revisão A2A externa permanece não executada; arquivos-alvo da R1246 inalterados entre o checkout validado e HEAD observado."
+      ],
+      "score": 0.55,
+      "lessons": [
+        "Validar RED/GREEN e SpecVerifier em worktree isolado quando a checkpointagem automática já incorporou o código.",
+        "Em migrações, distinguir prefixo efetivamente importado de arquivos legados que podem continuar mudando; nunca reescrever fontes para forçar igualdade.",
+        "Integridade estrutural do SQLite não prova equivalência completa com fontes legadas atuais; registrar divergência e manter SQLite como fonte de verdade pós-migração.",
+        "Revisão A2A bloqueada não equivale a revisão externa e não gera slashing de agente que não executou."
+      ],
+      "timestamp": 1795192627.0160894,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
