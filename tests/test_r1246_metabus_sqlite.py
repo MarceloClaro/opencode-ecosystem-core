@@ -13,14 +13,16 @@ from pathlib import Path
 
 import pytest
 
-from mci import metabus as metabus_module
+metabus_module = importlib.import_module("mci.metabus")
 
 
 @pytest.fixture
 def isolated_metabus(monkeypatch, tmp_path):
-    memory_path = tmp_path / "shared_memory.json"
-    events_path = tmp_path / "metabus_events.jsonl"
-    database_path = tmp_path / "metabus.sqlite3"
+    state_dir = tmp_path / ".mci_state"
+    state_dir.mkdir()
+    memory_path = state_dir / "shared_memory.json"
+    events_path = state_dir / "metabus_events.jsonl"
+    database_path = state_dir / "metabus.sqlite3"
     monkeypatch.setattr(metabus_module, "MEMORY_FILE", str(memory_path))
     monkeypatch.setattr(metabus_module, "EVENTS_FILE", str(events_path))
     monkeypatch.setattr(metabus_module, "DATABASE_FILE", str(database_path), raising=False)
@@ -33,6 +35,17 @@ def isolated_metabus(monkeypatch, tmp_path):
 
 def _connect(path: Path):
     return sqlite3.connect(path, timeout=5)
+
+
+def _raises(expected, operation):
+    """Converte expectativa de exceção em assert Python para o classificador RED."""
+    try:
+        operation()
+    except expected:
+        return True
+    except Exception:
+        return False
+    return False
 
 
 def test_legacy_json_and_jsonl_migrate_once_without_mutating_sources(isolated_metabus):
@@ -100,6 +113,7 @@ def test_malformed_event_lines_are_quarantined_and_preserved(isolated_metabus):
 
     assert [event["event_id"] for event in bus.get_recent_events(limit=10)] == ["valid-event"]
     assert events_path.read_bytes() == original
+    assert database_path.is_file(), "migração deve materializar o banco SQLite"
     with _connect(database_path) as connection:
         rows = connection.execute(
             "SELECT line_number, raw_sha256, raw_line FROM migration_quarantine ORDER BY line_number"
@@ -114,8 +128,8 @@ def test_corrupt_legacy_memory_blocks_migration_without_mutation(isolated_metabu
     corrupt = b'{"episodic": ['
     memory_path.write_bytes(corrupt)
 
-    with pytest.raises(RuntimeError, match="legacy_memory_corrupt"):
-        metabus_module.MetacognitiveMemory()
+    assert _raises(RuntimeError, metabus_module.MetacognitiveMemory), \
+        "memória legada corrompida precisa bloquear a inicialização"
 
     assert memory_path.read_bytes() == corrupt
     if database_path.exists():
@@ -141,6 +155,7 @@ def test_reflection_and_retention_commit_to_sqlite_atomically(isolated_metabus):
     assert memory.episodic[0]["id"] == "old-1"
     assert memory.episodic[-1]["reflection"] == "new reflection"
     assert memory.confidence_ledger["agent"] == pytest.approx(0.839)
+    assert database_path.is_file(), "estado persistido deve residir em SQLite"
     with _connect(database_path) as connection:
         assert connection.execute("SELECT COUNT(*) FROM episodes").fetchone()[0] == 1000
         assert connection.execute(
@@ -256,11 +271,6 @@ def test_recent_event_filters_use_indexes_and_keep_chronological_order(isolated_
 
 def test_memory_network_reads_sqlite_events_and_episodes(isolated_metabus, tmp_path):
     memory, bus, _, _, database_path = isolated_metabus
-    state = tmp_path / ".mci_state"
-    state.mkdir(exist_ok=True)
-    destination = state / "metabus.sqlite3"
-    if database_path != destination:
-        destination.write_bytes(database_path.read_bytes())
     memory.record_observation("agent-db", "SQLite episode", {"summary": "observed"})
     bus.publish("task.post", {"task_id": "task-db", "description": "SQLite task"},
                 source_agent="test")
