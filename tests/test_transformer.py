@@ -97,7 +97,7 @@ def test_hierarchical_memory_retrieve(monkeypatch):
     monkeypatch.setattr(metabus.memory, "episodic", [])
     monkeypatch.setattr(metabus.memory, "semantic", {})
     monkeypatch.setattr(metabus.memory, "confidence_ledger", {})
-    monkeypatch.setattr(metabus.memory, "_save", lambda: None)
+    monkeypatch.setattr(metabus.memory, "_save", lambda **_kwargs: True)
     metabus.memory.add_reflection("researcher", "busca de artigos sobre atenção",
                                   "usar bases indexadas primeiro", 0.9)
     metabus.memory.add_reflection("coder", "correção de bug no parser yaml",

@@ -2,7 +2,7 @@
 spec_id: SPEC-935-R1239
 title: Integrar Claude-BugHunter ao orquestrador por catálogo defensivo fechado
 component: integrations.claude_bughunter_catalog
-status: specified
+status: implemented
 test_file: tests/test_r1239_claude_bughunter_orchestration.py
 evidence_contract:
   version: 1
