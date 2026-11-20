@@ -79,8 +79,9 @@ exige revisão jurídica humana explícita.
 2. Rust Anything, Universal OS e Caveman usam diretórios/ambientes isolados.
    Pacotes npm são obtidos por `npm pack --ignore-scripts`; o SRI reportado e o
    SHA-512 local do tarball precisam coincidir com o pin antes de instalar o
-   tarball local; Rust Anything também exige igualdade do tamanho desempacotado
-   reportado. Universal OS fixa o commit completo e configura `UV_TOOL_DIR`,
+   tarball local, que permanece no prefixo para não deixar dependência para
+   staging temporário; Rust Anything também exige igualdade do tamanho
+   desempacotado reportado. Universal OS fixa o commit completo e configura `UV_TOOL_DIR`,
    `UV_TOOL_BIN_DIR` e cache privados. Subprocessos usam argv fechado, sem shell
    e com timeout; instalação só ocorre por chamada explícita confirmada. `status`,
    doctor e testes não instalam nem consultam serviços externos.
@@ -116,7 +117,8 @@ exige revisão jurídica humana explícita.
   somente leitura local.
 - `R1232-RUST` — O plano fixa pacote npm, versão, SRI, diretório e tamanho. A
   instalação só é possível com confirmação, confere SRI e tamanho antes do
-  tarball local, usa argv sem shell e não instala globalmente nem analisa alvos.
+  tarball local e o retém no prefixo isolado, usa argv sem shell e não instala
+  globalmente nem analisa alvos.
 - `R1232-UOS` — Universal OS fica isolado, com diretórios uv privados e MCP
   desligado; ISO, QEMU, VM e comandos de reconstrução não podem ser invocados.
 - `R1232-CAVEMAN` — Caveman recebe HOME/CAVEMAN_HOME privados, telemetria

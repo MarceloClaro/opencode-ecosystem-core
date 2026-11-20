@@ -157,10 +157,19 @@ def validate_manifest(data: Mapping[str, Any]) -> list[str]:
                         errors.append(f"{tool_id}: prefixo de instalação fora do destino isolado")
                     if tool_id in {"rust-anything", "caveman"} and observation.get("integrity_verified") is not True:
                         errors.append(f"{tool_id}: SRI do pacote não foi observado/verificado")
+                    if tool_id in {"rust-anything", "caveman"} and (
+                        not isinstance(observation.get("durable_tarball"), str)
+                        or not observation["durable_tarball"].startswith("verified-packages/")
+                        or not observation["durable_tarball"].endswith(".tgz")
+                    ):
+                        errors.append(f"{tool_id}: tarball verificado não foi retido no prefixo isolado")
                     if tool_id == "rust-anything" and observation.get("unpacked_size_verified") is not True:
                         errors.append("rust-anything: tamanho desempacotado não foi verificado")
-                    if tool_id == "universal-os" and observation.get("source_commit") != source.get("commit"):
-                        errors.append("universal-os: commit instalado diverge do pin")
+                    if tool_id == "universal-os" and (
+                        observation.get("source_commit") != source.get("commit")
+                        or observation.get("source_commit_observed_in_direct_url") is not True
+                    ):
+                        errors.append("universal-os: commit instalado diverge do pin ou não foi observado")
             else:
                 errors.append(f"{tool_id}: CLI isolada exige estado planejado ou instalado isoladamente")
         elif entry.get("installation_observation") is not None:

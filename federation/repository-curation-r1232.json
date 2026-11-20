@@ -1,6 +1,6 @@
 {
   "schema_version": "r1232.v1",
-  "collected_at": "2026-11-20T06:13:34Z",
+  "collected_at": "2026-11-20T07:49:54Z",
   "spec_id": "SPEC-935-R1232",
   "repositories": [
     {
@@ -27,11 +27,12 @@
       "isolation": "dedicated npm prefix; no global install; no target execution",
       "installation_observation": {
         "status": "installed",
-        "observed_at": "2026-11-20T07:42:30Z",
+        "observed_at": "2026-11-20T07:49:54Z",
         "returncode": 0,
         "target": "~/.local/share/opencode-core/external-tools/r1232/rust-anything",
         "integrity_verified": true,
         "unpacked_size_verified": true,
+        "durable_tarball": "verified-packages/rust-anything-2.1.0.tgz",
         "target_executed": false,
         "mcp_enabled": false
       }
@@ -84,7 +85,7 @@
       "isolation": "dedicated uv tool directory; UOS_HOME private; no ISO, QEMU, VM, or target execution",
       "installation_observation": {
         "status": "installed",
-        "observed_at": "2026-11-20T07:42:30Z",
+        "observed_at": "2026-11-20T07:49:54Z",
         "returncode": 0,
         "target": "~/.local/share/opencode-core/external-tools/r1232/universal-os",
         "source_commit": "661f15fc1afbbe1158ac5d14673e188238f29c0c",
@@ -160,10 +161,11 @@
       "isolation": "dedicated npm prefix and CAVEMAN_HOME; telemetry off; offline; no global agent hooks or cloud",
       "installation_observation": {
         "status": "installed",
-        "observed_at": "2026-11-20T07:42:30Z",
+        "observed_at": "2026-11-20T07:49:54Z",
         "returncode": 0,
         "target": "~/.local/share/opencode-core/external-tools/r1232/caveman",
         "integrity_verified": true,
+        "durable_tarball": "verified-packages/caveman-ai-cli-4.1.0.tgz",
         "target_executed": false,
         "mcp_enabled": false,
         "telemetry_disabled_in_installer_environment": true

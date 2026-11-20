@@ -58,8 +58,11 @@ def test_install_observations_record_completed_isolated_installs():
         assert observation["observed_at"].endswith("Z")
     assert entries["rust-anything"]["installation_observation"]["integrity_verified"] is True
     assert entries["rust-anything"]["installation_observation"]["unpacked_size_verified"] is True
+    assert entries["rust-anything"]["installation_observation"]["durable_tarball"] == "verified-packages/rust-anything-2.1.0.tgz"
     assert entries["caveman"]["installation_observation"]["integrity_verified"] is True
+    assert entries["caveman"]["installation_observation"]["durable_tarball"] == "verified-packages/caveman-ai-cli-4.1.0.tgz"
     assert entries["universal-os"]["installation_observation"]["source_commit"] == entries["universal-os"]["source"]["commit"]
+    assert entries["universal-os"]["installation_observation"]["source_commit_observed_in_direct_url"] is True
 
 
 def test_reference_only_and_blocked_entries_have_no_install_or_execution_claim():
