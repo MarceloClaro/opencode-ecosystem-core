@@ -78,26 +78,26 @@ orquestrador primário.
 - Completar os pré-requisitos declarados permite avançar para protocolo de
   pesquisa, não autoriza execução nem prova viabilidade do método.
 
-## Critérios de aceitação
+## Critérios de aceitação executáveis
 
-- AC1: catálogo determinístico cobre baselines clássicos, métodos híbridos,
+- `AC1` — catálogo determinístico cobre baselines clássicos, métodos híbridos,
   simulação clássica, annealing, autômatos celulares quânticos e mitigação de
   erros, com pré-requisitos e limites explícitos.
-- AC2: validação da entrada rejeita versões, campos, tipos, métodos, chaves JSON
+- `AC2` — validação da entrada rejeita versões, campos, tipos, métodos, chaves JSON
   duplicadas e valores
   numéricos inválidos; listas e recursos têm limites documentados.
-- AC3: plano detecta lacunas comuns e por método, preserva referências de
+- `AC3` — plano detecta lacunas comuns e por método, preserva referências de
   evidência e não converte entradas declaradas em fatos verificados.
-- AC4: os dez rótulos são listados exatamente como fornecidos; sem evidência de
+- `AC4` — os dez rótulos são listados exatamente como fornecidos; sem evidência de
   fonte suficiente, semântica permanece `unverified` e solver fica bloqueado.
-- AC5: somente rotas locais já existentes são citadas; VRP não é descrito como
+- `AC5` — somente rotas locais já existentes são citadas; VRP não é descrito como
   execução quântica e HDR não como reconhecimento treinado. Outros rótulos não
   recebem implementação presumida.
-- AC6: CLI lê JSON de stdin, emite JSON determinístico e não usa rede, arquivos
+- `AC6` — CLI lê JSON de stdin, emite JSON determinístico e não usa rede, arquivos
   indicados pelo payload, shell, credenciais ou dependências quânticas.
-- AC7: skill descreve o novo planejamento e roteamento; nenhum perfil gerenciado
+- `AC7` — skill descreve o novo planejamento e roteamento; nenhum perfil gerenciado
   `allow_edit: false` é editado diretamente.
-- AC8: testes RED→GREEN focais e regressão quantum/Tiangong passam; doctor é
+- `AC8` — testes RED→GREEN focais e regressão quantum/Tiangong passam; doctor é
   executado; limitações, recibos e reflexão não alegam revisão externa ausente.
 
 ## Evidência e estado inicial
