@@ -145,6 +145,16 @@ def _editable(node) -> bool:
         return False
 
 
+def _selection_iface(node):
+    if node is None:
+        return None
+    try:
+        iface = node.get_selection_iface()
+        return iface if callable(getattr(iface, "select_child", None)) else None
+    except Exception:
+        return None
+
+
 def _children(node) -> list[Any]:
     try:
         return [node.get_child_at_index(i) for i in range(node.get_child_count())]
@@ -177,7 +187,7 @@ def owns_ref(config, ref: str) -> bool:
 
 
 def _serialize(Atspi, node, path: list[int], snapshot_id: str, refs: dict,
-               depth: int, max_depth: int, budget: dict) -> dict | None:
+               depth: int, max_depth: int, budget: dict, parent=None) -> dict | None:
     if budget["nodes"] <= 0:
         budget["truncated"] = True
         return None
@@ -188,10 +198,12 @@ def _serialize(Atspi, node, path: list[int], snapshot_id: str, refs: dict,
         item["value"] = value
     action = _actionable(node)
     editable = _editable(node)
-    if action or editable:
+    selectable = _role(node).casefold() == "page tab" and _selection_iface(parent) is not None
+    if action or editable or selectable:
         ref = f"@{snapshot_id}:e{len(refs) + 1}"
         refs[ref] = {"path": path, "role": item["role"], "name": item["name"],
-                     "actionable": action, "editable": editable}
+                     "actionable": action, "editable": editable,
+                     "selectable": selectable}
         item["ref_id"] = ref
     states = []
     for state in ("ENABLED", "VISIBLE", "FOCUSED"):
@@ -203,7 +215,7 @@ def _serialize(Atspi, node, path: list[int], snapshot_id: str, refs: dict,
         children = []
         for index, child in enumerate(_children(node)):
             serialized = _serialize(Atspi, child, path + [index], snapshot_id,
-                                    refs, depth + 1, max_depth, budget)
+                                    refs, depth + 1, max_depth, budget, parent=node)
             if serialized is not None:
                 children.append(serialized)
         if children:
@@ -301,20 +313,32 @@ def _resolve(config, app: str, ref: str):
         raise AtspiError("STALE_REF", "ref não existe no snapshot")
     Atspi = _atspi()
     node = _find_app(Atspi, app, payload.get("pid"))
+    parent = None
     for index in entry["path"]:
+        parent = node
         node = node.get_child_at_index(index)
         if node is None:
             raise AtspiError("STALE_REF", "caminho do ref não resolve")
-    return node, entry
+    return node, entry, parent
 
 
 def click(config, app: str, ref: str) -> dict:
     try:
-        node, _ = _resolve(config, app, ref)
+        node, entry, parent = _resolve(config, app, ref)
         iface = node.get_action_iface()
-        if iface is None or iface.get_n_actions() < 1:
+        if iface is not None and iface.get_n_actions() > 0:
+            delivered = bool(iface.do_action(0))
+        elif (entry.get("selectable") is True
+              and entry.get("role", "").casefold() == "page tab"
+              and _role(node).casefold() == "page tab"
+              and parent is not None):
+            selection = _selection_iface(parent)
+            path = entry.get("path") or []
+            if selection is None or not path:
+                raise AtspiError("ACTION_NOT_SUPPORTED", "page tab sem seleção AT-SPI disponível")
+            delivered = bool(selection.select_child(path[-1]))
+        else:
             raise AtspiError("ACTION_NOT_SUPPORTED", "elemento sem ação")
-        delivered = bool(iface.do_action(0))
         return {"version": VERSION, "ok": delivered, "command": "click",
                 "data": {"action": "click", "backend": "atspi", "ref": ref,
                          "disposition": {"delivery": "delivered_unverified" if delivered else "not_delivered",
@@ -328,7 +352,7 @@ def click(config, app: str, ref: str) -> dict:
 
 def type_text(config, app: str, ref: str, text: str) -> dict:
     try:
-        node, _ = _resolve(config, app, ref)
+        node, _, _ = _resolve(config, app, ref)
         iface = node.get_editable_text_iface()
         if iface is None:
             raise AtspiError("ACTION_NOT_SUPPORTED", "elemento não editável")
@@ -378,7 +402,7 @@ def wait(config, *, app: str | None = None, ref: str | None = None,
         while time.monotonic() <= deadline:
             try:
                 if ref:
-                    node, _ = _resolve(config, app, ref)
+                    node, _, _ = _resolve(config, app, ref)
                     if _predicate(node, predicate or "exists", value):
                         return {"version": VERSION, "ok": True, "command": "wait",
                                 "data": {"found": True, "elapsed_ms": round((time.monotonic() - started) * 1000)},
