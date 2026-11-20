@@ -25493,6 +25493,37 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1257",
+      "objective": "Concluir SPEC-935-R1254: preflight SDD fail-closed no gateway MCP de delegação",
+      "changes": [
+        "Spec formal R1254 e par TDD imutável aceito: RED tdd-ffc41fae2e6f45f988c99bf075e89374; GREEN tdd-2407eb9890dd48b0993d68cfad45dd7a.",
+        "SpecVerifier local: 3/3 critérios; GREEN executou 8/8 testes específicos.",
+        "Preflight de todos os nós ocorre antes de claim/checkpoint/despacho; falha bloqueia estruturadamente e preserva checkpoint em retomada.",
+        "Schema MCP explicita spec_id/per_node_max_steps em workflow e spec_id no run; spec_id é encaminhado ao coordenador.",
+        "Regressões workflow/autonomous/cancelamento: 122 passed; regressões de superfície MCP: 96 passed e uma divergência de inventário exato confirmada também na árvore principal.",
+        "Doctor estrutural: 0 falhas, 6 avisos por provedores/runtimes ausentes; revisão A2A externa não executada."
+      ],
+      "score": 0.55,
+      "lessons": [
+        "Congelar a árvore inteira de testes antes do recibo RED; edições posteriores invalidam o manifesto TDD mesmo quando fora do alvo direto.",
+        "Usar worktree isolado para recibos quando o estado local aumenta o source manifest além do limite.",
+        "Em schemas Pydantic MCP, seguir $ref para $defs e testar o JSON Schema realmente exposto.",
+        "Reproduzir falhas de regressão na árvore principal antes de atribuí-las à alteração.",
+        "Nenhuma revisão externa foi executada; não imputar responsabilidade nem aplicar slashing a agentes ausentes."
+      ],
+      "timestamp": 1795196454.6697526,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [

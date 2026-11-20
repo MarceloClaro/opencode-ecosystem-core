@@ -189,13 +189,32 @@ def test_research_csv_pipeline_accepts_anova_spearman_and_cochrans_q(tmp_path):
     assert q["degrees_of_freedom"] == 2
 
 
+def test_advanced_methods_are_allowed_by_scientific_core_configuration():
+    from marceloclaro.knowledge_evolution import validate_science_config
+
+    for method, variables in (
+        ("anova_one_way", {"value": "y", "group": "group", "groups": ["A", "B"]}),
+        ("spearman", {"x": "x", "y": "y"}),
+        ("cochrans_q_meta_analysis", {"effect_size": "effect", "variance": "variance"}),
+    ):
+        result = validate_science_config({
+            "question": "Associação entre variáveis do estudo?",
+            "dataset_csv": "dataset.csv",
+            "dataset_provenance": {},
+            "method": method,
+            "variables": variables,
+            "output_dir": "analysis-output",
+        })
+        assert result["method"] == method
+
+
 def test_q_exponential_uses_tsallis_limit_and_domain():
     q_exponential = _api("research.quantitative_calculators", "q_exponential")
     assert q_exponential(1.25, 1.0) == pytest.approx(math.exp(1.25))
     assert q_exponential(1.0, 0.5) == pytest.approx(2.25**2)
     assert q_exponential(-3.0, 0.5) == 0.0
     with pytest.raises(ValueError):
-        q_exponential(-3.0, 1.5)
+        q_exponential(3.0, 1.5)
 
 
 def test_financial_calculators_use_explicit_conventions():

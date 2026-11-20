@@ -21,6 +21,7 @@ evidence_contract:
     AC4:
       - tests/test_r1256_quantitative_research.py::test_anova_spearman_and_meta_analysis_cochrans_q
       - tests/test_r1256_quantitative_research.py::test_research_csv_pipeline_accepts_anova_spearman_and_cochrans_q
+      - tests/test_r1256_quantitative_research.py::test_advanced_methods_are_allowed_by_scientific_core_configuration
     AC5:
       - tests/test_r1256_quantitative_research.py::test_q_exponential_uses_tsallis_limit_and_domain
     AC6:
@@ -108,10 +109,25 @@ silenciosamente pelas funções de probabilidade/valor esperado. A implementaç�
 local/clássica; não executa QPU, não prova fidelidade experimental nem vantagem
 quântica.
 
+## Definições operacionais adicionadas
+
+- Q de Cochran: `Q = Σ wᵢ(yᵢ − ȳw)²`, `wᵢ=1/vᵢ`, `ȳw=Σwᵢyᵢ/Σwᵢ`;
+  aproximação nula qui-quadrado com `k−1` graus de liberdade; `I²=max(0,
+  (Q−(k−1))/Q)×100`, e `I²=0` quando `Q=0`. Entradas são estimativas e
+  variâncias amostrais na mesma escala, não transformadas silenciosamente.
+- Q-exponencial: `exp_q(x)=[1+(1−q)x]^(1/(1−q))` para base positiva; no limite
+  `q→1`, `exp(x)`. Para `q<1` e base não positiva, usar o corte de suporte zero;
+  para `q>1`, base não positiva fica fora do domínio real e gera erro.
+- ROI usa retorno bruto total: `(retorno_bruto − investimento)/investimento`.
+  Receita/provento incremental precisa ser convertido pelo chamador para retorno
+  bruto total, sem interpretação automática.
+
 ## Critérios de aceitação
 
 - `AC1` — catálogo tem exatamente 200 IDs únicos, com categorias/status; itens
   planejados não podem ser executados ou resolvidos como se implementados.
+  Cada entrada inclui fórmula ou marcador explícito de formalização pendente,
+  entradas, saídas, unidades, pressupostos e API/estado de planejamento.
 - `AC2` — cálculos amostrais aceitam N finita ou população não limitada, confiança,
   erro, `p` ou desvio-padrão, design effect e não resposta; expõem arredondamento,
   fórmula, premissas e limitações; integração ao desenho não presume parâmetros
