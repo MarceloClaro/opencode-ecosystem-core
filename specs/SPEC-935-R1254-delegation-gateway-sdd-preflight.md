@@ -2,7 +2,7 @@
 spec_id: SPEC-935-R1254
 title: Preflight SDD e esquema explícito no gateway MCP de delegação
 component: integrations.ecosystem_mcp + marceloclaro.workflow + marceloclaro.autonomous
-status: red
+status: green
 test_file: tests/test_r1254_delegation_gateway.py
 evidence_contract:
   version: 1
