@@ -27,17 +27,26 @@ def _sha(path):
     return digest.hexdigest()
 
 
-def create_server(root=None):
+def create_server(root=None, *, mpt_output_root=None):
     value = root if root is not None else os.environ.get('EDITOR_PROJECT_ROOT')
     if not value or not Path(value).is_dir():
         raise ValueError('EDITOR_PROJECT_ROOT must be an existing directory')
     root = Path(value).absolute()
     if root.is_symlink() or any(p.is_symlink() for p in root.parents):
         raise ValueError('symlink root not allowed')
+    configured_mpt_root = mpt_output_root or os.environ.get('MPT_OUTPUT_ROOT')
+    if configured_mpt_root is not None:
+        configured_mpt_root = Path(configured_mpt_root).expanduser().absolute()
+        if (configured_mpt_root.is_symlink()
+                or any(p.is_symlink() for p in configured_mpt_root.parents)
+                or not configured_mpt_root.is_dir()):
+            raise ValueError('MPT_OUTPUT_ROOT must be an existing non-symlink directory')
     server = FastMCP('video-editor')
     read = ToolAnnotations(readOnlyHint=True, destructiveHint=False, openWorldHint=False)
     write = ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=False,
                             idempotentHint=True)
+    create_only = ToolAnnotations(readOnlyHint=False, destructiveHint=False,
+                                  openWorldHint=False, idempotentHint=False)
 
     def confined(relative, *, must_exist=False, directory=False):
         if not isinstance(relative, str) or not relative:
@@ -156,6 +165,17 @@ def create_server(root=None):
         return {'status': 'opened', 'project_id': project_id,
                 'frames': info['video']['frames'], 'fps': info['video']['fps'],
                 'artifact': str(target.relative_to(root))}
+
+    if configured_mpt_root is not None:
+        @server.tool(annotations=create_only)
+        def editor_import_mpt_output(media_path: str, project_id: str,
+                                     allow_silent: bool = False) -> dict:
+            """Importa somente um MP4 final local de MPT; não inicia MPT nem renderiza."""
+            from integrations.moneyprinterturbo import import_task_output
+
+            return import_task_output(
+                configured_mpt_root, root, media_path, project_id,
+                allow_silent=allow_silent)
 
     @server.tool(annotations=read)
     def editor_list_projects() -> dict:

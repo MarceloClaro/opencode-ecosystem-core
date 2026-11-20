@@ -218,8 +218,13 @@ def install_plan(tool_id: str, root: Path | str | None = None) -> dict[str, Any]
         "unpacked_bytes": item["source"].get("unpacked_bytes"),
         "integrity_verification": {
             "required": tool_id in {"rust-anything", "caveman"},
-            "method": "npm pack SRI metadata and local tarball SHA-512, both compared before install"
+            "method": "npm pack SRI metadata and local tarball SHA-512, both compared before install; Rust Anything also checks unpacked size"
             if tool_id in {"rust-anything", "caveman"} else "git source pinned to full commit SHA",
+            "before_install": True,
+        },
+        "unpacked_size_verification": {
+            "required": tool_id == "rust-anything",
+            "expected_bytes": item["source"].get("unpacked_bytes"),
             "before_install": True,
         },
         "install_argv_template": (

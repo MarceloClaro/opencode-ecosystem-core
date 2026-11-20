@@ -73,6 +73,11 @@ def test_rust_anything_install_plan_isolated_and_integrity_pinned(tmp_path):
     assert str(tmp_path.resolve()) in " ".join(plan["argv"])
     assert "<verified-tarball>" in plan["install_argv_template"]
     assert plan["integrity_verification"]["before_install"] is True
+    assert plan["unpacked_size_verification"] == {
+        "required": True,
+        "expected_bytes": 126965553,
+        "before_install": True,
+    }
     assert plan["dry_run"] is True
 
 

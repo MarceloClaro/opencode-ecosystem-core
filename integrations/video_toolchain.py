@@ -21,6 +21,12 @@ STATUSES = {'integrated', 'candidate', 'reference_only', 'blocked'}
 # parecer jurídico.
 REGISTRY = [
     # Base de execução
+    {'id': 'moneyprinterturbo', 'kind': 'tool', 'name': 'MoneyPrinterTurbo v1.3.10 output importer',
+     'url': 'https://github.com/harry0703/MoneyPrinterTurbo',
+     'license': 'MIT', 'license_class': 'permissive', 'roles': ['asset_import'],
+     'runtime': 'python', 'hardware': 'cpu', 'status': 'integrated',
+     'adapter': 'integrations.moneyprinterturbo', 'requires': ['MPT_OUTPUT_ROOT'],
+     'notes': 'Importa apenas exports locais task_id/final-N.mp4; não inicia o app, gera, renderiza ou publica.'},
     {'id': 'ffmpeg', 'kind': 'tool', 'name': 'FFmpeg', 'url': 'https://ffmpeg.org/',
      'license': 'LGPL-2.1-or-later (partes GPL opcionais)', 'license_class': 'copyleft',
      'roles': ['cut', 'concat', 'mux', 'audio', 'subtitles', 'render'],

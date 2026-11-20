@@ -64,7 +64,7 @@ def test_no_core_dependency_or_secret_configuration():
     assert plan["core_requirements_changed"] is False
     assert plan["read_credentials"] is False
     assert plan["create_config_toml"] is False
-    assert "starlette==1.3.1" in m.UPSTREAM["dependency_conflicts"]
+    assert any("starlette==1.3.1" in item for item in m.UPSTREAM["dependency_conflicts"])
 
 
 def test_import_copies_mp4_and_creates_single_clip_project(tmp_path, monkeypatch):
@@ -182,6 +182,19 @@ def test_release_import_contract_does_not_assume_scene_clips():
     plan = api().installation_plan()
     assert plan["import_contract"] == "task_final_mp4_only"
     assert plan["scene_clips_supported"] is False
+
+
+def test_toolchain_registers_only_confined_asset_import():
+    from integrations import video_toolchain
+
+    report = video_toolchain.validate_registry()
+    assert "moneyprinterturbo" in report["ids"]
+    row = next(item for item in video_toolchain.REGISTRY
+               if item["id"] == "moneyprinterturbo")
+    assert row["status"] == "integrated"
+    assert row["adapter"] == "integrations.moneyprinterturbo"
+    assert row["roles"] == ["asset_import"]
+    assert "não inicia" in row["notes"]
 
 
 def test_mcp_exposes_only_local_import_not_generation(tmp_path, monkeypatch):
