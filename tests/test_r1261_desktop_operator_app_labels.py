@@ -6,10 +6,17 @@ import pytest
 from integrations.desktop_operator import policy
 
 
+def _accepted_app(config: policy.PolicyConfig, app: str) -> str | None:
+    try:
+        return policy.require_app(config, app)
+    except policy.PolicyDenied:
+        return None
+
+
 def test_allowlisted_app_name_with_spaces_is_preserved_as_one_argv_value():
     config = policy.PolicyConfig(allowed_apps=("Burp Suite",))
 
-    assert policy.require_app(config, "Burp Suite") == "Burp Suite"
+    assert _accepted_app(config, "Burp Suite") == "Burp Suite"
     argv = policy.build_argv("snapshot", config, app="Burp Suite")
 
     assert argv[:3] == ["snapshot", "--app", "Burp Suite"]
@@ -19,7 +26,7 @@ def test_allowlisted_app_name_with_spaces_is_preserved_as_one_argv_value():
 def test_app_name_still_requires_exact_allowlist_match():
     config = policy.PolicyConfig(allowed_apps=("Burp Suite",))
 
-    assert policy.require_app(config, "burp suite") == "burp suite"
+    assert _accepted_app(config, "burp suite") == "burp suite"
     with pytest.raises(policy.PolicyDenied) as error:
         policy.require_app(config, "Other Suite")
 

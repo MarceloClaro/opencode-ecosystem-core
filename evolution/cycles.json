@@ -25612,6 +25612,35 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1262",
+      "objective": "Concluir SPEC-935-R1255: fallback textual do ReversaScanner para ENAMETOOLONG",
+      "changes": [
+        "Spec formal R1255 e testes de path guard; RED aceito tdd-fd06150f48194acaa9661218e0146e63.",
+        "Implementado helper _path_exists com fallback somente na sondagem de caminhos; caminho existente continua encaminhado ao ReversaUniversalEngine.",
+        "GREEN aceito tdd-8f72b1871e8744afae0b916d6259aef9; SpecVerifier local 2/2 e quatro testes específicos aprovados.",
+        "Regressão combinada: 70 passed; quatro falhas de testes de comandos R394 foram reproduzidas igualmente no checkout principal e não atribuídas à mudança.",
+        "Após reinício do servidor, smoke atual do arquivo R1255: 4 passed; recibos do worktree temporário não persistiram."
+      ],
+      "score": 0.55,
+      "lessons": [
+        "Usar worktrees persistentes ou armazenamento durável para recibos TDD que precisam sobreviver a reinícios de sessão.",
+        "Para entradas ambíguas entre path e texto, tratar OSError de existência como “não confirmado como caminho” e preservar o fallback textual.",
+        "Investigar falhas de regressão no checkout principal antes de associá-las à mudança local.",
+        "Não alegar revisão externa nem aplicar slashing quando nenhum agente executou inferência."
+      ],
+      "timestamp": 1795204875.0086899,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
