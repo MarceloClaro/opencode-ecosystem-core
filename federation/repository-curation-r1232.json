@@ -1,0 +1,168 @@
+{
+  "schema_version": "r1232.v1",
+  "collected_at": "2026-11-20T00:00:00Z",
+  "spec_id": "SPEC-935-R1232",
+  "repositories": [
+    {
+      "id": "rust-anything",
+      "repo": "erkamyaman/rust-anything",
+      "source": {
+        "url": "https://github.com/erkamyaman/rust-anything",
+        "commit": "71c78e10c5beb39acecd52c2eb3f675a199f3cea",
+        "version": "2.1.0",
+        "package": "rust-anything@2.1.0",
+        "integrity": "sha512-3djIcDXD5kQIQJRnR/4dtiBZYoKf6pKnPaU38AuhxN5HBpZfnyedOSUDdAqQA5uFQ/rSuDJvA4GVfVjUUXZV9w==",
+        "unpacked_bytes": 126965553,
+        "commit_signature_verified": true
+      },
+      "license": {"package": "MIT"},
+      "adoption": "isolated_cli",
+      "runtime": {
+        "installed": false,
+        "executed": false,
+        "enabled": false,
+        "mcp_enabled": false
+      },
+      "isolation": "dedicated npm prefix; no global install; no target execution"
+    },
+    {
+      "id": "awesome-reverse-engineer-anything",
+      "repo": "AIshihzong/awesome-reverse-engineer-anything",
+      "source": {
+        "url": "https://github.com/AIshihzong/awesome-reverse-engineer-anything",
+        "commit": "578cb1108760eed8cf09a22b49355909cf86c91f",
+        "commit_signature_verified": true
+      },
+      "license": {"repository": "CC0-1.0"},
+      "adoption": "reference_only",
+      "runtime": {"installed": false, "executed": false, "enabled": false, "mcp_enabled": false},
+      "isolation": "metadata only; external case claims are unverified"
+    },
+    {
+      "id": "open-reverselab",
+      "repo": "LING71671/open-reverselab",
+      "source": {
+        "url": "https://github.com/LING71671/open-reverselab",
+        "commit": "c42da86aadcbea4f2dd20822653f83da5f6aba54",
+        "commit_signature_verified": true
+      },
+      "license": {
+        "root": "Apache-2.0",
+        "nested_mcp": "GPL-3.0-only",
+        "review": "blocked: repository disclaimer and root license terms require human legal review"
+      },
+      "adoption": "blocked_legal_review",
+      "runtime": {"installed": false, "executed": false, "enabled": false, "mcp_enabled": false},
+      "isolation": "no clone, source import, install, execution, adaptation, or MCP registration"
+    },
+    {
+      "id": "universal-os",
+      "repo": "Jenischristan/universal-os",
+      "source": {
+        "url": "https://github.com/Jenischristan/universal-os",
+        "commit": "661f15fc1afbbe1158ac5d14673e188238f29c0c",
+        "version": "0.2.1",
+        "commit_signature_verified": false
+      },
+      "license": {"package": "MIT"},
+      "adoption": "isolated_cli",
+      "runtime": {"installed": false, "executed": false, "enabled": false, "mcp_enabled": false},
+      "isolation": "dedicated uv tool directory; UOS_HOME private; no ISO, QEMU, VM, or target execution"
+    },
+    {
+      "id": "anthropic-mcp-builder",
+      "repo": "anthropics/skills",
+      "source": {
+        "url": "https://github.com/anthropics/skills/tree/e4bb5d960d87126ff3b3a8af1a104b7db67560ba/skills/mcp-builder",
+        "commit": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
+        "path": "skills/mcp-builder",
+        "upstream_git_blob_sha": "d61a9056202a0f8b2d064c896e62f415c45b1bf1",
+        "license_git_blob_sha": "4f881c52d1f72f4cfb720e339e2d35c3058d01a9",
+        "license_file": "Apache-2.0"
+      },
+      "license": {"skill": "Apache-2.0"},
+      "adoption": "selected_skill",
+      "runtime": {"installed": true, "executed": false, "enabled": false, "mcp_enabled": false},
+      "isolation": "project-local skill; explicit invocation only; imported scripts remain inert"
+    },
+    {
+      "id": "anthropic-skill-creator",
+      "repo": "anthropics/skills",
+      "source": {
+        "url": "https://github.com/anthropics/skills/tree/e4bb5d960d87126ff3b3a8af1a104b7db67560ba/skills/skill-creator",
+        "commit": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
+        "path": "skills/skill-creator",
+        "upstream_git_blob_sha": "65b3a402dbd09b8e83f9d637c6b553875189085c",
+        "license_git_blob_sha": "4f881c52d1f72f4cfb720e339e2d35c3058d01a9",
+        "license_file": "Apache-2.0"
+      },
+      "license": {"skill": "Apache-2.0"},
+      "adoption": "selected_skill",
+      "runtime": {"installed": true, "executed": false, "enabled": false, "mcp_enabled": false},
+      "isolation": "project-local skill; explicit invocation only; imported scripts remain inert"
+    },
+    {
+      "id": "caveman",
+      "repo": "JuliusBrussee/caveman",
+      "source": {
+        "url": "https://github.com/JuliusBrussee/caveman",
+        "commit": "a192894723a8f47e7f504c7b5041967ff1f18e55",
+        "package": "@caveman-ai/cli@4.1.0",
+        "version": "4.1.0",
+        "integrity": "sha512-5+qoA9GydY6OlQYQLhAtAt+eQC8xW7mzWeuq4XBSAacgyOJ4fyyurzLFlc9r1YTcobL4lZbDYwewSPINOXqNdg==",
+        "commit_signature_verified": true
+      },
+      "license": {"package": "Apache-2.0"},
+      "adoption": "isolated_cli",
+      "runtime": {"installed": false, "executed": false, "enabled": false, "mcp_enabled": false},
+      "isolation": "dedicated npm prefix and CAVEMAN_HOME; telemetry off; offline; no global agent hooks or cloud"
+    },
+    {
+      "id": "cc-switch",
+      "repo": "farion1231/cc-switch",
+      "source": {
+        "url": "https://github.com/farion1231/cc-switch",
+        "commit": "2a750c3fcbbefa9550047d7dd3363d9120e545ed",
+        "commit_signature_verified": false
+      },
+      "license": {"repository": "MIT"},
+      "adoption": "reference_only",
+      "runtime": {"installed": false, "executed": false, "enabled": false, "mcp_enabled": false},
+      "isolation": "metadata only; no application startup, credentials, or config access"
+    },
+    {
+      "id": "prompts-chat",
+      "repo": "f/prompts.chat",
+      "source": {
+        "url": "https://github.com/f/prompts.chat",
+        "commit": "29417a15542c01938e2230d4c2dcee95771ae6aa",
+        "commit_signature_verified": false
+      },
+      "license": {"application": "MIT", "prompt_data": "CC0-1.0"},
+      "adoption": "reference_only",
+      "runtime": {"installed": false, "executed": false, "enabled": false, "mcp_enabled": false},
+      "isolation": "metadata only; no prompt corpus, app, or remote/local MCP enabled"
+    },
+    {
+      "id": "rea",
+      "repo": "morluto/rea",
+      "source": {
+        "url": "https://github.com/morluto/rea",
+        "commit": "160d821ac9a0310afcb8d1fc427862dd6508add5",
+        "version": "6.8.0",
+        "install_record": "SPEC-935-R1066"
+      },
+      "license": {"package": "MIT"},
+      "adoption": "existing_reuse",
+      "runtime": {
+        "installed": true,
+        "executed": false,
+        "enabled": true,
+        "mcp_enabled": true,
+        "upgrade_performed": false,
+        "duplicate_install": false
+      },
+      "isolation": "reuse existing Core gateway; no second installation or version change"
+    }
+  ]
+}
