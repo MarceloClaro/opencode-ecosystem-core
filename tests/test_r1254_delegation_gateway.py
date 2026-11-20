@@ -131,8 +131,10 @@ def test_mcp_workflow_schema_documents_spec_id_and_node_budget():
 
     tool = asyncio.run(get_tool())
     node_schema = tool.inputSchema["properties"]["nodes"]["items"]
-    node_schema = tool.inputSchema["$defs"][node_schema["$ref"].rsplit("/", 1)[-1]]
-    node_properties = node_schema["properties"]
+    if "$ref" in node_schema:
+        definition_name = node_schema["$ref"].rsplit("/", 1)[-1]
+        node_schema = tool.inputSchema.get("$defs", {}).get(definition_name, {})
+    node_properties = node_schema.get("properties", {})
     assert "spec_id" in node_properties
     assert "per_node_max_steps" in node_properties
     assert "spec_id" in tool.description
