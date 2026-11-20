@@ -197,14 +197,19 @@ def test_advanced_methods_are_allowed_by_scientific_core_configuration():
         ("spearman", {"x": "x", "y": "y"}),
         ("cochrans_q_meta_analysis", {"effect_size": "effect", "variance": "variance"}),
     ):
-        result = validate_science_config({
-            "question": "Associação entre variáveis do estudo?",
-            "dataset_csv": "dataset.csv",
-            "dataset_provenance": {},
-            "method": method,
-            "variables": variables,
-            "output_dir": "analysis-output",
-        })
+        try:
+            result = validate_science_config({
+                "question": "Associação entre variáveis do estudo?",
+                "dataset_csv": "dataset.csv",
+                "dataset_provenance": {},
+                "method": method,
+                "variables": variables,
+                "output_dir": "analysis-output",
+            })
+        except Exception as exc:
+            result = None
+            error = str(exc)
+        assert result is not None, f"método avançado rejeitado pelo Core: {method}: {error if result is None else ''}"
         assert result["method"] == method
 
 
