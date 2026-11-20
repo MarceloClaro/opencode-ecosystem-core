@@ -8,7 +8,7 @@ import statistics
 from pathlib import Path
 from typing import Any
 
-METHODS = ("descriptive", "pearson", "welch_t")
+METHODS = ("descriptive", "pearson", "welch_t", "anova_one_way", "spearman", "cochrans_q_meta_analysis")
 MAX_CSV_BYTES = 5_000_000
 MAX_ROWS = 50_000
 SEED = 663
@@ -20,18 +20,31 @@ def validate_configuration(method: str, variables: dict[str, Any]) -> None:
         raise ValueError(f"method must be one of {METHODS}")
     if not isinstance(variables, dict):
         raise ValueError("variables must be an object")
-    keys = {"value"} if method == "descriptive" else {"x", "y"} if method == "pearson" else {"value", "group", "groups"}
+    if method == "descriptive":
+        keys = {"value"}
+    elif method in {"pearson", "spearman"}:
+        keys = {"x", "y"}
+    elif method == "cochrans_q_meta_analysis":
+        keys = {"effect_size", "variance"}
+    else:
+        keys = {"value", "group", "groups"}
     if set(variables) != keys:
         raise ValueError(f"variables must contain exactly {sorted(keys)}")
     for key in keys - {"groups"}:
         if not isinstance(variables[key], str) or not variables[key].strip() or len(variables[key]) > 128:
             raise ValueError(f"invalid column name: {key}")
-    if method == "pearson" and variables["x"] == variables["y"]:
-        raise ValueError("pearson requires two distinct columns")
-    if method == "welch_t":
+    if method in {"pearson", "spearman"} and variables["x"] == variables["y"]:
+        raise ValueError(f"{method} requires two distinct columns")
+    if method == "cochrans_q_meta_analysis" and variables["effect_size"] == variables["variance"]:
+        raise ValueError("Cochran's Q requires distinct effect_size and variance columns")
+    if method in {"welch_t", "anova_one_way"}:
         groups = variables["groups"]
-        if not isinstance(groups, list) or len(groups) != 2 or any(not isinstance(g, str) or not g or len(g) > 128 for g in groups) or groups[0] == groups[1]:
-            raise ValueError("groups must contain two distinct nonempty labels")
+        min_groups = 2 if method == "welch_t" else 2
+        if (not isinstance(groups, list) or len(groups) < min_groups
+                or (method == "welch_t" and len(groups) != 2)
+                or any(not isinstance(g, str) or not g.strip() or len(g) > 128 for g in groups)
+                or len(set(groups)) != len(groups)):
+            raise ValueError("groups must contain the required distinct nonempty labels")
         if variables["value"] == variables["group"]:
             raise ValueError("value and group columns must differ")
 
@@ -117,7 +130,20 @@ def execute_analysis(dataset_csv: str | Path, method: str, variables: dict[str, 
                             "p_value": (extreme + 1) / (PERMUTATIONS + 1), "extreme": extreme},
         })
         result["assumptions"].append("O p-valor paramétrico e o intervalo de Fisher pressupõem distribuição bivariada adequada; o teste de permutação pressupõe permutabilidade sob a hipótese nula.")
-    elif method == "welch_t":
+    elif method == "spearman":
+        x, y = _numbers(rows, variables["x"]), _numbers(rows, variables["y"])
+        from .advanced_statistics import spearman_correlation
+        analysis = spearman_correlation(x, y)
+        result.update({
+            "null_hypothesis": analysis["null_hypothesis"],
+            "estimate": analysis["estimate"],
+            "statistic": analysis["statistic"],
+            "p_value": analysis["p_value"],
+            "alternative": "two-sided",
+            "assumptions": result["assumptions"] + analysis["assumptions"],
+            "descriptive": {variables["x"]: _summary(x), variables["y"]: _summary(y)},
+        })
+    elif method in {"welch_t", "anova_one_way"}:
         column, group_column = variables["value"], variables["group"]
         values = _numbers(rows, column)
         if group_column not in rows[0]:
@@ -126,24 +152,56 @@ def execute_analysis(dataset_csv: str | Path, method: str, variables: dict[str, 
         if any(row[group_column] not in groups for row in rows):
             raise ValueError("all observations must belong to the two predefined groups")
         grouped = {label: [value for row, value in zip(rows, values) if row[group_column] == label] for label in groups}
-        a, b = grouped[groups[0]], grouped[groups[1]]
-        if min(len(a), len(b)) < 3:
-            raise ValueError("welch_t requires at least three observations per group")
-        if statistics.variance(a) + statistics.variance(b) == 0:
-            raise ValueError("welch_t requires variation in at least one group")
-        test = stats.ttest_ind(a, b, equal_var=False)
-        difference = statistics.mean(a) - statistics.mean(b)
-        standard_error = math.sqrt(statistics.variance(a) / len(a) + statistics.variance(b) / len(b))
-        margin = float(stats.t.ppf(0.975, test.df)) * standard_error
+        if method == "welch_t":
+            a, b = grouped[groups[0]], grouped[groups[1]]
+            if min(len(a), len(b)) < 3:
+                raise ValueError("welch_t requires at least three observations per group")
+            if statistics.variance(a) + statistics.variance(b) == 0:
+                raise ValueError("welch_t requires variation in at least one group")
+            test = stats.ttest_ind(a, b, equal_var=False)
+            difference = statistics.mean(a) - statistics.mean(b)
+            standard_error = math.sqrt(statistics.variance(a) / len(a) + statistics.variance(b) / len(b))
+            margin = float(stats.t.ppf(0.975, test.df)) * standard_error
+            result.update({
+                "null_hypothesis": "Diferença entre as médias populacionais igual a zero.",
+                "estimate": difference, "statistic": float(test.statistic), "p_value": float(test.pvalue),
+                "degrees_of_freedom": float(test.df), "alternative": "two-sided",
+                "confidence_interval_95": [difference - margin, difference + margin],
+                "group_sizes": {label: len(grouped[label]) for label in groups},
+                "descriptive": {label: _summary(grouped[label]) for label in groups},
+            })
+            result["assumptions"].append("Os grupos são independentes; a inferência de Welch exige distribuição aproximadamente normal ou amostras adequadas e não implica equivalência de grupos não aleatorizados.")
+        else:
+            if any(len(grouped[label]) < 2 for label in groups):
+                raise ValueError("anova_one_way requires at least two observations per group")
+            from .advanced_statistics import one_way_anova
+            analysis = one_way_anova([grouped[label] for label in groups])
+            result.update({
+                "null_hypothesis": analysis["null_hypothesis"],
+                "estimate": analysis["statistic"],
+                "statistic": analysis["statistic"],
+                "p_value": analysis["p_value"],
+                "degrees_of_freedom": {"between": analysis["df_between"], "within": analysis["df_within"]},
+                "effect_size_eta_squared": analysis["eta_squared"],
+                "group_sizes": dict(zip(groups, analysis["group_sizes"])),
+                "group_means": dict(zip(groups, analysis["group_means"])),
+                "assumptions": result["assumptions"] + analysis["assumptions"],
+            })
+    elif method == "cochrans_q_meta_analysis":
+        effects = _numbers(rows, variables["effect_size"])
+        variances = _numbers(rows, variables["variance"])
+        from .advanced_statistics import cochrans_q_meta_analysis
+        analysis = cochrans_q_meta_analysis(effects, variances)
         result.update({
-            "null_hypothesis": "Diferença entre as médias populacionais igual a zero.",
-            "estimate": difference, "statistic": float(test.statistic), "p_value": float(test.pvalue),
-            "degrees_of_freedom": float(test.df), "alternative": "two-sided",
-            "confidence_interval_95": [difference - margin, difference + margin],
-            "group_sizes": {label: len(grouped[label]) for label in groups},
-            "descriptive": {label: _summary(grouped[label]) for label in groups},
+            "null_hypothesis": analysis["null_hypothesis"],
+            "estimate": analysis["statistic"],
+            "statistic": analysis["statistic"],
+            "p_value": analysis["p_value"],
+            "degrees_of_freedom": analysis["df"],
+            "i_squared_percent": analysis["i_squared_percent"],
+            "weighted_mean": analysis["weighted_mean"],
+            "assumptions": result["assumptions"] + analysis["assumptions"],
         })
-        result["assumptions"].append("Os grupos são independentes; a inferência de Welch exige distribuição aproximadamente normal ou amostras adequadas e não implica equivalência de grupos não aleatorizados.")
     else:
         values = _numbers(rows, variables["value"])
         if len(values) < 3:

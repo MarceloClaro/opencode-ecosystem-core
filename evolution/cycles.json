@@ -25524,6 +25524,35 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1258",
+      "objective": "R1249 — diagnosticar falha do instalador Burp WSL2 ao inicializar AT-SPI",
+      "changes": [
+        "Instalador oficial PortSwigger Community 2026.11.2 executado com Java ATK Bridge staged; encerrou com código 1 antes de mostrar interface porque /usr/bin/xprop está ausente.",
+        "AT-SPI list-apps permaneceu vazio; não houve clique, instalação confirmada, tráfego HTTP, teste de alvo ou alteração de configuração Burp/OpenCode.",
+        "Usuário autorizou apenas tentativa sudo -n para instalar x11-utils; sudo -n true retornou 'a password is required', portanto nenhum pacote do sistema foi instalado.",
+        "A simulação apt previa x11-utils e 11 dependências Ubuntu Noble; instalação global permanece bloqueada até ação do operador ou credencial sudo configurada fora desta conversa."
+      ],
+      "score": 0.4,
+      "lessons": [
+        "Não converter autorização para instalar o aplicativo em autorização presumida para dependências root; obter consentimento específico.",
+        "Em autorização sudo -n, testar privilégio não interativo antes da alteração; se senha for exigida, parar sem solicitar ou armazenar segredo.",
+        "A falha ocorreu antes da UI: não alegar instalação nem solicitar aprovação de clique sem interface observada.",
+        "Não contornar o caminho absoluto /usr/bin/xprop com modificação do sistema ou substituto improvisado sem aprovação e validação.",
+        "Nenhum agente foi executado; não há stake a penalizar. Score é registro interno, não revisão externa."
+      ],
+      "timestamp": 1795197044.7613144,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
