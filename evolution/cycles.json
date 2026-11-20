@@ -25584,6 +25584,34 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1260",
+      "objective": "SPEC-935-R1256 — catálogo de 200 cálculos quantitativos de pesquisa e implementação da fase inicial",
+      "changes": [
+        "Criados catálogo tipado de 200 cálculos, 28 implementados e 172 planejados com resolução fail-closed.",
+        "Implementados cálculos amostrais por precisão, estatística/bioestatística avançada, finanças e funções complexas de estado quântico local.",
+        "Integrados métodos ANOVA, Spearman e Q de Cochran ao pipeline CSV e à validação científica do Core.",
+        "Executados testes focais, regressões selecionadas, SpecVerifier e doctor estrutural; revisão independente permaneceu bloqueada."
+      ],
+      "score": 7.0,
+      "lessons": [
+        "Entrega R1256: catálogo com exatamente 200 itens; 28 APIs implementadas e 172 itens planejados falham fechados. A fase inicial cobre amostragem, estatística avançada, bioestatística, finanças, q-exponencial e álgebra complexa local.",
+        "A verificação atual é local: RED/GREEN aceitos, 8/8 critérios SpecVerifier e regressões focais selecionadas passaram; isso não equivale a auditoria metodológica externa ou validação científica independente.",
+        "A auditoria independente não foi concluída por indisponibilidade/restrição regional dos executores. Não atribuir parecer nem slashing a agente que não executou.",
+        "O doctor estrutural teve zero falhas e estado overall=degraded por provedores/chaves e CLIs opcionais ausentes. Reexecutar o par TDD depois de registrar este ciclo, pois a alteração do ledger evolutivo pode mudar o manifesto de fontes."
+      ],
+      "timestamp": 1795199800.8531864,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
