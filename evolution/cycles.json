@@ -25667,6 +25667,28 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1264",
+      "objective": "Registrar o bloqueio seguro da etapa BApp/handshake após aceite do Burp",
+      "changes": [
+        "inspeção somente leitura AT-SPI; desktop_operator max_depth=8; etapa BApp pausada"
+      ],
+      "score": 5.0,
+      "lessons": [
+        "Após consentimento para BApp + handshake, o início foi interrompido com segurança: a tela Community Edition aparece no nó AT-SPI de profundidade 12, enquanto o desktop-operator limita snapshots a 8 e retorna zero refs. Não contornar o limite com do_action, shell/X11 ou backend interno sem gate; pedir clique manual ou nova spec/teste antes de ampliar a política. Um primeiro script de inspeção falhou por erro de sintaxe, foi corrigido sem efeito de UI. BApp não foi carregado e nenhuma configuração MCP foi alterada."
+      ],
+      "timestamp": 1795206755.1659086,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
