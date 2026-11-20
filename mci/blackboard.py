@@ -42,6 +42,7 @@ def _live_confidence(agent_id: str) -> float:
 
 
 _LOAD_REFERENCE_CAPACITY = 5
+ACTIVE_TASK_STATES = frozenset({"assigned"})
 
 
 def _live_load(agent_id: str) -> float:
@@ -57,7 +58,7 @@ def _live_load(agent_id: str) -> float:
     active = sum(
         1
         for task in blackboard.tasks.values()
-        if task.assigned_to == agent_id and task.status in ("assigned", "completed", "failed")
+        if task.assigned_to == agent_id and task.status in ACTIVE_TASK_STATES
     )
     if _LOAD_REFERENCE_CAPACITY <= 0:
         return 0.0
@@ -101,6 +102,12 @@ class BlackboardTask:
         self.assigned_to: Optional[str] = None
         self.result: Optional[Any] = None
         self.created_at = datetime.now(timezone.utc).isoformat()
+        # Snapshot da elegibilidade do CFP corrente. A atribuição ainda refaz
+        # os gates para evitar que uma resposta atrasada reserve agente inelegível.
+        self.eligible_agents: List[str] = []
+        self.supervision_required = False
+        self.supervision_candidates: List[Dict[str, Any]] = []
+        self.blocked_reason: Optional[str] = None
 
 
 class Blackboard:
@@ -155,6 +162,8 @@ class Blackboard:
 
     def _match_task(self, task: BlackboardTask):
         """Busca agentes elegíveis e emite Call for Proposals (CFP)."""
+        if task.status != "open":
+            return
         eligible = []
         required = set(task.required_capabilities)
         for agent_id, card in self.registry.items():
@@ -169,11 +178,16 @@ class Blackboard:
             for card in eligible:
                 card.confidence_score = _live_confidence(card.agent_id)
             eligible.sort(key=lambda card: (-card.confidence_score, card.agent_id))
+            task.eligible_agents = [card.agent_id for card in eligible]
             metabus.publish("task.cfp", {
                 "task_id": task.task_id,
                 "description": task.description,
-                "eligible_agents": [a.agent_id for a in eligible]
+                "eligible_agents": list(task.eligible_agents),
             }, source_agent="blackboard")
+        else:
+            task.eligible_agents = []
+            task.status = "blocked"
+            task.blocked_reason = "no_eligible_agent"
             
     def _handle_volunteer(self, event: Dict[str, Any]):
         payload = event.get("payload", {})
@@ -181,17 +195,29 @@ class Blackboard:
         agent_id = payload.get("agent_id")
         
         task = self.tasks.get(task_id)
-        if task and task.status == "open":
-            task.status = "assigned"
-            task.assigned_to = agent_id
-            if agent_id in self.registry:
-                self.registry[agent_id].status = "busy"
-                
-            metabus.publish("task.assigned", {
-                "task_id": task_id,
-                "agent_id": agent_id
-            }, source_agent="blackboard")
-            logger.info(f"Tarefa {task_id} atribuída ao agente {agent_id}")
+        if not task or task.status != "open":
+            return
+        if not isinstance(agent_id, str) or not agent_id.strip():
+            return
+        agent_id = agent_id.strip()
+        card = self.registry.get(agent_id)
+        if (
+            card is None
+            or agent_id not in task.eligible_agents
+            or card.status != "available"
+            or not set(task.required_capabilities).issubset(set(card.capabilities))
+        ):
+            return
+
+        task.status = "assigned"
+        task.assigned_to = agent_id
+        card.status = "busy"
+
+        metabus.publish("task.assigned", {
+            "task_id": task_id,
+            "agent_id": agent_id
+        }, source_agent="blackboard")
+        logger.info(f"Tarefa {task_id} atribuída ao agente {agent_id}")
 
     def _handle_completion(self, event: Dict[str, Any]):
         payload = event.get("payload", {})
@@ -200,24 +226,38 @@ class Blackboard:
         status = payload.get("status", "completed") # completed or failed
         
         task = self.tasks.get(task_id)
-        if task and task.assigned_to == agent_id:
-            task.status = status
-            task.result = payload.get("result")
-            
-            if agent_id in self.registry:
-                self.registry[agent_id].status = "available"
-                
-            # Dispara reflexão metacognitiva
-            metabus.publish("metacognition.reflect_request", {
-                "task_id": task_id,
-                "agent_id": agent_id,
-                "context": task.description,
-                "result": task.result,
-                "success": status == "completed",
-                "sdd_verification": payload.get("sdd_verification"),
-            }, source_agent="blackboard")
-            
-            logger.info(f"Tarefa {task_id} finalizada por {agent_id} com status {status}")
+        if (
+            not task
+            or task.status != "assigned"
+            or task.assigned_to != agent_id
+            or status not in {"completed", "failed"}
+        ):
+            return
+
+        task.status = status
+        task.result = payload.get("result")
+
+        card = self.registry.get(agent_id)
+        if card is not None:
+            still_assigned = any(
+                other.task_id != task_id
+                and other.assigned_to == agent_id
+                and other.status in ACTIVE_TASK_STATES
+                for other in self.tasks.values()
+            )
+            card.status = "busy" if still_assigned else "available"
+
+        # Dispara uma única reflexão, após validar a transição de estado.
+        metabus.publish("metacognition.reflect_request", {
+            "task_id": task_id,
+            "agent_id": agent_id,
+            "context": task.description,
+            "result": task.result,
+            "success": status == "completed",
+            "sdd_verification": payload.get("sdd_verification"),
+        }, source_agent="blackboard")
+
+        logger.info(f"Tarefa {task_id} finalizada por {agent_id} com status {status}")
 
 # Instância global Singleton
 blackboard = Blackboard()
