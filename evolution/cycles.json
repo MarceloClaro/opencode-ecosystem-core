@@ -25553,6 +25553,37 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1259",
+      "objective": "R1249 — retomar instalador oficial após x11-utils; interromper com segurança por falta de espaço",
+      "changes": [
+        "Usuário instalou x11-utils 7.7+6build2 com dependências Ubuntu Noble; /usr/bin/xprop foi confirmado funcional no display :0.",
+        "Java ATK Bridge carregou sem o erro anterior, mas o instalador optou por console; AT-SPI continuou listando zero apps. Não houve clique GUI.",
+        "Prompt de instalação mostrou mínimo de 1.002.930 KB e apenas 27.600 KB livres no destino default /home/marceloclaro/BurpSuite; o instalador foi recusado/interrompido antes de instalar.",
+        "Após limpeza do instalador, /tmp/opencode reportou 709 MB livres. Não existe diretório BurpSuite no destino e nenhum processo Burp/installer permanece.",
+        "Busca ampla read-only por arquivos recentes excedeu o timeout de 30 s; nenhuma ação de limpeza sobre dados do usuário foi tomada."
+      ],
+      "score": 0.45,
+      "lessons": [
+        "Verificar espaço para o payload temporário e para o diretório final antes de iniciar; o instalador pode reduzir temporariamente o espaço e depois reportar o requisito do destino.",
+        "Não aceitar 'continue anyway' quando há apenas dezenas de MB e o instalador declara requisito de aproximadamente 1 GB; escolher No e cancelar é fail-safe.",
+        "xprop disponível não prova janela Java exposta por AT-SPI; instalador em console e apps=0 devem ser reportados como tal.",
+        "Não mover instalação para /mnt/c sem aprovação específica: DrvFS é uma alternativa possível, mas não validada para este produto/runtime.",
+        "Limitar buscas de disco a caminhos e padrões conhecidos; uma varredura ampla pode exceder timeout e não justifica apagar arquivos.",
+        "Nenhum agente executou a instalação; sem stake externo para slashing. Score interno, não revisão independente."
+      ],
+      "timestamp": 1795198348.0048778,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
