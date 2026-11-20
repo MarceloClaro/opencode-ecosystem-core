@@ -183,8 +183,11 @@ class MetacognitiveMemory:
         }
         # Episode e EMA são calculados no writer SQLite sob BEGIN IMMEDIATE;
         # nenhuma mutação local ocorre antes do commit.
-        self._ensure_store().add_reflection(entry, agent_id, score)
-        self._refresh_from_store()
+        updated_confidence = self._ensure_store().add_reflection(entry, agent_id, score)
+        self.episodic.append(entry)
+        if len(self.episodic) > MAX_MEMORY_LIMIT:
+            del self.episodic[:-MAX_MEMORY_LIMIT]
+        self.confidence_ledger[agent_id] = updated_confidence
         return entry["id"]
 
     def record_observation(self, agent_id: str, task_context: str,
@@ -203,7 +206,9 @@ class MetacognitiveMemory:
                  "type": "observation", "agent_id": agent_id, "context": task_context,
                  "observation": json.loads(payload)}
         self._ensure_store().add_observation(entry)
-        self._refresh_from_store()
+        self.episodic.append(entry)
+        if len(self.episodic) > MAX_MEMORY_LIMIT:
+            del self.episodic[:-MAX_MEMORY_LIMIT]
         return entry["id"]
 
     def extract_lessons(self, topic: str) -> List[str]:
@@ -275,7 +280,7 @@ class MetacognitiveMemory:
         entry = self._ensure_store().upsert_semantic_topic(
             topic, lesson, metadata, datetime.now(timezone.utc).isoformat()
         )
-        self._refresh_from_store()
+        self.semantic[topic] = entry
         return entry
 
     def update_domain_confidence(self, domain_id: str, score: float) -> float:
@@ -286,7 +291,7 @@ class MetacognitiveMemory:
     def update_topic_confidence(self, topic_key: str, score: float) -> float:
         """Atualiza confiança EMA para qualquer tópico/subsistema."""
         updated = self._ensure_store().update_confidence(topic_key, score)
-        self._refresh_from_store()
+        self.confidence_ledger[topic_key] = updated
         return updated
 
 
