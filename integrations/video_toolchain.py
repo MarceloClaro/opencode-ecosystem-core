@@ -102,12 +102,24 @@ REGISTRY = [
      'requires': ['gpu'], 'notes': 'Pesquisa de edição generativa; não integrado.'},
     {'id': 'scenedetect', 'kind': 'repo', 'name': 'PySceneDetect', 'url': 'https://github.com/Breakthrough/PySceneDetect',
      'license': 'BSD-3-Clause', 'license_class': 'permissive', 'roles': ['scene_detection', 'shot_split'],
-     'runtime': 'python', 'hardware': 'cpu', 'status': 'candidate', 'adapter': None,
-     'requires': ['python'], 'notes': 'Detecção de cortes; candidato a operação de timeline.'},
+     'runtime': 'python', 'hardware': 'cpu', 'status': 'integrated',
+     'adapter': 'integrations.video_analysis',
+     'requires': ['scenedetect-headless', 'ffprobe'],
+     'notes': 'Gera marcadores revisáveis em CFR; não divide nem edita a mídia.'},
     {'id': 'auto-editor', 'kind': 'repo', 'name': 'auto-editor', 'url': 'https://github.com/WyattBlue/auto-editor',
      'license': 'Unlicense', 'license_class': 'permissive', 'roles': ['silence_cut', 'rough_cut'],
-     'runtime': 'python', 'hardware': 'cpu', 'status': 'candidate', 'adapter': None,
-     'requires': ['ffmpeg'], 'notes': 'Corte por silêncio/movimento; usar como proposta, não como aprovação.'},
+     'runtime': 'native', 'hardware': 'cpu', 'status': 'integrated',
+     'adapter': 'integrations.video_analysis',
+     'requires': ['auto-editor', 'ffprobe'],
+     'notes': 'CLI nativa; export v1 é convertida em proposta pending, sem render ou aprovação automática.'},
+    {'id': 'longcat-video', 'kind': 'model', 'name': 'LongCat-Video',
+     'url': 'https://huggingface.co/meituan-longcat/LongCat-Video',
+     'license': 'MIT (metadados do model card Hugging Face consultados em 2026-11-19)',
+     'license_class': 'permissive',
+     'roles': ['text_to_video', 'image_to_video', 'video_continuation', 'generated_assets'],
+     'runtime': 'python', 'hardware': 'gpu_high', 'status': 'reference_only',
+     'adapter': None, 'requires': ['gpu', 'large_download', 'diffusers'],
+     'notes': 'Gerador opcional de clipes/assets pré-montagem; referência apenas. Pesos não baixados, sem adapter e não substitui timeline/editor.'},
 
     # Modelos de fala/ASR/diarização
     {'id': 'xtts-v2', 'kind': 'model', 'name': 'XTTS v2', 'url': 'https://huggingface.co/coqui/XTTS-v2',
@@ -299,7 +311,7 @@ def can_integrate(entry, *, accepted_licenses=()):
 
 def detect():
     system = {name: bool(shutil.which(name)) for name in
-              ('ffmpeg', 'ffprobe', 'node', 'npx', 'tesseract', 'python3')}
+              ('ffmpeg', 'ffprobe', 'auto-editor', 'node', 'npx', 'tesseract', 'python3')}
     modules = {}
     for name in ('moviepy', 'opentimelineio', 'cv2', 'scenedetect', 'demucs',
                  'torch', 'transformers', 'faster_whisper', 'TTS', 'pyannote.audio'):

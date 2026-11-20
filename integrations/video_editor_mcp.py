@@ -14,7 +14,7 @@ import re
 from mcp.server.fastmcp import FastMCP
 from mcp.types import ToolAnnotations
 
-from integrations import video_editor
+from integrations import video_analysis, video_editor
 
 ID = re.compile(r'[A-Za-z0-9_-]{1,80}')
 
@@ -75,6 +75,56 @@ def create_server(root=None):
                     raise ValueError('project source outside MCP root') from exc
             source['path'] = str(confined(str(raw), must_exist=True))
         return project
+
+    def registered_source(project_id, source_id):
+        """Resolve only a source already recorded in the confined project."""
+        project = load_project(project_id)
+        if not isinstance(source_id, str) or not source_id:
+            raise ValueError('registered source_id required')
+        source_key = Path(source_id)
+        if source_key.is_absolute() or any(part in ('.', '..') for part in source_key.parts):
+            raise ValueError('registered relative source_id required')
+        record = project['sources'].get(source_id)
+        if not isinstance(record, dict):
+            raise ValueError('source_id is not registered in project')
+        source = Path(record['path'])
+        try:
+            relative = source.relative_to(root)
+        except ValueError as exc:
+            raise ValueError('project source outside MCP root') from exc
+        target = confined(str(relative), must_exist=True)
+        if target.is_symlink() or not target.is_file():
+            raise ValueError('registered source must be a regular non-symlink file')
+        expected = record.get('sha256')
+        if not isinstance(expected, str) or not re.fullmatch(r'[0-9a-f]{64}', expected):
+            raise ValueError('registered source hash required')
+        if _sha(target) != expected:
+            raise ValueError('registered source hash mismatch; reopen project after review')
+        return project, target
+
+    def persist_analysis(folder_name, result, id_key):
+        raw = json.dumps(result, ensure_ascii=False, sort_keys=True,
+                         separators=(',', ':'), allow_nan=False).encode('utf-8')
+        artifact_hash = hashlib.sha256(raw).hexdigest()
+        relative = f'{folder_name}/{artifact_hash}.json'
+        target = confined(relative)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target = confined(relative)
+        if target.exists():
+            if target.is_symlink() or not target.is_file() or target.read_bytes() != raw:
+                raise ValueError('content-addressed artifact collision or integrity mismatch')
+            status = 'cached'
+        else:
+            try:
+                with target.open('xb') as stream:
+                    stream.write(raw)
+                status = 'created'
+            except FileExistsError:
+                if target.is_symlink() or not target.is_file() or target.read_bytes() != raw:
+                    raise ValueError('content-addressed artifact collision or integrity mismatch')
+                status = 'cached'
+        return {'status': status, id_key: artifact_hash,
+                'sha256': artifact_hash, 'artifact': str(target.relative_to(root))}
 
     @server.tool(annotations=write)
     def editor_open(media_path: str, project_id: str, allow_silent: bool = False) -> dict:
@@ -152,6 +202,38 @@ def create_server(root=None):
                 'backend': result['backend'], 'expected_frames': result['expected_frames'],
                 'warnings': result['warnings'], 'limitations': result['limitations'],
                 'artifact': str(target.relative_to(root))}
+
+    @server.tool(annotations=write)
+    def editor_analyze_scenes(project_id: str, source_id: str,
+                              threshold: float = 27.0,
+                              min_scene_len: int = 15) -> dict:
+        """Gera marcadores de cena revisáveis para uma fonte registrada; não edita."""
+        _project, source = registered_source(project_id, source_id)
+        result = video_analysis.detect_scene_markers(
+            source, threshold=threshold, min_scene_len=min_scene_len)
+        artifact = persist_analysis('editor-analysis', result, 'analysis_id')
+        artifact['kind'] = result['kind']
+        artifact['marker_count'] = len(result['markers'])
+        artifact['review_required'] = True
+        return artifact
+
+    @server.tool(annotations=write)
+    def editor_propose_auto_cuts(project_id: str, source_id: str,
+                                 timeout: int = 300) -> dict:
+        """Salva export Auto-Editor como proposta pendente; nunca renderiza."""
+        if isinstance(timeout, bool) or not isinstance(timeout, int) or not 1 <= timeout <= 600:
+            raise ValueError('timeout must be an integer between 1 and 600 seconds')
+        _project, source = registered_source(project_id, source_id)
+        result = video_analysis.propose_auto_editor_cuts(source, timeout=timeout)
+        if result.get('approval_state') != 'pending' or result.get('rendered') is not False:
+            raise ValueError('cut adapter returned a non-reviewable result')
+        artifact = persist_analysis('editor-proposals', result, 'proposal_id')
+        artifact['kind'] = result['kind']
+        artifact['segment_count'] = len(result['segments'])
+        artifact['approval_state'] = 'pending'
+        artifact['review_required'] = True
+        artifact['rendered'] = False
+        return artifact
 
     @server.tool(annotations=read)
     def editor_render(plan_id: str, dry_run: bool = True) -> dict:
