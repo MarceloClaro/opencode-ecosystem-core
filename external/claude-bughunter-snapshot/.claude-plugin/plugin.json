@@ -1,0 +1,37 @@
+{
+  "name": "claude-bughunter",
+  "description": "83-skill bug-hunting & external red-team bundle for Claude Code — 58 hunt-* web/vuln-class + framework skills, enterprise platform attack chains (M365/Entra, Okta, SharePoint, vCenter, SSL-VPN, APK/iOS), recon/OSINT, reporting & validation gates, and Burp MCP integration. Skills auto-load by topic; 15 slash commands included.",
+  "version": "2.1.0",
+  "author": {
+    "name": "Sachin Sharma",
+    "url": "https://github.com/elementalsouls"
+  },
+  "homepage": "https://elementalsouls.github.io/Claude-BugHunter",
+  "repository": "https://github.com/elementalsouls/Claude-BugHunter",
+  "license": "MIT",
+  "userConfig": {
+    "hackerone_api_username": {
+      "type": "string",
+      "title": "HackerOne API username (optional)",
+      "description": "Only for HackerOne bug bounty work: lets the HackerOne MCP read your private programs and your own reports. Leave blank if you don't need it.",
+      "required": false
+    },
+    "hackerone_api_token": {
+      "type": "string",
+      "title": "HackerOne API token (optional)",
+      "description": "Goes with the username; create it under HackerOne Settings > API Token. Kept in secure storage. Leave blank if you don't need it.",
+      "sensitive": true,
+      "required": false
+    }
+  },
+  "mcpServers": {
+    "hackerone": {
+      "command": "python3",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/mcp/hackerone/server.py"],
+      "env": {
+        "HACKERONE_API_USERNAME": "${user_config.hackerone_api_username}",
+        "HACKERONE_API_TOKEN": "${user_config.hackerone_api_token}"
+      }
+    }
+  }
+}

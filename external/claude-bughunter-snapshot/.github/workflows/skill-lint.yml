@@ -1,0 +1,59 @@
+name: skill-lint
+
+# Quality + safety gate for every skill change.
+# - Validates SKILL.md structure against CONTRIBUTING.md rules
+# - Scans for client/engagement identifiers (hashed denylist) and leaked secrets
+# Runs on PRs and pushes to main. No external dependencies — stdlib Python only.
+
+on:
+  pull_request:
+    paths:
+      - "skills/**"
+      - "engine/**"
+      - "docs/disclosed-reports/**"
+      - "cbh/data/skill_index.json"
+      - "scripts/gen_skill_index.py"
+      - "scripts/lint_skills.py"
+      - "scripts/.identifier-denylist.sha256"
+      - ".github/workflows/skill-lint.yml"
+  push:
+    branches: [main]
+    paths:
+      - "skills/**"
+      - "engine/**"
+      - "docs/disclosed-reports/**"
+      - "cbh/data/skill_index.json"
+      - "scripts/gen_skill_index.py"
+      - "scripts/lint_skills.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint skills
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate skills (structure + identifier/secret scan)
+        run: python3 scripts/lint_skills.py
+
+      # The routing maps are only useful if every mapped skill is installed and
+      # every installed hunt-* skill is reachable. skill_map.py checks both and
+      # exits non-zero, so a skill added without a mapping fails here rather than
+      # silently becoming unreachable.
+      - name: Validate skill routing (skill_map self-check)
+        run: python3 engine/skill_map.py
+
+      - name: Check the bundled CLI skill and report index
+        run: python3 scripts/gen_skill_index.py --check
+
+      - name: Summary
+        if: always()
+        run: echo "Skill lint finished — see annotations above for any errors/warnings."

@@ -28,6 +28,9 @@ receitas, payloads, scripts, dados de relatórios ou integração Burp MCP.
   registra declarações observadas, não constitui parecer jurídico nem confirma
   que aqueles arquivos correspondem ao commit fixado.
 - Nenhum conteúdo ou código upstream é incorporado por esta skill.
+- O snapshot integral autorizado está em
+  `external/claude-bughunter-snapshot/` como referência inerte; os skills,
+  comandos e scripts nele guardados não são carregados nem executados pelo Core.
 
 ## Gate de autorização e escopo
 

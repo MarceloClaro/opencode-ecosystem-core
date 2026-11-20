@@ -80,6 +80,7 @@ def test_package_is_not_registered_executed_or_installed():
         "registered_skill_count": 0,
         "registered_command_count": 0,
         "scripts_executable": False,
+        "burp_mcp_registered": False,
     }
     assert manifest["runtime"] == {
         "installed": False,
