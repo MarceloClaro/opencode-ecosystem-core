@@ -118,7 +118,8 @@ async def ecosystem_scientific_run(config: dict[str, Any]) -> dict[str, Any]:
     """Executa análise estatística delimitada de CSV, reproduz e grava artigo/código.
 
     Requer question, dataset_csv, dataset_provenance, method, variables, output_dir.
-    Métodos: pearson, welch_t, descriptive. Pode consultar fontes bibliográficas
+    Métodos: descriptive, pearson, welch_t, anova_one_way, spearman e
+    cochrans_q_meta_analysis. Pode consultar fontes bibliográficas
     públicas. Revisão é computacional; não comprova causalidade ou revisão por pares.
     """
     from marceloclaro.knowledge_evolution import validate_science_config
