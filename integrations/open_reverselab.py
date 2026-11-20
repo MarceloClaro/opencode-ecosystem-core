@@ -9,12 +9,15 @@ write active OpenCode configuration.
 from __future__ import annotations
 
 import argparse
+from datetime import datetime, timezone
 import hashlib
 import json
 import os
 from pathlib import Path
 import re
+import shutil
 import subprocess
+import tempfile
 try:
     import tomllib
 except ModuleNotFoundError:  # Python 3.10 compatibility without a new dependency.
@@ -26,9 +29,15 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH = REPOSITORY_ROOT / "federation" / "open-reverselab-adapter-r1237.json"
 HISTORICAL_MANIFEST_PATH = REPOSITORY_ROOT / "federation" / "repository-curation-r1232.json"
 SOURCE_COMMIT = "c42da86aadcbea4f2dd20822653f83da5f6aba54"
+SOURCE_URL = "https://github.com/LING71671/open-reverselab"
 MCP_RELATIVE = Path("tools/skills/mcp/ReverseLabToolsMCP")
 ENTRYPOINT_RELATIVE = MCP_RELATIVE / "reverse_lab_tools_mcp.py"
+LOCKFILE_RELATIVE = MCP_RELATIVE / "uv.lock"
+LOCKFILE_BLOB_ID = "30c5bbb363442264d3b0581e33455a791944196b"
+INSTALL_RECEIPT_SCHEMA = "open-reverselab-install.r1238.v1"
 MAX_GIT_TIMEOUT_SECONDS = 8
+MAX_INSTALL_TIMEOUT_SECONDS = 600
+MAX_INSTALL_OUTPUT_CHARS = 16_384
 
 
 class CheckoutValidationError(ValueError):
@@ -149,9 +158,12 @@ def validate_manifest(data: Mapping[str, Any]) -> list[str]:
 
 
 def status() -> dict[str, Any]:
-    """Report the Core manifest only; never inspect paths or start a process."""
+    """Report policy plus the fixed managed prefix; never use network or run upstream."""
     manifest = load_manifest()
     errors = validate_manifest(manifest)
+    installation = managed_installation_status()
+    runtime = dict(manifest.get("runtime", {}))
+    runtime["installed"] = installation.get("status") == "installed"
     return {
         "spec_id": manifest.get("spec_id"),
         "status": "metadata_only" if not errors else "invalid_manifest",
@@ -159,9 +171,456 @@ def status() -> dict[str, Any]:
         "adoption": manifest.get("adoption"),
         "integration_status": manifest.get("integration_status"),
         "license_status": manifest.get("license_status"),
-        "runtime": manifest.get("runtime"),
+        "runtime": runtime,
+        "installation": installation,
         "errors": errors,
     }
+
+
+def default_install_root() -> Path:
+    """Return the one managed checkout path; no user config is modified."""
+    return Path.home() / ".local" / "share" / "opencode-core" / "external-tools" / "open-reverselab"
+
+
+def installation_paths(checkout_path: Path | str | None = None) -> dict[str, str]:
+    """Resolve fixed sibling paths for checkout, venv, cache, private HOME and receipt."""
+    checkout = Path(checkout_path) if checkout_path is not None else default_install_root()
+    checkout = Path(os.path.expanduser(os.fspath(checkout)))
+    if not checkout.is_absolute() or ".." in checkout.parts:
+        raise ValueError("O caminho gerenciado deve ser absoluto e não conter '..'.")
+    resolved_for_scope = checkout.resolve(strict=False)
+    if resolved_for_scope == REPOSITORY_ROOT or resolved_for_scope.is_relative_to(REPOSITORY_ROOT):
+        raise ValueError("O prefixo de instalação não pode ficar dentro do repositório Core.")
+    parent = checkout.parent
+    stem = checkout.name
+    return {
+        "checkout": str(checkout),
+        "environment": str(parent / f"{stem}-mcp-venv"),
+        "cache": str(parent / f"{stem}-uv-cache"),
+        "private_home": str(parent / f"{stem}-home"),
+        "receipt": str(parent / f"{stem}.installation-r1238.json"),
+    }
+
+
+def _installation_environment(paths: Mapping[str, str]) -> dict[str, str]:
+    """Construct a minimal environment; do not inherit account/API credentials."""
+    private_home = paths["private_home"]
+    return {
+        "PATH": os.defpath,
+        "HOME": private_home,
+        "XDG_CONFIG_HOME": str(Path(private_home) / ".config"),
+        "XDG_CACHE_HOME": paths["cache"],
+        "UV_CACHE_DIR": paths["cache"],
+        "UV_PROJECT_ENVIRONMENT": paths["environment"],
+        "UV_NO_CONFIG": "1",
+        "UV_NO_PROGRESS": "1",
+        "UV_PYTHON_DOWNLOADS": "never",
+        "GIT_CONFIG_NOSYSTEM": "1",
+        "GIT_CONFIG_GLOBAL": os.devnull,
+        "GIT_TERMINAL_PROMPT": "0",
+        "GIT_OPTIONAL_LOCKS": "0",
+        "LANG": "C",
+        "LC_ALL": "C",
+    }
+
+
+def install_plan() -> dict[str, Any]:
+    """Describe the pinned isolated installation without creating files or processes."""
+    paths = installation_paths()
+    git = shutil.which("git") or "git"
+    uv = shutil.which("uv") or "uv"
+    stage = "<staging-checkout>"
+    commands = {
+        "git_clone": [git, "clone", "--no-checkout", "--no-tags", "--filter=blob:none", "--", SOURCE_URL, stage],
+        "git_checkout": [git, "-C", stage, "checkout", "--detach", SOURCE_COMMIT],
+        "uv_sync": [
+            uv,
+            "sync",
+            "--locked",
+            "--no-install-project",
+            "--no-build",
+            "--project",
+            str(Path(stage) / MCP_RELATIVE),
+        ],
+    }
+    return {
+        "spec_id": "SPEC-935-R1238",
+        "status": "dry_run",
+        "dry_run": True,
+        "source": {
+            "repository": "LING71671/open-reverselab",
+            "url": SOURCE_URL,
+            "commit": SOURCE_COMMIT,
+            "lockfile": LOCKFILE_RELATIVE.as_posix(),
+            "lockfile_git_blob": LOCKFILE_BLOB_ID,
+            "root_license_declared": "Apache-2.0",
+            "nested_mcp_license_declared": "GPL-3.0-only",
+        },
+        "paths": paths,
+        "commands": commands,
+        "environment": _installation_environment(paths),
+        "policy": {
+            "locked_dependencies_only": True,
+            "install_project_package": False,
+            "build_source_distributions": False,
+            "write_active_opencode_config": False,
+            "start_mcp": False,
+            "analyze_targets": False,
+            "legal_review": "not_performed",
+        },
+        "mcp_enabled": False,
+    }
+
+
+def verify_pinned_lockfile(
+    root: Path | str,
+    *,
+    runner: Runner | None = None,
+) -> dict[str, Any]:
+    """Verify the lockfile bytes and Git tree blob match the immutable R1238 pin."""
+    checkout = Path(root)
+    try:
+        lockfile = _regular_checkout_file(checkout, LOCKFILE_RELATIVE)
+        git_blob = _git_blob_id(checkout, LOCKFILE_RELATIVE, runner)
+        local_blob = _local_git_blob_id(lockfile, max_bytes=2 * 1024 * 1024)
+        valid = git_blob == LOCKFILE_BLOB_ID and local_blob == LOCKFILE_BLOB_ID
+        return {
+            "valid": valid,
+            "status": "ready" if valid else "lockfile_blob_mismatch",
+            "path": LOCKFILE_RELATIVE.as_posix(),
+            "expected_git_blob": LOCKFILE_BLOB_ID,
+            "git_blob": git_blob,
+            "local_blob": local_blob,
+        }
+    except CheckoutValidationError as error:
+        return {
+            "valid": False,
+            "status": error.status,
+            "error": str(error),
+            "path": LOCKFILE_RELATIVE.as_posix(),
+            "expected_git_blob": LOCKFILE_BLOB_ID,
+        }
+
+
+def create_install_receipt(
+    paths: Mapping[str, str],
+    *,
+    installed_at: str | None = None,
+) -> dict[str, Any]:
+    """Build a provenance receipt; callers still must observe successful installation."""
+    timestamp = installed_at or datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z", timestamp):
+        raise ValueError("installed_at deve ser UTC no formato YYYY-MM-DDTHH:MM:SSZ.")
+    return {
+        "schema_version": INSTALL_RECEIPT_SCHEMA,
+        "spec_id": "SPEC-935-R1238",
+        "source_repository": "LING71671/open-reverselab",
+        "source_url": SOURCE_URL,
+        "source_commit": SOURCE_COMMIT,
+        "source_lockfile": {
+            "path": LOCKFILE_RELATIVE.as_posix(),
+            "git_blob": LOCKFILE_BLOB_ID,
+        },
+        "checkout": paths["checkout"],
+        "environment": paths["environment"],
+        "installed_at": timestamp,
+        "uv_sync": {
+            "status": "success",
+            "locked": True,
+            "no_install_project": True,
+            "no_build": True,
+            "returncode": 0,
+        },
+        "authorization": {
+            "scope": "checkout_and_locked_dependencies_only",
+            "installation_authorized": True,
+            "activation_authorized": False,
+            "target_analysis_authorized": False,
+            "legal_review": "not_performed",
+        },
+        "runtime": {
+            "installed": True,
+            "executed": False,
+            "upstream_mcp_executed": False,
+            "enabled": False,
+            "mcp_enabled": False,
+            "target_analysis": False,
+        },
+    }
+
+
+def _receipt_is_valid(data: Any, paths: Mapping[str, str]) -> bool:
+    if not isinstance(data, Mapping):
+        return False
+    source_lock = data.get("source_lockfile")
+    uv_sync = data.get("uv_sync")
+    authorization = data.get("authorization")
+    runtime = data.get("runtime")
+    return bool(
+        data.get("schema_version") == INSTALL_RECEIPT_SCHEMA
+        and data.get("spec_id") == "SPEC-935-R1238"
+        and data.get("source_repository") == "LING71671/open-reverselab"
+        and data.get("source_url") == SOURCE_URL
+        and data.get("source_commit") == SOURCE_COMMIT
+        and isinstance(source_lock, Mapping)
+        and source_lock.get("path") == LOCKFILE_RELATIVE.as_posix()
+        and source_lock.get("git_blob") == LOCKFILE_BLOB_ID
+        and data.get("checkout") == paths["checkout"]
+        and data.get("environment") == paths["environment"]
+        and isinstance(data.get("installed_at"), str)
+        and re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z", data["installed_at"]) is not None
+        and isinstance(uv_sync, Mapping)
+        and uv_sync == {
+            "status": "success",
+            "locked": True,
+            "no_install_project": True,
+            "no_build": True,
+            "returncode": 0,
+        }
+        and isinstance(authorization, Mapping)
+        and authorization.get("scope") == "checkout_and_locked_dependencies_only"
+        and authorization.get("installation_authorized") is True
+        and authorization.get("activation_authorized") is False
+        and authorization.get("target_analysis_authorized") is False
+        and authorization.get("legal_review") == "not_performed"
+        and isinstance(runtime, Mapping)
+        and runtime.get("installed") is True
+        and runtime.get("executed") is False
+        and runtime.get("upstream_mcp_executed") is False
+        and runtime.get("enabled") is False
+        and runtime.get("mcp_enabled") is False
+        and runtime.get("target_analysis") is False
+    )
+
+
+def managed_installation_status(checkout_path: Path | str | None = None) -> dict[str, Any]:
+    """Observe only the managed local receipt and required paths; never invoke tools."""
+    paths = installation_paths(checkout_path)
+    checkout = Path(paths["checkout"])
+    environment = Path(paths["environment"])
+    receipt = Path(paths["receipt"])
+    python = environment / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
+    existing = [path for path in (checkout, environment, receipt) if path.exists() or path.is_symlink()]
+    runtime = {
+        "installed": False,
+        "executed": False,
+        "upstream_mcp_executed": False,
+        "enabled": False,
+        "mcp_enabled": False,
+        "target_analysis": False,
+    }
+    if not existing:
+        return {"status": "not_installed_in_managed_prefix", "paths": paths, "runtime": runtime}
+    if len(existing) != 3:
+        return {"status": "partial_installation", "paths": paths, "runtime": runtime}
+    if any(path.is_symlink() for path in existing) or not checkout.is_dir() or not environment.is_dir() or not receipt.is_file():
+        return {"status": "invalid_managed_paths", "paths": paths, "runtime": runtime}
+    if python.is_symlink() or not python.is_file():
+        return {"status": "environment_incomplete", "paths": paths, "runtime": runtime}
+    try:
+        data = json.loads(receipt.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {"status": "invalid_receipt", "paths": paths, "runtime": runtime}
+    if not _receipt_is_valid(data, paths):
+        return {"status": "invalid_receipt", "paths": paths, "runtime": runtime}
+    return {
+        "status": "installed",
+        "paths": paths,
+        "source_commit": SOURCE_COMMIT,
+        "source_lockfile_git_blob": LOCKFILE_BLOB_ID,
+        "receipt": str(receipt),
+        "runtime": {**runtime, "installed": True},
+    }
+
+
+def _assert_no_symlink_components(path: Path) -> None:
+    cursor = Path(path.anchor)
+    for part in path.parts[1:]:
+        cursor /= part
+        try:
+            mode = cursor.lstat().st_mode
+        except FileNotFoundError:
+            continue
+        except OSError as error:
+            raise CheckoutValidationError("managed_path_unreadable", "Não foi possível validar o prefixo gerenciado.") from error
+        if cursor.is_symlink():
+            raise CheckoutValidationError("symlink_path", f"Symlink não aceito no prefixo gerenciado: {cursor}.")
+        if cursor != path and not cursor.is_dir():
+            raise CheckoutValidationError("managed_path_conflict", f"Componente não é diretório: {cursor}.")
+
+
+def _write_install_receipt(path: Path, data: Mapping[str, Any]) -> None:
+    """Write a private receipt atomically without touching the checkout or OpenCode config."""
+    descriptor, temporary_name = tempfile.mkstemp(prefix=f".{path.name}.", dir=str(path.parent))
+    temporary = Path(temporary_name)
+    try:
+        os.fchmod(descriptor, 0o600)
+        with os.fdopen(descriptor, "w", encoding="utf-8") as stream:
+            json.dump(data, stream, ensure_ascii=False, sort_keys=True, indent=2)
+            stream.write("\n")
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def install_isolated(
+    *,
+    yes: bool = False,
+    timeout: int = MAX_INSTALL_TIMEOUT_SECONDS,
+    runner: Runner | None = None,
+) -> dict[str, Any]:
+    """Install pinned source/dependencies only on explicit confirmation; never start MCP."""
+    plan = install_plan()
+    if not yes:
+        return plan
+    if isinstance(timeout, bool) or not isinstance(timeout, int) or timeout <= 0 or timeout > MAX_INSTALL_TIMEOUT_SECONDS:
+        raise ValueError(f"timeout deve estar entre 1 e {MAX_INSTALL_TIMEOUT_SECONDS} segundos.")
+
+    paths = plan["paths"]
+    checkout = Path(paths["checkout"])
+    environment = Path(paths["environment"])
+    cache = Path(paths["cache"])
+    private_home = Path(paths["private_home"])
+    receipt = Path(paths["receipt"])
+    try:
+        _assert_no_symlink_components(checkout.parent)
+        for managed in (checkout, environment, cache, private_home, receipt):
+            _assert_no_symlink_components(managed)
+        existing = [path for path in (checkout, environment, receipt) if path.exists() or path.is_symlink()]
+        if existing:
+            current = managed_installation_status(checkout)
+            if current.get("status") == "installed":
+                # The receipt and path markers make this an idempotent local no-op.
+                return {
+                    **plan,
+                    "status": "already_installed",
+                    "dry_run": False,
+                    "runtime": current["runtime"],
+                    "installation": current,
+                }
+            status_code = "target_conflict" if checkout.exists() or checkout.is_symlink() else "partial_installation"
+            return {
+                **plan,
+                "status": status_code,
+                "dry_run": False,
+                "error": "Destino existente/parcial ou recibo inválido; nenhuma sobrescrita foi tentada.",
+                "runtime": {"installed": False, "executed": False, "mcp_enabled": False},
+            }
+
+        checkout.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+        _assert_no_symlink_components(checkout.parent)
+        cache.mkdir(mode=0o700, exist_ok=True)
+        private_home.mkdir(mode=0o700, exist_ok=True)
+        (Path(paths["private_home"]) / ".config").mkdir(mode=0o700, exist_ok=True)
+
+        invoke = runner or subprocess.run
+        environment_vars = dict(plan["environment"])
+
+        def run_fixed(argv: Sequence[str], *, cwd: Path, env: Mapping[str, str]) -> subprocess.CompletedProcess[str]:
+            try:
+                result = invoke(
+                    list(argv),
+                    cwd=str(cwd),
+                    env=dict(env),
+                    timeout=timeout,
+                    check=False,
+                    capture_output=True,
+                    text=True,
+                    shell=False,
+                )
+            except (OSError, subprocess.TimeoutExpired) as error:
+                raise CheckoutValidationError("installer_command_failed", f"Comando de instalação falhou: {type(error).__name__}.") from error
+            if not isinstance(result, subprocess.CompletedProcess):
+                # Test doubles and alternate runners may return compatible objects.
+                return result
+            return result
+
+        git = shutil.which("git") or "git"
+        uv = shutil.which("uv") or "uv"
+        git_env = dict(environment_vars)
+        with tempfile.TemporaryDirectory(prefix=".open-reverselab-stage-", dir=str(checkout.parent)) as staging_parent:
+            staging = Path(staging_parent) / "checkout"
+            clone_argv = [git, "clone", "--no-checkout", "--no-tags", "--filter=blob:none", "--", SOURCE_URL, str(staging)]
+            cloned = run_fixed(clone_argv, cwd=checkout.parent, env=git_env)
+            clone_code = int(getattr(cloned, "returncode", 1))
+            if clone_code != 0:
+                return {**plan, "status": "git_clone_failed", "dry_run": False, "returncode": clone_code,
+                        "stderr": str(getattr(cloned, "stderr", "") or "")[:MAX_INSTALL_OUTPUT_CHARS],
+                        "runtime": {"installed": False, "executed": False, "mcp_enabled": False}}
+
+            checkout_argv = [git, "-C", str(staging), "checkout", "--detach", SOURCE_COMMIT]
+            checked_out = run_fixed(checkout_argv, cwd=staging, env=git_env)
+            checkout_code = int(getattr(checked_out, "returncode", 1))
+            if checkout_code != 0:
+                return {**plan, "status": "git_checkout_failed", "dry_run": False, "returncode": checkout_code,
+                        "stderr": str(getattr(checked_out, "stderr", "") or "")[:MAX_INSTALL_OUTPUT_CHARS],
+                        "runtime": {"installed": False, "executed": False, "mcp_enabled": False}}
+
+            inspected = inspect_checkout(staging, runner=runner)
+            if inspected.get("status") != "ready":
+                return {**plan, "status": "checkout_validation_failed", "dry_run": False,
+                        "inspection": inspected, "runtime": {"installed": False, "executed": False, "mcp_enabled": False}}
+            lock = verify_pinned_lockfile(staging, runner=runner)
+            if not lock.get("valid"):
+                return {**plan, "status": "lockfile_validation_failed", "dry_run": False,
+                        "lockfile": lock, "runtime": {"installed": False, "executed": False, "mcp_enabled": False}}
+
+            sync_argv = [
+                uv, "sync", "--locked", "--no-install-project", "--no-build",
+                "--project", str(staging / MCP_RELATIVE),
+            ]
+            synced = run_fixed(sync_argv, cwd=staging, env=environment_vars)
+            sync_code = int(getattr(synced, "returncode", 1))
+            if sync_code != 0:
+                return {**plan, "status": "dependency_sync_failed", "dry_run": False,
+                        "returncode": sync_code,
+                        "stderr": str(getattr(synced, "stderr", "") or "")[:MAX_INSTALL_OUTPUT_CHARS],
+                        "runtime": {"installed": False, "executed": False, "mcp_enabled": False}}
+
+            python = environment / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
+            if python.is_symlink() or not python.is_file():
+                return {**plan, "status": "environment_validation_failed", "dry_run": False,
+                        "error": "uv sync retornou sucesso, mas o Python do venv gerenciado não está presente.",
+                        "runtime": {"installed": False, "executed": False, "mcp_enabled": False}}
+
+            # Revalidate staged sources after dependency sync, then publish atomically.
+            inspected_after_sync = inspect_checkout(staging, runner=runner)
+            lock_after_sync = verify_pinned_lockfile(staging, runner=runner)
+            if inspected_after_sync.get("status") != "ready" or not lock_after_sync.get("valid"):
+                return {**plan, "status": "post_sync_validation_failed", "dry_run": False,
+                        "inspection": inspected_after_sync, "lockfile": lock_after_sync,
+                        "runtime": {"installed": False, "executed": False, "mcp_enabled": False}}
+            if checkout.exists() or checkout.is_symlink():
+                return {**plan, "status": "target_race_conflict", "dry_run": False,
+                        "runtime": {"installed": False, "executed": False, "mcp_enabled": False}}
+            os.replace(staging, checkout)
+
+        receipt_data = create_install_receipt(paths)
+        if not _receipt_is_valid(receipt_data, paths):
+            return {**plan, "status": "receipt_validation_failed", "dry_run": False,
+                    "runtime": {"installed": False, "executed": False, "mcp_enabled": False}}
+        _write_install_receipt(receipt, receipt_data)
+        return {
+            **plan,
+            "status": "installed",
+            "dry_run": False,
+            "returncode": 0,
+            "runtime": receipt_data["runtime"],
+            "installation": managed_installation_status(checkout),
+            "receipt": str(receipt),
+            "upstream_mcp_executed": False,
+            "active_opencode_config_written": False,
+        }
+    except (CheckoutValidationError, OSError, ValueError, subprocess.TimeoutExpired) as error:
+        return {
+            **plan,
+            "status": getattr(error, "status", "install_error"),
+            "dry_run": False,
+            "error": str(error)[:MAX_INSTALL_OUTPUT_CHARS],
+            "runtime": {"installed": False, "executed": False, "mcp_enabled": False},
+        }
 
 
 def _absolute_checkout(path: str | os.PathLike[str]) -> Path:
