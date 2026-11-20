@@ -25206,6 +25206,35 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1245",
+      "objective": "Mitigar falhas reproduzíveis de limites, validação e persistência no MetaBus; avaliar prontidão multiagente sem alegar validação externa.",
+      "changes": [
+        "mci/metabus.py: limites fail-closed, score/text validation, rollback local, retention consistency",
+        "specs/SPEC-935-R1243-metabus-integrity-efficiency.md",
+        "tests/test_r1243_metabus_guardrails.py",
+        "tests/test_transformer.py: adaptador de persistência de teste para assinatura strict"
+      ],
+      "score": 0.65,
+      "lessons": [
+        "R1243 valida limites em [0,1000], rejeita scores inválidos e reverte reflexão/ledger se a persistência falhar; retenção episódica fica alinhada em memória e disco após reflexão e observação.",
+        "TDDHistory não classificou pytest.raises com DID NOT RAISE como falha assertiva; o ciclo foi reconciliado com helpers que produzem AssertionError explícito e recibo RED aceito.",
+        "Auto-checkpoint altera git HEAD, invalidando recibos de par embora hashes de arquivos permaneçam iguais; executar SpecVerifier imediatamente após o checkpoint.",
+        "Workflow externo não executou análise: primeiro bloqueio sem spec_id; segundo não encontrou SPEC-935-R1243 no registro do executor. Agentes subdelegados falharam antes de inferência por restrição regional/assinatura. Nenhum executor concluiu tarefa, portanto nenhum stake foi penalizado.",
+        "Suite de regressão direcionada: 74 testes aprovados; test_deep_diagnose isolado no pacote agregado falhou em ReversaScanner por Path.exists com texto longo (ENAMETOOLONG), fora do escopo R1243 e pendente de correção própria."
+      ],
+      "timestamp": 1795181748.4713392,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
