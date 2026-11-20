@@ -46,9 +46,11 @@ acrescentadas a `requirements.txt`.
 
 ## Contrato funcional
 
-1. O importador aceita apenas arquivo regular `.mp4` sob a raiz local MPT
-   configurada; caminho absoluto, `..`, symlink, path escape, arquivo ausente e
-   projeto inválido falham de modo fechado.
+1. O importador aceita apenas a forma relativa `{task_id}/final-{n}.mp4`
+   (`n` inteiro positivo) sob a raiz `$MPT_HOME/storage/tasks` configurada;
+   caminho absoluto, níveis extras, `..`, symlink, path escape, arquivo ausente
+   e projeto inválido falham de modo fechado. A forma deriva dos caminhos de
+   download `.../{task_id}/final-1.mp4` documentados pela release.
 2. O importador copia o asset para uma pasta própria sob
    `EDITOR_PROJECT_ROOT`, verifica a integridade SHA-256, sonda a mídia e grava
    um novo projeto sem sobrescrever projeto existente. A origem não é movida,

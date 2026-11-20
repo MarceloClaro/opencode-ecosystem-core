@@ -215,7 +215,9 @@ def test_npm_integrity_mismatch_stops_before_install(tmp_path):
             destination = Path(argv[argv.index("--pack-destination") + 1])
             destination.mkdir(parents=True, exist_ok=True)
             (destination / "wrong.tgz").write_bytes(b"not-the-pinned-package")
-            return ext.CompletedResult(0, json.dumps([{"integrity": "sha512-wrong", "filename": "wrong.tgz"}]), "")
+            return ext.CompletedResult(0, json.dumps([{
+                "integrity": "sha512-wrong", "filename": "wrong.tgz", "unpackedSize": 126965553,
+            }]), "")
         raise AssertionError("install must not run for a mismatched package integrity")
 
     result = ext.install_tool("rust-anything", root=tmp_path, yes=True, runner=fake_runner)
@@ -250,7 +252,11 @@ def test_npm_install_uses_only_tarball_verified_against_pinned_integrity(tmp_pat
             (destination / "rust-anything-2.1.0.tgz").write_bytes(tarball_bytes)
             return ext.CompletedResult(
                 0,
-                json.dumps([{"integrity": expected, "filename": "rust-anything-2.1.0.tgz"}]),
+                json.dumps([{
+                    "integrity": expected,
+                    "filename": "rust-anything-2.1.0.tgz",
+                    "unpackedSize": 126965553,
+                }]),
                 "",
             )
         assert argv[1] == "install"
@@ -262,7 +268,42 @@ def test_npm_install_uses_only_tarball_verified_against_pinned_integrity(tmp_pat
     result = ext.install_tool("rust-anything", root=tmp_path, yes=True, runner=fake_runner)
     assert result["status"] == "installed"
     assert result["integrity_verified"] is True
+    assert result["unpacked_size_verified"] is True
     assert [call[0][1] for call in calls] == ["pack", "install"]
+
+
+def test_npm_install_blocks_unexpected_unpacked_size_before_install(tmp_path, monkeypatch):
+    tarball_bytes = b"correct-integrity-wrong-size-metadata"
+    expected = "sha512-" + base64.b64encode(hashlib.sha512(tarball_bytes).digest()).decode("ascii")
+    original_entry = ext._entry
+
+    def entry_with_small_expected_size(tool_id):
+        item = original_entry(tool_id)
+        if tool_id == "rust-anything":
+            item = deepcopy(item)
+            item["source"]["integrity"] = expected
+            item["source"]["unpacked_bytes"] = 10
+        return item
+
+    monkeypatch.setattr(ext, "_entry", entry_with_small_expected_size)
+    calls = []
+
+    def fake_runner(argv, **kwargs):
+        calls.append(argv)
+        if argv[1] == "pack":
+            destination = Path(argv[argv.index("--pack-destination") + 1])
+            (destination / "rust-anything-2.1.0.tgz").write_bytes(tarball_bytes)
+            return ext.CompletedResult(0, json.dumps([{
+                "integrity": expected,
+                "filename": "rust-anything-2.1.0.tgz",
+                "unpackedSize": 11,
+            }]), "")
+        raise AssertionError("install must stop on unpacked-size mismatch")
+
+    result = ext.install_tool("rust-anything", root=tmp_path, yes=True, runner=fake_runner)
+    assert result["status"] == "unpacked_size_mismatch"
+    assert calls[0][1] == "pack"
+    assert len(calls) == 1
 
 
 def test_manifest_records_license_and_adoption_states_without_collapsing_them():

@@ -73,6 +73,10 @@ def validate_manifest(data: Mapping[str, Any]) -> list[str]:
         if tool_id in seen:
             errors.append(f"id duplicado: {tool_id}")
         seen.add(tool_id)
+        adoption = entry.get("adoption")
+        if not isinstance(adoption, str) or adoption not in {"isolated_cli", "reference_only", "blocked_legal_review", "selected_skill", "existing_reuse"}:
+            errors.append(f"{tool_id}: adoption inválido ou ausente")
+            adoption = None
         source = entry.get("source")
         if not isinstance(source, Mapping) or not isinstance(source.get("url"), str) or not source["url"].startswith("https://"):
             errors.append(f"{tool_id}: origem URL ausente")
@@ -108,10 +112,6 @@ def validate_manifest(data: Mapping[str, Any]) -> list[str]:
         license_status = entry.get("license_status")
         if not isinstance(license_status, str) or license_status not in {"source_declared_unreviewed", "human_review_required"}:
             errors.append(f"{tool_id}: license_status inválido ou ausente")
-        adoption = entry.get("adoption")
-        if not isinstance(adoption, str) or adoption not in {"isolated_cli", "reference_only", "blocked_legal_review", "selected_skill", "existing_reuse"}:
-            errors.append(f"{tool_id}: adoption inválido ou ausente")
-            adoption = None
         integration_status = entry.get("integration_status")
         if not isinstance(integration_status, str) or integration_status not in {"planned_isolated", "reference_only", "blocked_legal_review", "imported_explicit_only", "existing_reuse"}:
             errors.append(f"{tool_id}: integration_status inválido ou ausente")
@@ -158,7 +158,13 @@ def status() -> dict[str, Any]:
     root = default_install_root()
     rows = []
     for item in manifest["repositories"]:
-        row = {"id": item["id"], "adoption": item["adoption"], "runtime": dict(item["runtime"])}
+        row = {
+            "id": item["id"],
+            "adoption": item["adoption"],
+            "license_status": item["license_status"],
+            "integration_status": item["integration_status"],
+            "runtime": dict(item["runtime"]),
+        }
         if item["id"] in {"rust-anything", "universal-os", "caveman"}:
             executable = executable_path(item["id"], root)
             row["isolated_executable_present"] = executable.is_file() if executable else False
@@ -413,6 +419,26 @@ def install_tool(
                         "stdout": packed_stdout,
                         "stderr": "Pacote obtido não corresponde ao SRI fixado; instalação bloqueada.",
                     }
+                expected_unpacked_bytes = plan.get("unpacked_bytes")
+                reported_unpacked_bytes = record.get("unpackedSize") if isinstance(record, Mapping) else None
+                unpacked_size_verified = None
+                if expected_unpacked_bytes is not None:
+                    unpacked_size_verified = (
+                        isinstance(reported_unpacked_bytes, int)
+                        and not isinstance(reported_unpacked_bytes, bool)
+                        and reported_unpacked_bytes == expected_unpacked_bytes
+                    )
+                    if not unpacked_size_verified:
+                        return {
+                            **plan,
+                            "dry_run": False,
+                            "status": "unpacked_size_mismatch",
+                            "expected_unpacked_bytes": expected_unpacked_bytes,
+                            "reported_unpacked_bytes": reported_unpacked_bytes,
+                            "integrity_verified": True,
+                            "stdout": packed_stdout,
+                            "stderr": "Tamanho desempacotado diverge do valor fixado; instalação bloqueada.",
+                        }
                 target.mkdir(parents=True, exist_ok=True)
                 install_argv = [
                     shutil.which("npm") or "npm", "install", "--prefix", str(target), "--ignore-scripts",
@@ -427,6 +453,7 @@ def install_tool(
                     "status": "installed" if code == 0 else "install_failed",
                     "returncode": code,
                     "integrity_verified": True,
+                    "unpacked_size_verified": unpacked_size_verified,
                     "stdout": str(getattr(installed, "stdout", "") or "")[:MAX_OUTPUT_CHARS],
                     "stderr": str(getattr(installed, "stderr", "") or "")[:MAX_OUTPUT_CHARS],
                 }
