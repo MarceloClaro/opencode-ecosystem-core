@@ -81,8 +81,33 @@ def test_invalid_node_blocks_entire_workflow_before_any_dispatch():
     assert result["sdd_preflight"]["failed_nodes"] == [
         {"node_id": "invalid", "spec_id": "SPEC-INVALID", "error": "spec_not_found"}
     ]
-    assert coordinator.preflight_calls == ["SPEC-VALID", "SPEC-INVALID"]
+    assert coordinator.preflight_calls == ["SPEC-INVALID", "SPEC-VALID"]
     assert coordinator.run_calls == [] and store.records == {}
+
+
+def test_resume_preflight_failure_preserves_checkpoint():
+    store = MemoryStore()
+    first_coordinator = SddCoordinator(store, {})
+    definition = [{"id": "review", "task": "Revisar", "spec_id": "SPEC-REVIEW"}]
+    initial = WorkflowCoordinator(first_coordinator, store).run(
+        definition, workflow_id="existing-workflow"
+    )
+    assert initial["status"] == "completed"
+    checkpoint_before = store.load("existing-workflow")
+
+    blocked_coordinator = SddCoordinator(store, {
+        "SPEC-REVIEW": {"ready": False, "error": "executed_red_history_missing"},
+    })
+    result = WorkflowCoordinator(blocked_coordinator, store).run(
+        definition, workflow_id="existing-workflow", resume=True
+    )
+
+    assert result["status"] == "blocked"
+    assert result["workflow_id"] == "existing-workflow"
+    assert result["checkpoint_created"] is False
+    assert result["checkpoint_updated"] is False
+    assert blocked_coordinator.run_calls == []
+    assert store.load("existing-workflow") == checkpoint_before
 
 
 def test_valid_spec_is_preflighted_and_forwarded_to_node():
@@ -106,11 +131,24 @@ def test_mcp_workflow_schema_documents_spec_id_and_node_budget():
 
     tool = asyncio.run(get_tool())
     node_schema = tool.inputSchema["properties"]["nodes"]["items"]
-    node_properties = node_schema.get("properties", {})
+    node_schema = tool.inputSchema["$defs"][node_schema["$ref"].rsplit("/", 1)[-1]]
+    node_properties = node_schema["properties"]
     assert "spec_id" in node_properties
     assert "per_node_max_steps" in node_properties
     assert "spec_id" in tool.description
     assert "SDD estrito" in tool.description
+
+
+def test_mcp_run_schema_exposes_spec_id():
+    from integrations import ecosystem_mcp
+
+    async def get_tool():
+        return next(tool for tool in await ecosystem_mcp.mcp.list_tools()
+                    if tool.name == "ecosystem_run")
+
+    tool = asyncio.run(get_tool())
+    assert "spec_id" in tool.inputSchema["properties"]
+    assert "spec_id" in tool.description
 
 
 def test_non_strict_mode_keeps_legacy_workflow_without_spec_id():

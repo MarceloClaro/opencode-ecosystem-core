@@ -12,8 +12,10 @@ evidence_contract:
       - tests/test_r1254_delegation_gateway.py::test_missing_or_unknown_spec_blocks_before_checkpoint_and_dispatch
       - tests/test_r1254_delegation_gateway.py::test_invalid_node_blocks_entire_workflow_before_any_dispatch
       - tests/test_r1254_delegation_gateway.py::test_valid_spec_is_preflighted_and_forwarded_to_node
+      - tests/test_r1254_delegation_gateway.py::test_resume_preflight_failure_preserves_checkpoint
     R1254-SCHEMA:
       - tests/test_r1254_delegation_gateway.py::test_mcp_workflow_schema_documents_spec_id_and_node_budget
+      - tests/test_r1254_delegation_gateway.py::test_mcp_run_schema_exposes_spec_id
     R1254-COMPATIBILITY:
       - tests/test_r1254_delegation_gateway.py::test_non_strict_mode_keeps_legacy_workflow_without_spec_id
       - tests/test_r1254_delegation_gateway.py::test_spec_preflight_delegates_known_and_unknown_ids
@@ -59,7 +61,8 @@ preservar sua passagem até cada nó sem iniciar agente quando o preflight falha
   bloqueio estruturado antes de checkpoint ou despacho; qualquer nó inválido
   impede despacho parcial; um ID válido é preflightado e chega intacto ao nó.
 - `R1254-SCHEMA` — o schema e a descrição MCP expõem `spec_id` e
-  `per_node_max_steps`, incluindo a exigência de especificação em modo estrito.
+  `per_node_max_steps` no workflow, e `spec_id` no run, incluindo a exigência
+  de especificação em modo estrito.
 - `R1254-COMPATIBILITY` — modo não estrito sem ID continua funcional; o
   preflight do coordenador delega IDs ao gate SDD sem executar tarefa.
 

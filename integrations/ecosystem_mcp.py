@@ -518,7 +518,9 @@ async def ecosystem_run(task: str, required_capabilities: list[str] | None = Non
 
     Usa executores de leitura Claude, Antigravity ou Codex. Relata bloqueio,
     erro e ausência de autenticação; não executa hooks importados. Transformer
-    é roteamento inspirado em atenção, não treinamento de rede neural.
+    é roteamento inspirado em atenção, não treinamento de rede neural. Passe
+    spec_id para o preflight SDD; em modo estrito, IDs de especificação são
+    obrigatórios e precisam satisfazer o gate de histórico RED aplicável.
     """
     def execute() -> dict[str, Any]:
         # O Blackboard e a memória do orquestrador são compartilhados neste
