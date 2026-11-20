@@ -303,6 +303,7 @@ class TestR212TrustFailClosed:
     def test_allowed_agent_is_selected_while_denied_agent_stays_excluded(self, monkeypatch):
         # Arrange
         task = BlackboardTask("task-mixed-trust", "implementar", ["python"], {})
+        task.eligible_agents = ["denied", "allowed"]
         blackboard.tasks[task.task_id] = task
         _register_card("denied", ["python"])
         _register_card("allowed", ["python"])
@@ -328,6 +329,7 @@ class TestR212TrustFailClosed:
     def test_all_denied_agents_leave_task_blocked_without_fallback(self, monkeypatch):
         # Arrange
         task = BlackboardTask("task-denied", "implementar", ["python"], {})
+        task.eligible_agents = ["denied-a", "denied-b"]
         blackboard.tasks[task.task_id] = task
         _register_card("denied-a", ["python"])
         _register_card("denied-b", ["python"])
@@ -587,6 +589,7 @@ class TestR212IdempotentLogicalSubscriptions:
         task = BlackboardTask("task-subscription", "implementar", ["python"], {})
         blackboard.tasks[task.task_id] = task
         _register_card("worker", ["python"])
+        task.eligible_agents = ["worker"]
         return task
 
     @staticmethod

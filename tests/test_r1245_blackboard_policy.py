@@ -160,6 +160,7 @@ def _orchestrator(trust_score: float, *, confidence: float = 0.95):
 
 def test_trust_below_point_three_requires_supervision_without_auto_volunteer(isolate_blackboard):
     task = BlackboardTask("task-low-trust", "implementar", ["python"], {})
+    task.eligible_agents = ["worker"]
     blackboard.tasks[task.task_id] = task
     _card("worker", ["python"])
 
@@ -172,7 +173,9 @@ def test_trust_below_point_three_requires_supervision_without_auto_volunteer(iso
     assert task.status == "awaiting_supervision"
     assert task.assigned_to is None
     assert task.supervision_candidates == [{
-        "agent_id": "worker", "trust_score": 0.29, "confidence_score": 0.95,
+        "agent_id": "worker", "trust_score": 0.29,
+        "trust_score_source": "behavioral_gate", "confidence_score": 0.95,
+        "confidence_score_source": "metabus.confidence_ledger",
     }]
     assert not [event for event in isolate_blackboard if event["topic"] == "task.volunteer"]
     request = next(event for event in isolate_blackboard if event["topic"] == "task.supervision_required")
@@ -181,6 +184,7 @@ def test_trust_below_point_three_requires_supervision_without_auto_volunteer(iso
 
 def test_trust_at_point_three_is_eligible_and_confidence_remains_distinct(isolate_blackboard):
     task = BlackboardTask("task-boundary", "implementar", ["python"], {})
+    task.eligible_agents = ["worker"]
     blackboard.tasks[task.task_id] = task
     _card("worker", ["python"])
 

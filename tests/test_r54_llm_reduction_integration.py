@@ -12,6 +12,29 @@ from unittest.mock import MagicMock, patch, PropertyMock
 import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+from mci.blackboard import AgentCard, BlackboardTask, blackboard  # noqa: E402
+
+
+@pytest.fixture(autouse=True)
+def _seed_current_blackboard_cfps():
+    """Assegura que os testes internos usem CFPs existentes no Blackboard."""
+    old_registry, old_tasks = blackboard.registry, blackboard.tasks
+    candidates = ["coder", "debugger", "reviewer", "test-engineer", "security-auditor"]
+    blackboard.registry = {}
+    for agent_id in candidates:
+        blackboard.registry[agent_id] = AgentCard(
+            agent_id, agent_id, "agente de teste", [], {}
+        )
+    blackboard.tasks = {}
+    for index in range(1, 6):
+        task_id = f"test-task-{index:03d}"
+        task = BlackboardTask(task_id, "tarefa de integração", [], {})
+        task.eligible_agents = list(candidates)
+        blackboard.tasks[task_id] = task
+    try:
+        yield
+    finally:
+        blackboard.registry, blackboard.tasks = old_registry, old_tasks
 
 
 class TestOrchestratorLLMReductionInit:

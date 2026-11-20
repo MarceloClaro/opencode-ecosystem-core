@@ -509,7 +509,7 @@ def run_gjq_qaoa(
 
     api_key = os.environ.get("GJQ_API_KEY")
     if not api_key:
-        return _blocked("credential_missing", "GJQ_API_KEY ausente no ambiente; nenhuma chamada externa foi feita.")
+        return _blocked("credential_missing", "credencial GJQ ausente no ambiente; nenhuma chamada externa foi feita.")
     try:
         sdk = sdk if sdk is not None else load_gjq_sdk()
     except ImportError:

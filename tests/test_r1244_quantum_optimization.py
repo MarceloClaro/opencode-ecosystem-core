@@ -214,9 +214,11 @@ def test_remote_runner_uses_fake_provider_without_network(monkeypatch):
             assert shots == 128
             return Job()
 
+    FakeSampler = Sampler
+
     class SDK:
         GJQRuntimeService = Service
-        Sampler = Sampler
+        Sampler = FakeSampler
         QuantumCircuit = Circuit
         ParameterVector = ParamVector
 
@@ -229,7 +231,7 @@ def test_remote_runner_uses_fake_provider_without_network(monkeypatch):
         _problem(), backend_name="fake-qpu", shots=128,
         max_evaluations=2, max_total_shots=256, confirm_remote=True, sdk=SDK,
     )
-    assert result["status"] == "success"
+    assert result["status"] == "success", result
     assert result["evidence"]["jobs_submitted"] == 2
     assert result["evidence"]["total_shots"] == 256
     assert result["result"]["optimality"] == "not_proven"
