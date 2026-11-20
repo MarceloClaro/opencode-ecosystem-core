@@ -28,6 +28,7 @@ MAX_LOG_CHARS = 4_000
 VERSION_TIMEOUT_SECONDS = 10
 AUTO_EDITOR_TIMEOUT_SECONDS = 300
 _VERSION_RE = re.compile(r"\bversion\s+([^\s,;]+)", re.IGNORECASE)
+_BARE_VERSION_RE = re.compile(r"^\s*(\d+\.\d+\.\d+(?:[-+][^\s]+)?)\s*$")
 
 
 def _sha256_file(path: Path) -> str:
@@ -57,9 +58,9 @@ def _fraction(value, name: str) -> Fraction:
     try:
         if isinstance(value, (list, tuple)) and len(value) == 2:
             numerator, denominator = value
-            if isinstance(numerator, bool) or isinstance(denominator, bool):
+            if (type(numerator) is not int or type(denominator) is not int):
                 raise ValueError
-            parsed = Fraction(int(numerator), int(denominator))
+            parsed = Fraction(numerator, denominator)
         else:
             parsed = Fraction(str(value))
     except (ValueError, ZeroDivisionError, TypeError, OverflowError) as exc:
@@ -143,11 +144,12 @@ def diagnose_tools(*, which_fn=shutil.which, runner=subprocess.run,
             stderr = str(getattr(proc, "stderr", "") or "")
             combined = stdout + "\n" + stderr
             match = _VERSION_RE.search(combined)
+            bare = _BARE_VERSION_RE.match(stdout.splitlines()[0]) if stdout.splitlines() else None
             status = "ready" if returncode == 0 else "failed"
             tools[key] = {
                 "status": status,
                 "path": str(executable),
-                "version": match.group(1) if match else None,
+                "version": match.group(1) if match else (bare.group(1) if bare else None),
                 "returncode": returncode,
                 "error": None if returncode == 0 else (stderr or stdout)[:MAX_LOG_CHARS],
                 "required": required,

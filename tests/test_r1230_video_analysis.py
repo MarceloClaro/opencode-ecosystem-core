@@ -69,13 +69,15 @@ def test_diagnose_tools_reports_ffmpeg_ffprobe_versions_separately():
     def runner(argv, **kwargs):
         calls.append((argv, kwargs))
         tool = Path(argv[0]).name
-        return SimpleNamespace(returncode=0, stdout=f"{tool} version 8.0-test\n", stderr="")
+        output = "31.9.0\n" if tool == "auto-editor" else f"{tool} version 8.0-test\n"
+        return SimpleNamespace(returncode=0, stdout=output, stderr="")
 
     result = m.diagnose_tools(which_fn=which, runner=runner)
     assert result["status"] == "ready"
     assert result["tools"]["ffmpeg"]["version"] == "8.0-test"
     assert result["tools"]["ffprobe"]["version"] == "8.0-test"
     assert result["tools"]["auto-editor"]["status"] == "ready"
+    assert result["tools"]["auto-editor"]["version"] == "31.9.0"
     assert all(call[1].get("shell") is False for call in calls)
     assert all(isinstance(call[0], list) for call in calls)
 
@@ -201,6 +203,29 @@ def test_auto_editor_parser_rejects_vfr_and_non_frame_aligned_timebase(tmp_path)
         )
 
 
+def test_auto_editor_parser_preserves_ntsc_rational_timebase_exactly(tmp_path):
+    m = api()
+    source = media_file(tmp_path)
+    probe = media_probe(source, fps="30000/1001", frames=1000)
+    document = auto_v1(
+        source,
+        fps="30000/1001",
+        chunks=[[0, 300, 1], [300, 500, 99999], [500, 1000, 1]],
+    )
+    result = m.parse_auto_editor_v1(document, source_path=source, probe=probe)
+    assert result["timebase"] == "30000/1001"
+    assert [(x["in_frame"], x["out_frame"]) for x in result["segments"]] == [
+        (0, 300), (300, 500), (500, 1000)]
+    assert result["summary"]["kept_frames"] == 800
+    assert result["segments"][2]["timeline_start_frame"] == 300
+    with pytest.raises(ValueError, match="frame"):
+        m.parse_auto_editor_v1(
+            auto_v1(source, fps="30/1", chunks=[[0, 1, 1], [1, 1000, 1]]),
+            source_path=source,
+            probe=probe,
+        )
+
+
 def test_auto_editor_runner_exports_only_v1_and_preserves_source(tmp_path, monkeypatch):
     m = api()
     source = media_file(tmp_path)
@@ -291,9 +316,12 @@ def test_mcp_exposes_confined_analysis_and_review_proposal_tools(tmp_path, monke
 
     scene = asyncio.run(server.call_tool("editor_analyze_scenes", {
         "project_id": "demo", "source_id": "media/source.mp4"}))
+    scene_cached = asyncio.run(server.call_tool("editor_analyze_scenes", {
+        "project_id": "demo", "source_id": "media/source.mp4"}))
     cut = asyncio.run(server.call_tool("editor_propose_auto_cuts", {
         "project_id": "demo", "source_id": "media/source.mp4"}))
     assert "analysis_id" in _mcp_text(scene)
+    assert "cached" in _mcp_text(scene_cached)
     assert "proposal_id" in _mcp_text(cut)
     assert list((root / "editor-analysis").glob("*.json"))
     proposals = list((root / "editor-proposals").glob("*.json"))
@@ -302,6 +330,23 @@ def test_mcp_exposes_confined_analysis_and_review_proposal_tools(tmp_path, monke
     with pytest.raises(Exception):
         asyncio.run(server.call_tool("editor_analyze_scenes", {
             "project_id": "demo", "source_id": "../outside.mp4"}))
+    with pytest.raises(Exception):
+        asyncio.run(server.call_tool("editor_analyze_scenes", {
+            "project_id": "../demo", "source_id": "media/source.mp4"}))
+    with pytest.raises(Exception):
+        asyncio.run(server.call_tool("editor_analyze_scenes", {
+            "project_id": "demo", "source_id": "media/not-registered.mp4"}))
+    other = root / "media/other.mp4"
+    other.write_bytes(b"other")
+    alias = root / "media/alias.mp4"
+    alias.symlink_to(other)
+    project["sources"]["media/alias.mp4"] = {
+        "path": str(alias), "sha256": hashlib.sha256(other.read_bytes()).hexdigest(),
+        "frames": 120, "fps": [30, 1]}
+    (root / "editor-projects/demo.json").write_text(json.dumps(project), encoding="utf-8")
+    with pytest.raises(Exception):
+        asyncio.run(server.call_tool("editor_analyze_scenes", {
+            "project_id": "demo", "source_id": "media/alias.mp4"}))
 
 
 @pytest.mark.skipif(
