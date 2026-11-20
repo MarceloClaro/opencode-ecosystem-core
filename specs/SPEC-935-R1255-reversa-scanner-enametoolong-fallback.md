@@ -2,7 +2,7 @@
 spec_id: SPEC-935-R1255
 title: Fallback textual do ReversaScanner diante de caminhos ENAMETOOLONG
 component: scanners.reversa_scanner
-status: red
+status: green
 test_file: tests/test_r1255_reversa_scanner_path_guard.py
 evidence_contract:
   version: 1
