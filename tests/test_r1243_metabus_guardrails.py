@@ -76,7 +76,10 @@ def test_reflection_score_must_be_finite_normalized_and_does_not_mutate_on_rejec
         assert memory.confidence_ledger == before_ledger
 
     for invalid_fields in (("", "context", "reflection"), ("agent", "", "reflection"),
-                           ("agent", "context", "")):
+                           ("agent", "context", ""),
+                           ("a" * (metabus_module.MAX_AGENT_ID_LENGTH + 1), "context", "reflection"),
+                           ("agent", "c" * (metabus_module.MAX_CONTEXT_LENGTH + 1), "reflection"),
+                           ("agent", "context", "r" * (metabus_module.MAX_REFLECTION_LENGTH + 1))):
         assert _raises((TypeError, ValueError), lambda: memory.add_reflection(*invalid_fields, 0.5))
         assert memory.episodic == []
         assert memory.confidence_ledger == before_ledger
@@ -114,3 +117,9 @@ def test_successful_save_keeps_runtime_and_disk_retention_in_sync(monkeypatch, t
     assert memory.episodic[0]["id"] == "old-1"
     assert persisted["episodic"] == memory.episodic
     assert memory.episodic[-1]["reflection"] == "new reflection"
+
+    memory.record_observation("agent", "new observation", {"result_summary": "saved"})
+    persisted = json.loads((tmp_path / "memory.json").read_text(encoding="utf-8"))
+    assert len(memory.episodic) == 1000
+    assert persisted["episodic"] == memory.episodic
+    assert memory.episodic[-1]["observation"]["result_summary"] == "saved"

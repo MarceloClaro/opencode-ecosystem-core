@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_catalog_validates_pinned_provenance_and_exposes_only_safe_route():
+    assert (ROOT / "integrations/claude_bughunter_catalog.py").is_file()
     from integrations.claude_bughunter_catalog import load_catalog
 
     catalog = load_catalog(ROOT)
@@ -45,6 +46,7 @@ def test_catalog_validates_pinned_provenance_and_exposes_only_safe_route():
 
 
 def test_catalog_fails_closed_when_package_manifest_is_tampered(tmp_path):
+    assert (ROOT / "integrations/claude_bughunter_catalog.py").is_file()
     from integrations.claude_bughunter_catalog import load_catalog
 
     federation = tmp_path / "federation"
@@ -87,6 +89,8 @@ def test_status_and_plan_are_exposed_through_marcelo_claro():
     orchestrator = MarceloClaroOrchestrator.__new__(MarceloClaroOrchestrator)
     orchestrator._integration_service = service
 
+    assert hasattr(service, "claude_bughunter_status")
+    assert hasattr(orchestrator, "claude_bughunter_plan")
     status = orchestrator.integration_status()
     assert status["orchestrator"] == "marceloclaro"
     assert status["reference_packages"]["claude_bughunter"]["status"] == "reference_only"
@@ -131,9 +135,9 @@ def test_cli_and_mcp_plan_dispatch_only_to_primary_orchestrator(monkeypatch, cap
 
 
 def test_official_burp_mcp_authorization_is_recorded_but_prerequisites_block_enablement():
-    readiness = json.loads(
-        (ROOT / "federation/claude-bughunter-mcp-r1239.json").read_text(encoding="utf-8")
-    )
+    readiness_path = ROOT / "federation/claude-bughunter-mcp-r1239.json"
+    assert readiness_path.is_file()
+    readiness = json.loads(readiness_path.read_text(encoding="utf-8"))
     assert readiness["schema_version"] == "r1239.burp.v1"
     assert readiness["provider"] == "portswigger-official"
     assert readiness["authorization_granted"] is True
@@ -158,6 +162,7 @@ def test_no_burp_server_or_target_testing_is_claimed():
     config = json.loads((ROOT / "opencode.json").read_text(encoding="utf-8"))
     assert "burp" not in json.dumps(config, ensure_ascii=False).casefold()
 
+    assert (ROOT / "integrations/claude_bughunter_catalog.py").is_file()
     from integrations.claude_bughunter_catalog import load_catalog
 
     result = load_catalog(ROOT)["burp_mcp"]

@@ -49,11 +49,13 @@ de produção de todos os subsistemas nem migra o formato de armazenamento.
   retorna lista vazia; valores inválidos geram `ValueError` antes de percorrer
   memória/log.
 - `R1243-REFLECTION` — `add_reflection` exige agente, contexto e reflexão úteis;
-  score numérico, finito, não booleano e em `[0, 1]`. Rejeição não altera
-  episódio/ledger. Falha de persistência gera erro explícito e restaura ambos.
-  Sucesso mantém a fórmula EMA de SPEC-001.
+  `agent_id` de até 256 caracteres, contexto de até 2.000 e reflexão de até
+  16.384 caracteres. O score deve ser numérico, finito, não booleano e em
+  `[0, 1]`. Rejeição não altera episódio/ledger. Falha de persistência gera
+  erro explícito e restaura ambos. Sucesso mantém a fórmula EMA de SPEC-001.
 - `R1243-RETENTION` — após gravação bem-sucedida, episódios em memória e arquivo
-  JSON preservam a mesma cauda de até 1.000 registros. Falha não trunca memória.
+  JSON preservam a mesma cauda de até 1.000 registros, tanto em
+  `add_reflection` quanto em `record_observation`. Falha não trunca memória.
 
 ## Evidência e limites inferenciais
 
