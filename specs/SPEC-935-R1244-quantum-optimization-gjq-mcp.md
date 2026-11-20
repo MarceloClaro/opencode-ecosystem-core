@@ -29,6 +29,7 @@ evidence_contract:
     AC6:
       - tests/test_r1244_quantum_optimization.py::test_mcp_catalog_and_tools
       - tests/test_r1244_quantum_optimization.py::test_mcp_stdio_transport_read_only_operations
+      - tests/test_r1244_quantum_optimization.py::test_mcp_negotiates_supported_protocol_versions
     AC7:
       - tests/test_r1244_quantum_optimization.py::test_managed_quantum_research_profiles_are_valid
     AC8:

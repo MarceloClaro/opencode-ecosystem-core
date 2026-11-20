@@ -122,6 +122,8 @@ através de variável de ambiente protegida. Não a passe como argumento MCP.
 - [Cirq](https://github.com/quantumlib/Cirq) e [Google Quantum Engine](https://quantumai.google/cirq/google/engine)
 - [XQuad](https://github.com/QuipNetwork/xquad)
 - [Hugging Face Transformers](https://github.com/huggingface/transformers)
+- [MCP specification — tools, 2025-06-18](https://modelcontextprotocol.io/specification/2025-06-18/server/tools)
+- [MCP specification — lifecycle, 2025-06-18](https://modelcontextprotocol.io/specification/2025-06-18/basic/lifecycle)
 
 As fontes sustentam o mapa documental, não a disponibilidade atual de backend,
 compatibilidade instalada, execução no hardware, custo, optimalidade ou

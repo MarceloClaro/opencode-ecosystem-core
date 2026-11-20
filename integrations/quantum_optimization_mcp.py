@@ -17,7 +17,8 @@ from integrations import quantum_optimization as qo
 
 SERVER_NAME = "quantum-optimization"
 SERVER_VERSION = "0.1.0"
-PROTOCOL_VERSION = "2024-11-05"
+PROTOCOL_VERSION = "2025-06-18"
+SUPPORTED_PROTOCOL_VERSIONS = frozenset({"2024-11-05", PROTOCOL_VERSION})
 MAX_REQUEST_BYTES = 1_048_576
 
 
@@ -176,6 +177,7 @@ class QuantumOptimizationMCPServer:
 
     def __init__(self) -> None:
         self._initialized = False
+        self._protocol_version = PROTOCOL_VERSION
 
     @staticmethod
     def _error(request_id: Any, code: int, message: str) -> dict[str, Any]:
@@ -211,17 +213,23 @@ class QuantumOptimizationMCPServer:
             requested = params.get("protocolVersion", PROTOCOL_VERSION)
             if not isinstance(requested, str):
                 return self._error(request_id, -32602, "protocolVersion must be text")
-            # Return the version supported by this server. MCP clients negotiate
-            # against the version in the initialize result.
+            # Preserve a mutually supported version; unknown requests receive
+            # this server's latest implemented version for client negotiation.
+            self._protocol_version = (requested if requested in SUPPORTED_PROTOCOL_VERSIONS
+                                      else PROTOCOL_VERSION)
             return self._success(request_id, {
-                "protocolVersion": PROTOCOL_VERSION,
+                "protocolVersion": self._protocol_version,
                 "capabilities": {"tools": {"listChanged": False}},
                 "serverInfo": {"name": SERVER_NAME, "version": SERVER_VERSION},
             })
         if method == "ping":
             return self._success(request_id, {})
         if method == "tools/list":
-            return self._success(request_id, {"tools": _TOOLS})
+            tools = _TOOLS
+            if self._protocol_version == "2024-11-05":
+                tools = [{key: value for key, value in tool.items() if key != "annotations"}
+                         for tool in _TOOLS]
+            return self._success(request_id, {"tools": tools})
         if method == "tools/call":
             name, arguments = params.get("name"), params.get("arguments", {})
             if not isinstance(name, str) or name not in _HANDLERS:
@@ -236,21 +244,25 @@ class QuantumOptimizationMCPServer:
             try:
                 payload = _HANDLERS[name](arguments)
                 encoded = json.dumps(payload, ensure_ascii=False, allow_nan=False, separators=(",", ":"))
-                return self._success(request_id, {
+                tool_result = {
                     "content": [{"type": "text", "text": encoded}],
-                    "structuredContent": payload,
                     "isError": payload.get("status") in {"blocked", "error", "unavailable", "partial"},
-                })
+                }
+                if self._protocol_version != "2024-11-05":
+                    tool_result["structuredContent"] = payload
+                return self._success(request_id, tool_result)
             except qo.QuantumContractError as exc:
                 payload = {"status": "error", "app": "quantum-optimization",
                            "result": {"code": "invalid_request", "message": str(exc)},
                            "evidence": {"network": False},
                            "limitations": ["A requisição foi rejeitada antes de qualquer execução."]}
-                return self._success(request_id, {
+                tool_result = {
                     "content": [{"type": "text", "text": json.dumps(payload, ensure_ascii=False)}],
-                    "structuredContent": payload,
                     "isError": True,
-                })
+                }
+                if self._protocol_version != "2024-11-05":
+                    tool_result["structuredContent"] = payload
+                return self._success(request_id, tool_result)
             except Exception:
                 # Do not emit tracebacks, provider messages, environment values,
                 # or account state over the MCP channel.
@@ -274,11 +286,13 @@ class QuantumOptimizationMCPServer:
                         "Consulte o log local protegido; nenhuma credencial é retornada."
                     ]),
                 }
-                return self._success(request_id, {
+                tool_result = {
                     "content": [{"type": "text", "text": json.dumps(payload, ensure_ascii=False)}],
-                    "structuredContent": payload,
                     "isError": True,
-                })
+                }
+                if self._protocol_version != "2024-11-05":
+                    tool_result["structuredContent"] = payload
+                return self._success(request_id, tool_result)
         return self._error(request_id, -32601, "Method not found")
 
     def run(self, stdin=None, stdout=None) -> int:

@@ -299,6 +299,33 @@ def test_mcp_catalog_and_tools():
     assert server is not None
 
 
+def test_mcp_negotiates_supported_protocol_versions():
+    for requested, expected, has_annotations, has_structured_content in (
+        ("2025-06-18", "2025-06-18", True, True),
+        ("2024-11-05", "2024-11-05", False, False),
+        ("unsupported-version", "2025-06-18", True, True),
+    ):
+        server = qomcp.create_server()
+        initialized = server.handle({
+            "jsonrpc": "2.0", "id": 1, "method": "initialize",
+            "params": {"protocolVersion": requested, "capabilities": {},
+                       "clientInfo": {"name": "pytest-r1244", "version": "1.0"}},
+        })
+        assert initialized["result"]["protocolVersion"] == expected
+        assert initialized["result"]["capabilities"]["tools"]["listChanged"] is False
+
+        listed = server.handle({"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}})
+        catalog_tool = next(tool for tool in listed["result"]["tools"]
+                            if tool["name"] == "quantum_catalog")
+        assert ("annotations" in catalog_tool) is has_annotations
+
+        called = server.handle({
+            "jsonrpc": "2.0", "id": 3, "method": "tools/call",
+            "params": {"name": "quantum_catalog", "arguments": {}},
+        })
+        assert ("structuredContent" in called["result"]) is has_structured_content
+
+
 def test_mcp_unexpected_remote_failure_preserves_uncertain_effect_state(monkeypatch):
     def fail_after_possible_submission(_arguments):
         raise TimeoutError("provider response unavailable")
@@ -436,6 +463,7 @@ def test_quantum_documentation_and_mcp_disabled_by_default():
         "AGPL-3.0-or-later",
         "https://tiangongqs.com/docs/en/",
         "https://github.com/guoji-quantum/gjq_client",
+        "https://modelcontextprotocol.io/specification/2025-06-18/server/tools",
         "custo em",
         "tarefa enviada a uma",
     ):
