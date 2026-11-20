@@ -25235,6 +25235,35 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1246",
+      "objective": "Pré-voo para instalação da extensão oficial PortSwigger Burp MCP e extração do proxy, autorizadas pelo usuário, sem tráfego ou testes de alvos",
+      "changes": [
+        "Confirmação explícita recebida para instalar Burp Community e abri-lo somente para instalar o BApp e extrair o proxy",
+        "Documentação oficial consultada: extensão exige instalação na interface Burp e o instalador grava mcp-proxy-all.jar; carregar a extensão pode iniciar listener porque enabled tem default true",
+        "Ambiente observado é Ubuntu 24.04 WSL2; java/burp/burpsuite não estão no PATH; buscas limitadas em Program Files/Users do Windows montado não localizaram Burp ou o proxy",
+        "desktop-operator está indisponível: backend agent-desktop não instalado; nenhum download, instalação, inicialização, edição de configuração ou tráfego foi realizado",
+        "CFP A2A cfp-burp-portswigger-install-r1245 publicado; status ainda open, sem voluntários observados"
+      ],
+      "score": 0.3,
+      "lessons": [
+        "Autorização do usuário não elimina pré-requisito de controle GUI: não contornar desktop-operator ausente com automação shell/x11 não aprovada.",
+        "A extensão oficial pode iniciar o listener MCP no primeiro load por enabled=true; instalação/extracção deve ser tratada de forma explícita e não inferida como estado inofensivo.",
+        "Próximo passo: disponibilizar backend desktop aprovado; então criar spec/testes operacionais antes de instalar e manter proibição de requests a alvos e alterações de configuração Burp.",
+        "Nenhum agente executou ação nem possui stake atribuível; CFP sem voluntários, portanto não há slashing aplicável."
+      ],
+      "timestamp": 1795183086.2274957,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
