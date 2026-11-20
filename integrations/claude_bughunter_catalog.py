@@ -195,6 +195,8 @@ def load_catalog(repo_root: str | Path | None = None) -> dict[str, Any]:
     burp_manifest = _read_object(root / BURP_MANIFEST)
     package = _validate_package(package_manifest, root)
     burp = _validate_burp(burp_manifest)
+    from integrations.burp_wsl2_plan import load_plan
+    wsl2_transport_plan = load_plan(root)
     return {
         "schema_version": "r1239.v1",
         "spec_id": "SPEC-935-R1239",
@@ -203,6 +205,7 @@ def load_catalog(repo_root: str | Path | None = None) -> dict[str, Any]:
         "package": package,
         "entries": [dict(SAFE_SKILL)],
         "burp_mcp": burp,
+        "wsl2_transport_plan": wsl2_transport_plan,
         "executed": False,
         "execution_verified": False,
     }

@@ -22,7 +22,7 @@ from numbers import Real
 from typing import Dict, List, Any, Optional, Callable
 from datetime import datetime, timezone
 
-from mci.metabus_store import MetaBusPersistenceError, MetaBusSQLiteStore
+from mci.metabus_store import MetaBusSQLiteStore
 
 logger = logging.getLogger("mci-metabus")
 logger.setLevel(logging.INFO)

@@ -213,9 +213,9 @@ class CoreMemoryNetworkSource:
         # O override do Core só se aplica ao projeto padrão.
         state_path = Path(os.environ.get('MCI_STATE_DIR', self.root/'.mci_state')) if self.root == ROOT.resolve() else self.root/'.mci_state'
         database_path = (
-            Path(os.environ['MCI_DATABASE_FILE']).expanduser()
+            Path(os.environ['MCI_DATABASE_FILE']).expanduser().resolve()
             if self.root == ROOT.resolve() and os.environ.get('MCI_DATABASE_FILE')
-            else state_path/'metabus.sqlite3'
+            else (state_path/'metabus.sqlite3').expanduser().resolve()
         )
         if database_path.is_file():
             # SQLite is authoritative once present. A damaged database must

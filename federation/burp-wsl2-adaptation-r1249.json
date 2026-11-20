@@ -1,0 +1,55 @@
+{
+  "schema_version": "r1249.v1",
+  "spec_id": "SPEC-935-R1249",
+  "status": "blocked_missing_bapp",
+  "selected_transport": "remote_streamable_http",
+  "endpoint": "http://127.0.0.1:9876/mcp",
+  "requires_java": false,
+  "requires_proxy_jar": false,
+  "source": {
+    "repository": "PortSwigger/mcp-server",
+    "commit": "291034081160bc944b6df3eccd60c6fc99b477e1",
+    "commit_signature_status": "unsigned",
+    "bapp_version": "1.4.0",
+    "supported_products": ["Pro", "Community"],
+    "transports": ["streamable_http", "legacy_sse", "stdio_proxy"],
+    "manifest_url": "https://raw.githubusercontent.com/PortSwigger/mcp-server/291034081160bc944b6df3eccd60c6fc99b477e1/BappManifest.bmf",
+    "readme_url": "https://github.com/PortSwigger/mcp-server/tree/291034081160bc944b6df3eccd60c6fc99b477e1",
+    "opencode_docs_url": "https://opencode.ai/docs/mcp-servers/",
+    "microsoft_wslg_docs_url": "https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps",
+    "microsoft_wsl_network_docs_url": "https://learn.microsoft.com/en-us/windows/wsl/networking"
+  },
+  "wsl2_observation": {
+    "distribution": "Ubuntu 24.04.5 LTS",
+    "kernel_identifies_wsl2": true,
+    "display": ":0",
+    "wayland_display": "wayland-0",
+    "wslg_environment_present": true,
+    "agent_desktop_binary_found": false,
+    "atspi_backend_before_mitigation": "namespace_unavailable",
+    "atspi_typelib_package": "gir1.2-atspi-2.0",
+    "atspi_typelib_package_installed": false,
+    "at_spi2_core_installed": true,
+    "dbus_session_bus_present": true
+  },
+  "burp_runtime": {
+    "burp_community_installed": false,
+    "official_bapp_installed": false,
+    "listener_started": false,
+    "default_host": "127.0.0.1",
+    "default_port": 9876,
+    "enabled_default_on_extension_load": true,
+    "config_editing_tooling_default": false,
+    "http_request_approval_default": true
+  },
+  "safety": {
+    "bind_host": "127.0.0.1",
+    "burp_started": false,
+    "extension_installed": false,
+    "opencode_server_configured": false,
+    "mcp_connected": false,
+    "http_requests_sent": false,
+    "target_testing_authorized": false,
+    "burp_config_edited": false
+  }
+}
