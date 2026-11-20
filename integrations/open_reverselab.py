@@ -394,6 +394,17 @@ def _receipt_is_valid(data: Any, paths: Mapping[str, str]) -> bool:
     )
 
 
+def _managed_python_is_usable(path: Path, checkout: Path) -> bool:
+    """Accept normal venv interpreter symlinks, but not dangling or checkout-local links."""
+    try:
+        resolved = path.resolve(strict=True)
+    except OSError:
+        return False
+    if not resolved.is_file() or resolved.is_relative_to(checkout):
+        return False
+    return os.name == "nt" or os.access(resolved, os.X_OK)
+
+
 def managed_installation_status(checkout_path: Path | str | None = None) -> dict[str, Any]:
     """Observe only the managed local receipt and required paths; never invoke tools."""
     paths = installation_paths(checkout_path)
@@ -416,7 +427,7 @@ def managed_installation_status(checkout_path: Path | str | None = None) -> dict
         return {"status": "partial_installation", "paths": paths, "runtime": runtime}
     if any(path.is_symlink() for path in existing) or not checkout.is_dir() or not environment.is_dir() or not receipt.is_file():
         return {"status": "invalid_managed_paths", "paths": paths, "runtime": runtime}
-    if python.is_symlink() or not python.is_file():
+    if not _managed_python_is_usable(python, checkout):
         return {"status": "environment_incomplete", "paths": paths, "runtime": runtime}
     try:
         data = json.loads(receipt.read_text(encoding="utf-8"))
@@ -594,7 +605,7 @@ def install_isolated(
                         "runtime": {"installed": False, "executed": False, "mcp_enabled": False}}
 
             python = environment / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
-            if python.is_symlink() or not python.is_file():
+            if not _managed_python_is_usable(python, checkout):
                 return {**plan, "status": "environment_validation_failed", "dry_run": False,
                         "error": "uv sync retornou sucesso, mas o Python do venv gerenciado não está presente.",
                         "runtime": {"installed": False, "executed": False, "mcp_enabled": False}}
@@ -918,7 +929,7 @@ def _emit(data: Mapping[str, Any]) -> None:
 def main(argv: Sequence[str] | None = None, *, runner: Runner | None = None) -> int:
     parser = argparse.ArgumentParser(description="Adaptador OpenReverseLab com instalação isolada e ativação desabilitada")
     subparsers = parser.add_subparsers(dest="operation", required=True)
-    subparsers.add_parser("status", help="valida apenas o manifesto local")
+    subparsers.add_parser("status", help="valida a política e observa o prefixo gerenciado local")
     inspect_parser = subparsers.add_parser("inspect", help="inspeciona checkout local fixado sem executar seu código")
     inspect_parser.add_argument("--path", required=True, help="caminho absoluto do checkout local")
     config_parser = subparsers.add_parser("config", help="emite fragmento MCP desabilitado em stdout")
@@ -940,6 +951,9 @@ def main(argv: Sequence[str] | None = None, *, runner: Runner | None = None) -> 
         return 0 if result.get("status") in {"metadata_only", "ready", "candidate_disabled", "dry_run", "installed", "already_installed"} else 2
     except CheckoutValidationError as error:
         _emit({"status": error.status, "error": str(error), "runtime": {"executed": False, "mcp_enabled": False}})
+        return 2
+    except ValueError as error:
+        _emit({"status": "invalid_argument", "error": str(error), "runtime": {"executed": False, "mcp_enabled": False}})
         return 2
 
 

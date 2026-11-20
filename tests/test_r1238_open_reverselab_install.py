@@ -135,7 +135,7 @@ def test_install_plan_pins_commit_lock_and_separates_checkout_environment_cache(
     assert plan["dry_run"] is True
 
 
-def test_install_without_yes_is_dry_run_and_creates_nothing(monkeypatch, tmp_path):
+def test_install_without_yes_is_dry_run_and_creates_nothing(monkeypatch, tmp_path, capsys):
     adapter = _adapter()
     checkout = tmp_path / "managed" / "open-reverselab"
     monkeypatch.setattr(adapter, "default_install_root", lambda: checkout)
@@ -148,6 +148,10 @@ def test_install_without_yes_is_dry_run_and_creates_nothing(monkeypatch, tmp_pat
 
     assert result["dry_run"] is True
     assert result["status"] == "dry_run"
+    assert not checkout.parent.exists()
+    assert adapter.main(["install"]) == 0
+    cli_result = json.loads(capsys.readouterr().out)
+    assert cli_result["status"] == "dry_run"
     assert not checkout.parent.exists()
 
 
@@ -288,6 +292,17 @@ def test_install_receipt_records_provenance_and_forbids_activation(monkeypatch, 
     assert receipt["authorization"]["legal_review"] == "not_performed"
     assert receipt["checkout"] == str(checkout)
     assert receipt["environment"] != receipt["checkout"]
+
+    _write_checkout(checkout)
+    environment_python = Path(receipt["environment"]) / "bin" / "python"
+    environment_python.parent.mkdir(parents=True)
+    environment_python.write_bytes(b"placeholder")
+    environment_python.chmod(0o700)
+    Path(adapter.installation_paths(checkout)["receipt"]).write_text(json.dumps(receipt), encoding="utf-8")
+    observed = adapter.status()
+    assert observed["installation"]["status"] == "installed"
+    assert observed["runtime"]["installed"] is True
+    assert observed["runtime"]["mcp_enabled"] is False
 
 
 def test_managed_config_uses_isolated_interpreter_but_remains_disabled(monkeypatch, tmp_path):
