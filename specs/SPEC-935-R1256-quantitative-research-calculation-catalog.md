@@ -122,7 +122,7 @@ quântica.
   Receita/provento incremental precisa ser convertido pelo chamador para retorno
   bruto total, sem interpretação automática.
 
-## Critérios de aceitação
+## Critérios de aceitação executáveis
 
 - `AC1` — catálogo tem exatamente 200 IDs únicos, com categorias/status; itens
   planejados não podem ser executados ou resolvidos como se implementados.
