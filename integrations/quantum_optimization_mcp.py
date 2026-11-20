@@ -254,10 +254,26 @@ class QuantumOptimizationMCPServer:
             except Exception:
                 # Do not emit tracebacks, provider messages, environment values,
                 # or account state over the MCP channel.
-                payload = {"status": "error", "app": "quantum-optimization",
-                           "result": {"code": "internal_error", "message": "falha interna sem detalhes sensíveis."},
-                           "evidence": {"network": False},
-                           "limitations": ["Consulte o log local protegido; nenhuma credencial é retornada."]}
+                external_effect = name == "qaoa_optimize_gjq"
+                payload = {
+                    "status": "partial" if external_effect else "error",
+                    "app": "quantum-optimization",
+                    "result": {
+                        "code": "internal_error",
+                        "message": "falha interna sem detalhes sensíveis.",
+                    },
+                    "evidence": ({
+                        "external_effect": "possible",
+                        "submission_state": "unknown",
+                        "automatic_retry": False,
+                    } if external_effect else {"network": False}),
+                    "limitations": ([
+                        "O estado da submissão remota é incerto; não repita antes de verificar o provedor.",
+                        "Consulte o log local protegido; nenhuma credencial é retornada.",
+                    ] if external_effect else [
+                        "Consulte o log local protegido; nenhuma credencial é retornada."
+                    ]),
+                }
                 return self._success(request_id, {
                     "content": [{"type": "text", "text": json.dumps(payload, ensure_ascii=False)}],
                     "structuredContent": payload,

@@ -237,6 +237,25 @@ def test_remote_runner_uses_fake_provider_without_network(monkeypatch):
     assert result["result"]["optimality"] == "not_proven"
     assert "test-token-not-secret" not in json.dumps(result)
 
+    class FailingSampler:
+        def __init__(self, backend):
+            self.backend = backend
+
+        def run(self, circuit, shots):
+            raise TimeoutError("provider outcome may be uncertain")
+
+    class FailingSDK(SDK):
+        Sampler = FailingSampler
+
+    uncertain = qo.run_gjq_qaoa(
+        _problem(), backend_name="fake-qpu", shots=128,
+        max_evaluations=1, max_total_shots=128, confirm_remote=True, sdk=FailingSDK,
+    )
+    assert uncertain["status"] == "partial"
+    assert uncertain["result"]["submission_state"] == "uncertain"
+    assert uncertain["evidence"]["hardware_executed"] is None
+    assert uncertain["evidence"]["automatic_retry"] is False
+
 
 def test_mcp_catalog_and_tools():
     catalog = qo.quantum_catalog()
@@ -250,6 +269,30 @@ def test_mcp_catalog_and_tools():
 
     server = qomcp.create_server()
     assert server is not None
+
+
+def test_mcp_unexpected_remote_failure_preserves_uncertain_effect_state(monkeypatch):
+    def fail_after_possible_submission(_arguments):
+        raise TimeoutError("provider response unavailable")
+
+    monkeypatch.setitem(qomcp._HANDLERS, "qaoa_optimize_gjq", fail_after_possible_submission)
+    server = qomcp.create_server()
+    response = server.handle({
+        "jsonrpc": "2.0", "id": 7, "method": "tools/call",
+        "params": {
+            "name": "qaoa_optimize_gjq",
+            "arguments": {
+                "problem": _problem(), "backend_name": "test-backend",
+                "shots": 128, "max_evaluations": 1, "max_total_shots": 128,
+                "confirm_remote": True,
+            },
+        },
+    })
+    payload = json.loads(response["result"]["content"][0]["text"])
+    assert payload["status"] == "partial"
+    assert payload["evidence"]["external_effect"] == "possible"
+    assert payload["evidence"]["submission_state"] == "unknown"
+    assert payload["evidence"]["automatic_retry"] is False
 
 
 def _read_message(proc):

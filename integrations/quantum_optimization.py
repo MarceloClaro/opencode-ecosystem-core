@@ -602,7 +602,11 @@ def run_gjq_qaoa(
                 "backend_name": backend_name,
                 "backend_type_reported_by_provider": backend_type,
                 "jobs_submitted_or_uncertain": jobs_attempted,
-                "hardware_executed": False,
+                # The provider may have accepted the last request before a
+                # timeout/error. Preserve uncertainty instead of asserting that
+                # no QPU execution occurred.
+                "hardware_executed": None if jobs_attempted else False,
+                "hardware_execution_state": "uncertain" if jobs_attempted else "not_submitted",
                 "automatic_retry": False,
             },
             "limitations": [
