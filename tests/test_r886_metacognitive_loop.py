@@ -87,6 +87,8 @@ def test_resultados_contraditorios_nao_viram_reflexao_identica_ou_prova(primary)
 
 
 def test_replay_identico_nao_duplica_episodio_e_revisao_preserva_historico(primary):
+    from mci.metacognitive_loop import MetacognitiveLoop
+
     orchestrator, bus, board, _ = primary
     task = orchestrator.delegate("Revisar replay helio", ["r886_review"])
     agent = board.tasks[task].assigned_to
@@ -96,7 +98,13 @@ def test_replay_identico_nao_duplica_episodio_e_revisao_preserva_historico(prima
     orchestrator.report_completion(task, agent, dict(result), True)
     assert len(episodes(bus)) == 1
     assert orchestrator._metacognitive_reports[task]["reflection_id"] == first_id
-    orchestrator.report_completion(task, agent, {"output": "análise corrigida helio"}, True)
+    # O Blackboard agora aceita uma conclusão terminal uma única vez
+    # (R1245). A revisão de conteúdo ocorre diretamente no ciclo metacognitivo.
+    MetacognitiveLoop(bus).complete(
+        task_id=task, agent_id=agent, context="Revisar replay helio",
+        result={"output": "análise corrigida helio"}, success=True,
+        sdd_verification={"status": "legacy_unverified"},
+    )
     assert len(episodes(bus)) == 2
     assert episodes(bus)[-1]["observation"]["supersedes"] == first_id
     successor = orchestrator.delegate("Revisar replay helio", ["r886_review"])

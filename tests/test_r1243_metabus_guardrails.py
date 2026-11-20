@@ -130,9 +130,9 @@ def test_successful_save_keeps_runtime_and_disk_retention_in_sync(monkeypatch, t
             "SELECT entry_json FROM episodes ORDER BY seq"
         )]
     assert len(memory.episodic) == 1000
-    assert len(persisted["episodic"]) == 1000
+    assert len(persisted) == 1000
     assert memory.episodic[0]["id"] == "old-1"
-    assert persisted["episodic"] == memory.episodic
+    assert persisted == memory.episodic
     assert memory.episodic[-1]["reflection"] == "new reflection"
 
     memory.record_observation("agent", "new observation", {"result_summary": "saved"})
@@ -141,5 +141,5 @@ def test_successful_save_keeps_runtime_and_disk_retention_in_sync(monkeypatch, t
             "SELECT entry_json FROM episodes ORDER BY seq"
         )]
     assert len(memory.episodic) == 1000
-    assert persisted["episodic"] == memory.episodic
+    assert persisted == memory.episodic
     assert memory.episodic[-1]["observation"]["result_summary"] == "saved"
