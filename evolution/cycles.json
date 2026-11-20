@@ -25324,6 +25324,33 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1250",
+      "objective": "Validar R1247 e adquirir com segurança o SDK-fonte Tiangong solicitado",
+      "changes": [
+        "R1247: 116 testes quantum/Tiangong passaram e 1 foi ignorado; SpecVerifier AC1–AC9 validado (9/9) com TDD RED/GREEN.",
+        "Clone gjq_client criado em /tmp/opencode/gjq_client, commit a37d9eacbbb783699c70f50eee48df332f57ab5e.",
+        "Instalação editável não executada: setup.py exige Windows x64/CPython >=3.12; nenhuma dependência, credencial ou job cloud foi usado.",
+        "Revisão independente via ecosystem_run bloqueada no preflight por falta de RED; nenhum agente foi executado."
+      ],
+      "score": 0.55,
+      "lessons": [
+        "Inspecionar pyproject.toml e setup.py antes de instalar SDK de terceiro; não executar build em plataforma que o próprio pacote rejeita.",
+        "Em Linux/macOS, seguir a rota PyPI documentada requer autorização separada porque instala a pilha Qiskit; documentação URL não é argumento de pip.",
+        "Não penalizar agente quando não houve execução; falha de preflight deve permanecer reportada como bloqueio, não como revisão concluída."
+      ],
+      "timestamp": 1795191655.612753,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [

@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_plan_selects_official_streamable_http_without_java_or_proxy():
+    assert (ROOT / "integrations/burp_wsl2_plan.py").is_file()
     from integrations.burp_wsl2_plan import load_plan
 
     plan = load_plan(ROOT)
@@ -30,6 +31,7 @@ def test_plan_selects_official_streamable_http_without_java_or_proxy():
 
 
 def test_plan_remains_loopback_only_and_does_not_claim_target_activity():
+    assert (ROOT / "integrations/burp_wsl2_plan.py").is_file()
     from integrations.burp_wsl2_plan import load_plan
 
     safety = load_plan(ROOT)["safety"]
@@ -47,6 +49,7 @@ def test_catalog_surfaces_plan_without_claiming_burp_enabled():
     from integrations.claude_bughunter_catalog import load_catalog
 
     catalog = load_catalog(ROOT)
+    assert "wsl2_transport_plan" in catalog
     plan = catalog["wsl2_transport_plan"]
     assert plan["transport"] == "remote_streamable_http"
     assert plan["safety"]["opencode_server_configured"] is False
@@ -65,6 +68,7 @@ def test_primary_plan_exposes_wsl2_transport():
     service = CoreIntegrationService(ROOT, registry=Registry())
     plan = service.claude_bughunter_plan()
     assert plan["status"] == "instruction_only"
+    assert "wsl2_transport_plan" in plan
     assert plan["wsl2_transport_plan"]["transport"] == "remote_streamable_http"
     assert plan["wsl2_transport_plan"]["endpoint"] == "http://127.0.0.1:9876/mcp"
     assert plan["executed"] is False
