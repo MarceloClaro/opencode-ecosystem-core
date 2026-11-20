@@ -68,7 +68,9 @@ Com o ambiente Python do Core, a execução manual do servidor é:
 .venv/bin/python -m integrations.quantum_optimization_mcp
 ```
 
-O transporte é stdio JSON-RPC. As três ferramentas locais não importam Qiskit,
+O transporte é stdio JSON-RPC e negocia MCP `2024-11-05` e `2025-06-18`;
+respostas estruturadas e anotações de ferramenta só são emitidas quando a versão
+negociada as suporta. As três ferramentas locais não importam Qiskit,
 não leem `GJQ_API_KEY` e não acessam a rede. A configuração de exemplo abaixo
 registra o servidor **desabilitado**; a compilação desta entrega não ativa o
 MCP nem migra a configuração compartilhada:
