@@ -24949,6 +24949,33 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1234",
+      "objective": "Integrar Build Your Own X ao Core como referência educacional segura",
+      "changes": [
+        "SPEC-935-R1233 formalizou escopo e proveniência",
+        "Skill OpenCode build-your-own-x em modo de referência",
+        "Manifesto federado fixado ao commit upstream e limites CC0/downstream",
+        "Testes offline, TDD RED/GREEN e SpecVerifier local 3/3"
+      ],
+      "score": 0.6,
+      "lessons": [
+        "A declaração CC0 do README não se transfere aos recursos externos listados; verificar cada licença individualmente.",
+        "Um recibo TDD foi inicialmente rejeitado porque outro arquivo de teste mudou durante a execução; após estabilização, o par RED/GREEN e o SpecVerifier passaram.",
+        "A instalação do Tunnel no workspace ChatGPT continua não observável/não autorizada por esta interface e não foi alterada."
+      ],
+      "timestamp": 1795154755.5922573,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [

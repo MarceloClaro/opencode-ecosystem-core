@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 import json
+import base64
 import hashlib
-import os
+from copy import deepcopy
 from pathlib import Path
 
 import pytest
@@ -68,6 +69,7 @@ def test_rust_anything_install_plan_isolated_and_integrity_pinned(tmp_path):
     assert "--global" not in plan["argv"] and "-g" not in plan["argv"]
     assert "rust-anything@2.1.0" in plan["argv"]
     assert plan["integrity"].startswith("sha512-")
+    assert plan["unpacked_bytes"] == 126965553
     assert str(tmp_path.resolve()) in " ".join(plan["argv"])
     assert "<verified-tarball>" in plan["install_argv_template"]
     assert plan["integrity_verification"]["before_install"] is True
@@ -205,9 +207,20 @@ def test_npm_integrity_mismatch_stops_before_install(tmp_path):
     assert not (tmp_path / "rust-anything" / "node_modules").exists()
 
 
-def test_npm_install_uses_only_tarball_verified_against_pinned_integrity(tmp_path):
+def test_npm_install_uses_only_tarball_verified_against_pinned_integrity(tmp_path, monkeypatch):
     calls = []
-    expected = _entries()["rust-anything"]["source"]["integrity"]
+    tarball_bytes = b"verified-by-npm-integrity-field"
+    expected = "sha512-" + base64.b64encode(hashlib.sha512(tarball_bytes).digest()).decode("ascii")
+    original_entry = ext._entry
+
+    def entry_with_test_integrity(tool_id):
+        item = original_entry(tool_id)
+        if tool_id == "rust-anything":
+            item = deepcopy(item)
+            item["source"]["integrity"] = expected
+        return item
+
+    monkeypatch.setattr(ext, "_entry", entry_with_test_integrity)
 
     def fake_runner(argv, **kwargs):
         calls.append((argv, kwargs))
@@ -216,7 +229,7 @@ def test_npm_install_uses_only_tarball_verified_against_pinned_integrity(tmp_pat
         if argv[1] == "pack":
             destination = Path(argv[argv.index("--pack-destination") + 1])
             destination.mkdir(parents=True, exist_ok=True)
-            (destination / "rust-anything-2.1.0.tgz").write_bytes(b"verified-by-npm-integrity-field")
+            (destination / "rust-anything-2.1.0.tgz").write_bytes(tarball_bytes)
             return ext.CompletedResult(
                 0,
                 json.dumps([{"integrity": expected, "filename": "rust-anything-2.1.0.tgz"}]),
@@ -242,3 +255,16 @@ def test_manifest_records_license_and_adoption_states_without_collapsing_them():
     assert entries["prompts-chat"]["integration_status"] == "reference_only"
     assert entries["anthropic-mcp-builder"]["integration_status"] == "imported_explicit_only"
     assert entries["rust-anything"]["integration_status"] == "planned_isolated"
+
+
+def test_manifest_policy_validation_fails_closed_for_contradictory_states():
+    manifest = ext.load_manifest()
+    broken = deepcopy(manifest)
+    open_reverselab = next(item for item in broken["repositories"] if item["id"] == "open-reverselab")
+    open_reverselab["runtime"]["installed"] = True
+    assert any("open-reverselab" in error for error in ext.validate_manifest(broken))
+
+    broken = deepcopy(manifest)
+    prompts = next(item for item in broken["repositories"] if item["id"] == "prompts-chat")
+    prompts["license_status"] = "approved"
+    assert any("prompts-chat: license_status" in error for error in ext.validate_manifest(broken))

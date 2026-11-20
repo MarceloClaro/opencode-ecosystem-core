@@ -75,6 +75,29 @@ def validate_manifest(data: Mapping[str, Any]) -> list[str]:
             errors.append(f"{tool_id}: origem URL ausente")
         if not isinstance(entry.get("license"), Mapping):
             errors.append(f"{tool_id}: proveniência de licença ausente")
+        license_status = entry.get("license_status")
+        if not isinstance(license_status, str) or license_status not in {"source_declared_unreviewed", "human_review_required"}:
+            errors.append(f"{tool_id}: license_status inválido ou ausente")
+        adoption = entry.get("adoption")
+        if not isinstance(adoption, str) or adoption not in {"isolated_cli", "reference_only", "blocked_legal_review", "selected_skill", "existing_reuse"}:
+            errors.append(f"{tool_id}: adoption inválido ou ausente")
+            adoption = None
+        integration_status = entry.get("integration_status")
+        if not isinstance(integration_status, str) or integration_status not in {"planned_isolated", "reference_only", "blocked_legal_review", "imported_explicit_only", "existing_reuse"}:
+            errors.append(f"{tool_id}: integration_status inválido ou ausente")
+            integration_status = None
+        if adoption == "reference_only" and integration_status != "reference_only":
+            errors.append(f"{tool_id}: estado reference_only inconsistente")
+        if adoption == "blocked_legal_review" and (
+            integration_status != "blocked_legal_review" or license_status != "human_review_required"
+        ):
+            errors.append(f"{tool_id}: bloqueio legal deve permanecer fail-closed")
+        if adoption == "selected_skill" and integration_status != "imported_explicit_only":
+            errors.append(f"{tool_id}: skill selecionada deve permanecer explicit-only")
+        if adoption == "isolated_cli" and integration_status != "planned_isolated":
+            errors.append(f"{tool_id}: CLI isolada precisa distinguir plano de instalação")
+        if adoption == "existing_reuse" and integration_status != "existing_reuse":
+            errors.append(f"{tool_id}: integração existente deve ser marcada como reutilizada")
         runtime = entry.get("runtime")
         if not isinstance(runtime, Mapping):
             errors.append(f"{tool_id}: runtime ausente")
@@ -82,7 +105,6 @@ def validate_manifest(data: Mapping[str, Any]) -> list[str]:
         for key in ("installed", "executed", "enabled", "mcp_enabled"):
             if not isinstance(runtime.get(key), bool):
                 errors.append(f"{tool_id}: runtime.{key} deve ser booleano")
-        adoption = entry.get("adoption")
         if adoption in {"reference_only", "blocked_legal_review"}:
             if runtime.get("installed") or runtime.get("executed") or runtime.get("enabled") or runtime.get("mcp_enabled"):
                 errors.append(f"{tool_id}: fonte {adoption} não pode alegar instalação/execução/ativação")
@@ -157,6 +179,7 @@ def install_plan(tool_id: str, root: Path | str | None = None) -> dict[str, Any]
         "target": str(target),
         "root": str(base),
         "integrity": integrity,
+        "unpacked_bytes": item["source"].get("unpacked_bytes"),
         "integrity_verification": {
             "required": tool_id in {"rust-anything", "caveman"},
             "method": "npm pack SRI metadata and local tarball SHA-512, both compared before install"
