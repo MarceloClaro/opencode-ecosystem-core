@@ -90,6 +90,12 @@ def test_reflection_score_must_be_finite_normalized_and_does_not_mutate_on_rejec
 
 def test_reflection_persistence_failure_rolls_back_episode_and_confidence(monkeypatch, tmp_path):
     memory = _memory(monkeypatch, tmp_path)
+    memory.episodic.extend(
+        {"id": f"preexisting-{index}", "agent_id": "agent", "context": "historical"}
+        for index in range(1000)
+    )
+    memory.confidence_ledger["agent"] = 0.77
+    before_episodic = list(memory.episodic)
     before_ledger = dict(memory.confidence_ledger)
     monkeypatch.setattr(memory, "_save", lambda **_kwargs: False)
 
@@ -98,7 +104,7 @@ def test_reflection_persistence_failure_rolls_back_episode_and_confidence(monkey
         lambda: memory.add_reflection("agent", "context", "reflection", 1.0),
     )
 
-    assert memory.episodic == []
+    assert memory.episodic == before_episodic
     assert memory.confidence_ledger == before_ledger
 
 
