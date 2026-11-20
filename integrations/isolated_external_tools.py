@@ -9,13 +9,16 @@ registered here.
 from __future__ import annotations
 
 import argparse
+import base64
 from dataclasses import dataclass
+import hashlib
 import json
 import os
 from pathlib import Path
 import shutil
 import subprocess
 import sys
+import tempfile
 from typing import Any, Callable, Mapping, Sequence
 
 
@@ -127,22 +130,22 @@ def install_plan(tool_id: str, root: Path | str | None = None) -> dict[str, Any]
         package = item["source"]["package"]
         npm = shutil.which("npm") or "npm"
         argv = [
-            npm, "install", "--prefix", str(target), "--ignore-scripts", "--no-audit",
-            "--no-fund", "--save-exact", package,
+            npm, "pack", "--json", "--ignore-scripts", "--pack-destination",
+            str(base / f".{tool_id}-verified-staging"), package,
         ]
         cache = base / "npm-cache"
         environment = isolated_environment(tool_id, base)
         environment["npm_config_cache"] = str(cache)
+        environment["npm_config_ignore_scripts"] = "true"
         integrity = item["source"].get("integrity")
     elif tool_id == "universal-os":
         uv = shutil.which("uv") or "uv"
         source = f"git+{item['source']['url']}@{item['source']['commit']}"
-        argv = [
-            uv, "tool", "install", "--tool-dir", str(target), "--bin-dir", str(target / "bin"),
-            "--from", source, "universal-os",
-        ]
+        argv = [uv, "tool", "install", "--from", source, "universal-os"]
         environment = isolated_environment(tool_id, base)
         environment["UV_CACHE_DIR"] = str(base / "uv-cache")
+        environment["UV_TOOL_DIR"] = str(target / "tools")
+        environment["UV_TOOL_BIN_DIR"] = str(target / "bin")
         integrity = None
     else:  # pragma: no cover - guarded by manifest/adoption contract
         raise ValueError(f"Sem instalador isolado suportado: {tool_id}")
@@ -152,7 +155,20 @@ def install_plan(tool_id: str, root: Path | str | None = None) -> dict[str, Any]
         "cwd": str(target),
         "environment": environment,
         "target": str(target),
+        "root": str(base),
         "integrity": integrity,
+        "integrity_verification": {
+            "required": tool_id in {"rust-anything", "caveman"},
+            "method": "npm pack SRI metadata and local tarball SHA-512, both compared before install"
+            if tool_id in {"rust-anything", "caveman"} else "git source pinned to full commit SHA",
+            "before_install": True,
+        },
+        "install_argv_template": (
+            [
+                shutil.which("npm") or "npm", "install", "--prefix", str(target), "--ignore-scripts",
+                "--no-audit", "--no-fund", "--save-exact", "<verified-tarball>",
+            ] if tool_id in {"rust-anything", "caveman"} else None
+        ),
         "mcp_enabled": False,
         "dry_run": True,
     }
@@ -179,6 +195,15 @@ def isolated_environment(
             "DO_NOT_TRACK": "1",
             "CAVEMAN_TELEMETRY": "0",
             "CAVEMAN_OFFLINE": "1",
+        })
+    if tool_id in {"rust-anything", "caveman"}:
+        env.update({
+            "npm_config_userconfig": str(private_home / ".npmrc"),
+            "npm_config_globalconfig": str(private_home / "global.npmrc"),
+            "npm_config_registry": "https://registry.npmjs.org/",
+            "npm_config_audit": "false",
+            "npm_config_fund": "false",
+            "npm_config_update_notifier": "false",
         })
     elif tool_id == "universal-os":
         env["UOS_HOME"] = str(private_home)
@@ -274,20 +299,87 @@ def install_tool(
         return plan
     if timeout <= 0 or timeout > MAX_TIMEOUT_SECONDS:
         raise ValueError(f"timeout deve estar entre 1 e {MAX_TIMEOUT_SECONDS} segundos")
+    base = Path(plan["root"])
     target = Path(plan["target"])
-    target.mkdir(parents=True, exist_ok=True)
+    if target.is_symlink() or (target.exists() and (not target.is_dir() or any(target.iterdir()))):
+        return {**plan, "dry_run": False, "status": "target_not_empty", "stderr": "O destino existe e não está vazio; nenhuma instalação foi iniciada."}
     invoke = runner or subprocess.run
-    try:
-        completed = invoke(
-            plan["argv"],
-            cwd=str(target),
-            env=plan["environment"],
+
+    def run_command(argv: Sequence[str], cwd: Path, env: Mapping[str, str]) -> Any:
+        return invoke(
+            list(argv),
+            cwd=str(cwd),
+            env=dict(env),
             shell=False,
             capture_output=True,
             text=True,
             timeout=timeout,
             check=False,
         )
+
+    if tool_id in {"rust-anything", "caveman"}:
+        base.mkdir(parents=True, exist_ok=True)
+        try:
+            with tempfile.TemporaryDirectory(prefix=f".{tool_id}-verified-", dir=str(base)) as scratch:
+                staging = Path(scratch).resolve()
+                pack_argv = list(plan["argv"])
+                pack_argv[pack_argv.index("--pack-destination") + 1] = str(staging)
+                packed = run_command(pack_argv, staging, plan["environment"])
+                packed_code = int(getattr(packed, "returncode", 1))
+                packed_stdout = str(getattr(packed, "stdout", "") or "")[:MAX_OUTPUT_CHARS]
+                packed_stderr = str(getattr(packed, "stderr", "") or "")[:MAX_OUTPUT_CHARS]
+                if packed_code != 0:
+                    return {**plan, "dry_run": False, "status": "pack_failed", "returncode": packed_code, "stdout": packed_stdout, "stderr": packed_stderr}
+                try:
+                    metadata = json.loads(packed_stdout)
+                    record = metadata[0] if isinstance(metadata, list) and metadata else metadata
+                    filename = record.get("filename") if isinstance(record, Mapping) else None
+                    reported_integrity = record.get("integrity") if isinstance(record, Mapping) else None
+                except (json.JSONDecodeError, TypeError, IndexError):
+                    return {**plan, "dry_run": False, "status": "pack_metadata_invalid", "stdout": packed_stdout, "stderr": packed_stderr}
+                if (not isinstance(filename, str) or Path(filename).name != filename
+                        or "\\" in filename or filename in {"", ".", ".."}):
+                    return {**plan, "dry_run": False, "status": "pack_metadata_invalid", "stdout": packed_stdout, "stderr": "Nome do tarball inválido."}
+                tarball = staging / filename
+                if not tarball.is_file() or tarball.is_symlink():
+                    return {**plan, "dry_run": False, "status": "pack_artifact_missing", "stdout": packed_stdout, "stderr": "npm pack não produziu um tarball regular no staging isolado."}
+                actual_integrity = _sha512_sri(tarball)
+                expected_integrity = plan["integrity"]
+                if reported_integrity != expected_integrity or actual_integrity != expected_integrity:
+                    return {
+                        **plan,
+                        "dry_run": False,
+                        "status": "integrity_mismatch",
+                        "expected_integrity": expected_integrity,
+                        "reported_integrity": reported_integrity,
+                        "actual_integrity": actual_integrity,
+                        "stdout": packed_stdout,
+                        "stderr": "Pacote obtido não corresponde ao SRI fixado; instalação bloqueada.",
+                    }
+                target.mkdir(parents=True, exist_ok=True)
+                install_argv = [
+                    shutil.which("npm") or "npm", "install", "--prefix", str(target), "--ignore-scripts",
+                    "--no-audit", "--no-fund", "--save-exact", str(tarball),
+                ]
+                installed = run_command(install_argv, target, plan["environment"])
+                code = int(getattr(installed, "returncode", 1))
+                return {
+                    **plan,
+                    "argv": install_argv,
+                    "dry_run": False,
+                    "status": "installed" if code == 0 else "install_failed",
+                    "returncode": code,
+                    "integrity_verified": True,
+                    "stdout": str(getattr(installed, "stdout", "") or "")[:MAX_OUTPUT_CHARS],
+                    "stderr": str(getattr(installed, "stderr", "") or "")[:MAX_OUTPUT_CHARS],
+                }
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            return {**plan, "dry_run": False, "status": "install_error", "stderr": str(exc)[:MAX_OUTPUT_CHARS]}
+
+    base.mkdir(parents=True, exist_ok=True)
+    target.mkdir(parents=True, exist_ok=True)
+    try:
+        completed = run_command(plan["argv"], target, plan["environment"])
         return {
             **plan,
             "dry_run": False,
@@ -298,6 +390,15 @@ def install_tool(
         }
     except (OSError, subprocess.TimeoutExpired) as exc:
         return {**plan, "dry_run": False, "status": "install_error", "stderr": str(exc)[:MAX_OUTPUT_CHARS]}
+
+
+def _sha512_sri(path: Path) -> str:
+    """Hash a packed package incrementally using npm's SRI representation."""
+    digest = hashlib.sha512()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return "sha512-" + base64.b64encode(digest.digest()).decode("ascii")
 
 
 def main(argv: Sequence[str] | None = None) -> int:
