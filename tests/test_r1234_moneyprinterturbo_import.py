@@ -238,6 +238,8 @@ def test_mcp_import_creates_project_from_configured_local_root(tmp_path, monkeyp
     mpt_root, editor_root, source = roots(tmp_path)
     monkeypatch.setattr(video_editor, "probe_media", lambda path, **kwargs: probe_for(path))
     server = video_editor_mcp.create_server(editor_root, mpt_output_root=mpt_root)
+    names = {tool.name for tool in asyncio.run(server.list_tools())}
+    assert "editor_import_mpt_output" in names
     result = asyncio.run(server.call_tool("editor_import_mpt_output", {
         "media_path": "8f4f8a75-1c27-47ed-b2d3-45a9940e9ed1/final-1.mp4",
         "project_id": "mcp-mpt-demo",
