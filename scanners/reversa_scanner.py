@@ -44,6 +44,16 @@ _SMELL_PATTERNS = {
 }
 
 
+def _path_exists(path) -> bool:
+    """Sonda se o corpus é caminho; erros de filesystem deixam texto seguir."""
+    try:
+        return path.exists()
+    except OSError:
+        # ENAMETOOLONG e erros semelhantes apenas significam que o corpus não
+        # foi confirmado como caminho; o scanner textual ainda pode analisá-lo.
+        return False
+
+
 class ReversaScanner:
     """
     Scanner de Engenharia Reversa (código legado → especificações executáveis).
@@ -74,9 +84,9 @@ class ReversaScanner:
             if not _p.is_absolute():
                 _root = _Path(__file__).resolve().parents[1]
                 _cand = _root / corpus_stripped
-                if _cand.exists():
+                if _path_exists(_cand):
                     _p = _cand
-            if _p.exists():
+            if _path_exists(_p):
                 try:
                     from reversa_universal.engine import ReversaUniversalEngine
                     _eng = ReversaUniversalEngine()

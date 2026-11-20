@@ -56,7 +56,7 @@ def test_sample_size_proportion_uses_finite_population_and_documents_variability
     assert result["population_size"] == 10_000
     assert result["assumptions"]["population_model"] == "Bernoulli proportion"
     assert "máxima variância" in result["assumptions"]["proportion_choice"]
-    assert "geographic heterogeneity" in result["limitations"]
+    assert any("heterogeneidade geográfica" in item for item in result["limitations"])
 
 
 def test_sample_size_adjusts_for_design_effect_and_nonresponse_without_exceeding_population():
