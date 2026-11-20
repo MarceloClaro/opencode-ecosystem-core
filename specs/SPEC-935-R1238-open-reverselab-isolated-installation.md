@@ -2,7 +2,7 @@
 spec_id: SPEC-935-R1238
 title: Instalacao condicional e isolada do MCP OpenReverseLab
 component: integrations.open_reverselab
-status: planned
+status: implemented
 test_file: tests/test_r1238_open_reverselab_install.py
 evidence_contract:
   version: 1
