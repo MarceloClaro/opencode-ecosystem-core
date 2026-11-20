@@ -25741,6 +25741,31 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1270",
+      "objective": "SPEC-935-R1268: retomada após recuperação de AT-SPI, aguardando seleção manual do BApp",
+      "changes": [
+        "Acessibilidade AT-SPI voltou a responder; Extensions/Installed confirmados selecionados por estado acessível.",
+        "Snapshot do desktop-operator é limitado a 12 níveis e não emite ref para o botão Add, que está mais profundo.",
+        "Sem bypass da política; listener MCP ausente e configuração OpenCode permanece sem servidor Burp."
+      ],
+      "score": 0.45,
+      "lessons": [
+        "Se uma ação autorizada fica fora da profundidade de snapshot, parar e pedir uma ação manual mínima em vez de sintetizar ref ou modificar o gate.",
+        "Reconfirmar o listener loopback antes de tocar a configuração do cliente MCP."
+      ],
+      "timestamp": 1795219077.2964303,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
