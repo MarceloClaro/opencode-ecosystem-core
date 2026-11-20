@@ -14,6 +14,7 @@ evidence_contract:
       - tests/test_r1249_burp_wsl2_adaptation.py::test_primary_plan_exposes_wsl2_transport
     R1249-SAFETY:
       - tests/test_r1249_burp_wsl2_adaptation.py::test_plan_remains_loopback_only_and_does_not_claim_target_activity
+      - tests/test_r1249_burp_wsl2_adaptation.py::test_plan_tracks_burp_install_without_enabling_bapp
     R1249-AT-SPI:
       - tests/test_r1249_burp_wsl2_adaptation.py::test_atspi_backend_is_available_after_typelib_staging
 ---
@@ -91,10 +92,12 @@ prova de execução local após o BApp estar instalado.
 
 - `R1249-TRANSPORT`: catálogo valida a proveniência declarada e seleciona
   Streamable HTTP em loopback sem exigir Java ou JAR proxy.
-- `R1249-SAFETY`: plano deixa explícito `burp_installed=false`,
+- `R1249-SAFETY`: plano registra o estado observado de instalação do Burp como
+  booleano (inicialmente `false`; pode ser atualizado após instalação oficial),
+  sem inferir que isso instala o BApp. Enquanto o BApp não estiver instalado,
   `extension_installed=false`, `opencode_server_configured=false`,
   `mcp_connected=false`, `http_requests_sent=false` e
-  `target_testing_authorized=false` até execução observada.
+  `target_testing_authorized=false`.
 - `R1249-AT-SPI`: o backend local responde `ok=true` depois que o typelib for
   estagiado e carregado via `GI_TYPELIB_PATH`. Acesso à GUI não remove a
   aprovação humana por ação.

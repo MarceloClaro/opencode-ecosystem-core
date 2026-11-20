@@ -48,8 +48,10 @@ def load_plan(repo_root: str | Path | None = None) -> dict[str, Any]:
         raise ValueError("rota HTTP direta não pode exigir Java ou proxy JAR")
     if manifest.get("status") != "blocked_missing_bapp":
         raise ValueError("status deve permanecer bloqueado enquanto faltar o BApp")
-    if runtime.get("burp_community_installed") is not False or runtime.get("official_bapp_installed") is not False:
-        raise ValueError("manifesto não pode alegar Burp/BApp instalado sem recibo")
+    if type(runtime.get("burp_community_installed")) is not bool:
+        raise ValueError("estado observado de instalação do Burp deve ser booleano")
+    if runtime.get("official_bapp_installed") is not False:
+        raise ValueError("plano atual não deve promover BApp ausente a instalado")
     if runtime.get("default_host") != "127.0.0.1" or runtime.get("default_port") != 9876:
         raise ValueError("bind/porta padrão PortSwigger divergente")
     if runtime.get("enabled_default_on_extension_load") is not True:

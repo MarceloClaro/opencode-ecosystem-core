@@ -2,12 +2,10 @@
 
 from __future__ import annotations
 
-import asyncio
 import json
 import os
 from pathlib import Path
 import subprocess
-import sys
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -43,6 +41,33 @@ def test_plan_remains_loopback_only_and_does_not_claim_target_activity():
     assert safety["http_requests_sent"] is False
     assert safety["target_testing_authorized"] is False
     assert safety["burp_config_edited"] is False
+
+
+def test_plan_tracks_burp_install_without_enabling_bapp(tmp_path):
+    from integrations.burp_wsl2_plan import load_plan
+
+    manifest = json.loads(
+        (ROOT / "federation/burp-wsl2-adaptation-r1249.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    manifest["burp_runtime"]["burp_community_installed"] = True
+    federation = tmp_path / "federation"
+    federation.mkdir()
+    (federation / "burp-wsl2-adaptation-r1249.json").write_text(
+        json.dumps(manifest), encoding="utf-8"
+    )
+    try:
+        plan = load_plan(tmp_path)
+    except ValueError as exc:
+        raise AssertionError(
+            "o plano deve aceitar o estado observado após instalar Burp "
+            "sem promover o BApp"
+        ) from exc
+    assert plan["burp_runtime"]["burp_community_installed"] is True
+    assert plan["burp_runtime"]["official_bapp_installed"] is False
+    assert plan["safety"]["extension_installed"] is False
+    assert plan["safety"]["mcp_connected"] is False
 
 
 def test_catalog_surfaces_plan_without_claiming_burp_enabled():
