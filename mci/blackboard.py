@@ -65,6 +65,18 @@ def _live_load(agent_id: str) -> float:
     return max(0.0, min(1.0, active / _LOAD_REFERENCE_CAPACITY))
 
 
+def _capability_set(value: Any) -> Optional[set[str]]:
+    """Normaliza capacidades sem dividir strings em caracteres."""
+
+    if isinstance(value, str):
+        value = [value]
+    if not isinstance(value, (list, tuple, set, frozenset)):
+        return None
+    if any(not isinstance(item, str) or not item.strip() for item in value):
+        return None
+    return {item.strip() for item in value}
+
+
 class AgentCard:
     """Representa as capacidades de um agente (Padrão A2A Protocol)."""
     def __init__(self, agent_id: str, name: str, description: str, capabilities: List[str], schema: Dict[str, Any]):
@@ -98,7 +110,7 @@ class BlackboardTask:
         self.description = description
         self.required_capabilities = required_capabilities
         self.context = context
-        self.status = "open" # open, assigned, completed, failed, blocked
+        self.status = "open" # open, assigned, completed, failed, blocked, awaiting_supervision
         self.assigned_to: Optional[str] = None
         self.result: Optional[Any] = None
         self.created_at = datetime.now(timezone.utc).isoformat()
@@ -148,8 +160,10 @@ class Blackboard:
 
     def _handle_task_post(self, event: Dict[str, Any]):
         payload = event.get("payload", {})
+        raw_task_id = payload.get("task_id")
+        task_id = raw_task_id if isinstance(raw_task_id, str) and raw_task_id.strip() else str(uuid.uuid4())
         task = BlackboardTask(
-            task_id=payload.get("task_id", str(uuid.uuid4())),
+            task_id=task_id.strip(),
             description=payload.get("description"),
             required_capabilities=payload.get("required_capabilities", []),
             context=payload.get("context", {})
@@ -165,12 +179,18 @@ class Blackboard:
         if task.status != "open":
             return
         eligible = []
-        required = set(task.required_capabilities)
+        required = _capability_set(task.required_capabilities)
+        if required is None:
+            task.status = "blocked"
+            task.blocked_reason = "invalid_required_capabilities"
+            task.eligible_agents = []
+            return
         for agent_id, card in self.registry.items():
             if card.status != "available":
                 continue
             # Capacidades obrigatórias têm semântica all_of, nunca any_of.
-            if required.issubset(set(card.capabilities)):
+            capabilities = _capability_set(card.capabilities)
+            if capabilities is not None and required.issubset(capabilities):
                 eligible.append(card)
                 
         if eligible:
@@ -193,7 +213,9 @@ class Blackboard:
         payload = event.get("payload", {})
         task_id = payload.get("task_id")
         agent_id = payload.get("agent_id")
-        
+        if not isinstance(task_id, str) or not task_id.strip():
+            return
+        task_id = task_id.strip()
         task = self.tasks.get(task_id)
         if not task or task.status != "open":
             return
@@ -201,12 +223,11 @@ class Blackboard:
             return
         agent_id = agent_id.strip()
         card = self.registry.get(agent_id)
-        if (
-            card is None
-            or agent_id not in task.eligible_agents
-            or card.status != "available"
-            or not set(task.required_capabilities).issubset(set(card.capabilities))
-        ):
+        if card is None or agent_id not in task.eligible_agents or card.status != "available":
+            return
+        required = _capability_set(task.required_capabilities)
+        capabilities = _capability_set(card.capabilities)
+        if required is None or capabilities is None or not required.issubset(capabilities):
             return
 
         task.status = "assigned"
@@ -224,12 +245,15 @@ class Blackboard:
         task_id = payload.get("task_id")
         agent_id = payload.get("agent_id")
         status = payload.get("status", "completed") # completed or failed
-        
+        if not isinstance(task_id, str) or not task_id.strip():
+            return
+        task_id = task_id.strip()
         task = self.tasks.get(task_id)
         if (
             not task
             or task.status != "assigned"
             or task.assigned_to != agent_id
+            or not isinstance(status, str)
             or status not in {"completed", "failed"}
         ):
             return

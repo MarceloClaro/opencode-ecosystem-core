@@ -51,7 +51,7 @@ def test_volunteer_must_belong_to_current_cfp_and_still_be_eligible(isolate_blac
     _card("stale-worker", ["python"], status="busy")
 
     blackboard._match_task(task)
-    assert task.eligible_agents == ["worker"]
+    assert getattr(task, "eligible_agents", []) == ["worker"]
 
     # A stale CFP cannot reserve an agent who was not eligible when issued,
     # even if that agent becomes available before the volunteer event arrives.

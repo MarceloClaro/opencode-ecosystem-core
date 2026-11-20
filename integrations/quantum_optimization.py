@@ -433,11 +433,14 @@ def build_qiskit_circuit(qubo: Qubo, depth: int, sdk: Any = None):
         if gate == "H":
             circuit.h(qubits[0])
         elif gate == "RZ":
-            circuit.rz(gammas[int(operation["parameter"].split("_")[1])] * operation["scale"], qubits[0])
+            angle = operation["scale"] * gammas[int(operation["parameter"].split("_")[1])]
+            circuit.rz(angle, qubits[0])
         elif gate == "RZZ":
-            circuit.rzz(gammas[int(operation["parameter"].split("_")[1])] * operation["scale"], *qubits)
+            angle = operation["scale"] * gammas[int(operation["parameter"].split("_")[1])]
+            circuit.rzz(angle, *qubits)
         elif gate == "RX":
-            circuit.rx(betas[int(operation["parameter"].split("_")[1])] * operation["scale"], qubits[0])
+            angle = operation["scale"] * betas[int(operation["parameter"].split("_")[1])]
+            circuit.rx(angle, qubits[0])
         elif gate == "MEASURE_ALL":
             circuit.measure_all()
     return circuit, gammas, betas
