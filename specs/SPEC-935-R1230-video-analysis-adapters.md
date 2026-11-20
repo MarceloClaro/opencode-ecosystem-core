@@ -4,6 +4,31 @@ title: Adaptadores de análise e cortes propostos para o editor de vídeo
 component: integrations.video_analysis
 status: specified
 test_file: tests/test_r1230_video_analysis.py
+evidence_contract:
+  version: 1
+  mode: criterion-runtime-v1
+  criteria:
+    R1230-TOOLS:
+      - tests/test_r1230_video_analysis.py::test_diagnose_tools_reports_ffmpeg_ffprobe_versions_separately
+      - tests/test_r1230_video_analysis.py::test_diagnose_tools_does_not_hide_missing_or_failed_binary
+    R1230-SCENES:
+      - tests/test_r1230_video_analysis.py::test_scene_markers_are_frame_aligned_hashed_and_review_only
+      - tests/test_r1230_video_analysis.py::test_scene_markers_reject_symlink_vfr_and_bad_detector_output
+    R1230-V1:
+      - tests/test_r1230_video_analysis.py::test_auto_editor_v1_becomes_pending_cut_proposal_without_frame_drift
+      - tests/test_r1230_video_analysis.py::test_auto_editor_parser_rejects_invalid_or_unmapped_chunks
+      - tests/test_r1230_video_analysis.py::test_auto_editor_parser_rejects_vfr_and_non_frame_aligned_timebase
+      - tests/test_r1230_video_analysis.py::test_auto_editor_parser_preserves_ntsc_rational_timebase_exactly
+    R1230-RUNNER:
+      - tests/test_r1230_video_analysis.py::test_auto_editor_runner_exports_only_v1_and_preserves_source
+      - tests/test_r1230_video_analysis.py::test_auto_editor_runner_reports_timeout_and_missing_cli
+    R1230-MCP:
+      - tests/test_r1230_video_analysis.py::test_mcp_exposes_confined_analysis_and_review_proposal_tools
+      - tests/test_r1230_video_analysis.py::test_mcp_status_reports_tool_versions_and_pending_artifact_counts
+    R1230-CATALOG:
+      - tests/test_r1230_video_analysis.py::test_registry_records_native_auto_editor_and_optional_longcat
+    R1230-REQUIREMENTS:
+      - tests/test_r1230_video_analysis.py::test_spec_declares_review_only_and_no_whisperx_install
 depends_on:
   - SPEC-935-R1042
   - SPEC-935-R1043
@@ -76,6 +101,16 @@ se uma medição em corpus PT-BR demonstrar falha de alinhamento no backend atua
    gerador opcional não executável; WhisperX não é apresentado como requisito.
 8. Testes focais, regressões de R1042/R1043 e doctor do `.venv` passam; limitações
    de execução e disponibilidade externa são registradas sem overclaim.
+
+## Critérios de aceitação executáveis
+
+- `R1230-TOOLS` — diagnóstico diferenciado de FFmpeg, ffprobe e Auto-Editor.
+- `R1230-SCENES` — marcadores CFR íntegros, revisáveis e com rejeição de VFR/symlink.
+- `R1230-V1` — conversão exata de timeline v1 e rejeição de dados ou timebases inválidos.
+- `R1230-RUNNER` — exportação v1 sem shell/render, com temporário, timeout e fonte preservada.
+- `R1230-MCP` — análise e propostas confinadas, content-addressed e pendentes de revisão.
+- `R1230-CATALOG` — Auto-Editor nativo e LongCat-Video opcional/reference-only.
+- `R1230-REQUIREMENTS` — WhisperX não é instalado quando timestamps por palavra já existem.
 
 ## Fora de escopo
 
