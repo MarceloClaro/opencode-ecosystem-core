@@ -25434,6 +25434,32 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1255",
+      "objective": "Registrar invalidação pós-GREEN do recibo R1251 pelo ledger evolutivo",
+      "changes": [
+        "Após gravação R1254, validate_pair R1251 retornou current_sources_differ_from_green.",
+        "Reexecução direta do teste operacional R1251 passou 4/4 e pip check passou; recibo TDD antigo não foi promovido como atual.",
+        "Nenhum agente executou; sem slashing; instalação e ambiente isolado foram preservados."
+      ],
+      "score": 0.4,
+      "lessons": [
+        "Gravar Reflexion/Evolution depois do GREEN pode alterar fontes rastreadas e invalidar o par final.",
+        "Ordenar registro evolutivo antes do gate final, ou excluir o ledger do manifesto de fontes via mudança especificada e testada.",
+        "Manter separados resultado de pytest corrente e validade do recibo RED/GREEN; nunca fabricar RED após a implementação."
+      ],
+      "timestamp": 1795192806.0772529,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
