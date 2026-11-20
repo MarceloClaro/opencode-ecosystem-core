@@ -58,7 +58,7 @@ def test_manifest_forbids_upstream_import_install_execution_and_mcp():
 def test_skill_requires_explicit_authority_and_bounded_scope():
     text = SKILL_PATH.read_text(encoding="utf-8").casefold()
     assert SKILL_PATH.is_file()
-    assert f"https://github.com/{REPOSITORY}" in text
+    assert f"https://github.com/{REPOSITORY.casefold()}" in text
     assert OBSERVED_COMMIT in text
     assert "autorização escrita" in text
     assert "escopo" in text
@@ -72,7 +72,7 @@ def test_skill_limits_assistance_to_defensive_non_intrusive_work():
     text = SKILL_PATH.read_text(encoding="utf-8").casefold()
     assert "recomendações de correção" in text
     assert "não executa testes" in text or "não realize testes" in text
-    assert "não fornece payloads" in text or "não inclua payloads" in text
+    assert "não forneça payloads" in text or "não inclua payloads" in text
     assert "pós-exploração" in text
     assert "negação de serviço" in text or "dos" in text
     assert "burp mcp" in text

@@ -1,0 +1,44 @@
+{
+  "schema_version": "r1235.v1",
+  "spec_id": "SPEC-935-R1235",
+  "repository": "elementalsouls/Claude-BugHunter",
+  "observed_at": "2026-11-20",
+  "source": {
+    "url": "https://github.com/elementalsouls/Claude-BugHunter",
+    "default_branch": "main",
+    "commit": "0e70a021e59d6875004e7a563f8511aca2ba3bc1",
+    "commit_url": "https://github.com/elementalsouls/Claude-BugHunter/commit/0e70a021e59d6875004e7a563f8511aca2ba3bc1",
+    "observed_via": "github_commits_atom_feed",
+    "commit_observed_at": "2026-11-19T13:21:34Z",
+    "signature_status": "not_observed",
+    "branch_head_status": "not_verified"
+  },
+  "evidence": {
+    "readme": "https://raw.githubusercontent.com/elementalsouls/Claude-BugHunter/main/README.md",
+    "security_policy": "https://raw.githubusercontent.com/elementalsouls/Claude-BugHunter/main/SECURITY.md",
+    "license_code": "https://raw.githubusercontent.com/elementalsouls/Claude-BugHunter/main/LICENSE",
+    "license_content": "https://raw.githubusercontent.com/elementalsouls/Claude-BugHunter/main/LICENSE-CONTENT",
+    "notice": "https://raw.githubusercontent.com/elementalsouls/Claude-BugHunter/main/NOTICE",
+    "commit_feed": "https://github.com/elementalsouls/Claude-BugHunter/commits/main.atom",
+    "license_files_crosschecked_to_pinned_commit": false
+  },
+  "license": {
+    "code": "MIT",
+    "content": "CC-BY-4.0",
+    "third_party_material": "independent_unreviewed",
+    "legal_review": "not_performed"
+  },
+  "adoption": "reference_only",
+  "integrated_surface": "original_project_skill",
+  "content_imported": false,
+  "upstream_skills_imported": 0,
+  "upstream_commands_imported": 0,
+  "active_target_testing_authorized": false,
+  "runtime": {
+    "installed": false,
+    "executed": false,
+    "enabled": false,
+    "mcp_enabled": false
+  },
+  "isolation": "pinned reference metadata and locally authored defensive workflow only; no upstream content, scripts, tools, payloads, commands, dependencies, or MCP"
+}
