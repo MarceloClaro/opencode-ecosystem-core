@@ -25062,6 +25062,34 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1239",
+      "objective": "SPEC-935-R1234: fechar o gate TDD formal para a spec ampliada de MoneyPrinterTurbo com alvo de symlink e documentação de evidências corrigida",
+      "changes": [
+        "Corrigida a seção de evidência da SPEC-935-R1234 para distinguir o histórico de 15 alvos do gate atual de 16 alvos e documentar o bloqueio causado por mudança de HEAD durante auto-checkpoint.",
+        "Executado novo TDDHistory RED→GREEN em worktree destacado com estado privado: 16 alvos, RED aceito e GREEN 16/16; SpecVerifier 5/5 em software_delivery_gate.",
+        "Reexecutadas no checkout principal as suítes focais (16) e regressões de vídeo (66), doctor estrutural e git diff --check."
+      ],
+      "score": 7.0,
+      "lessons": [
+        "O TDDHistory inclui o git HEAD no snapshot de fontes; um auto-checkpoint pode invalidar recibo mesmo sem mudança em bytes-fonte. Em ambientes com checkpoint concorrente, use worktree destacado e mantenha contexto/spec/teste idênticos.",
+        "Não editar a spec depois do RED: a correção de contagem/evidência foi feita antes de abrir novo par, e a spec testada foi comparada byte a byte com a do checkout principal.",
+        "Guarde RED e GREEN receipts na mesma raiz TDDHistory; históricos em raízes diferentes não podem compartilhar ledger porque o receipt prende o root.",
+        "O gate local confirmou 5/5 critérios e 16/16 nodeids; não houve revisão externa independente e a pontuação do EvolutionRegistry é heurística, não validação de mérito.",
+        "MoneyPrinterTurbo permanece privado e inerte: instalação separada, importação apenas de MP4 local, sem iniciar app, configurar chaves, gerar/renderizar/publicar vídeos."
+      ],
+      "timestamp": 1795168206.6139264,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
