@@ -17,6 +17,17 @@ def _memory(monkeypatch, tmp_path):
     return metabus_module.MetacognitiveMemory()
 
 
+def _raises(expected, operation):
+    """Return an assertion-friendly result for TDDHistory's RED classifier."""
+    try:
+        operation()
+    except expected:
+        return True
+    except Exception:
+        return False
+    return False
+
+
 def test_memory_context_limit_zero_is_empty_and_invalid_limits_are_rejected(monkeypatch, tmp_path):
     memory = _memory(monkeypatch, tmp_path)
     memory.episodic.append({"id": "episode-1", "agent_id": "agent", "context": "marker"})
@@ -24,8 +35,7 @@ def test_memory_context_limit_zero_is_empty_and_invalid_limits_are_rejected(monk
     assert memory.get_recent_context(limit=0) == []
     assert memory.get_recent_context(limit=1)[0]["id"] == "episode-1"
     for invalid in (-1, 1001, True, 1.5, "1"):
-        with pytest.raises(ValueError):
-            memory.get_recent_context(limit=invalid)
+        assert _raises(ValueError, lambda: memory.get_recent_context(limit=invalid))
 
 
 def test_memory_search_limit_zero_is_empty_and_invalid_limits_are_rejected(monkeypatch, tmp_path):
@@ -35,8 +45,7 @@ def test_memory_search_limit_zero_is_empty_and_invalid_limits_are_rejected(monke
     assert memory.search_memory("distinctive memory", limit=0) == []
     assert len(memory.search_memory("distinctive memory", limit=1)) == 1
     for invalid in (-1, 1001, True, 1.5, "1"):
-        with pytest.raises(ValueError):
-            memory.search_memory("distinctive memory", limit=invalid)
+        assert _raises(ValueError, lambda: memory.search_memory("distinctive memory", limit=invalid))
 
 
 def test_metabus_recent_events_limit_zero_is_empty_and_invalid_limits_are_rejected(monkeypatch, tmp_path):
@@ -51,8 +60,7 @@ def test_metabus_recent_events_limit_zero_is_empty_and_invalid_limits_are_reject
     assert metabus_module.metabus.get_recent_events(limit=0) == []
     assert len(metabus_module.metabus.get_recent_events(limit=1)) == 1
     for invalid in (-1, 1001, True, 1.5, "1"):
-        with pytest.raises(ValueError):
-            metabus_module.metabus.get_recent_events(limit=invalid)
+        assert _raises(ValueError, lambda: metabus_module.metabus.get_recent_events(limit=invalid))
 
 
 def test_reflection_score_must_be_finite_normalized_and_does_not_mutate_on_rejection(monkeypatch, tmp_path):
@@ -60,15 +68,16 @@ def test_reflection_score_must_be_finite_normalized_and_does_not_mutate_on_rejec
     before_ledger = dict(memory.confidence_ledger)
 
     for invalid_score in (True, math.nan, math.inf, -0.01, 1.01, "0.5"):
-        with pytest.raises((TypeError, ValueError)):
-            memory.add_reflection("agent", "context", "reflection", invalid_score)
+        assert _raises(
+            (TypeError, ValueError),
+            lambda: memory.add_reflection("agent", "context", "reflection", invalid_score),
+        )
         assert memory.episodic == []
         assert memory.confidence_ledger == before_ledger
 
     for invalid_fields in (("", "context", "reflection"), ("agent", "", "reflection"),
                            ("agent", "context", "")):
-        with pytest.raises((TypeError, ValueError)):
-            memory.add_reflection(*invalid_fields, 0.5)
+        assert _raises((TypeError, ValueError), lambda: memory.add_reflection(*invalid_fields, 0.5))
         assert memory.episodic == []
         assert memory.confidence_ledger == before_ledger
 
@@ -81,8 +90,10 @@ def test_reflection_persistence_failure_rolls_back_episode_and_confidence(monkey
     before_ledger = dict(memory.confidence_ledger)
     monkeypatch.setattr(memory, "_save", lambda **_kwargs: False)
 
-    with pytest.raises(RuntimeError):
-        memory.add_reflection("agent", "context", "reflection", 1.0)
+    assert _raises(
+        RuntimeError,
+        lambda: memory.add_reflection("agent", "context", "reflection", 1.0),
+    )
 
     assert memory.episodic == []
     assert memory.confidence_ledger == before_ledger

@@ -199,11 +199,40 @@ class CoreIntegrationService:
     def claude_bughunter_status(self) -> dict[str, Any]:
         """Retorna o catálogo fechado; não lê skills ou comandos upstream."""
         from integrations.claude_bughunter_catalog import load_catalog
-        return load_catalog(self.repo_root)
+        package_manifest = self.repo_root / "federation/claude-bughunter-package-r1236.json"
+        if not package_manifest.exists():
+            return {
+                "spec_id": "SPEC-935-R1239",
+                "orchestrator": "marceloclaro",
+                "status": "not_present",
+                "executed": False,
+                "execution_verified": False,
+            }
+        try:
+            return load_catalog(self.repo_root)
+        except (OSError, ValueError):
+            return {
+                "spec_id": "SPEC-935-R1239",
+                "orchestrator": "marceloclaro",
+                "status": "blocked_invalid_manifest",
+                "executed": False,
+                "execution_verified": False,
+            }
 
     def claude_bughunter_plan(self) -> dict[str, Any]:
         """Prepara handoff apenas para a skill defensiva local, sem executá-la."""
         catalog = self.claude_bughunter_status()
+        if catalog.get("status") != "reference_only":
+            return {
+                "spec_id": "SPEC-935-R1239",
+                "status": "blocked",
+                "orchestrator": "marceloclaro",
+                "reason": "O catálogo Claude-BugHunter não está validado neste workspace.",
+                "burp_mcp": catalog.get("burp_mcp", {"enabled": False}),
+                "target_testing_authorized": False,
+                "executed": False,
+                "execution_verified": False,
+            }
         route = catalog["entries"][0]
         skill_plan = self.skill_plan(route["id"])
         if skill_plan.get("found") is not True or skill_plan.get("status") != "instruction_only":

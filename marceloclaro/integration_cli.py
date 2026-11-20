@@ -35,7 +35,7 @@ def run_integration_cli(argv: list[str], orchestrator: Any = None) -> int:
         else:
             result = orchestrator.integration_skill_plan(args.skill_name)
         print(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False))
-        return 1 if result.get("status") in {"error", "refused", "not_found"} else 0
+        return 1 if result.get("status") in {"error", "refused", "not_found", "blocked"} else 0
     except (ValueError, OSError, ImportError, RuntimeError) as exc:
         print(json.dumps({"status": "error", "error": str(exc)}, ensure_ascii=False))
         return 2
