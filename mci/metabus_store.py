@@ -145,10 +145,6 @@ class MetaBusSQLiteStore:
                 if version > SCHEMA_VERSION:
                     raise MetaBusPersistenceError("metabus_schema_newer_than_runtime")
                 self._create_schema(connection)
-                connection.execute(f"PRAGMA user_version={SCHEMA_VERSION}")
-                connection.commit()
-
-                connection.execute("BEGIN IMMEDIATE")
                 migrated = connection.execute(
                     "SELECT value FROM meta WHERE key='legacy_import_v1'"
                 ).fetchone()
@@ -158,11 +154,25 @@ class MetaBusSQLiteStore:
                         "INSERT INTO meta(key, value) VALUES('legacy_import_v1', ?)",
                         (_json_dump(report),),
                     )
+                connection.execute(f"PRAGMA user_version={SCHEMA_VERSION}")
                 connection.commit()
+        except BaseException:
+            # Explicit transaction also encloses schema creation, version and
+            # migration marker. A failed legacy import cannot leave a success
+            # marker or a partially initialized schema behind.
+            try:
+                if "connection" in locals() and connection.in_transaction:
+                    connection.rollback()
+            except Exception:
+                pass
+            raise
+        try:
             try:
                 os.chmod(self.path, 0o600)
             except OSError:
                 pass
+        except Exception:
+            pass
         except MetaBusPersistenceError:
             raise
         except Exception as exc:
