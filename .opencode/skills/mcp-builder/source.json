@@ -1,0 +1,145 @@
+{
+  "schema_version": "r1232.skill-source.v1",
+  "repository": "anthropics/skills",
+  "commit": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
+  "tree_sha": "d495c40fdd16cfe817a71aa05ecc1969ba98e925",
+  "upstream_path": "skills/mcp-builder",
+  "license": "Apache-2.0",
+  "license_file": "LICENSE.txt",
+  "license_git_blob_sha": "4f881c52d1f72f4cfb720e339e2d35c3058d01a9",
+  "license_sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+  "skill_git_blob_sha": "d61a9056202a0f8b2d064c896e62f415c45b1bf1",
+  "skill_upstream_sha256": "b483b56d6673134497e45489c317f26ae0f1429c194db0297e43073e17e6748c",
+  "sha256": "ba33a991a547e3a8659568a20060eefa8c51e473afa0ee95dc1fb08229ae5f67",
+  "activation": "explicit_only",
+  "invocation_policy": {
+    "allow_implicit_invocation": false,
+    "disable_model_invocation": false
+  },
+  "local_policy_overlay": "Added local explicit-only invocation policy to upstream SKILL.md frontmatter; all instructional/resource bytes otherwise retained.",
+  "scripts_executed": false,
+  "resources_imported": "all regular files under the selected upstream skill directory at the pinned commit; scripts made non-executable",
+  "files": {
+    "LICENSE.txt": {
+      "upstream_path": "skills/mcp-builder/LICENSE.txt",
+      "upstream_git_blob_sha": "4f881c52d1f72f4cfb720e339e2d35c3058d01a9",
+      "upstream_sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "imported_sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "bytes_upstream": 11345,
+      "bytes_imported": 11345,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "SKILL.md": {
+      "upstream_path": "skills/mcp-builder/SKILL.md",
+      "upstream_git_blob_sha": "d61a9056202a0f8b2d064c896e62f415c45b1bf1",
+      "upstream_sha256": "b483b56d6673134497e45489c317f26ae0f1429c194db0297e43073e17e6748c",
+      "imported_sha256": "ba33a991a547e3a8659568a20060eefa8c51e473afa0ee95dc1fb08229ae5f67",
+      "bytes_upstream": 11129,
+      "bytes_imported": 11206,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": true
+    },
+    "reference/evaluation.md": {
+      "upstream_path": "skills/mcp-builder/reference/evaluation.md",
+      "upstream_git_blob_sha": "87e9bb78840fac113d93b4a27ab5b229a18cf226",
+      "upstream_sha256": "8c99479f8a2d22a636c38e274537aac3610879e26f34e0709825077c4576f427",
+      "imported_sha256": "8c99479f8a2d22a636c38e274537aac3610879e26f34e0709825077c4576f427",
+      "bytes_upstream": 21663,
+      "bytes_imported": 21663,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "reference/mcp_best_practices.md": {
+      "upstream_path": "skills/mcp-builder/reference/mcp_best_practices.md",
+      "upstream_git_blob_sha": "b9d343cc3ae89b1fc139dae96bdb2b7e29ba3648",
+      "upstream_sha256": "80fb4369a349447cf18ecdd7494fe7938b6065377e9f08c077cec411093a3007",
+      "imported_sha256": "80fb4369a349447cf18ecdd7494fe7938b6065377e9f08c077cec411093a3007",
+      "bytes_upstream": 7330,
+      "bytes_imported": 7330,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "reference/node_mcp_server.md": {
+      "upstream_path": "skills/mcp-builder/reference/node_mcp_server.md",
+      "upstream_git_blob_sha": "738ec1fb8b1a41661b0bb5d32a26234a14c4e3f0",
+      "upstream_sha256": "ee3c95d812e450f6168b734390d0c9ef6f8ebeef041d73a122c972dfbd4d476a",
+      "imported_sha256": "ee3c95d812e450f6168b734390d0c9ef6f8ebeef041d73a122c972dfbd4d476a",
+      "bytes_upstream": 28745,
+      "bytes_imported": 28745,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "reference/node_mcp_server_v2.md": {
+      "upstream_path": "skills/mcp-builder/reference/node_mcp_server_v2.md",
+      "upstream_git_blob_sha": "5d61f896d9707c8797c33ac8ac03c5aebf9b163f",
+      "upstream_sha256": "49b2fe48f33910b743ae3a56353fffa5d5f252f531053f24f2da4e5914c0d3aa",
+      "imported_sha256": "49b2fe48f33910b743ae3a56353fffa5d5f252f531053f24f2da4e5914c0d3aa",
+      "bytes_upstream": 35171,
+      "bytes_imported": 35171,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "reference/python_mcp_server.md": {
+      "upstream_path": "skills/mcp-builder/reference/python_mcp_server.md",
+      "upstream_git_blob_sha": "cf7ec996d2e6e3655bc75ff6902738d03a37334e",
+      "upstream_sha256": "2da52f77e675191014ca2e146a4b95aa04d0ca7dd7e2b100322df15ade685e80",
+      "imported_sha256": "2da52f77e675191014ca2e146a4b95aa04d0ca7dd7e2b100322df15ade685e80",
+      "bytes_upstream": 25099,
+      "bytes_imported": 25099,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "scripts/connections.py": {
+      "upstream_path": "skills/mcp-builder/scripts/connections.py",
+      "upstream_git_blob_sha": "ffcd0da3fbe1539320d022017ae83b61a9587a5c",
+      "upstream_sha256": "9403668a2041568772082a8b334122c1f88daf0541fb393af4522d0094a47a6e",
+      "imported_sha256": "9403668a2041568772082a8b334122c1f88daf0541fb393af4522d0094a47a6e",
+      "bytes_upstream": 4875,
+      "bytes_imported": 4875,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "scripts/evaluation.py": {
+      "upstream_path": "skills/mcp-builder/scripts/evaluation.py",
+      "upstream_git_blob_sha": "41778569c45a458e0eea839b8917692ad65be2d5",
+      "upstream_sha256": "49ed1d17cdce5da101b210197740713f49b935c29d4f339542a14b132658e6f7",
+      "imported_sha256": "49ed1d17cdce5da101b210197740713f49b935c29d4f339542a14b132658e6f7",
+      "bytes_upstream": 12579,
+      "bytes_imported": 12579,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "scripts/example_evaluation.xml": {
+      "upstream_path": "skills/mcp-builder/scripts/example_evaluation.xml",
+      "upstream_git_blob_sha": "41e4459b5af861e61f1ca87d2f8f5ab5543dc054",
+      "upstream_sha256": "9272b348ddcc4b06ba562367ccd0770e018158c0068ac5116d5e34aaeff8777a",
+      "imported_sha256": "9272b348ddcc4b06ba562367ccd0770e018158c0068ac5116d5e34aaeff8777a",
+      "bytes_upstream": 1194,
+      "bytes_imported": 1194,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "scripts/requirements.txt": {
+      "upstream_path": "skills/mcp-builder/scripts/requirements.txt",
+      "upstream_git_blob_sha": "e73e5d1e356edafadb9dc9243e6f300f2c5529b3",
+      "upstream_sha256": "d5d7558b2368ecea9dfeed7d1fbc71ee9e0750bebd1282faa527d528a344c3c7",
+      "imported_sha256": "d5d7558b2368ecea9dfeed7d1fbc71ee9e0750bebd1282faa527d528a344c3c7",
+      "bytes_upstream": 29,
+      "bytes_imported": 29,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    }
+  }
+}

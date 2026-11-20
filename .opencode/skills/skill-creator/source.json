@@ -1,0 +1,222 @@
+{
+  "schema_version": "r1232.skill-source.v1",
+  "repository": "anthropics/skills",
+  "commit": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
+  "tree_sha": "d495c40fdd16cfe817a71aa05ecc1969ba98e925",
+  "upstream_path": "skills/skill-creator",
+  "license": "Apache-2.0",
+  "license_file": "LICENSE.txt",
+  "license_git_blob_sha": "4f881c52d1f72f4cfb720e339e2d35c3058d01a9",
+  "license_sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+  "skill_git_blob_sha": "65b3a402dbd09b8e83f9d637c6b553875189085c",
+  "skill_upstream_sha256": "dcd4803e61e913e6fc27294184cd3a71f09f5e924ff20c8a9a20173e7b3c2bcf",
+  "sha256": "d3e799d516b5ceb81d0e7e69fdaab2230d49b862df7ee087247aecefe727e45a",
+  "activation": "explicit_only",
+  "invocation_policy": {
+    "allow_implicit_invocation": false,
+    "disable_model_invocation": false
+  },
+  "local_policy_overlay": "Added local explicit-only invocation policy to upstream SKILL.md frontmatter; all instructional/resource bytes otherwise retained.",
+  "scripts_executed": false,
+  "resources_imported": "all regular files under the selected upstream skill directory at the pinned commit; scripts made non-executable",
+  "files": {
+    "LICENSE.txt": {
+      "upstream_path": "skills/skill-creator/LICENSE.txt",
+      "upstream_git_blob_sha": "4f881c52d1f72f4cfb720e339e2d35c3058d01a9",
+      "upstream_sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "imported_sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "bytes_upstream": 11345,
+      "bytes_imported": 11345,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "SKILL.md": {
+      "upstream_path": "skills/skill-creator/SKILL.md",
+      "upstream_git_blob_sha": "65b3a402dbd09b8e83f9d637c6b553875189085c",
+      "upstream_sha256": "dcd4803e61e913e6fc27294184cd3a71f09f5e924ff20c8a9a20173e7b3c2bcf",
+      "imported_sha256": "d3e799d516b5ceb81d0e7e69fdaab2230d49b862df7ee087247aecefe727e45a",
+      "bytes_upstream": 33168,
+      "bytes_imported": 33245,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": true
+    },
+    "agents/analyzer.md": {
+      "upstream_path": "skills/skill-creator/agents/analyzer.md",
+      "upstream_git_blob_sha": "14e41d6068635f4dd3fb878fd1626312395dda63",
+      "upstream_sha256": "bf68f4cac5a56c673a928c2e6d619586c5b93ea364026ab37547772cb45a663a",
+      "imported_sha256": "bf68f4cac5a56c673a928c2e6d619586c5b93ea364026ab37547772cb45a663a",
+      "bytes_upstream": 10376,
+      "bytes_imported": 10376,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "agents/comparator.md": {
+      "upstream_path": "skills/skill-creator/agents/comparator.md",
+      "upstream_git_blob_sha": "80e00eb45db3ee53a132fc2ba97fd59a7339e563",
+      "upstream_sha256": "fe1fc9787c495d864c5d6eada47396478572325fde1b33a96d78bf4b849b7a3e",
+      "imported_sha256": "fe1fc9787c495d864c5d6eada47396478572325fde1b33a96d78bf4b849b7a3e",
+      "bytes_upstream": 7287,
+      "bytes_imported": 7287,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "agents/grader.md": {
+      "upstream_path": "skills/skill-creator/agents/grader.md",
+      "upstream_git_blob_sha": "558ab05c0a9a8bb062ef4c51823d4d76c3acf7c4",
+      "upstream_sha256": "57134da0c1a4eea33fbd74a1c9c44aa814f07d6bc64de303edb586f941e5d21a",
+      "imported_sha256": "57134da0c1a4eea33fbd74a1c9c44aa814f07d6bc64de303edb586f941e5d21a",
+      "bytes_upstream": 9049,
+      "bytes_imported": 9049,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "assets/eval_review.html": {
+      "upstream_path": "skills/skill-creator/assets/eval_review.html",
+      "upstream_git_blob_sha": "938ff32aed9bffabf723bd5492d720f4736c8e4d",
+      "upstream_sha256": "ce477dcc74dc1c0d1d3352646a79167b5a63634e936b1019160025065974e452",
+      "imported_sha256": "ce477dcc74dc1c0d1d3352646a79167b5a63634e936b1019160025065974e452",
+      "bytes_upstream": 7058,
+      "bytes_imported": 7058,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "eval-viewer/generate_review.py": {
+      "upstream_path": "skills/skill-creator/eval-viewer/generate_review.py",
+      "upstream_git_blob_sha": "7fa5978631fed1ed545591dbb2b0eb21ce3f3d08",
+      "upstream_sha256": "fc9d1b9243fe5ab6012ebd579bd76d0035de1b79fd3b969de114defab26478fb",
+      "imported_sha256": "fc9d1b9243fe5ab6012ebd579bd76d0035de1b79fd3b969de114defab26478fb",
+      "bytes_upstream": 16365,
+      "bytes_imported": 16365,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "eval-viewer/viewer.html": {
+      "upstream_path": "skills/skill-creator/eval-viewer/viewer.html",
+      "upstream_git_blob_sha": "6d8e96348a02e66c3363d2ff3b3ae58ac11e6382",
+      "upstream_sha256": "a53213426ee1100441d701a3a0d49cda7a842f992d2c36463f4d3cc0258575fa",
+      "imported_sha256": "a53213426ee1100441d701a3a0d49cda7a842f992d2c36463f4d3cc0258575fa",
+      "bytes_upstream": 44998,
+      "bytes_imported": 44998,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "references/schemas.md": {
+      "upstream_path": "skills/skill-creator/references/schemas.md",
+      "upstream_git_blob_sha": "b6eeaa2d4a34c1653069585c6c5603da39a5bdbe",
+      "upstream_sha256": "8e8876180a8989b406a4d3edddf875b04cdfd5805cc8616686d552b11ce4455f",
+      "imported_sha256": "8e8876180a8989b406a4d3edddf875b04cdfd5805cc8616686d552b11ce4455f",
+      "bytes_upstream": 12061,
+      "bytes_imported": 12061,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "scripts/__init__.py": {
+      "upstream_path": "skills/skill-creator/scripts/__init__.py",
+      "upstream_git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "upstream_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "imported_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes_upstream": 0,
+      "bytes_imported": 0,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "scripts/aggregate_benchmark.py": {
+      "upstream_path": "skills/skill-creator/scripts/aggregate_benchmark.py",
+      "upstream_git_blob_sha": "3e66e8c105be9bab9f0e9c61f0d1482619401580",
+      "upstream_sha256": "123ef128ea5ccc01a4b1ac212ef5567f21e9c13d3d240609780beeb3200c49aa",
+      "imported_sha256": "123ef128ea5ccc01a4b1ac212ef5567f21e9c13d3d240609780beeb3200c49aa",
+      "bytes_upstream": 14386,
+      "bytes_imported": 14386,
+      "upstream_mode": "100755",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "scripts/generate_report.py": {
+      "upstream_path": "skills/skill-creator/scripts/generate_report.py",
+      "upstream_git_blob_sha": "959e30a0014ec165c41a2bb7420b7dfe1416bbac",
+      "upstream_sha256": "13df7118a3c50c83c4c3250a606d5f2b20b25a3d44cbc392b3d669ec75281453",
+      "imported_sha256": "13df7118a3c50c83c4c3250a606d5f2b20b25a3d44cbc392b3d669ec75281453",
+      "bytes_upstream": 12847,
+      "bytes_imported": 12847,
+      "upstream_mode": "100755",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "scripts/improve_description.py": {
+      "upstream_path": "skills/skill-creator/scripts/improve_description.py",
+      "upstream_git_blob_sha": "06bcec76122446986e3610c20a39c466de36f495",
+      "upstream_sha256": "87d864570220b699fac52da309d2d6efdb060647bfebc74f768128e646accf80",
+      "imported_sha256": "87d864570220b699fac52da309d2d6efdb060647bfebc74f768128e646accf80",
+      "bytes_upstream": 11116,
+      "bytes_imported": 11116,
+      "upstream_mode": "100755",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "scripts/package_skill.py": {
+      "upstream_path": "skills/skill-creator/scripts/package_skill.py",
+      "upstream_git_blob_sha": "f48eac444656ddc41204aac1760a217951ce609e",
+      "upstream_sha256": "1a33059b0db1ef73375d46d513e5ea81369d2e8838c970597b0d52ddef8d1c0f",
+      "imported_sha256": "1a33059b0db1ef73375d46d513e5ea81369d2e8838c970597b0d52ddef8d1c0f",
+      "bytes_upstream": 4234,
+      "bytes_imported": 4234,
+      "upstream_mode": "100755",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "scripts/quick_validate.py": {
+      "upstream_path": "skills/skill-creator/scripts/quick_validate.py",
+      "upstream_git_blob_sha": "ed8e1dddce77b16af13c6f36b3fe86c4ac7c590c",
+      "upstream_sha256": "67cf5703402013936c8fb75ad6a1afecd8841d45cc5e606b634eb05825fde365",
+      "imported_sha256": "67cf5703402013936c8fb75ad6a1afecd8841d45cc5e606b634eb05825fde365",
+      "bytes_upstream": 3972,
+      "bytes_imported": 3972,
+      "upstream_mode": "100755",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "scripts/run_eval.py": {
+      "upstream_path": "skills/skill-creator/scripts/run_eval.py",
+      "upstream_git_blob_sha": "e58c70bea39d5b252a1e819f242bbdcdf20e8b87",
+      "upstream_sha256": "43e3b8f80dbf69c343967ba77e268fae991d9fa3ed68b32a0ff02532cd48657f",
+      "imported_sha256": "43e3b8f80dbf69c343967ba77e268fae991d9fa3ed68b32a0ff02532cd48657f",
+      "bytes_upstream": 11464,
+      "bytes_imported": 11464,
+      "upstream_mode": "100755",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "scripts/run_loop.py": {
+      "upstream_path": "skills/skill-creator/scripts/run_loop.py",
+      "upstream_git_blob_sha": "30a263d674ef19de11c756d6f7537f91a421909e",
+      "upstream_sha256": "7bd6f674203168520517eec94c55f493c0d154339b061b4d7c0f0dad187d0f21",
+      "imported_sha256": "7bd6f674203168520517eec94c55f493c0d154339b061b4d7c0f0dad187d0f21",
+      "bytes_upstream": 13605,
+      "bytes_imported": 13605,
+      "upstream_mode": "100755",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    },
+    "scripts/utils.py": {
+      "upstream_path": "skills/skill-creator/scripts/utils.py",
+      "upstream_git_blob_sha": "51b6a07dd57174197a937034b7eecebd5768ff8a",
+      "upstream_sha256": "3af8ae62c40c73ab712207436a0d9a981e845f25c5a7040229eb189cc8e45bb1",
+      "imported_sha256": "3af8ae62c40c73ab712207436a0d9a981e845f25c5a7040229eb189cc8e45bb1",
+      "bytes_upstream": 1661,
+      "bytes_imported": 1661,
+      "upstream_mode": "100644",
+      "imported_mode": "100644",
+      "local_policy_overlay": false
+    }
+  }
+}

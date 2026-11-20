@@ -2,7 +2,7 @@
 spec_id: SPEC-935-R1233
 title: Integrar Build Your Own X como referência educacional segura
 component: .opencode/skills/build-your-own-x
-status: specified
+status: green
 test_file: tests/test_r1233_build_your_own_x.py
 evidence_contract:
   version: 1

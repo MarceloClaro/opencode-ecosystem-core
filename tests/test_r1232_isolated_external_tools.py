@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import hashlib
+import os
 from pathlib import Path
 
 import pytest
@@ -31,6 +33,8 @@ def test_manifest_pins_sources_licenses_and_isolation_states():
     assert entries["universal-os"]["source"]["commit"] == "661f15fc1afbbe1158ac5d14673e188238f29c0c"
     assert entries["caveman"]["source"]["version"] == "4.1.0"
     assert entries["rea"]["adoption"] == "existing_reuse"
+    assert all(item.get("license_status") for item in manifest["repositories"])
+    assert all(item.get("integration_status") for item in manifest["repositories"])
 
 
 def test_reference_only_and_blocked_entries_have_no_install_or_execution_claim():
@@ -58,12 +62,15 @@ def test_prompts_chat_is_catalog_only_with_dual_license_boundary():
 def test_rust_anything_install_plan_isolated_and_integrity_pinned(tmp_path):
     plan = ext.install_plan("rust-anything", tmp_path)
     assert plan["tool_id"] == "rust-anything"
-    assert plan["argv"][0].endswith("npm") or plan["argv"][0] == "npm"
+    assert Path(plan["argv"][0]).name == "npm"
+    assert plan["argv"][1] == "pack"
     assert "--ignore-scripts" in plan["argv"]
     assert "--global" not in plan["argv"] and "-g" not in plan["argv"]
     assert "rust-anything@2.1.0" in plan["argv"]
     assert plan["integrity"].startswith("sha512-")
     assert str(tmp_path.resolve()) in " ".join(plan["argv"])
+    assert "<verified-tarball>" in plan["install_argv_template"]
+    assert plan["integrity_verification"]["before_install"] is True
     assert plan["dry_run"] is True
 
 
@@ -91,6 +98,9 @@ def test_universal_os_isolated_and_mcp_disabled_by_default(tmp_path):
     assert plan["tool_id"] == "universal-os"
     assert plan["dry_run"] is True
     assert plan["mcp_enabled"] is False
+    assert "--tool-dir" not in plan["argv"] and "--bin-dir" not in plan["argv"]
+    assert plan["environment"]["UV_TOOL_DIR"] == str((tmp_path / "universal-os" / "tools").resolve())
+    assert plan["environment"]["UV_TOOL_BIN_DIR"] == str((tmp_path / "universal-os" / "bin").resolve())
     environment = ext.isolated_environment("universal-os", tmp_path, base_env={"HOME": "/home/real"})
     assert environment["UOS_HOME"] == str((tmp_path / "universal-os" / "home").resolve())
     assert environment["HOME"] != "/home/real"
@@ -133,6 +143,13 @@ def test_only_selected_anthropic_skills_are_imported_with_license_and_hashes():
         assert source["commit"] == "e4bb5d960d87126ff3b3a8af1a104b7db67560ba"
         assert source["license"] == "Apache-2.0"
         assert source["sha256"]
+        assert source["resources_imported"].startswith("all regular files")
+        for relative, record in source["files"].items():
+            file_path = directory / relative
+            assert file_path.is_file()
+            assert hashlib.sha256(file_path.read_bytes()).hexdigest() == record["imported_sha256"]
+            assert record["imported_mode"] == "100644"
+            assert not (file_path.stat().st_mode & 0o111)
     assert not (root / "anthropic-skills").exists()
 
 
@@ -157,3 +174,71 @@ def test_catalog_does_not_expose_unapproved_mcp_servers():
     entries = ext.load_manifest()["repositories"]
     assert all(item["runtime"]["mcp_enabled"] is False for item in entries if item["id"] != "rea")
     assert all(item.get("mcp_config") is None for item in entries)
+
+
+def test_install_without_confirmation_is_plan_only(tmp_path):
+    def should_not_run(*args, **kwargs):
+        raise AssertionError("external installer must not run without explicit confirmation")
+
+    result = ext.install_tool("rust-anything", root=tmp_path, runner=should_not_run)
+    assert result["dry_run"] is True
+    assert result["argv"][1] == "pack"
+    assert not (tmp_path / "rust-anything").exists()
+
+
+def test_npm_integrity_mismatch_stops_before_install(tmp_path):
+    calls = []
+
+    def fake_runner(argv, **kwargs):
+        calls.append((argv, kwargs))
+        if argv[1] == "pack":
+            destination = Path(argv[argv.index("--pack-destination") + 1])
+            destination.mkdir(parents=True, exist_ok=True)
+            (destination / "wrong.tgz").write_bytes(b"not-the-pinned-package")
+            return ext.CompletedResult(0, json.dumps([{"integrity": "sha512-wrong", "filename": "wrong.tgz"}]), "")
+        raise AssertionError("install must not run for a mismatched package integrity")
+
+    result = ext.install_tool("rust-anything", root=tmp_path, yes=True, runner=fake_runner)
+    assert result["status"] == "integrity_mismatch"
+    assert result["expected_integrity"].startswith("sha512-")
+    assert len(calls) == 1
+    assert not (tmp_path / "rust-anything" / "node_modules").exists()
+
+
+def test_npm_install_uses_only_tarball_verified_against_pinned_integrity(tmp_path):
+    calls = []
+    expected = _entries()["rust-anything"]["source"]["integrity"]
+
+    def fake_runner(argv, **kwargs):
+        calls.append((argv, kwargs))
+        assert kwargs["shell"] is False
+        assert "--ignore-scripts" in argv
+        if argv[1] == "pack":
+            destination = Path(argv[argv.index("--pack-destination") + 1])
+            destination.mkdir(parents=True, exist_ok=True)
+            (destination / "rust-anything-2.1.0.tgz").write_bytes(b"verified-by-npm-integrity-field")
+            return ext.CompletedResult(
+                0,
+                json.dumps([{"integrity": expected, "filename": "rust-anything-2.1.0.tgz"}]),
+                "",
+            )
+        assert argv[1] == "install"
+        assert argv[-1].endswith("rust-anything-2.1.0.tgz")
+        assert str((tmp_path / "rust-anything").resolve()) in argv
+        assert kwargs["env"]["HOME"] == str((tmp_path / "rust-anything" / "home").resolve())
+        return ext.CompletedResult(0, "ok", "")
+
+    result = ext.install_tool("rust-anything", root=tmp_path, yes=True, runner=fake_runner)
+    assert result["status"] == "installed"
+    assert result["integrity_verified"] is True
+    assert [call[0][1] for call in calls] == ["pack", "install"]
+
+
+def test_manifest_records_license_and_adoption_states_without_collapsing_them():
+    entries = _entries()
+    assert entries["open-reverselab"]["license_status"] == "human_review_required"
+    assert entries["open-reverselab"]["integration_status"] == "blocked_legal_review"
+    assert entries["prompts-chat"]["license_status"] == "source_declared_unreviewed"
+    assert entries["prompts-chat"]["integration_status"] == "reference_only"
+    assert entries["anthropic-mcp-builder"]["integration_status"] == "imported_explicit_only"
+    assert entries["rust-anything"]["integration_status"] == "planned_isolated"
