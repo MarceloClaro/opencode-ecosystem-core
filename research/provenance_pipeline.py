@@ -177,9 +177,16 @@ def _article(question: str, dataset: dict[str, Any], analysis: dict[str, Any], r
     for index, reference in enumerate(references, 1):
         title = re.sub(r"[\r\n]+", " ", reference["title"])
         reference_lines.append(f"{index}. {title}. {reference.get('year') or 's.d.'}. {reference['url']}")
-    inferential = (f"Estimativa: {analysis['estimate']:.8g}. p-valor bilateral: {analysis['p_value']:.8g}. "
-                   f"Intervalo de 95%: {analysis['confidence_interval_95']}." if analysis.get("p_value") is not None
-                   else "Análise descritiva; não foi realizado teste de hipótese.")
+    if analysis.get("p_value") is None:
+        inferential = "Análise descritiva; não foi realizado teste de hipótese."
+    elif analysis.get("method") in {"anova_one_way", "cochrans_q_meta_analysis"}:
+        inferential = (f"Estatística de teste: {analysis['statistic']:.8g}. "
+                       f"p-valor bilateral: {analysis['p_value']:.8g}.")
+    else:
+        interval = analysis.get("confidence_interval_95")
+        interval_text = f" Intervalo de 95%: {interval}." if interval is not None else ""
+        inferential = (f"Estimativa: {analysis['estimate']:.8g}. p-valor bilateral: "
+                       f"{analysis['p_value']:.8g}.{interval_text}")
     assumptions = "\n".join(f"- {item}" for item in analysis["assumptions"])
     limitations = "\n".join(f"- {item}" for item in analysis["limitations"])
     return f"""# Relatório científico computacional

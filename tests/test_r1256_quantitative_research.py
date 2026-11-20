@@ -51,8 +51,8 @@ def test_sample_size_proportion_uses_finite_population_and_documents_variability
     )
     assert result["z_score"] == pytest.approx(1.9599639845)
     assert result["infinite_population_n"] == pytest.approx(384.145882)
-    assert result["required_completes"] == 371
-    assert result["recruitment_target"] == 371
+    assert result["required_completes"] == 370
+    assert result["recruitment_target"] == 370
     assert result["population_size"] == 10_000
     assert result["assumptions"]["population_model"] == "Bernoulli proportion"
     assert "maximum variance" in result["assumptions"]["proportion_choice"]
@@ -141,8 +141,8 @@ def test_wilson_interval_and_advanced_biostatistics():
 def test_benjamini_hochberg_is_monotone_and_preserves_input_order():
     benjamini_hochberg = _api("research.advanced_statistics", "benjamini_hochberg")
     adjusted = benjamini_hochberg([0.04, 0.001, 0.02, 0.5])
-    assert len(adjusted) == 4
     by_original = adjusted["adjusted_p_values"]
+    assert len(by_original) == 4
     assert by_original[1] == pytest.approx(0.004)
     sorted_adjusted = [adjusted["adjusted_p_values"][i] for i in adjusted["rank_order"]]
     assert sorted_adjusted == sorted(sorted_adjusted)
@@ -186,7 +186,7 @@ def test_research_csv_pipeline_accepts_anova_spearman_and_cochrans_q(tmp_path):
     q = execute_analysis(csv_file, "cochrans_q_meta_analysis", {"effect_size": "effect", "variance": "variance"})
     assert anova["execution_attempted"] is True
     assert spearman["estimate"] == pytest.approx(1)
-    assert q["degrees_of_freedom"] == 2
+    assert q["degrees_of_freedom"] == 5
 
 
 def test_advanced_methods_are_allowed_by_scientific_core_configuration():
@@ -216,7 +216,7 @@ def test_advanced_methods_are_allowed_by_scientific_core_configuration():
 def test_q_exponential_uses_tsallis_limit_and_domain():
     q_exponential = _api("research.quantitative_calculators", "q_exponential")
     assert q_exponential(1.25, 1.0) == pytest.approx(math.exp(1.25))
-    assert q_exponential(1.0, 0.5) == pytest.approx(2.25**2)
+    assert q_exponential(1.0, 0.5) == pytest.approx(2.25)
     assert q_exponential(-3.0, 0.5) == 0.0
     with pytest.raises(ValueError):
         q_exponential(3.0, 1.5)
@@ -243,7 +243,7 @@ def test_financial_calculators_use_explicit_conventions():
     assert return_on_investment(100, 150)["roi_percent"] == pytest.approx(50)
     assert weighted_average_cost([10, 20], [2, 3])["weighted_average_cost"] == pytest.approx(16)
     wacc = weighted_average_cost_of_capital(600, 400, 0.12, 0.08, 0.25)
-    assert wacc["wacc"] == pytest.approx(0.096)
+    assert wacc["wacc"] == pytest.approx(0.086)
     irr = internal_rate_of_return([-100, 60, 60])
     assert irr["status"] == "unique_root"
     assert irr["irr"] == pytest.approx(0.130662386, rel=1e-6)

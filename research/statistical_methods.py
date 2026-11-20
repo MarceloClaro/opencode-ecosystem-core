@@ -101,7 +101,7 @@ def execute_analysis(dataset_csv: str | Path, method: str, variables: dict[str, 
     from scipy import stats
     result: dict[str, Any] = {
         "method": method, "n": len(rows), "variables": variables,
-        "alpha": 0.05, "seed": SEED, "experiment_executed": True,
+        "alpha": 0.05, "seed": SEED, "experiment_executed": True, "execution_attempted": True,
         "causal_inference": False, "missing_values_policy": "reject",
         "assumptions": ["Observações independentes; esta premissa não é confirmada pelo código.",
                         "A origem e a adequação da amostra dependem da proveniência informada.",
