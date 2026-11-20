@@ -25035,6 +25035,33 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1238",
+      "objective": "Concluir instalações isoladas autorizadas da SPEC-935-R1232 e registrar o estado observado sem executar os alvos.",
+      "changes": [
+        "Instalados rust-anything 2.1.0, universal-os 0.2.1 no commit pinado e caveman-ai-cli 4.1.0 em prefixos isolados.",
+        "Reparados os pacotes npm para reter os tarballs verificados dentro dos prefixos, evitando referências file: para staging temporário.",
+        "Atualizado o manifesto com recibos, proveniência e estados installed_isolated; CLIs e MCPs permanecem desativados.",
+        "SpecVerifier aprovou 8/8 critérios; 96 testes focais e regressões passaram; doctor estrutural sem falhas, com avisos opcionais."
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Uma instalação npm a partir de tarball em TemporaryDirectory com --save-exact pode persistir uma dependência file: já inválida após limpeza; manter o tarball verificado no prefixo isolado e testar reparo idempotente.",
+        "Instalação e disponibilidade de binário não equivalem a execução do alvo; preservar runtime.executed=false e mcp_enabled=false até ação separadamente autorizada.",
+        "uv tool install pode executar o backend de build do pacote; distinguir esse passo de executar a CLI/alvo e registrar explicitamente a ocorrência."
+      ],
+      "timestamp": 1795161391.5184987,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
