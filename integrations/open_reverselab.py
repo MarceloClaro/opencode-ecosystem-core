@@ -152,7 +152,7 @@ def status() -> dict[str, Any]:
     errors = validate_manifest(manifest)
     return {
         "spec_id": manifest.get("spec_id"),
-        "status": "wrong_status" if not errors else "invalid_manifest",
+        "status": "metadata_only" if not errors else "invalid_manifest",
         "manifest_valid": not errors,
         "adoption": manifest.get("adoption"),
         "integration_status": manifest.get("integration_status"),
