@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import importlib
+import json
+import sqlite3
 from types import SimpleNamespace
 
 import pytest
@@ -40,6 +42,7 @@ class RuntimeDouble:
 @pytest.fixture()
 def isolated_orchestrator(monkeypatch, tmp_path):
     metabus_module = importlib.import_module("mci.metabus")
+    monkeypatch.setattr(metabus_module, "DATABASE_FILE", str(tmp_path / "metabus.sqlite3"))
     for obj, attr, value in (
         (metabus, "subscribers", {}), (blackboard, "registry", {}),
         (blackboard, "tasks", {}), (metabus.memory, "episodic", []),
@@ -68,6 +71,13 @@ def isolated_orchestrator(monkeypatch, tmp_path):
         capabilities=["code_review"], schema={},
     )
     return orchestrator
+
+
+def _persisted_events(tmp_path):
+    with sqlite3.connect(tmp_path / "metabus.sqlite3") as connection:
+        return [json.loads(row[0]) for row in connection.execute(
+            "SELECT event_json FROM events ORDER BY seq"
+        )]
 
 
 @pytest.fixture()
@@ -223,7 +233,6 @@ def test_changed_import_is_excluded_and_never_read_as_instructions(isolated_orch
 
 
 def test_sdd_rejection_is_reflected_in_return_value(isolated_orchestrator, registry, monkeypatch, tmp_path):
-    import json
     confidence_before = dict(metabus.memory.confidence_ledger)
     complete = isolated_orchestrator.report_completion
     monkeypatch.setattr(isolated_orchestrator, "report_completion",
@@ -235,7 +244,7 @@ def test_sdd_rejection_is_reflected_in_return_value(isolated_orchestrator, regis
     assert stored["status"] == "failed" and stored["success"] is False
     assert stored["error"] == result["error"]
     assert isolated_orchestrator.results[result["task_id"]] == stored
-    events = [json.loads(line) for line in (tmp_path / "events.jsonl").read_text().splitlines()]
+    events = _persisted_events(tmp_path)
     completions = [event["payload"] for event in events if event["topic"] == "task.complete"]
     assert len(completions) == 1
     assert completions[0]["status"] == "failed"
@@ -245,12 +254,11 @@ def test_sdd_rejection_is_reflected_in_return_value(isolated_orchestrator, regis
 
 
 def test_accepted_completion_is_synchronized_without_duplicate_events(isolated_orchestrator, registry, tmp_path):
-    import json
     result = AutonomousCoordinator(isolated_orchestrator, RuntimeDouble(), registry).run("Revisar código")
     stored = blackboard.tasks[result["task_id"]].result
     assert stored["status"] == "completed" and stored["success"] is True
     assert isolated_orchestrator.results[result["task_id"]] == stored
-    events = [json.loads(line) for line in (tmp_path / "events.jsonl").read_text().splitlines()]
+    events = _persisted_events(tmp_path)
     completions = [event for event in events if event["topic"] == "task.complete"]
     reflections = [event for event in events if event["topic"] == "metacognition.reflected"]
     assert len(completions) == len(reflections) == 1

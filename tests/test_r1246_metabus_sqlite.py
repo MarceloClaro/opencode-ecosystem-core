@@ -37,6 +37,11 @@ def _connect(path: Path):
     return sqlite3.connect(path, timeout=5)
 
 
+def _remove_database(path: Path):
+    for candidate in (path, Path(str(path) + "-wal"), Path(str(path) + "-shm")):
+        candidate.unlink(missing_ok=True)
+
+
 def _raises(expected, operation):
     """Converte expectativa de exceção em assert Python para o classificador RED."""
     try:
@@ -64,6 +69,7 @@ def test_legacy_json_and_jsonl_migrate_once_without_mutating_sources(isolated_me
         {"event_id": "legacy-event-2", "timestamp": "2026-01-02T00:00:00+00:00",
          "topic": "legacy.two", "source": "legacy", "payload": {"n": 2}},
     ]
+    _remove_database(database_path)
     memory_path.write_text(json.dumps(legacy_memory), encoding="utf-8")
     events_path.write_text(
         "".join(json.dumps(event, ensure_ascii=False) + "\n" for event in legacy_events),
@@ -103,6 +109,7 @@ def test_malformed_event_lines_are_quarantined_and_preserved(isolated_metabus):
     valid = {"event_id": "valid-event", "timestamp": "t", "topic": "ok",
              "source": "legacy", "payload": {}}
     raw_lines = [json.dumps(valid) + "\n", '{"event_id":\n', "not-json\n"]
+    _remove_database(database_path)
     memory_path.write_text(json.dumps({"episodic": [], "semantic": {}, "confidence_ledger": {}}),
                            encoding="utf-8")
     events_path.write_text("".join(raw_lines), encoding="utf-8")
@@ -126,6 +133,7 @@ def test_malformed_event_lines_are_quarantined_and_preserved(isolated_metabus):
 def test_corrupt_legacy_memory_blocks_migration_without_mutation(isolated_metabus):
     _, _, memory_path, _, database_path = isolated_metabus
     corrupt = b'{"episodic": ['
+    _remove_database(database_path)
     memory_path.write_bytes(corrupt)
 
     assert _raises(RuntimeError, metabus_module.MetacognitiveMemory), \
@@ -134,9 +142,12 @@ def test_corrupt_legacy_memory_blocks_migration_without_mutation(isolated_metabu
     assert memory_path.read_bytes() == corrupt
     if database_path.exists():
         with _connect(database_path) as connection:
+            tables = {row[0] for row in connection.execute(
+                "SELECT name FROM sqlite_master WHERE type='table'"
+            )}
             marker = connection.execute(
                 "SELECT value FROM meta WHERE key = 'legacy_import_v1'"
-            ).fetchone()
+            ).fetchone() if "meta" in tables else None
         assert marker is None
 
 
@@ -158,9 +169,9 @@ def test_reflection_and_retention_commit_to_sqlite_atomically(isolated_metabus):
     assert database_path.is_file(), "estado persistido deve residir em SQLite"
     with _connect(database_path) as connection:
         assert connection.execute("SELECT COUNT(*) FROM episodes").fetchone()[0] == 1000
-        assert connection.execute(
-            "SELECT score FROM confidence_ledger WHERE topic = 'agent'"
-        ).fetchone()[0] == pytest.approx(0.839)
+        assert json.loads(connection.execute(
+            "SELECT value_json FROM confidence_ledger WHERE topic = 'agent'"
+        ).fetchone()[0]) == pytest.approx(0.839)
 
     restarted = metabus_module.MetacognitiveMemory()
     assert len(restarted.episodic) == 1000
@@ -189,9 +200,9 @@ def test_failed_episode_insert_rolls_back_reflection_and_confidence(isolated_met
     assert memory.confidence_ledger == before_ledger
     with _connect(database_path) as connection:
         assert connection.execute("SELECT COUNT(*) FROM episodes").fetchone()[0] == 0
-        assert connection.execute(
-            "SELECT score FROM confidence_ledger WHERE topic = 'agent'"
-        ).fetchone()[0] == pytest.approx(0.77)
+        assert json.loads(connection.execute(
+            "SELECT value_json FROM confidence_ledger WHERE topic = 'agent'"
+        ).fetchone()[0]) == pytest.approx(0.77)
 
 
 def test_failed_event_insert_does_not_dispatch_subscribers(isolated_metabus):

@@ -14,6 +14,7 @@ def primary(tmp_path, monkeypatch):
 
     monkeypatch.setattr(memory_module, "MEMORY_FILE", str(tmp_path / "memory.json"))
     monkeypatch.setattr(memory_module, "EVENTS_FILE", str(tmp_path / "events.jsonl"))
+    monkeypatch.setattr(memory_module, "DATABASE_FILE", str(tmp_path / "metabus.sqlite3"))
     memory = memory_module.MetacognitiveMemory()
     bus = memory_module.metabus
     monkeypatch.setattr(bus, "memory", memory)
@@ -52,8 +53,12 @@ def test_resultado_real_persiste_e_orienta_proxima_delegacao(primary):
     assert episode["next_action"]
     assert episode["confidence_promoted"] is False
     assert bus.memory.confidence_ledger == before
-    persisted = json.loads((directory / "memory.json").read_text())
-    assert any(item["id"] == history[0]["id"] for item in persisted["episodic"])
+    import sqlite3
+    with sqlite3.connect(directory / "metabus.sqlite3") as connection:
+        persisted = [json.loads(row[0]) for row in connection.execute(
+            "SELECT entry_json FROM episodes ORDER BY seq"
+        )]
+    assert any(item["id"] == history[0]["id"] for item in persisted)
     successor = orchestrator.delegate("Revisar parser cobalto", ["r886_review"])
     briefing = board.tasks[successor].context["metacognitive_briefing"]
     assert history[0]["id"] in [record["id"] for record in briefing["records"]]
