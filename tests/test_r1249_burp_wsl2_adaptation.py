@@ -51,6 +51,8 @@ def test_catalog_surfaces_plan_without_claiming_burp_enabled():
     assert plan["transport"] == "remote_streamable_http"
     assert plan["safety"]["opencode_server_configured"] is False
     assert catalog["burp_mcp"]["enabled"] is False
+    config = json.loads((ROOT / "opencode.json").read_text(encoding="utf-8"))
+    assert "burp" not in json.dumps(config.get("mcp", {}), ensure_ascii=False).casefold()
 
 
 def test_atspi_backend_is_available_after_typelib_staging():
