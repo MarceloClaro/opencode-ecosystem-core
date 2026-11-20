@@ -164,6 +164,52 @@ class WorkflowCoordinator:
         if workflow_id is not None:
             cls._identifier(workflow_id, "workflow_id")
 
+    def _preflight_nodes(self, nodes: list[dict[str, Any]]) -> dict[str, Any]:
+        """Exige autorização SDD para a definição inteira antes de persistir."""
+        checker = getattr(self.coordinator, "preflight_spec", None)
+        failures = []
+        if not callable(checker):
+            return {
+                "ready": False,
+                "failed_nodes": [
+                    {"node_id": node["id"], "spec_id": node.get("spec_id"),
+                     "error": "sdd_preflight_unavailable"}
+                    for node in nodes
+                ],
+            }
+        for node in nodes:
+            spec_id = node.get("spec_id")
+            try:
+                check = checker(spec_id)
+            except Exception:
+                check = {"ready": False, "error": "sdd_preflight_exception"}
+            if not isinstance(check, dict) or check.get("ready") is not True:
+                reason = check.get("error") if isinstance(check, dict) else None
+                failures.append({
+                    "node_id": node["id"],
+                    "spec_id": spec_id,
+                    "error": reason if isinstance(reason, str) and reason else "sdd_preflight_rejected",
+                })
+        return {"ready": not failures, "failed_nodes": failures}
+
+    @classmethod
+    def _preflight_blocked(cls, preflight, *, requested_workflow_id, resume):
+        return {
+            "version": cls.VERSION,
+            "workflow_id": requested_workflow_id if resume else None,
+            "requested_workflow_id": requested_workflow_id,
+            "status": "blocked",
+            "success": False,
+            "steps": 0,
+            "max_parallel": 1,
+            "execution_strategy": cls.EXECUTION_STRATEGY,
+            "checkpoint_created": False,
+            "checkpoint_updated": False,
+            "error": "sdd_preflight_failed",
+            "sdd_preflight": preflight,
+            "nodes": {},
+        }
+
     @classmethod
     def _new_record(cls, workflow_id, definition, max_steps, timeout):
         created = cls._now()
@@ -296,6 +342,11 @@ class WorkflowCoordinator:
         """Executa o DAG; retomada reaproveita entregas, mas não repete falhas por padrão."""
         definition = self._definition(nodes)
         self._limits(max_steps, timeout, max_parallel, workflow_id, resume, retry_failed)
+        preflight = self._preflight_nodes(definition["nodes"])
+        if preflight.get("ready") is not True:
+            return self._preflight_blocked(
+                preflight, requested_workflow_id=workflow_id, resume=resume
+            )
         workflow_id = workflow_id or "workflow-" + uuid4().hex
         deadline = time.monotonic() + timeout
         store = self.store

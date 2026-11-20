@@ -50,10 +50,17 @@ class CoordinatorDouble:
         self.responses = list(responses or [])
         self.calls = []
 
-    def run(self, task, required_capabilities=None, max_steps=1, timeout=120, ecosystem=None):
+    def preflight_spec(self, spec_id=None):
+        return {"ready": True, "verification_scope": "test_fixture"}
+
+    def run(self, task, required_capabilities=None, max_steps=1, timeout=120,
+            ecosystem=None, spec_id=None):
         assert self.store.locked
-        self.calls.append({"task": task, "required_capabilities": required_capabilities,
-                           "max_steps": max_steps, "timeout": timeout, "ecosystem": ecosystem})
+        call = {"task": task, "required_capabilities": required_capabilities,
+                "max_steps": max_steps, "timeout": timeout, "ecosystem": ecosystem}
+        if spec_id is not None:
+            call["spec_id"] = spec_id
+        self.calls.append(call)
         if self.responses:
             response = self.responses.pop(0)
             if isinstance(response, BaseException):
@@ -283,6 +290,8 @@ def test_real_store_persists_roundtrip_and_resume_in_temporary_directory(tmp_pat
     class ImmediateCoordinator:
         def __init__(self):
             self.calls = []
+        def preflight_spec(self, spec_id=None):
+            return {"ready": True, "verification_scope": "test_fixture"}
         def run(self, task, **kwargs):
             self.calls.append(task)
             return {"status": "completed", "success": True, "steps": 1,
@@ -305,7 +314,9 @@ def test_initial_checkpoint_is_complete_even_if_first_save_fails(tmp_path, monke
         calls.append(task)
         return {"status": "completed", "success": True, "steps": 1,
                 "output": "Simulado", "task_id": "after-resume"}
-    workflow = WorkflowCoordinator(SimpleNamespace(run=execute), store)
+    workflow = WorkflowCoordinator(SimpleNamespace(
+        run=execute, preflight_spec=lambda _spec_id=None: {"ready": True}
+    ), store)
     save = store.save
     monkeypatch.setattr(store, "save", lambda *args: (_ for _ in ()).throw(OSError("Falha inicial")))
     nodes = [{"id": "a", "task": "A"}]
@@ -330,7 +341,10 @@ def test_non_serializable_outcome_does_not_abandon_independent_branch(tmp_path, 
          "output": "Simulado", "task_id": "good-trace"},
     ])
     store = WorkflowStore(tmp_path)
-    workflow = WorkflowCoordinator(SimpleNamespace(run=lambda *args, **kwargs: next(responses)), store)
+    workflow = WorkflowCoordinator(SimpleNamespace(
+        run=lambda *args, **kwargs: next(responses),
+        preflight_spec=lambda _spec_id=None: {"ready": True},
+    ), store)
     result = workflow.run([{"id": "a", "task": "A"}, {"id": "b", "task": "B"}])
     assert result["nodes"]["a"]["status"] == "failed"
     assert result["nodes"]["a"]["execution_uncertain"]
@@ -343,6 +357,8 @@ def test_different_workflow_ids_cannot_overlap_shared_blackboard_in_one_process(
     from threading import Event
     entered, release = Event(), Event()
     class GatedCoordinator:
+        def preflight_spec(self, spec_id=None):
+            return {"ready": True, "verification_scope": "test_fixture"}
         def run(self, task, **kwargs):
             entered.set()
             assert release.wait(timeout=5)

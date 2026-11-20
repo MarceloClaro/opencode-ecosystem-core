@@ -13,12 +13,12 @@ import asyncio
 import json
 import re
 from threading import Lock
-from typing import Annotated, Any
+from typing import Annotated, Any, Literal
 
 from mcp.server.fastmcp import FastMCP
 from mcp.server.fastmcp.prompts.base import UserMessage
 from mcp.types import ToolAnnotations
-from pydantic import Field
+from pydantic import BaseModel, ConfigDict, Field
 from integrations.execution_control import ExecutionBusy, execution_gate, run_cancellable
 
 mcp = FastMCP("ecosystem-network")
@@ -32,6 +32,25 @@ _execution_lock = Lock()
 LibraryText = Annotated[str, Field(strict=True, min_length=1, max_length=2000)]
 LibraryLimit = Annotated[int, Field(strict=True, ge=1, le=10)]
 IntegrationText = Annotated[str, Field(strict=True, min_length=1, max_length=240)]
+
+
+class WorkflowNodeInput(BaseModel):
+    """Schema pública de uma etapa; validação de domínio fica no workflow."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+
+    id: Annotated[str, Field(min_length=1, max_length=64)]
+    task: Annotated[str, Field(min_length=1, max_length=2000)]
+    dependencies: list[str] = Field(default_factory=list)
+    required_capabilities: list[str] = Field(default_factory=list)
+    ecosystem: Literal["claude", "codex", "antigravity", "chatgpt", "opencode"] | None = None
+    per_node_max_steps: int = Field(default=1, ge=1, le=3)
+    spec_id: Annotated[str, Field(min_length=1, max_length=256)] | None = None
+
+
+def _workflow_node_payload(nodes: list[WorkflowNodeInput]) -> list[dict[str, Any]]:
+    return [node.model_dump(exclude_unset=True) if isinstance(node, WorkflowNodeInput) else node
+            for node in nodes]
 
 
 def get_library_orchestrator() -> Any:
@@ -516,13 +535,16 @@ async def ecosystem_run(task: str, required_capabilities: list[str] | None = Non
 
 
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False))
-async def ecosystem_workflow(nodes: list[dict[str, Any]], max_steps: int = 6,
+async def ecosystem_workflow(nodes: list[WorkflowNodeInput], max_steps: int = 6,
                              timeout: float = 180, workflow_id: str | None = None,
                              resume: bool = False, retry_failed: bool = False) -> dict[str, Any]:
     """Executa até oito etapas com dependências e checkpoints duráveis.
 
-    Passe nodes com id, task, dependencies, required_capabilities e ecosystem
-    opcionais. Análise e revisão podem usar especialistas/executores diferentes.
+    Cada nó declara id/task; dependencies, required_capabilities, ecosystem,
+    per_node_max_steps e spec_id são opcionais. Em SDD estrito, spec_id é
+    obrigatório por nó; use ecosystem_text_spec para registrar um contrato de
+    análise textual ou uma spec de software com RED válido. Análise e revisão
+    podem usar especialistas/executores diferentes.
     As etapas respeitam um orçamento global e executam sequencialmente. Para
     retomar, forneça a mesma definição e workflow_id, resume=True. Etapas
     concluídas são reutilizadas; repetir falha/interrupção exige retry_failed.
@@ -531,7 +553,7 @@ async def ecosystem_workflow(nodes: list[dict[str, Any]], max_steps: int = 6,
         try:
             with execution_gate(_execution_lock, wait=False):
                 return compact_report(get_workflow_coordinator().run(
-                    nodes, max_steps=max_steps, timeout=timeout, workflow_id=workflow_id,
+                    _workflow_node_payload(nodes), max_steps=max_steps, timeout=timeout, workflow_id=workflow_id,
                     resume=resume, retry_failed=retry_failed
                 ))
         except ExecutionBusy as exc:

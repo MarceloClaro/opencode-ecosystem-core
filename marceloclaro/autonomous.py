@@ -83,6 +83,23 @@ class AutonomousCoordinator:
             raise ValueError(f"Ecossistema desconhecido: {ecosystem}")
         return task.strip(), required
 
+    def preflight_spec(self, spec_id: str | None = None) -> dict[str, Any]:
+        """Valida SDD sem rotear, postar tarefa ou iniciar executor externo."""
+        orchestrator = self.orchestrator
+        if spec_id is None:
+            if getattr(orchestrator, "strict_sdd", True):
+                return {
+                    "ready": False,
+                    "red_history_required": True,
+                    "error": "spec_id_required",
+                }
+            return {
+                "ready": True,
+                "red_history_required": False,
+                "verification_scope": "legacy_compatible",
+            }
+        return orchestrator.sdd_preflight(spec_id)
+
     @staticmethod
     def _executor_map(status: dict[str, Any]) -> dict[str, Any]:
         return status.get("executors", status)
@@ -246,7 +263,7 @@ class AutonomousCoordinator:
         if routing["status"] != "ready":
             return result
         if spec_id is not None or self.orchestrator.strict_sdd:
-            check = self.orchestrator.sdd_preflight(spec_id) if spec_id else {"ready": False, "error": "spec_id_required"}
+            check = self.preflight_spec(spec_id)
             result["sdd_preflight"] = check
             if check.get("ready") is not True:
                 result["error"] = "Especificação e histórico RED exigidos antes da execução."

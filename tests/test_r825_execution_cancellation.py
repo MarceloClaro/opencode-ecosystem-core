@@ -95,6 +95,9 @@ async def _cancelled_workflow_probe(monkeypatch):
     entered, release, finished = Event(), Event(), Event()
     calls = []
     class Child:
+        def preflight_spec(self, spec_id=None):
+            return {"ready": True, "verification_scope": "test_fixture"}
+
         def run(self, task, **kwargs):
             calls.append(task)
             if len(calls) == 1:
@@ -190,7 +193,9 @@ def test_cancel_between_nodes_preserves_completed_delivery_for_resume():
         calls.append(task)
         return {"status": "completed", "success": True, "steps": 1,
                 "output": "Entrega anterior preservada", "task_id": "local-" + str(len(calls))}
-    workflow = WorkflowCoordinator(SimpleNamespace(run=execute), store)
+    workflow = WorkflowCoordinator(SimpleNamespace(
+        run=execute, preflight_spec=lambda _spec_id=None: {"ready": True}
+    ), store)
     nodes = [{"id": "a", "task": "A"}, {"id": "b", "task": "B", "dependencies": ["a"]}]
     with cancellation_scope(event):
         record = workflow.run(nodes, workflow_id="between")
@@ -351,7 +356,9 @@ def test_cancel_after_checkpoint_reservation_prevents_coordinator_call():
         return {"status": "completed", "success": True, "steps": 1,
                 "output": "Saída local", "task_id": "should-not-start"}
     store = Store()
-    workflow = WorkflowCoordinator(SimpleNamespace(run=execute), store)
+    workflow = WorkflowCoordinator(SimpleNamespace(
+        run=execute, preflight_spec=lambda _spec_id=None: {"ready": True}
+    ), store)
     with cancellation_scope(event):
         result = workflow.run([{"id": "a", "task": "A"}], workflow_id="precall")
     assert calls == [], "Cancelar após persistir a reserva deve impedir a chamada externa."
