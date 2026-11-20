@@ -113,17 +113,19 @@ acrescentadas a `requirements.txt`.
 
 ## Evidência observada (2026-11-20)
 
-- RED observado antes do módulo: a suíte focal falhou com `16 failed` porque
-  `integrations.moneyprinterturbo` ainda não existia. Esse resultado foi uma
-  execução pytest manual, não um recibo RED do `TDDHistory`; o histórico formal
-  não deve ser alegado retrospectivamente.
+- RED inicial observado antes do módulo: a suíte focal falhou com `16 failed`
+  porque `integrations.moneyprinterturbo` ainda não existia. Esse primeiro
+  resultado foi manual, não recibo formal. Para o par verificável, o
+  `TDDHistory` registrou depois o baseline pré-feature da ferramenta MCP
+  desabilitada: RED `3 failed / 12 passed / 0 errors`; os três failures são
+  asserções de ausência da integração.
 - GREEN focal: `./.venv/bin/python -m pytest
   tests/test_r1234_moneyprinterturbo_import.py -q` → `16 passed` (um aviso de
   Pydantic/FastMCP de dependência, sem falha).
-- Execução dos alvos do contrato pelo `TDDRunner.run_spec_test` → `15/15
-  nodeid(s)` aprovados; `SpecVerifier` → `5/5` critérios aprovados em modo
-  `criteria_only` (`require_red_history=false`). Isso não valida nem substitui
-  o pareamento formal RED→GREEN do `TDDHistory`.
+- GREEN formal `TDDHistory` → `15/15 passed`, pareado ao RED acima. Execução
+  adicional do `TDDRunner.run_delivery_test` → `15/15 nodeid(s)` aprovados;
+  `SpecVerifier` → `5/5` critérios, `software_delivery_gate`,
+  `red_history_valid=true`.
 - Regressão do editor: cinco suítes R1042/R1043/R1046 → `66 passed` (o mesmo
   aviso de dependência).
 - Instalação: wheel obtido do PyPI e SHA-256 confrontado com o manifesto, sem
@@ -142,6 +144,6 @@ acrescentadas a `requirements.txt`.
 - `git diff --check` sem erro de whitespace. Não houve render, geração,
   publicação, alteração de dependências do `.venv` Core nem mudança em dados
   do usuário.
-- O gate estrito de RED→GREEN do `TDDHistory` e revisão independente não têm
-  recibo nesta sessão; os resultados acima comprovam testes locais executados,
-  não validação externa nem conclusão desse gate estrito.
+- A revisão independente não tem recibo nesta sessão; os resultados acima são
+  validação local e não validação externa. O par TDD formal cobre os 15 alvos
+  vinculados na spec, sem promover o resultado para revisão externa.
