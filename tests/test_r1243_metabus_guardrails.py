@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 import json
+import importlib
 import math
 
 import pytest
 
-from mci import metabus as metabus_module
+metabus_module = importlib.import_module("mci.metabus")
 
 
 def _memory(monkeypatch, tmp_path):

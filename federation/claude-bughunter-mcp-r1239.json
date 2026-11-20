@@ -1,0 +1,34 @@
+{
+  "schema_version": "r1239.burp.v1",
+  "spec_id": "SPEC-935-R1239",
+  "provider": "portswigger-official",
+  "authorization_granted": true,
+  "authorized_at": "2026-11-20",
+  "transport": "stdio_proxy_to_local_sse",
+  "endpoint": "http://127.0.0.1:9876",
+  "status": "blocked_missing_local_runtime",
+  "enabled": false,
+  "opencode_server_configured": false,
+  "observed_prerequisites": {
+    "java_executable_found": false,
+    "proxy_jar_found": false,
+    "burp_directories_found_in_searched_roots": false
+  },
+  "observation": {
+    "method": "read_only_local_discovery",
+    "searched_roots": [
+      "/home/marceloclaro/.BurpSuite",
+      "/home/marceloclaro/.local",
+      "/opt",
+      "/usr/local"
+    ],
+    "home_directory_search_max_depth": 4,
+    "network_probe_performed": false,
+    "credentials_read": false
+  },
+  "burp_started": false,
+  "mcp_connected": false,
+  "http_requests_sent": false,
+  "config_editing_authorized": false,
+  "target_testing_authorized": false
+}

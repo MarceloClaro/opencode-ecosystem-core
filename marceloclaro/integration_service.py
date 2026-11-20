@@ -193,8 +193,43 @@ class CoreIntegrationService:
                     "issues_semantics": "configuration_findings_only",
                 },
                 "components": components, "issues": issues,
-                "ecosystems_present": inventory.get("ecosystems_present", []),
-                "ecosystems_missing": inventory.get("ecosystems_missing", [])}
+                 "ecosystems_present": inventory.get("ecosystems_present", []),
+                 "ecosystems_missing": inventory.get("ecosystems_missing", [])}
+
+    def claude_bughunter_status(self) -> dict[str, Any]:
+        """Retorna o catálogo fechado; não lê skills ou comandos upstream."""
+        from integrations.claude_bughunter_catalog import load_catalog
+        return load_catalog(self.repo_root)
+
+    def claude_bughunter_plan(self) -> dict[str, Any]:
+        """Prepara handoff apenas para a skill defensiva local, sem executá-la."""
+        catalog = self.claude_bughunter_status()
+        route = catalog["entries"][0]
+        skill_plan = self.skill_plan(route["id"])
+        if skill_plan.get("found") is not True or skill_plan.get("status") != "instruction_only":
+            return {
+                "spec_id": "SPEC-935-R1239",
+                "status": "blocked",
+                "orchestrator": "marceloclaro",
+                "route": route,
+                "reason": "A skill local defensiva não está disponível como plano instrucional.",
+                "burp_mcp": catalog["burp_mcp"],
+                "target_testing_authorized": False,
+                "executed": False,
+                "execution_verified": False,
+            }
+        return {
+            "spec_id": "SPEC-935-R1239",
+            "status": "instruction_only",
+            "orchestrator": "marceloclaro",
+            "route": route,
+            "package": catalog["package"],
+            "skill_plan": skill_plan,
+            "burp_mcp": catalog["burp_mcp"],
+            "target_testing_authorized": False,
+            "executed": False,
+            "execution_verified": False,
+        }
 
     def handoff(self, artifact_id: str) -> dict[str, Any]:
         return self.registry.plan_handoff(validate_artifact_id(artifact_id))

@@ -42,28 +42,18 @@ de produção de todos os subsistemas nem migra o formato de armazenamento.
 - Pesquisa GitHub/Gitee/GitTrend serve como referência arquitetural, não como
   validação independente da qualidade deste projeto.
 
-## Critérios de aceitação
+## Critérios de aceitação executáveis
 
-### R1243-LIMITS — Limites semânticos e fail-closed
-
-`get_recent_context`, `search_memory` e `get_recent_events` aceitam apenas
-limites inteiros não booleanos no intervalo `[0, 1000]`. Limite zero retorna
-lista vazia; valores negativos, acima do máximo, bool ou não inteiros geram
-`ValueError` antes de ler/percorrer memória ou log.
-
-### R1243-REFLECTION — Confiança e persistência coerentes
-
-`add_reflection` exige `agent_id`, contexto e reflexão textuais úteis dentro dos
-limites publicados pelo módulo; o score deve ser numérico, finito, não booleano
-e estar em `[0, 1]`. Rejeição não altera episódio nem ledger. Se a persistência
-falhar, a chamada falha explicitamente e restaura episódio e confiança ao estado
-anterior. Sucesso mantém a fórmula EMA definida por SPEC-001.
-
-### R1243-RETENTION — Projeção em memória igual à persistida
-
-Após gravação bem-sucedida, episódios em memória e arquivo JSON preservam a
-mesma cauda de até 1.000 registros. Falha de persistência não trunca o estado em
-memória.
+- `R1243-LIMITS` — `get_recent_context`, `search_memory` e `get_recent_events`
+  aceitam apenas limites inteiros não booleanos em `[0, 1000]`. Limite zero
+  retorna lista vazia; valores inválidos geram `ValueError` antes de percorrer
+  memória/log.
+- `R1243-REFLECTION` — `add_reflection` exige agente, contexto e reflexão úteis;
+  score numérico, finito, não booleano e em `[0, 1]`. Rejeição não altera
+  episódio/ledger. Falha de persistência gera erro explícito e restaura ambos.
+  Sucesso mantém a fórmula EMA de SPEC-001.
+- `R1243-RETENTION` — após gravação bem-sucedida, episódios em memória e arquivo
+  JSON preservam a mesma cauda de até 1.000 registros. Falha não trunca memória.
 
 ## Evidência e limites inferenciais
 

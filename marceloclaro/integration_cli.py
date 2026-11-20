@@ -20,6 +20,7 @@ def run_integration_cli(argv: list[str], orchestrator: Any = None) -> int:
     handoff.add_argument("artifact_id")
     skill = sub.add_parser("skill")
     skill.add_argument("skill_name")
+    sub.add_parser("bughunter")
     try:
         args = parser.parse_args(argv or ["status"])
         if orchestrator is None:
@@ -29,6 +30,8 @@ def run_integration_cli(argv: list[str], orchestrator: Any = None) -> int:
             result = orchestrator.integration_status()
         elif args.operation == "handoff":
             result = orchestrator.integration_handoff(args.artifact_id)
+        elif args.operation == "bughunter":
+            result = orchestrator.claude_bughunter_plan()
         else:
             result = orchestrator.integration_skill_plan(args.skill_name)
         print(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False))

@@ -1944,7 +1944,15 @@ class MarceloClaroOrchestrator:
         return self._integration_service
 
     def integration_status(self) -> Dict[str, Any]:
-        return self.integration_service.status()
+        result = self.integration_service.status()
+        result["reference_packages"] = {
+            "claude_bughunter": self.integration_service.claude_bughunter_status(),
+        }
+        return result
+
+    def claude_bughunter_plan(self) -> Dict[str, Any]:
+        """Encaminha para a skill local defensiva; não invoca conteúdo upstream."""
+        return self.integration_service.claude_bughunter_plan()
 
     def integration_handoff(self, artifact_id: str) -> Dict[str, Any]:
         return self.integration_service.handoff(artifact_id)

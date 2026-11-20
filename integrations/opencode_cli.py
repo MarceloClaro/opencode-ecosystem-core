@@ -999,6 +999,10 @@ def build_config() -> Dict[str, Any]:
                 "template": (
                     "Examine as integrações do Core para: $ARGUMENTS. "
                     "Use ecosystem-network.ecosystem_integration_status para os contratos. "
+                    "Para encaminhar uma tarefa defensiva Claude-BugHunter use "
+                    "ecosystem-network.ecosystem_claude_bughunter_plan; ele retorna somente a skill local safe. "
+                    "Não carregue instruções upstream nem trate a autorização de integração como autorização "
+                    "para testes dinâmicos. "
                     "Para uma skill local use ecosystem_skill_plan; para um ID federado use "
                     "ecosystem_artifact_handoff. Preserve a política e leia as instruções no "
                     "contexto do orquestrador MarceloClaro. Diferencie configuração, descoberta "

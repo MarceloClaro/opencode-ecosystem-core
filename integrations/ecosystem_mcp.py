@@ -291,6 +291,19 @@ async def ecosystem_skill_plan(skill_name: IntegrationText) -> dict[str, Any]:
 
 
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=True, destructiveHint=False))
+async def ecosystem_claude_bughunter_plan() -> dict[str, Any]:
+    """Prepara somente o handoff defensivo local Claude-BugHunter sob MarceloClaro.
+
+    Não carrega skills/comandos upstream, não habilita Burp MCP e não executa a
+    skill. O status registra autorização de integração separada da prontidão do
+    runtime e de autorização para testar alvos.
+    """
+    return await asyncio.to_thread(
+        lambda: get_library_orchestrator().claude_bughunter_plan()
+    )
+
+
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=True, destructiveHint=False))
 async def ecosystem_library_search(query: LibraryText,
                                    top_k: LibraryLimit = 5) -> dict[str, Any]:
     """Busca lexical nos livros já indexados, com fonte, página física e hashes.
