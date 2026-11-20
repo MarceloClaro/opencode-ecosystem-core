@@ -25641,6 +25641,32 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1263",
+      "objective": "Corrigir seletor AT-SPI para nomes de aplicação com espaços, sob SPEC-935-R1261",
+      "changes": [
+        "specs/SPEC-935-R1261-desktop-operator-atspi-app-spaces.md",
+        "tests/test_r1261_desktop_operator_app_labels.py",
+        "integrations/desktop_operator/policy.py"
+      ],
+      "score": 8.0,
+      "lessons": [
+        "R1261: APP_RE agora permite somente ASCII space interno em nomes de app, mantendo limites lexicais, allowlist case-insensitive exata e um único item de argv; testes focais, regressão desktop-operator e SpecVerifier passaram. O escore é autoavaliação local, sem revisão externa.",
+        "TDD RED requer falha de asserção observável: exceções não tratadas classificam-se como erro e não formam recibo RED válido. Um checkpoint automático mudou HEAD entre GREEN e validação; repetir o ciclo com fontes estáveis produziu par RED/GREEN válido.",
+        "Delegação externa não concluiu: ecosystem_workflow bloqueou no preflight porque o backend não reconhecia a spec local, e o subagente foi recusado por restrição regional do provider. Não tratar roteamento ou bloqueio como revisão concluída; nenhum resultado de executor nem stake atribuído, portanto não há slashing de agente executado a aplicar."
+      ],
+      "timestamp": 1795205850.8783584,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
