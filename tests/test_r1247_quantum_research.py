@@ -113,6 +113,31 @@ def test_explicitly_declaring_no_constraints_is_not_a_gap():
     assert "constraints" not in {item["field"] for item in result["gaps"]}
 
 
+def test_cli_rejects_duplicate_json_keys():
+    process = subprocess.run(
+        [sys.executable, "-m", "integrations.quantum_research", "plan"],
+        cwd=ROOT,
+        input='{"schema_version":1,"schema_version":1,"question":"ambiguous"}',
+        text=True,
+        capture_output=True,
+        check=False,
+        timeout=10,
+    )
+    assert process.returncode == 2
+    assert json.loads(process.stdout)["code"] == "invalid_research_request"
+
+
+def test_skill_and_managed_profiles_route_without_editing_cards():
+    skill = (ROOT / ".opencode/skills/pesquisador-universal-marcelo-claro/SKILL.md").read_text()
+    applicability = (ROOT / "agents/catalog/quantum-applicability-researcher.md").read_text()
+    optimization = (ROOT / "agents/catalog/quantum-optimization-researcher.md").read_text()
+    assert "integrations.quantum_research" in skill
+    assert "quantum-applicability-researcher" in skill
+    assert "quantum-optimization-researcher" in skill
+    assert "allow_edit: false" in applicability
+    assert "allow_edit: false" in optimization
+
+
 @pytest.mark.parametrize("mutate", [
     lambda p: p.update(schema_version=True),
     lambda p: p.update(unknown_field="ignored?"),

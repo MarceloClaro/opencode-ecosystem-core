@@ -483,6 +483,15 @@ def _emit(value: Any) -> None:
     print(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True, allow_nan=False))
 
 
+def _unique_json_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise QuantumResearchContractError("JSON contém chave duplicada.")
+        result[key] = value
+    return result
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Planejamento local de pesquisa NISQ; sem solver/QPU.")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -504,7 +513,7 @@ def main(argv: list[str] | None = None) -> int:
         _emit({"status": "error", "code": "input_limit_exceeded"})
         return 2
     try:
-        payload = json.loads(raw)
+        payload = json.loads(raw, object_pairs_hook=_unique_json_object)
         _emit(build_research_plan(payload))
         return 0
     except (json.JSONDecodeError, QuantumResearchContractError) as exc:

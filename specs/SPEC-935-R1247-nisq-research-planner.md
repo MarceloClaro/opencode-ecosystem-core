@@ -4,6 +4,30 @@ title: Planejador auditável de pesquisa NISQ e lacunas quânticas
 component: integrations.quantum_research
 status: proposed
 test_file: tests/test_r1247_quantum_research.py
+evidence_contract:
+  version: 1
+  mode: criterion-runtime-v1
+  criteria:
+    AC1:
+      - tests/test_r1247_quantum_research.py::test_catalog_covers_nisq_methods_and_preserves_tiangong_labels
+    AC2:
+      - tests/test_r1247_quantum_research.py::test_invalid_payloads_fail_closed
+      - tests/test_r1247_quantum_research.py::test_cli_rejects_duplicate_json_keys
+    AC3:
+      - tests/test_r1247_quantum_research.py::test_plan_is_gap_aware_deterministic_and_never_claims_execution
+      - tests/test_r1247_quantum_research.py::test_plan_reports_common_and_method_specific_gaps_without_recommendation
+      - tests/test_r1247_quantum_research.py::test_explicitly_declaring_no_constraints_is_not_a_gap
+    AC4:
+      - tests/test_r1247_quantum_research.py::test_catalog_covers_nisq_methods_and_preserves_tiangong_labels
+    AC5:
+      - tests/test_r1247_quantum_research.py::test_catalog_covers_nisq_methods_and_preserves_tiangong_labels
+    AC6:
+      - tests/test_r1247_quantum_research.py::test_catalog_cli_and_plan_cli_are_local_json_only
+      - tests/test_r1247_quantum_research.py::test_cli_rejects_duplicate_json_keys
+    AC7:
+      - tests/test_r1247_quantum_research.py::test_skill_and_managed_profiles_route_without_editing_cards
+    AC8:
+      - tests/test_r1247_quantum_research.py::test_plan_is_gap_aware_deterministic_and_never_claims_execution
 ---
 
 # SPEC-935-R1247 — Planejador de pesquisa NISQ e auditoria das aplicações Tiangong
@@ -59,7 +83,8 @@ orquestrador primário.
 - AC1: catálogo determinístico cobre baselines clássicos, métodos híbridos,
   simulação clássica, annealing, autômatos celulares quânticos e mitigação de
   erros, com pré-requisitos e limites explícitos.
-- AC2: validação da entrada rejeita versões, campos, tipos, métodos e valores
+- AC2: validação da entrada rejeita versões, campos, tipos, métodos, chaves JSON
+  duplicadas e valores
   numéricos inválidos; listas e recursos têm limites documentados.
 - AC3: plano detecta lacunas comuns e por método, preserva referências de
   evidência e não converte entradas declaradas em fatos verificados.

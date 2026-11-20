@@ -26,7 +26,7 @@ python -m marceloclaro.scientific_lab causal --help
 python -m marceloclaro.scientific_lab federation --help
 python -m marceloclaro.scientific_lab production --help
 python -m integrations.quantum_research catalog
-python -m integrations.quantum_research plan < request.json
+python -m integrations.quantum_research plan  # JSON v1 por stdin
 ```
 
 `plan` lê JSON v1 de stdin e retorna lacunas e protocolo de pesquisa. A entrada
