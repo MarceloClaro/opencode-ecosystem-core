@@ -29,8 +29,26 @@
     "atspi_backend_before_mitigation": "namespace_unavailable",
     "atspi_typelib_package": "gir1.2-atspi-2.0",
     "atspi_typelib_package_installed": false,
+    "atspi_typelib_staged_user_local": true,
+    "atspi_typelib_stage_path": "/tmp/opencode/burp-wsl2-atspi/root/usr/lib/x86_64-linux-gnu/girepository-1.0",
+    "atspi_backend_after_mitigation": "available_no_apps_detected",
+    "atspi_status_apps_count": 0,
     "at_spi2_core_installed": true,
-    "dbus_session_bus_present": true
+    "dbus_session_bus_present": true,
+    "system_package_install_completed": false,
+    "sudo_install_attempt": "failed_password_required",
+    "staged_packages": [
+      {
+        "name": "gir1.2-atspi-2.0",
+        "version": "2.52.0-1build1",
+        "sha256": "a30c955c8d81e3d2a2f74d52c3447e412117cc514560fcf7acae74d8b09f05cb"
+      },
+      {
+        "name": "gir1.2-freedesktop",
+        "version": "1.80.1-1",
+        "sha256": "49944f1fc427b839b55b01c3764ea1c01affa44cacdafdd67f30d31363b178e7"
+      }
+    ]
   },
   "burp_runtime": {
     "burp_community_installed": false,

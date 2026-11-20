@@ -28,9 +28,12 @@ launcher do proxy. O BApp continua sendo PortSwigger oficial e requer instalaç�
 na interface do Burp.
 
 Preparar o backend AT-SPI já incluído no Core para a interface gráfica WSLg,
-instalando somente o typelib Ubuntu `gir1.2-atspi-2.0`, aprovado pelo usuário.
-Cada ação de clique/tipagem continua sujeita ao token de aprovação humana de uso
-único; não contornar a aprovação por automação shell/X11.
+estagiando o typelib Ubuntu `gir1.2-atspi-2.0` e sua dependência
+`gir1.2-freedesktop` em diretório temporário do usuário. A instalação global
+via apt foi impedida porque sudo exige senha; não pedir nem guardar senha. Os
+`.deb` serão obtidos do repositório Ubuntu, hash conferido e apenas extraídos
+(sem post-install). Cada ação de clique/tipagem continua sujeita ao token de
+aprovação humana de uso único; não contornar a aprovação por automação shell/X11.
 
 ## Evidência documental consultada
 
@@ -53,8 +56,9 @@ prova de execução local após o BApp estar instalado.
 - `agent-desktop` ausente; o operador Core foi observado como
   `binary_not_found`.
 - O fallback AT-SPI existe no Core, mas falhou com `Namespace Atspi not available`.
-- `at-spi2-core` está instalado; `gir1.2-atspi-2.0` não está instalado e tem
-  candidato no repositório Ubuntu Noble.
+- `at-spi2-core` está instalado; `gir1.2-atspi-2.0` e
+  `gir1.2-freedesktop` não estão instalados no sistema e têm candidatos no
+  repositório Ubuntu Noble.
 - Burp, Java e a extensão ainda não foram instalados/carregados.
 
 ## Contrato
@@ -67,8 +71,9 @@ prova de execução local após o BApp estar instalado.
 3. Manter a configuração MCP do OpenCode ausente até a extensão oficial estar
    instalada e o endpoint estar disponível. Não declarar conexão/habilitação a
    partir do plano.
-4. Instalar somente `gir1.2-atspi-2.0` do repositório Ubuntu oficial; verificar
-   status AT-SPI pelo backend já existente. Não instalar `agent-desktop` nem
+4. Estagiar os dois `.deb` oficiais e suas hashes em `/tmp/opencode`, sem
+   instalação global ou scripts; verificar status AT-SPI pelo backend já
+   existente usando `GI_TYPELIB_PATH`. Não instalar `agent-desktop` nem
    contornar seus gates.
 5. Após iniciar Burp, carregar somente o BApp oficial PortSwigger. Não navegar a
    sites-alvo, não enviar requisições, não rodar scanner e não testar ferramenta
@@ -90,14 +95,15 @@ prova de execução local após o BApp estar instalado.
   `mcp_connected=false`, `http_requests_sent=false` e
   `target_testing_authorized=false` até execução observada.
 - `R1249-AT-SPI`: o backend local responde `ok=true` depois que o typelib for
-  instalado. Acesso à GUI não remove a aprovação humana por ação.
+  estagiado e carregado via `GI_TYPELIB_PATH`. Acesso à GUI não remove a
+  aprovação humana por ação.
 
 ## Verificação e limites
 
 - Testes primeiro; registrar RED antes do plano/integração e GREEN depois.
 - Rodar testes R1249, regressão R1239 e `git diff --check`.
-- Verificar a instalação do pacote no apt/dpkg e executar apenas o comando de
-  status AT-SPI; não iniciar Burp nem conectar ao endpoint nesta fase.
+- Verificar versão/hash dos `.deb`, estado do staging e executar apenas o
+  comando de status AT-SPI; não iniciar Burp nem conectar ao endpoint nesta fase.
 - A instalação posterior do Burp/BApp é fase operacional separada; se AT-SPI
   não conseguir expor a UI ou exigir privilégios não disponíveis, parar e pedir
   intervenção humana.

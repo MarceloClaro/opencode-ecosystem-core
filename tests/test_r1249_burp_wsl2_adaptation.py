@@ -53,7 +53,7 @@ def test_catalog_surfaces_plan_without_claiming_burp_enabled():
     assert catalog["burp_mcp"]["enabled"] is False
 
 
-def test_atspi_backend_is_available_after_typelib_install():
+def test_atspi_backend_is_available_after_typelib_staging():
     env = dict(os.environ)
     env["DESKTOP_OPERATOR_BACKEND"] = "atspi"
     result = subprocess.run(
