@@ -11,6 +11,7 @@ evidence_contract:
     R1232-CATALOG:
       - tests/test_r1232_isolated_external_tools.py::test_manifest_pins_sources_licenses_and_isolation_states
       - tests/test_r1232_isolated_external_tools.py::test_reference_only_and_blocked_entries_have_no_install_or_execution_claim
+      - tests/test_r1232_isolated_external_tools.py::test_prompts_chat_is_catalog_only_with_dual_license_boundary
     R1232-RUST:
       - tests/test_r1232_isolated_external_tools.py::test_rust_anything_install_plan_isolated_and_integrity_pinned
       - tests/test_r1232_isolated_external_tools.py::test_rust_anything_runner_never_uses_shell_or_global_install
@@ -47,8 +48,9 @@ instalação, metadados upstream ou alegações de benchmark em prova de qualida
 | `LING71671/open-reverselab` | commit `c42da86aadcbea4f2dd20822653f83da5f6aba54` | Apache-2.0 na raiz; disclaimer com obrigações incompatíveis/ambíguas e pacote MCP aninhado `GPL-3.0-only` | Estado `blocked_legal_review`; somente metadados mínimos e registro do bloqueio. Não clonar, instalar, importar, executar, adaptar conteúdo ou habilitar MCP nesta entrega. |
 | `Jenischristan/universal-os` | commit `661f15fc1afbbe1158ac5d14673e188238f29c0c`, versão `0.2.1` | MIT | Adaptador/instalação isolada, MCP desabilitado por padrão. Sem fornecer ISO, iniciar QEMU/VM, analisar imagem ou reconstruir/testar SO. |
 | `anthropics/skills` | commit `e4bb5d960d87126ff3b3a8af1a104b7db67560ba` | Licença por skill; `mcp-builder` e `skill-creator` observadas com Apache-2.0 | Importar somente estas duas skills, preservando licença, atribuição, commit e hashes. Nenhuma outra pasta do repositório é incluída. As skills permanecem explícitas/não implícitas conforme política local. |
-| `JuliusBrussee/caveman` | commit `a192894723a8f47e7f504c7b5041967ff1f18e55` | Apache-2.0 | CLI isolada; sem interceptar/substituir comandos globais de agentes. `DO_NOT_TRACK=1`, `CAVEMAN_TELEMETRY=0`, `CAVEMAN_OFFLINE=1` e `CAVEMAN_HOME` privado devem ser aplicados em cada processo. Auto, login, gateway/cloud, hooks e integração de agentes ficam bloqueados. Versão publicada e integridade devem ser fixadas antes de qualquer instalação. |
-| `farion1231/cc-switch` | commit `a192894723a8f47e7f504c7b5041967ff1f18e55` observado em 2026-11-20 | MIT | Somente catalogação. Não instalar/abrir aplicativo, importar configs, ler credenciais, reescrever endpoints ou iniciar roteamento/sync. |
+| `JuliusBrussee/caveman` / npm `@caveman-ai/cli` | repositório commit `a192894723a8f47e7f504c7b5041967ff1f18e55`; pacote `4.1.0`, integrity `sha512-5+qoA9GydY6OlQYQLhAtAt+eQC8xW7mzWeuq4XBSAacgyOJ4fyyurzLFlc9r1YTcobL4lZbDYwewSPINOXqNdg==` | Apache-2.0 | CLI isolada; sem interceptar/substituir comandos globais de agentes. `DO_NOT_TRACK=1`, `CAVEMAN_TELEMETRY=0`, `CAVEMAN_OFFLINE=1` e `CAVEMAN_HOME` privado devem ser aplicados em cada processo. Auto, login, gateway/cloud, hooks e integração de agentes ficam bloqueados. |
+| `farion1231/cc-switch` | commit `2a750c3fcbbefa9550047d7dd3363d9120e545ed` observado em 2026-11-20 | MIT | Somente catalogação. Não instalar/abrir aplicativo, importar configs, ler credenciais, reescrever endpoints ou iniciar roteamento/sync. |
+| `f/prompts.chat` | commit `29417a15542c01938e2230d4c2dcee95771ae6aa`, observado em 2026-11-20 | Licença dupla: app/código MIT; prompts/dados CC0-1.0 | Somente catalogação. Não baixar o corpus, instalar/self-host a aplicação, habilitar MCP local/remoto nem tratar prompts enviados por usuários como instruções confiáveis. |
 | `morluto/rea` | `rea-agents@6.8.0`, já instalado; trilha existente em `SPEC-935-R1066` | MIT | Reutilizar a integração existente. Não instalar outra cópia, atualizar, duplicar ferramentas nem ampliar permissões nesta entrega. |
 
 As referências a commits e metadados são fotografias da pesquisa, não auditoria
@@ -80,8 +82,8 @@ exige revisão jurídica humana explícita.
    `SKILL.md`, `LICENSE.txt`, `source.json` (repo, commit, caminho, SHA-256,
    política de ativação) e os arquivos de suporte necessários. Não executar
    scripts ou instruções que produzam efeitos durante a importação.
-7. Awesome REA e CC Switch são entradas `reference_only`; OpenReverseLab é
-   `blocked_legal_review`. Não se copia código, dados ou texto desses itens.
+7. Awesome REA, CC Switch e prompts.chat são entradas `reference_only`;
+   OpenReverseLab é `blocked_legal_review`. Não se copia conteúdo desses itens.
 8. REA 6.8.0 permanece como implementação canônica de reverse engineering; o
    novo catálogo aponta para a integração existente, sem recapturar sua
    instalação nem declarar que suas camadas externas estejam disponíveis.
@@ -100,7 +102,9 @@ exige revisão jurídica humana explícita.
    fixado; arquivos, licenças e SHA-256 são reconciliáveis; invocação implícita
    fica desativada.
 6. OpenReverseLab não é baixado nem executado; o conflito de licenças permanece
-   marcado como bloqueio. Awesome REA e CC Switch não alegam instalação nem uso.
+   marcado como bloqueio. Awesome REA, CC Switch e prompts.chat não alegam
+   instalação nem uso; prompts.chat mantém separadas as licenças do código e do
+   corpus de prompts.
 7. REA existente é reutilizado sem alteração da versão, instalação ou MCP.
 8. Testes focais, regressões pertinentes, `python3 -m marceloclaro.cli doctor`
    com `.venv` e revisão de diff passam; todo estado externo não observado é
