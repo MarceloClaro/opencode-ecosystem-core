@@ -130,7 +130,12 @@ acrescentadas a `requirements.txt`.
   divergência. `mpt==1.3.10` instalado somente em
   `~/.local/share/marceloclaro/tools/mpt/1.3.10/venv` com pacotes binários;
   `pip check` → `No broken requirements found`; `pip show mpt` → `1.3.10`.
-  Instalação não executou o CLI/WebUI/API e não criou `config.toml` nem chaves.
+  `importlib.metadata` confirmou a distribuição e o entry point `mpt`; o
+  namespace Python `import mpt` não existe (`ModuleNotFoundError`) e não foi
+  usado como teste de prontidão. A instalação não iniciou CLI/WebUI/API, não
+  criou `config.toml` nem chaves. A pasta vazia
+  `~/.local/share/marceloclaro/data/mpt/1.3.10/storage/tasks` foi preparada
+  para exports futuros.
 - Doctor pelo `.venv` do Core → `overall=degraded`, 16 checks pass, 6 warnings,
   0 failed; avisos são capacidades/provedores opcionais ausentes. A execução
   estrutural confirmou specs, registro de evolução e memória disponíveis.
