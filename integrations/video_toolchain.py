@@ -9,8 +9,8 @@ import argparse
 import copy
 import importlib.util
 import json
-from pathlib import Path
 import shutil
+from pathlib import Path
 
 VERSION = 'R1043-1'
 LICENSE_CLASSES = {'permissive', 'copyleft', 'non_commercial', 'custom', 'unknown'}
@@ -251,7 +251,7 @@ def validate_registry(entries=None):
     ids = set()
     for row in rows:
         if not isinstance(row, dict):
-            raise ValueError('entry object required')
+            raise TypeError('entry object required')
         for key in ('id', 'kind', 'name', 'url', 'license', 'license_class', 'roles',
                     'runtime', 'hardware', 'status'):
             if key not in row:

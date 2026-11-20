@@ -8,8 +8,8 @@ from __future__ import annotations
 import hashlib
 import json
 import os
-from pathlib import Path
 import re
+from pathlib import Path
 
 from mcp.server.fastmcp import FastMCP
 from mcp.types import ToolAnnotations
@@ -89,8 +89,10 @@ def create_server(root=None):
         if source_key.is_absolute() or any(part in ('.', '..') for part in source_key.parts):
             raise ValueError('registered relative source_id required')
         record = project['sources'].get(source_id)
-        if not isinstance(record, dict):
+        if record is None:
             raise ValueError('source_id is not registered in project')
+        if not isinstance(record, dict):
+            raise TypeError('registered project source must be an object')
         source = Path(record['path'])
         try:
             relative = source.relative_to(root)
@@ -167,7 +169,7 @@ def create_server(root=None):
         """Cria plano auditável. Caminhos ficam confinados à raiz do projeto."""
         project = load_project(project_id)
         if not isinstance(params, dict):
-            raise ValueError('params object required')
+            raise TypeError('params object required')
         clean = dict(params)
         for key in ('output',):
             if key not in clean:
@@ -260,14 +262,24 @@ def create_server(root=None):
 
     @server.tool(annotations=read)
     def editor_status() -> dict:
-        """Contagens locais; não executa render nem aprova qualidade."""
-        projects = root / 'editor-projects'
-        plans = root / 'editor-plans'
-        approvals = root / 'editor-approvals'
-        return {'projects': len(list(projects.glob('*.json'))) if projects.is_dir() else 0,
-                'plans': len(list(plans.glob('*.json'))) if plans.is_dir() else 0,
-                'approvals': len(list(approvals.glob('*.json'))) if approvals.is_dir() else 0,
+        """Contagens e versões locais; não analisa mídia nem executa render."""
+        folders = {name: confined(name) for name in (
+            'editor-projects', 'editor-plans', 'editor-approvals',
+            'editor-analysis', 'editor-proposals')}
+
+        def count_json(folder):
+            if not folder.is_dir():
+                return 0
+            return sum(1 for item in folder.glob('*.json')
+                       if not item.is_symlink() and item.is_file())
+
+        return {'projects': count_json(folders['editor-projects']),
+                'plans': count_json(folders['editor-plans']),
+                'approvals': count_json(folders['editor-approvals']),
+                'analyses': count_json(folders['editor-analysis']),
+                'cut_proposals': count_json(folders['editor-proposals']),
                 'backends': sorted(video_editor.BACKENDS),
+                'toolchain': video_analysis.diagnose_tools(),
                 'render_executed': False}
 
     return server

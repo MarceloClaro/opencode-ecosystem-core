@@ -7,17 +7,17 @@ representáveis na taxa CFR da fonte.
 """
 from __future__ import annotations
 
-from fractions import Fraction
 import hashlib
 import importlib.util
 import json
 import math
-from pathlib import Path
 import re
 import shutil
 import subprocess
 import tempfile
-from typing import Callable
+from collections.abc import Callable
+from fractions import Fraction
+from pathlib import Path
 
 from integrations import video_editor
 
@@ -88,14 +88,14 @@ def _probe(path: Path, probe_fn: Callable | None) -> dict:
         return video_editor.probe_media(path, allow_silent=True)
     result = probe_fn(str(path), allow_silent=True)
     if not isinstance(result, dict):
-        raise ValueError("media probe must return an object")
+        raise TypeError("media probe must return an object")
     return result
 
 
 def _source_details(path: Path, probe: dict) -> dict:
     video = probe.get("video")
     if not isinstance(video, dict):
-        raise ValueError("video stream metadata required")
+        raise TypeError("video stream metadata object required")
     vfr = video.get("variable_frame_rate")
     if vfr is not False:
         if vfr is True:
@@ -121,8 +121,9 @@ def _source_details(path: Path, probe: dict) -> dict:
 def diagnose_tools(*, which_fn=shutil.which, runner=subprocess.run,
                    timeout: int = VERSION_TIMEOUT_SECONDS) -> dict:
     """Run bounded version checks and report required and optional tools."""
-    if isinstance(timeout, bool) or not isinstance(timeout, (int, float)) or timeout <= 0:
-        raise ValueError("positive version-check timeout required")
+    if (isinstance(timeout, bool) or not isinstance(timeout, (int, float))
+            or not math.isfinite(float(timeout)) or not 0 < timeout <= 60):
+        raise ValueError("version-check timeout must be between 0 and 60 seconds")
     commands = {
         "ffmpeg": ("ffmpeg", ["-version"], True),
         "ffprobe": ("ffprobe", ["-version"], True),
@@ -191,7 +192,7 @@ def _default_scene_detect(path: str, *, threshold: float, min_scene_len: int):
 def _frame_number(value) -> int:
     frame = getattr(value, "frame_num", value)
     if isinstance(frame, bool):
-        raise ValueError("scene frame number must be an integer")
+        raise TypeError("scene frame number must be an integer")
     try:
         integer = int(frame)
     except (ValueError, TypeError, OverflowError) as exc:
@@ -216,7 +217,7 @@ def detect_scene_markers(path: str | Path, *, threshold: float = 27.0,
     detector = scene_detect_fn or _default_scene_detect
     scenes = detector(str(source), threshold=float(threshold), min_scene_len=min_scene_len)
     if not isinstance(scenes, (list, tuple)):
-        raise ValueError("scene detector must return a list of scene boundaries")
+        raise TypeError("scene detector must return a list of scene boundaries")
     if len(scenes) > 10_000:
         raise ValueError("scene count exceeds limit")
     if not scenes:
@@ -266,7 +267,7 @@ def parse_auto_editor_v1(document: dict, *, source_path: str | Path,
     source = _regular_media(source_path)
     details = _source_details(source, probe)
     if not isinstance(document, dict):
-        raise ValueError("Auto-Editor v1 document must be an object")
+        raise TypeError("Auto-Editor v1 document must be an object")
     if document.get("version") != "1":
         raise ValueError("Auto-Editor v1 version must be the string '1'")
     if not isinstance(document.get("source"), str) \
@@ -363,8 +364,8 @@ def propose_auto_editor_cuts(path: str | Path, *, probe_fn: Callable | None = No
                              timeout: int = AUTO_EDITOR_TIMEOUT_SECONDS) -> dict:
     """Export Auto-Editor v1 to a private temporary file and return a proposal."""
     if isinstance(timeout, bool) or not isinstance(timeout, (int, float)) \
-            or not math.isfinite(float(timeout)) or timeout <= 0:
-        raise ValueError("positive Auto-Editor timeout required")
+            or not math.isfinite(float(timeout)) or not 0 < timeout <= 600:
+        raise ValueError("Auto-Editor timeout must be between 0 and 600 seconds")
     source = _regular_media(path)
     probe = _probe(source, probe_fn)
     details = _source_details(source, probe)

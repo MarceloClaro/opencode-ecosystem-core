@@ -6,13 +6,12 @@ import hashlib
 import importlib
 import importlib.util
 import json
-from pathlib import Path
 import shutil
 import subprocess
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
-
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = ROOT / "specs/SPEC-935-R1230-video-analysis-adapters.md"
@@ -327,13 +326,13 @@ def test_mcp_exposes_confined_analysis_and_review_proposal_tools(tmp_path, monke
     proposals = list((root / "editor-proposals").glob("*.json"))
     assert len(proposals) == 1
     assert json.loads(proposals[0].read_text())["approval_state"] == "pending"
-    with pytest.raises(Exception):
+    with pytest.raises(ValueError):
         asyncio.run(server.call_tool("editor_analyze_scenes", {
             "project_id": "demo", "source_id": "../outside.mp4"}))
-    with pytest.raises(Exception):
+    with pytest.raises(ValueError):
         asyncio.run(server.call_tool("editor_analyze_scenes", {
             "project_id": "../demo", "source_id": "media/source.mp4"}))
-    with pytest.raises(Exception):
+    with pytest.raises(ValueError):
         asyncio.run(server.call_tool("editor_analyze_scenes", {
             "project_id": "demo", "source_id": "media/not-registered.mp4"}))
     other = root / "media/other.mp4"
@@ -344,9 +343,29 @@ def test_mcp_exposes_confined_analysis_and_review_proposal_tools(tmp_path, monke
         "path": str(alias), "sha256": hashlib.sha256(other.read_bytes()).hexdigest(),
         "frames": 120, "fps": [30, 1]}
     (root / "editor-projects/demo.json").write_text(json.dumps(project), encoding="utf-8")
-    with pytest.raises(Exception):
+    with pytest.raises(ValueError):
         asyncio.run(server.call_tool("editor_analyze_scenes", {
             "project_id": "demo", "source_id": "media/alias.mp4"}))
+
+
+def test_mcp_status_reports_tool_versions_and_pending_artifact_counts(tmp_path, monkeypatch):
+    from integrations import video_analysis, video_editor_mcp
+    root = tmp_path / "project"
+    root.mkdir()
+    (root / "editor-analysis").mkdir()
+    (root / "editor-analysis/one.json").write_text("{}", encoding="utf-8")
+    (root / "editor-proposals").mkdir()
+    (root / "editor-proposals/pending.json").write_text(
+        '{"approval_state":"pending"}', encoding="utf-8")
+    monkeypatch.setattr(video_analysis, "diagnose_tools", lambda: {
+        "status": "ready", "tools": {
+            "ffmpeg": {"version": "8.1"}, "ffprobe": {"version": "8.1"}}})
+    server = video_editor_mcp.create_server(root)
+    result = asyncio.run(server.call_tool("editor_status", {}))
+    text = _mcp_text(result)
+    assert '"analyses": 1' in text
+    assert '"cut_proposals": 1' in text
+    assert '"toolchain"' in text and '"ffprobe"' in text
 
 
 @pytest.mark.skipif(
