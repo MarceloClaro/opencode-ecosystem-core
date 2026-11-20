@@ -12,6 +12,7 @@ evidence_contract:
       - tests/test_r1256_quantitative_research.py::test_catalog_contains_200_unique_typed_calculations_and_fails_closed_for_planned_items
     AC2:
       - tests/test_r1256_quantitative_research.py::test_sample_size_proportion_uses_finite_population_and_documents_variability
+      - tests/test_r1256_quantitative_research.py::test_sample_size_adjusts_for_design_effect_and_nonresponse_without_exceeding_population
       - tests/test_r1256_quantitative_research.py::test_sample_size_mean_uses_standard_deviation_and_finite_correction
       - tests/test_r1256_quantitative_research.py::test_sample_size_rejects_invalid_inputs
       - tests/test_r1256_quantitative_research.py::test_design_experiment_uses_only_explicit_sample_size_parameters
