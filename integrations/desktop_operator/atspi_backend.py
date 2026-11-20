@@ -14,6 +14,8 @@ import time
 from pathlib import Path
 from typing import Any
 
+from .policy import MAX_SNAPSHOT_DEPTH
+
 VERSION = "r1060-atspi/1"
 MAX_NODES = 2000
 MAX_NAME = 500
@@ -267,7 +269,7 @@ def snapshot(config, app: str, max_depth: int = 6) -> dict:
         refs: dict[str, dict] = {}
         budget = {"nodes": MAX_NODES, "truncated": False}
         tree = _serialize(Atspi, application, [], snapshot_id, refs, 0,
-                          max(1, min(int(max_depth), 8)), budget)
+                          max(1, min(int(max_depth), MAX_SNAPSHOT_DEPTH)), budget)
         payload = {"app": _name(application), "pid": _pid(application),
                    "snapshot_id": snapshot_id, "refs": refs}
         target = _store_path(config, snapshot_id)

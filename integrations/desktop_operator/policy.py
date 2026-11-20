@@ -24,6 +24,7 @@ DENIED_FLAGS = frozenset({
 })
 WAIT_PREDICATES = frozenset({"exists", "enabled", "visible", "actionable", "value"})
 WAIT_ACTIONS = frozenset({"click", "type", "set-value", "clear"})
+MAX_SNAPSHOT_DEPTH = 12
 APP_RE = re.compile(
     r"^(?=.{1,120}\Z)[A-Za-z0-9._@/-](?:[A-Za-z0-9._@/ -]*[A-Za-z0-9._@/-])?\Z"
 )
@@ -183,8 +184,11 @@ def build_argv(
     if command == "snapshot":
         target = require_app(config, app)
         depth = 6 if max_depth is None else max_depth
-        if type(depth) is not int or not 1 <= depth <= 8:
-            raise PolicyDenied("max_depth_invalid", "profundidade deve estar entre 1 e 8")
+        if type(depth) is not int or not 1 <= depth <= MAX_SNAPSHOT_DEPTH:
+            raise PolicyDenied(
+                "max_depth_invalid",
+                f"profundidade deve estar entre 1 e {MAX_SNAPSHOT_DEPTH}",
+            )
         return ["snapshot", "--app", target, "-i", "--compact",
                 "--max-depth", str(depth), "--timeout-ms", str(_timeout(timeout_ms, config))]
 
