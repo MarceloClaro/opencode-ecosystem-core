@@ -24921,6 +24921,34 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1231",
+      "objective": "Fechar R1230: análise CFR de cenas e propostas de corte revisáveis no editor de vídeo",
+      "changes": [
+        "PySceneDetect gera marcadores com hash; Auto-Editor v1 vira segmentos CFR exatos e sempre pending, sem render.",
+        "MCP aceita apenas fontes registradas/confinadas, persiste artefatos content-addressed; toolchain/docs atualizados com FFmpeg, Auto-Editor, LongCat reference_only e Remotion preservado.",
+        "WhisperX não foi instalado porque faster-whisper já habilita word_timestamps=True; pesos LongCat não foram baixados.",
+        "Instalações sem privilégios em ~/.local e .venv foram usadas após apt/sudo indisponível; hashes de release foram conferidos."
+      ],
+      "score": 7.0,
+      "lessons": [
+        "SpecVerifier confirmou 7/7 critérios com TDDHistory RED→GREEN local (RED tdd-70c4b86473a347c68d5d6a5bc6b55e83; GREEN tdd-881c302f990444978ecc3604d446b167); a validação é local, não externa.",
+        "Manter equivalência de timestamps somente com Fraction e limites exatos por frame; VFR/timebase incerta e retiming ficam bloqueados; nenhum corte é aprovação nem render.",
+        "Revisão externa via workflow ficou bloqueada no preflight; nenhum agente foi executado/atribuído, portanto não havia stake de executor para slashing. Registrar o bloqueio, não inventar revisão.",
+        "Doctor permanece degraded por avisos de autenticação/dependências externas: 16 checks passaram, 6 avisos, 0 falhas. Não transformar presença do toolchain em prova de qualidade perceptual."
+      ],
+      "timestamp": 1795151867.4939418,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
