@@ -25689,6 +25689,33 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1267",
+      "objective": "R1266 — completar o acesso AT-SPI a page tabs sob aprovação única para prosseguir na configuração Burp/MCP sem ações sobre alvos",
+      "changes": [
+        "R1266 formalizou page tab/Selection.select_child somente com ref AT-SPI qualificado e click aprovado.",
+        "Teste sintético confirmou que a seleção não ocorre sem token; testes focais R1266/R1265/R1060/R1249: 58 passaram, 1 aviso.",
+        "No Burp Community real, a aba BApp Store ficou selecionada; o painel expôs dois painéis vazios sem resultados/controles acessíveis.",
+        "Nenhum BApp foi carregado; :9876 não está ouvindo; OpenCode não foi configurado; nenhum scanner ou requisição para alvo foi usado."
+      ],
+      "score": 0.55,
+      "lessons": [
+        "Abas AT-SPI sem Action podem exigir Selection no pai; não contornar o gate chamando a interface diretamente: emitir ref qualificado e preservar a aprovação de uso único.",
+        "Um click pode retornar APP_NOT_FOUND por nome transitório do app; renovar list-apps/snapshot e revalidar o alvo antes de emitir nova aprovação, sem reutilizar token/ref.",
+        "Entregar o BApp Store selecionado não prova que o catálogo carregou; confirmar conteúdo e listener antes de configurar OpenCode."
+      ],
+      "timestamp": 1795212207.5672178,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
