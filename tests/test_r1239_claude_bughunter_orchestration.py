@@ -54,6 +54,10 @@ def test_catalog_fails_closed_when_package_manifest_is_tampered(tmp_path):
         "claude-bughunter-mcp-r1239.json",
     ):
         (federation / filename).write_bytes((ROOT / "federation" / filename).read_bytes())
+    (tmp_path / "external/claude-bughunter-snapshot").mkdir(parents=True)
+    local_skill = tmp_path / ".opencode/skills/claude-bughunter-safe/SKILL.md"
+    local_skill.parent.mkdir(parents=True)
+    local_skill.write_text("local safe skill", encoding="utf-8")
 
     manifest_path = federation / "claude-bughunter-package-r1236.json"
     tampered = json.loads(manifest_path.read_text(encoding="utf-8"))
