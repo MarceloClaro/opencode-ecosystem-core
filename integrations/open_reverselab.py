@@ -217,6 +217,7 @@ def _installation_environment(paths: Mapping[str, str]) -> dict[str, str]:
         "UV_PYTHON_DOWNLOADS": "never",
         "GIT_CONFIG_NOSYSTEM": "1",
         "GIT_CONFIG_GLOBAL": os.devnull,
+        "GIT_TEMPLATE_DIR": str(Path(private_home) / "git-template"),
         "GIT_TERMINAL_PROMPT": "0",
         "GIT_OPTIONAL_LOCKS": "0",
         "LANG": "C",
@@ -231,8 +232,8 @@ def install_plan() -> dict[str, Any]:
     uv = shutil.which("uv") or "uv"
     stage = "<staging-checkout>"
     commands = {
-        "git_clone": [git, "clone", "--no-checkout", "--no-tags", "--filter=blob:none", "--", SOURCE_URL, stage],
-        "git_checkout": [git, "-C", stage, "checkout", "--detach", SOURCE_COMMIT],
+        "git_clone": [git, "-c", f"core.hooksPath={os.devnull}", "clone", "--no-checkout", "--no-tags", "--filter=blob:none", "--", SOURCE_URL, stage],
+        "git_checkout": [git, "-c", f"core.hooksPath={os.devnull}", "-C", stage, "checkout", "--detach", SOURCE_COMMIT],
         "uv_sync": [
             uv,
             "sync",
@@ -438,7 +439,7 @@ def _assert_no_symlink_components(path: Path) -> None:
     for part in path.parts[1:]:
         cursor /= part
         try:
-            mode = cursor.lstat().st_mode
+            cursor.lstat()
         except FileNotFoundError:
             continue
         except OSError as error:
@@ -522,6 +523,11 @@ def install_isolated(
         if config_home.exists() and not config_home.is_dir():
             raise CheckoutValidationError("managed_path_conflict", "XDG_CONFIG_HOME privado não é diretório.")
         config_home.mkdir(mode=0o700, exist_ok=True)
+        git_template = Path(paths["private_home"]) / "git-template"
+        _assert_no_symlink_components(git_template)
+        if git_template.exists() and not git_template.is_dir():
+            raise CheckoutValidationError("managed_path_conflict", "Diretório de templates Git privado não é diretório.")
+        git_template.mkdir(mode=0o700, exist_ok=True)
 
         invoke = runner or subprocess.run
         environment_vars = dict(plan["environment"])
@@ -550,7 +556,7 @@ def install_isolated(
         git_env = dict(environment_vars)
         with tempfile.TemporaryDirectory(prefix=".open-reverselab-stage-", dir=str(checkout.parent)) as staging_parent:
             staging = Path(staging_parent) / "checkout"
-            clone_argv = [git, "clone", "--no-checkout", "--no-tags", "--filter=blob:none", "--", SOURCE_URL, str(staging)]
+            clone_argv = [git, "-c", f"core.hooksPath={os.devnull}", "clone", "--no-checkout", "--no-tags", "--filter=blob:none", "--", SOURCE_URL, str(staging)]
             cloned = run_fixed(clone_argv, cwd=checkout.parent, env=git_env)
             clone_code = int(getattr(cloned, "returncode", 1))
             if clone_code != 0:
@@ -558,7 +564,7 @@ def install_isolated(
                         "stderr": str(getattr(cloned, "stderr", "") or "")[:MAX_INSTALL_OUTPUT_CHARS],
                         "runtime": {"installed": False, "executed": False, "mcp_enabled": False}}
 
-            checkout_argv = [git, "-C", str(staging), "checkout", "--detach", SOURCE_COMMIT]
+            checkout_argv = [git, "-c", f"core.hooksPath={os.devnull}", "-C", str(staging), "checkout", "--detach", SOURCE_COMMIT]
             checked_out = run_fixed(checkout_argv, cwd=staging, env=git_env)
             checkout_code = int(getattr(checked_out, "returncode", 1))
             if checkout_code != 0:
