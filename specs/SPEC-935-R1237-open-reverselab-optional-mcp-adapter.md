@@ -2,7 +2,7 @@
 spec_id: SPEC-935-R1237
 title: Adaptador OpenReverseLab opcional com MCP desabilitado por padrão
 component: integrations.open_reverselab
-status: specified
+status: implemented
 test_file: tests/test_r1237_open_reverselab_adapter.py
 evidence_contract:
   version: 1
@@ -71,12 +71,12 @@ altera retroativamente o estado histórico de R1232.
    informar uma working tree aparentemente limpa. Não seguir caminhos que
    escapem do checkout.
 4. A configuração candidata é apenas saída JSON: servidor MCP local com
-  `disabled: true`, `command` em lista argv, `cwd` explícito e execução de
-  `uv run --no-sync`. Não escrever `opencode.json`, `.opencode/` ou arquivos do
-  checkout. `--no-sync` evita sincronização automática de dependências; o
-  adaptador não instala nem garante dependências previamente instaladas. Como
-  o processo herdaria ambiente do OpenCode, o fragmento exige revisão explícita
-  dessa exposição antes de qualquer ativação posterior.
+   `disabled: true`, `command` em lista argv, `cwd` explícito e execução de
+   `uv run --no-sync`. Não escrever `opencode.json`, `.opencode/` ou arquivos do
+   checkout. `--no-sync` evita sincronização automática de dependências; o
+   adaptador não instala nem garante dependências previamente instaladas. Como
+   o processo herdaria ambiente do OpenCode, o fragmento exige revisão explícita
+   dessa exposição antes de qualquer ativação posterior.
 5. Não copiar, adaptar, importar, empacotar ou executar código, documentação,
    scripts, skills, ferramentas, binários ou conteúdo do OpenReverseLab. O Core
    mantém somente o adaptador próprio, metadados de proveniência e caminhos
@@ -112,6 +112,14 @@ altera retroativamente o estado histórico de R1232.
 - A verificação local não é revisão jurídica, validação de segurança do
   upstream, prova de funcionamento do servidor MCP, nem autorização para
   instalar/ativar serviços ou analisar alvos.
+
+## Uso local
+
+- `python3 -m integrations.open_reverselab status` valida somente o manifesto.
+- `python3 -m integrations.open_reverselab inspect --path /caminho/absoluto`
+  consulta checkout local e seus metadados Git sem executar o projeto.
+- `python3 -m integrations.open_reverselab config --path /caminho/absoluto`
+  emite um fragmento OpenCode v2 com `disabled: true`; não o grava nem o ativa.
 
 ## Fora de escopo
 
