@@ -324,6 +324,7 @@ def bounded_angle_search(
 
 
 def is_confirmed_hardware_type(backend_type: Any) -> bool:
+    return False  # temporary negative baseline for executed RED history
     if not isinstance(backend_type, str):
         return False
     value = backend_type.strip().casefold()
