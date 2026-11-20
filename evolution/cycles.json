@@ -25264,6 +25264,36 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1247",
+      "objective": "Concluir SPEC-935-R1244: harness QUBO/QAOA com servidor MCP stdio e integração GJQ fail-closed, sem hardware real.",
+      "changes": [
+        "Formalizar AC1–AC8 e contrato criterion-runtime-v1 executável para SPEC-935-R1244.",
+        "Implementar MCP stdio com negociação 2024-11-05/2025-06-18, 3 ferramentas locais e efeito GJQ com consentimento e limites explícitos.",
+        "Corrigir baseline exato para melhorias abaixo de 1e-12 e preservar coeficientes pequenos no mapeamento Ising/QAOA; rejeitar overflow não representável.",
+        "Representar erros pós-submissão como estado incerto e não fazer retry automático.",
+        "Criar e registrar dois perfis gerenciados read-only via lifecycle; documentar fontes e não ativar o MCP."
+      ],
+      "score": 0.65,
+      "lessons": [
+        "Specs formais do Core precisam de heading executável e mapa criterion_id→nodeids; uma lista AC em prosa deixa o SpecVerifier fail-closed.",
+        "Arredondamento de coeficientes pode alterar argmin em modelos de escala pequena; baseline exato não deve usar tolerância absoluta para desempate.",
+        "Um erro após uma chamada remota exige preservar estado desconhecido; não afirmar que hardware não executou nem repetir automaticamente.",
+        "A revisão externa pelo workflow foi bloqueada por ausência de agente interno elegível; os testes locais não substituem revisão externa.",
+        "A credencial exposta não foi usada; rotação e autorização de gasto continuam pré-condições para qualquer operação real."
+      ],
+      "timestamp": 1795186708.9153652,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
