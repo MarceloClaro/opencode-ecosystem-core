@@ -21,6 +21,8 @@ Ampliar o editor local, mantendo planos separados de execução, com:
 3. proposta de corte Auto-Editor convertida em segmentos revisáveis, sem render;
 4. registro do LongCat-Video como gerador opcional de assets, sem baixar pesos;
 5. preservação do Remotion como backend existente.
+6. exposição das análises no MCP do editor, confinadas ao projeto e a fontes
+   previamente registradas.
 
 O pedido explícito de timestamps por palavra já é atendido no fluxo existente:
 `integrations.video_cpu_pipeline.transcribe_cpu` chama faster-whisper com
@@ -44,6 +46,9 @@ se uma medição em corpus PT-BR demonstrar falha de alinhamento no backend atua
   limites para frames quando o mapeamento é exato; conversão ambígua/VFR bloqueia.
 - O objeto resultante é `proposal` com `review_required=true` e
   `approval_state="pending"`; não é plano renderizável nem executa cortes.
+- MCP recebe somente `project_id` e chave de fonte já existente no projeto;
+  grava JSON content-addressed em `editor-analysis/` ou `editor-proposals/`,
+  sem sobrescrever conteúdo diferente e sem caminho arbitrário no cliente.
 - Nenhum subprocesso aceita argumentos livres do usuário. Falta de dependência
   gera erro acionável, não fallback silencioso.
 - O inventário corrige Auto-Editor para CLI nativa/Nim, versionada, e registra
@@ -63,11 +68,13 @@ se uma medição em corpus PT-BR demonstrar falha de alinhamento no backend atua
    velocidades não suportadas.
 4. Execução com runner falso demonstra argv fixo, sem shell, sem render, timeout,
    saída temporária e preservação do original; proposta fica pendente de revisão.
-5. Smoke test Auto-Editor real gera timeline v1 para clipe sintético e a converte
+5. MCP rejeita fonte não registrada, symlink e project id inválido; artefatos
+   ficam confinados, content-addressed e preservam propostas pendentes.
+6. Smoke test Auto-Editor real gera timeline v1 para clipe sintético e a converte
    em proposta sem criar MP4 de saída.
-6. `video_toolchain` registra Auto-Editor com runtime atual e LongCat-Video como
+7. `video_toolchain` registra Auto-Editor com runtime atual e LongCat-Video como
    gerador opcional não executável; WhisperX não é apresentado como requisito.
-7. Testes focais, regressões de R1042/R1043 e doctor do `.venv` passam; limitações
+8. Testes focais, regressões de R1042/R1043 e doctor do `.venv` passam; limitações
    de execução e disponibilidade externa são registradas sem overclaim.
 
 ## Fora de escopo
