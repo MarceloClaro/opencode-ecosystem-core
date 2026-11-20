@@ -101,7 +101,7 @@ def test_snapshot_qualifies_page_tab_with_parent_selection(tmp_path, monkeypatch
     assert result["ok"] is True
     tab = _find_named(result["data"]["tree"], "page tab", "BApp Store")
     assert tab is not None
-    assert tab["ref_id"] == f"@{result['data']['snapshot_id']}:e2"
+    assert tab.get("ref_id") == f"@{result['data']['snapshot_id']}:e2"
     stored = json.loads(
         (tmp_path / "atspi-refs" / f"{result['data']['snapshot_id']}.json").read_text()
     )
@@ -124,7 +124,8 @@ def test_click_selects_tab_only_after_one_time_approval(tmp_path, monkeypatch):
     config, result, selection = _snapshot(monkeypatch, tmp_path, app_tree)
     tab = _find_named(result["data"]["tree"], "page tab", "BApp Store")
     assert tab is not None
-    ref = tab["ref_id"]
+    ref = tab.get("ref_id")
+    assert ref is not None
 
     denied = runtime.run("click", config, app=APP, ref=ref)
     assert denied["ok"] is False
