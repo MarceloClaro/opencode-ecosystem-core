@@ -17,11 +17,12 @@ import os
 import json
 import uuid
 import logging
-import tempfile
 import math
 from numbers import Real
 from typing import Dict, List, Any, Optional, Callable
 from datetime import datetime, timezone
+
+from mci.metabus_store import MetaBusPersistenceError, MetaBusSQLiteStore
 
 logger = logging.getLogger("mci-metabus")
 logger.setLevel(logging.INFO)
@@ -48,10 +49,34 @@ os.makedirs(STATE_DIR, exist_ok=True)
 
 MEMORY_FILE = os.path.join(STATE_DIR, "shared_memory.json")
 EVENTS_FILE = os.path.join(STATE_DIR, "metabus_events.jsonl")
+DATABASE_FILE = os.environ.get("MCI_DATABASE_FILE", os.path.join(STATE_DIR, "metabus.sqlite3"))
+_DEFAULT_MEMORY_FILE = MEMORY_FILE
+_DEFAULT_EVENTS_FILE = EVENTS_FILE
+_DEFAULT_DATABASE_FILE = DATABASE_FILE
 MAX_MEMORY_LIMIT = 1000
 MAX_AGENT_ID_LENGTH = 256
 MAX_CONTEXT_LENGTH = 2000
 MAX_REFLECTION_LENGTH = 16384
+
+
+def _active_database_file() -> str:
+    """Resolve o banco ativo, preservando isolamento de testes legados."""
+    explicit = os.environ.get("MCI_DATABASE_FILE")
+    if explicit:
+        return os.path.abspath(os.path.expanduser(explicit))
+    if DATABASE_FILE != _DEFAULT_DATABASE_FILE:
+        return os.path.abspath(os.path.expanduser(DATABASE_FILE))
+    changed = [
+        path for path, original in (
+            (MEMORY_FILE, _DEFAULT_MEMORY_FILE),
+            (EVENTS_FILE, _DEFAULT_EVENTS_FILE),
+        ) if path != original
+    ]
+    if changed:
+        # Compatibility for tests and older callers that override only a
+        # legacy filename: their SQLite file stays alongside the override.
+        return os.path.join(os.path.dirname(os.path.abspath(changed[0])), "metabus.sqlite3")
+    return DATABASE_FILE
 
 
 def _validate_memory_limit(limit: int) -> int:
@@ -85,48 +110,52 @@ def memory_entry_text(entry: Dict[str, Any]) -> str:
 
 class MetacognitiveMemory:
     """Memória episódica e semântica compartilhada entre agentes."""
-    
+
     def __init__(self):
         self.episodic: List[Dict[str, Any]] = []  # Traces e reflexões de execução
         self.semantic: Dict[str, Any] = {}        # Conhecimento consolidado, lições aprendidas
         self.confidence_ledger: Dict[str, float] = {} # Score global de confiança por tópico/agente
+        self._store: Optional[MetaBusSQLiteStore] = None
+        self._store_identity = None
         self._load()
-        
+
+    def _ensure_store(self) -> MetaBusSQLiteStore:
+        database_file = _active_database_file()
+        identity = (database_file, os.path.abspath(MEMORY_FILE), os.path.abspath(EVENTS_FILE))
+        if self._store is None or self._store_identity != identity:
+            self._store = MetaBusSQLiteStore(
+                database_file,
+                legacy_memory_path=MEMORY_FILE,
+                legacy_events_path=EVENTS_FILE,
+            )
+            self._store_identity = identity
+        return self._store
+
+    def _refresh_from_store(self) -> None:
+        episodes, semantic, confidence = self._ensure_store().load_memory()
+        self.episodic = episodes
+        self.semantic = semantic
+        self.confidence_ledger = confidence
+
     def _load(self):
-        if os.path.exists(MEMORY_FILE):
-            try:
-                with open(MEMORY_FILE, 'r', encoding='utf-8') as f:
-                    data = json.load(f)
-                    self.episodic = data.get("episodic", [])
-                    self.semantic = data.get("semantic", {})
-                    self.confidence_ledger = data.get("confidence_ledger", {})
-            except Exception as e:
-                logger.error(f"Erro ao carregar memória: {e}")
-                
+        # A inicialização do store faz a importação legada idempotente e
+        # fail-closed. Arquivo de memória presente, porém corrompido, não pode
+        # ser mascarado por um estado vazio.
+        self._refresh_from_store()
+
     def _save(self, *, strict: bool = False) -> bool:
-        temporary = None
         try:
-            descriptor, temporary = tempfile.mkstemp(
-                prefix=".memory-", suffix=".json", dir=os.path.dirname(os.path.abspath(MEMORY_FILE)))
-            with os.fdopen(descriptor, 'w', encoding='utf-8') as f:
-                json.dump({
-                    "episodic": self.episodic[-1000:], # Manter últimos 1000 eventos
-                    "semantic": self.semantic,
-                    "confidence_ledger": self.confidence_ledger,
-                    "last_updated": datetime.now(timezone.utc).isoformat()
-                }, f, indent=2, allow_nan=False)
-                f.flush()
-                os.fsync(f.fileno())
-            os.replace(temporary, MEMORY_FILE)
+            episodic = self.episodic[-MAX_MEMORY_LIMIT:]
+            self._ensure_store().save_memory_snapshot(
+                episodic, self.semantic, self.confidence_ledger
+            )
+            self.episodic = episodic
             return True
         except Exception as e:
             logger.error(f"Erro ao salvar memória: {e}")
             if strict:
                 raise RuntimeError("Falha ao persistir memória metacognitiva.") from e
             return False
-        finally:
-            if temporary is not None and os.path.exists(temporary):
-                os.unlink(temporary)
 
     def add_reflection(self, agent_id: str, task_context: str, reflection: str, score: float):
         """Adiciona uma reflexão pós-execução (padrão Reflexion)."""
@@ -152,26 +181,10 @@ class MetacognitiveMemory:
             "reflection": reflection,
             "score": score
         }
-        had_prior_confidence = agent_id in self.confidence_ledger
-        prior_confidence = self.confidence_ledger.get(agent_id)
-        self.episodic.append(entry)
-
-        try:
-            # Atualiza confidence ledger via EMA somente para score válido.
-            current_conf = self.confidence_ledger.get(agent_id, 0.5)
-            self.confidence_ledger[agent_id] = (current_conf * 0.7) + (score * 0.3)
-            if self._save(strict=True) is not True:
-                raise RuntimeError("Falha ao persistir memória metacognitiva.")
-        except Exception:
-            self.episodic.remove(entry)
-            if had_prior_confidence:
-                self.confidence_ledger[agent_id] = prior_confidence
-            else:
-                self.confidence_ledger.pop(agent_id, None)
-            raise
-
-        if len(self.episodic) > MAX_MEMORY_LIMIT:
-            del self.episodic[:-MAX_MEMORY_LIMIT]
+        # Episode e EMA são calculados no writer SQLite sob BEGIN IMMEDIATE;
+        # nenhuma mutação local ocorre antes do commit.
+        self._ensure_store().add_reflection(entry, agent_id, score)
+        self._refresh_from_store()
         return entry["id"]
 
     def record_observation(self, agent_id: str, task_context: str,
@@ -189,21 +202,14 @@ class MetacognitiveMemory:
         entry = {"id": str(uuid.uuid4()), "timestamp": datetime.now(timezone.utc).isoformat(),
                  "type": "observation", "agent_id": agent_id, "context": task_context,
                  "observation": json.loads(payload)}
-        self.episodic.append(entry)
-        try:
-            if self._save(strict=True) is not True:
-                raise RuntimeError("Falha ao persistir memória metacognitiva.")
-        except Exception:
-            self.episodic.remove(entry)
-            raise
-        if len(self.episodic) > MAX_MEMORY_LIMIT:
-            del self.episodic[:-MAX_MEMORY_LIMIT]
+        self._ensure_store().add_observation(entry)
+        self._refresh_from_store()
         return entry["id"]
 
     def extract_lessons(self, topic: str) -> List[str]:
         """Extrai lições semânticas consolidadas sobre um tópico."""
         return self.semantic.get(topic, {}).get("lessons", [])
-        
+
     def get_recent_context(self, limit: int = 5) -> List[Dict[str, Any]]:
         """Recupera contexto recente do Global Workspace."""
         limit = _validate_memory_limit(limit)
@@ -266,20 +272,10 @@ class MetacognitiveMemory:
                               metadata: Optional[Dict[str, Any]] = None,
                               *, strict: bool = False) -> Dict[str, Any]:
         """Atualiza/inicializa um tópico semântico preservando histórico de lições."""
-        entry = self.semantic.setdefault(topic, {
-            "lessons": [],
-            "metadata": {},
-            "updated_at": None,
-        })
-        if lesson and lesson not in entry["lessons"]:
-            entry["lessons"].append(lesson)
-        if metadata:
-            entry["metadata"].update(metadata)
-        entry["updated_at"] = datetime.now(timezone.utc).isoformat()
-        if strict:
-            self._save(strict=True)
-        else:
-            self._save()
+        entry = self._ensure_store().upsert_semantic_topic(
+            topic, lesson, metadata, datetime.now(timezone.utc).isoformat()
+        )
+        self._refresh_from_store()
         return entry
 
     def update_domain_confidence(self, domain_id: str, score: float) -> float:
@@ -289,11 +285,8 @@ class MetacognitiveMemory:
 
     def update_topic_confidence(self, topic_key: str, score: float) -> float:
         """Atualiza confiança EMA para qualquer tópico/subsistema."""
-        key = topic_key
-        current_conf = self.confidence_ledger.get(key, 0.5)
-        updated = (current_conf * 0.7) + (max(0.0, min(1.0, score)) * 0.3)
-        self.confidence_ledger[key] = updated
-        self._save()
+        updated = self._ensure_store().update_confidence(topic_key, score)
+        self._refresh_from_store()
         return updated
 
 
@@ -356,13 +349,10 @@ class MetaBus:
             "payload": payload
         }
         
-        # Persiste no log append-only
-        try:
-            with open(EVENTS_FILE, 'a', encoding='utf-8') as f:
-                f.write(json.dumps(event) + "\n")
-        except Exception as e:
-            logger.error(f"Erro ao persistir evento: {e}")
-            
+        # O evento só pode ser observado localmente depois de um commit
+        # durável. Falha de persistência bloqueia o despacho.
+        self.memory._ensure_store().append_event(event)
+
         # Roteamento
         # Copiar impede que o wildcard seja anexado permanentemente à lista do
         # tópico a cada publicação.
@@ -403,28 +393,7 @@ class MetaBus:
         limit = _validate_memory_limit(limit)
         if limit == 0:
             return []
-        events: List[Dict[str, Any]] = []
-        if not os.path.exists(EVENTS_FILE):
-            return events
-        try:
-            with open(EVENTS_FILE, 'r', encoding='utf-8') as f:
-                for line in f:
-                    line = line.strip()
-                    if not line:
-                        continue
-                    try:
-                        event = json.loads(line)
-                    except json.JSONDecodeError:
-                        continue
-                    if topic_prefix and not str(event.get("topic", "")).startswith(topic_prefix):
-                        continue
-                    if source and event.get("source") != source:
-                        continue
-                    events.append(event)
-        except Exception as e:
-            logger.error(f"Erro ao ler eventos recentes: {e}")
-            return []
-        return events[-limit:]
+        return self.memory._ensure_store().recent_events(limit, topic_prefix, source)
 
     def search_memory(self, query: str, limit: int = 10) -> List[Dict[str, Any]]:
         """Atalho para busca metacognitiva na memória compartilhada."""

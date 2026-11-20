@@ -212,8 +212,28 @@ class CoreMemoryNetworkSource:
         # Um root explícito é um projeto independente, inclusive sob testes.
         # O override do Core só se aplica ao projeto padrão.
         state_path = Path(os.environ.get('MCI_STATE_DIR', self.root/'.mci_state')) if self.root == ROOT.resolve() else self.root/'.mci_state'
-        memory = self._read(state_path/'shared_memory.json', warnings)
-        events = self._read(state_path/'metabus_events.jsonl', warnings, lines=True)
+        database_path = (
+            Path(os.environ['MCI_DATABASE_FILE']).expanduser()
+            if self.root == ROOT.resolve() and os.environ.get('MCI_DATABASE_FILE')
+            else state_path/'metabus.sqlite3'
+        )
+        if database_path.is_file():
+            # SQLite is authoritative once present. A damaged database must
+            # not be silently replaced by stale legacy JSON/JSONL snapshots.
+            try:
+                from mci.metabus_store import MetaBusSQLiteStore
+                projection = MetaBusSQLiteStore.read_projection(
+                    database_path, event_limit=200, episode_limit=200, semantic_limit=100
+                )
+                memory = projection['memory']
+                events = projection['events']
+            except Exception:
+                self._cache.pop(str(database_path), None)
+                warnings.append({'source': database_path.name, 'status': 'unavailable_or_invalid'})
+                memory, events = {}, []
+        else:
+            memory = self._read(state_path/'shared_memory.json', warnings)
+            events = self._read(state_path/'metabus_events.jsonl', warnings, lines=True)
         claims = self._read(self.root/'data/evidence_graph.json', warnings)
         graph = MemoryNetworkGraph(self.max_nodes, self.max_edges)
         # Eventos e evidências têm prioridade sobre cartões ociosos do catálogo.

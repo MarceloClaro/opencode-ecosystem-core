@@ -25294,6 +25294,36 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1248",
+      "objective": "Adaptar a instalação do Burp MCP ao WSL2 e reduzir dependências/risco sem testar alvos",
+      "changes": [
+        "Pesquisa em fontes primárias: Microsoft Learn WSLg e networking, PortSwigger mcp-server README/BappManifest no commit observado 291034081160bc944b6df3eccd60c6fc99b477e1, documentação oficial OpenCode MCP servers",
+        "Identificada rota Streamable HTTP /mcp no BApp PortSwigger v1.4.0 (Community e Pro) compatível por transporte com o OpenCode remoto, dispensando proxy stdio e Java se essa alternativa for aceita",
+        "WSLg apresenta DISPLAY=:0 e WAYLAND_DISPLAY=wayland-0; a operação GUI automatizada falha porque agent-desktop está ausente e AT-SPI não tem typelib Atspi",
+        "at-spi2-core está instalado; pacote Ubuntu gir1.2-atspi-2.0 está disponível mas não instalado; nenhuma instalação/configuração foi executada",
+        "CFP de análise permanece aberto sem voluntários observados; nenhuma conexão MCP, instalação, inicialização Burp, alteração de config ou tráfego foi realizada"
+      ],
+      "score": 0.55,
+      "lessons": [
+        "Não tratar falta de desktop-operator como falta de WSLg: os sinais gráficos WSLg existem, mas a ponte de controle/AT-SPI está incompleta.",
+        "Versão atual observada do BApp expõe Streamable HTTP em /mcp e legacy SSE; para OpenCode, a rota remota direta pode evitar Java/proxy e contornar NAT ao manter Burp e OpenCode na mesma distro e loopback.",
+        "A afirmação de compatibilidade é baseada em contratos documentados, não em teste; instalar gir1.2-atspi-2.0 e clicar em UI exige aprovação explícita e validação local.",
+        "A extensão PortSwigger declara enabled=true como default, logo carregá-la pode iniciar listener local; não instalar ou iniciar sem plano de transporte e gates de segurança.",
+        "Nenhum agente executou trabalho nem possui stake atribuível; sem slashing aplicável. Score interno não é validação externa."
+      ],
+      "timestamp": 1795188007.340314,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
