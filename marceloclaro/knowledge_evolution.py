@@ -88,11 +88,11 @@ def validate_science_config(config: Any) -> dict[str, Any]:
     result = _finite_object(config, SCIENCE_KEYS)
     for key in ("question", "dataset_csv", "output_dir"):
         result[key] = _text(result.get(key), key)
-    from research.statistical_methods import METHODS, validate_configuration
-    if result.get("method") not in METHODS:
-        raise ValueError(f"Método deve ser um de {METHODS}.")
+    if result.get("method") not in {"pearson", "welch_t", "descriptive"}:
+        raise ValueError("Método deve ser pearson, welch_t ou descriptive.")
     if not isinstance(result.get("dataset_provenance"), dict) or not isinstance(result.get("variables"), dict):
         raise ValueError("dataset_provenance e variables devem ser objetos.")
+    from research.statistical_methods import validate_configuration
     validate_configuration(result["method"], result["variables"])
     if "reference_sources" in result and (not isinstance(result["reference_sources"], list)
                                           or not 1 <= len(result["reference_sources"]) <= 5):

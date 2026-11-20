@@ -55,7 +55,7 @@ def test_sample_size_proportion_uses_finite_population_and_documents_variability
     assert result["recruitment_target"] == 370
     assert result["population_size"] == 10_000
     assert result["assumptions"]["population_model"] == "Bernoulli proportion"
-    assert "maximum variance" in result["assumptions"]["proportion_choice"]
+    assert "máxima variância" in result["assumptions"]["proportion_choice"]
     assert "geographic heterogeneity" in result["limitations"]
 
 

@@ -179,55 +179,6 @@ def design_experiment(
             "Subgroup analysis: análise de subgrupos (se aplicável)",
         ]),
     })
-
-    # Cálculo por precisão e power analysis respondem perguntas diferentes.
-    # Só calcular a primeira modalidade quando o usuário fornece parâmetros
-    # explícitos; não assumir erro, confiança, população ou variabilidade.
-    sample_parameters = context.get("sample_size_parameters")
-    if sample_parameters is not None:
-        if not isinstance(sample_parameters, dict):
-            raise ValueError("sample_size_parameters deve ser um objeto.")
-        outcome_type = sample_parameters.get("outcome_type")
-        common = {"population_size", "margin_error", "confidence_level", "design_effect", "nonresponse_rate"}
-        if outcome_type == "proportion":
-            allowed = common | {"outcome_type", "expected_proportion"}
-            if not {"margin_error", "confidence_level"} <= set(sample_parameters):
-                raise ValueError("Cálculo amostral de proporção requer margin_error e confidence_level explícitos.")
-            if set(sample_parameters) - allowed:
-                raise ValueError("Parâmetro desconhecido para cálculo amostral de proporção.")
-            from research.quantitative_calculators import calculate_sample_size_proportion
-            result = calculate_sample_size_proportion(
-                population_size=sample_parameters.get("population_size"),
-                margin_error=sample_parameters["margin_error"],
-                confidence_level=sample_parameters["confidence_level"],
-                expected_proportion=sample_parameters.get("expected_proportion", 0.5),
-                design_effect=sample_parameters.get("design_effect", 1.0),
-                nonresponse_rate=sample_parameters.get("nonresponse_rate", 0.0),
-            )
-        elif outcome_type == "mean":
-            allowed = common | {"outcome_type", "standard_deviation"}
-            if not {"standard_deviation", "margin_error", "confidence_level"} <= set(sample_parameters):
-                raise ValueError("Cálculo amostral de média requer desvio-padrão, erro e confiança explícitos.")
-            if set(sample_parameters) - allowed:
-                raise ValueError("Parâmetro desconhecido para cálculo amostral de média.")
-            from research.quantitative_calculators import calculate_sample_size_mean
-            result = calculate_sample_size_mean(
-                population_size=sample_parameters.get("population_size"),
-                standard_deviation=sample_parameters["standard_deviation"],
-                margin_error=sample_parameters["margin_error"],
-                confidence_level=sample_parameters["confidence_level"],
-                design_effect=sample_parameters.get("design_effect", 1.0),
-                nonresponse_rate=sample_parameters.get("nonresponse_rate", 0.0),
-            )
-        else:
-            raise ValueError("outcome_type deve ser 'proportion' ou 'mean'.")
-        design["sample_size_calculation"] = {
-            **result,
-            "outcome_type": outcome_type,
-            "execution_authorized": False,
-            "distinction": "Precision-based minimum sample size; separate from effect-size power approximation.",
-        }
-
     if protocol_verification is not None:
         design["protocol_verification"] = protocol_verification
 
