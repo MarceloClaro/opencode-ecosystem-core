@@ -4,6 +4,7 @@ import importlib
 import json
 
 import pytest
+from mcp.server.fastmcp.exceptions import ToolError
 
 
 def api():
@@ -48,7 +49,7 @@ def test_open_confined_and_project_written(tmp_path, monkeypatch):
     assert 'opened' in text_of(result)
     project = json.loads((root / 'editor-projects' / 'demo.json').read_text())
     assert project['sources']['media/source.mp4']['frames'] == 25
-    with pytest.raises(ValueError):
+    with pytest.raises(ToolError):
         asyncio.run(server.call_tool('editor_open', {
             'media_path': '../escape.mp4', 'project_id': 'bad'}))
 
@@ -72,7 +73,7 @@ def test_plan_confines_output_and_returns_small_summary(tmp_path):
         'params': {'clip_id': 'c1', 'output': 'out.mp4'}}))
     text = text_of(answer)
     assert 'plan_id' in text and len(text) < 6000
-    with pytest.raises(ValueError):
+    with pytest.raises(ToolError):
         asyncio.run(server.call_tool('editor_plan', {
             'project_id': 'demo', 'operation': 'trim',
             'params': {'clip_id': 'c1', 'output': '../escape.mp4'}}))
@@ -96,7 +97,7 @@ def test_render_requires_operator_approval(tmp_path, monkeypatch):
         'plan_id': plan_id, 'dry_run': True}))
     assert 'rendered' in text_of(dry) and len(calls) == 1
     assert calls[0][1].get('dry_run') is True
-    with pytest.raises(ValueError):
+    with pytest.raises(ToolError):
         asyncio.run(server.call_tool('editor_render', {
             'plan_id': plan_id, 'dry_run': False}))
     assert len(calls) == 1
@@ -108,6 +109,6 @@ def test_render_requires_operator_approval(tmp_path, monkeypatch):
     assert 'rendered' in text_of(allowed) and len(calls) == 2
     (root / 'editor-approvals' / f'{plan_id}.json').write_text(json.dumps({
         'approved': True, 'reviewer': 'operator', 'plan_sha256': 'c' * 64}))
-    with pytest.raises(ValueError):
+    with pytest.raises(ToolError):
         asyncio.run(server.call_tool('editor_render', {
             'plan_id': plan_id, 'dry_run': False}))

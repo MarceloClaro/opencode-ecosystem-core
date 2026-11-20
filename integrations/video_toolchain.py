@@ -12,12 +12,13 @@ import json
 import shutil
 from pathlib import Path
 
-VERSION = 'R1043-1'
+VERSION = 'R1043-2'
 LICENSE_CLASSES = {'permissive', 'copyleft', 'non_commercial', 'custom', 'unknown'}
 STATUSES = {'integrated', 'candidate', 'reference_only', 'blocked'}
 
-# Fontes verificadas em 2026-11-02 via GitHub API/Hugging Face API e leitura
-# local dos livros/skills. Licença é triagem, não parecer jurídico.
+# Inventário original consultado em 2026-11-02; entradas R1230 atualizadas em
+# 2026-11-20 via documentação e metadados upstream. Licença é triagem, não
+# parecer jurídico.
 REGISTRY = [
     # Base de execução
     {'id': 'ffmpeg', 'kind': 'tool', 'name': 'FFmpeg', 'url': 'https://ffmpeg.org/',
@@ -108,13 +109,13 @@ REGISTRY = [
      'notes': 'Gera marcadores revisáveis em CFR; não divide nem edita a mídia.'},
     {'id': 'auto-editor', 'kind': 'repo', 'name': 'auto-editor', 'url': 'https://github.com/WyattBlue/auto-editor',
      'license': 'Unlicense', 'license_class': 'permissive', 'roles': ['silence_cut', 'rough_cut'],
-     'runtime': 'native', 'hardware': 'cpu', 'status': 'integrated',
+     'runtime': 'native_nim', 'hardware': 'cpu', 'status': 'integrated',
      'adapter': 'integrations.video_analysis',
-     'requires': ['auto-editor', 'ffprobe'],
-     'notes': 'CLI nativa; export v1 é convertida em proposta pending, sem render ou aprovação automática.'},
+     'requires': ['auto-editor', 'ffmpeg', 'ffprobe'],
+     'notes': 'CLI nativa Nim; export v1 é convertida em proposta pending, sem render ou aprovação automática.'},
     {'id': 'longcat-video', 'kind': 'model', 'name': 'LongCat-Video',
      'url': 'https://huggingface.co/meituan-longcat/LongCat-Video',
-     'license': 'MIT (metadados do model card Hugging Face consultados em 2026-11-19)',
+     'license': 'MIT (metadados do model card Hugging Face consultados em 2026-11-20)',
      'license_class': 'permissive',
      'roles': ['text_to_video', 'image_to_video', 'video_continuation', 'generated_assets'],
      'runtime': 'python', 'hardware': 'gpu_high', 'status': 'reference_only',

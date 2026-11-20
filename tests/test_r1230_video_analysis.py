@@ -12,6 +12,7 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
+from mcp.server.fastmcp.exceptions import ToolError
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = ROOT / "specs/SPEC-935-R1230-video-analysis-adapters.md"
@@ -326,13 +327,13 @@ def test_mcp_exposes_confined_analysis_and_review_proposal_tools(tmp_path, monke
     proposals = list((root / "editor-proposals").glob("*.json"))
     assert len(proposals) == 1
     assert json.loads(proposals[0].read_text())["approval_state"] == "pending"
-    with pytest.raises(ValueError):
+    with pytest.raises(ToolError):
         asyncio.run(server.call_tool("editor_analyze_scenes", {
             "project_id": "demo", "source_id": "../outside.mp4"}))
-    with pytest.raises(ValueError):
+    with pytest.raises(ToolError):
         asyncio.run(server.call_tool("editor_analyze_scenes", {
             "project_id": "../demo", "source_id": "media/source.mp4"}))
-    with pytest.raises(ValueError):
+    with pytest.raises(ToolError):
         asyncio.run(server.call_tool("editor_analyze_scenes", {
             "project_id": "demo", "source_id": "media/not-registered.mp4"}))
     other = root / "media/other.mp4"
@@ -343,7 +344,7 @@ def test_mcp_exposes_confined_analysis_and_review_proposal_tools(tmp_path, monke
         "path": str(alias), "sha256": hashlib.sha256(other.read_bytes()).hexdigest(),
         "frames": 120, "fps": [30, 1]}
     (root / "editor-projects/demo.json").write_text(json.dumps(project), encoding="utf-8")
-    with pytest.raises(ValueError):
+    with pytest.raises(ToolError):
         asyncio.run(server.call_tool("editor_analyze_scenes", {
             "project_id": "demo", "source_id": "media/alias.mp4"}))
 
