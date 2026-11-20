@@ -396,7 +396,7 @@ class MetaBusSQLiteStore:
                 self._insert_episode(connection, entry)
                 self._trim_episodes(connection)
         except Exception as exc:
-            raise MetaBusPersistenceError("metabus_observation_write_failed") from exc
+            raise MetaBusPersistenceError("metabus_observation_persistence_failed") from exc
 
     def add_reflection(self, entry: dict[str, Any], agent_id: str, score: float) -> float:
         try:
@@ -423,7 +423,7 @@ class MetaBusSQLiteStore:
                 self._trim_episodes(connection)
             return updated
         except Exception as exc:
-            raise MetaBusPersistenceError("metabus_reflection_write_failed") from exc
+            raise MetaBusPersistenceError("metabus_reflection_persistence_failed") from exc
 
     def update_confidence(self, topic: str, score: float) -> float:
         try:
@@ -448,7 +448,7 @@ class MetaBusSQLiteStore:
                 )
             return updated
         except Exception as exc:
-            raise MetaBusPersistenceError("metabus_confidence_write_failed") from exc
+            raise MetaBusPersistenceError("metabus_confidence_persistence_failed") from exc
 
     def upsert_semantic_topic(
         self, topic: str, lesson: str | None, metadata: dict[str, Any] | None,
@@ -483,14 +483,14 @@ class MetaBusSQLiteStore:
                 )
             return entry
         except Exception as exc:
-            raise MetaBusPersistenceError("metabus_semantic_write_failed") from exc
+            raise MetaBusPersistenceError("metabus_semantic_persistence_failed") from exc
 
     def append_event(self, event: dict[str, Any]) -> None:
         try:
             with self._transaction() as connection:
                 self._insert_event(connection, event)
         except Exception as exc:
-            raise MetaBusPersistenceError("metabus_event_write_failed") from exc
+            raise MetaBusPersistenceError("metabus_event_persistence_failed") from exc
 
     @staticmethod
     def _escape_like_prefix(value: str) -> str:

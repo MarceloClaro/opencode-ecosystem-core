@@ -78,12 +78,15 @@ def test_observation_preserves_confidence_and_copies_input(tmp_path, monkeypatch
 
 def test_observation_cannot_return_persisted_receipt_after_write_failure(tmp_path, monkeypatch):
     import importlib
+    import sqlite3
     module = importlib.import_module("mci.metabus")
     monkeypatch.setattr(module, "MEMORY_FILE", str(tmp_path / "memory.json"))
     memory = module.MetacognitiveMemory()
-    def fail_replace(*args):
-        raise OSError("disk failure")
-    monkeypatch.setattr(module.os, "replace", fail_replace)
+    with sqlite3.connect(memory._store.path) as connection:
+        connection.execute("""
+            CREATE TRIGGER reject_observation BEFORE INSERT ON episodes
+            BEGIN SELECT RAISE(ABORT, 'injected disk failure'); END
+        """)
     with pytest.raises(RuntimeError, match="persist"):
         memory.record_observation("marceloclaro", "plano", {"executed": False})
     assert not memory.episodic
