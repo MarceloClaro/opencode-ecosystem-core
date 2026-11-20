@@ -15,6 +15,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
@@ -26,6 +27,7 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH = REPOSITORY_ROOT / "federation" / "repository-curation-r1232.json"
 MAX_TIMEOUT_SECONDS = 600
 MAX_OUTPUT_CHARS = 16_384
+MAX_PACK_METADATA_CHARS = 8 * 1024 * 1024
 
 
 class UnsafeInvocationError(ValueError):
@@ -71,8 +73,36 @@ def validate_manifest(data: Mapping[str, Any]) -> list[str]:
         if tool_id in seen:
             errors.append(f"id duplicado: {tool_id}")
         seen.add(tool_id)
-        if not isinstance(entry.get("source"), Mapping) or not entry["source"].get("url"):
+        source = entry.get("source")
+        if not isinstance(source, Mapping) or not isinstance(source.get("url"), str) or not source["url"].startswith("https://"):
             errors.append(f"{tool_id}: origem URL ausente")
+            source = {}
+        commit = source.get("commit")
+        if commit is not None and (not isinstance(commit, str) or not re.fullmatch(r"[0-9a-f]{40}", commit)):
+            errors.append(f"{tool_id}: commit deve ser SHA hexadecimal de 40 caracteres")
+        if adoption == "isolated_cli":
+            if not isinstance(source.get("version"), str) or not source.get("version"):
+                errors.append(f"{tool_id}: versão fixa ausente para CLI isolada")
+            if tool_id in {"rust-anything", "caveman"}:
+                package = source.get("package")
+                integrity = source.get("integrity")
+                if not isinstance(package, str) or not package.endswith("@" + str(source.get("version"))):
+                    errors.append(f"{tool_id}: pacote npm deve fixar a versão exata")
+                if not isinstance(integrity, str) or not integrity.startswith("sha512-"):
+                    errors.append(f"{tool_id}: SRI SHA-512 ausente para pacote npm")
+            if tool_id == "rust-anything" and (
+                isinstance(source.get("unpacked_bytes"), bool)
+                or not isinstance(source.get("unpacked_bytes"), int)
+                or source["unpacked_bytes"] <= 0
+            ):
+                errors.append("rust-anything: tamanho desempacotado não positivo ou ausente")
+        if adoption == "selected_skill":
+            if not all(isinstance(source.get(key), str) and source.get(key) for key in ("path", "upstream_git_blob_sha", "license_git_blob_sha")):
+                errors.append(f"{tool_id}: proveniência da skill incompleta")
+            if source.get("license") != "Apache-2.0" or source.get("license_file") != "LICENSE.txt":
+                errors.append(f"{tool_id}: licença da skill não reconciliada")
+            if not re.fullmatch(r"[0-9a-f]{64}", str(source.get("imported_skill_sha256", ""))):
+                errors.append(f"{tool_id}: SHA-256 da skill importada inválido")
         if not isinstance(entry.get("license"), Mapping):
             errors.append(f"{tool_id}: proveniência de licença ausente")
         license_status = entry.get("license_status")
@@ -350,12 +380,15 @@ def install_tool(
                 pack_argv[pack_argv.index("--pack-destination") + 1] = str(staging)
                 packed = run_command(pack_argv, staging, plan["environment"])
                 packed_code = int(getattr(packed, "returncode", 1))
-                packed_stdout = str(getattr(packed, "stdout", "") or "")[:MAX_OUTPUT_CHARS]
+                packed_stdout_raw = str(getattr(packed, "stdout", "") or "")
+                packed_stdout = packed_stdout_raw[:MAX_OUTPUT_CHARS]
                 packed_stderr = str(getattr(packed, "stderr", "") or "")[:MAX_OUTPUT_CHARS]
                 if packed_code != 0:
                     return {**plan, "dry_run": False, "status": "pack_failed", "returncode": packed_code, "stdout": packed_stdout, "stderr": packed_stderr}
+                if len(packed_stdout_raw) > MAX_PACK_METADATA_CHARS:
+                    return {**plan, "dry_run": False, "status": "pack_metadata_too_large", "stderr": "A saída JSON de npm pack excedeu o limite de segurança."}
                 try:
-                    metadata = json.loads(packed_stdout)
+                    metadata = json.loads(packed_stdout_raw)
                     record = metadata[0] if isinstance(metadata, list) and metadata else metadata
                     filename = record.get("filename") if isinstance(record, Mapping) else None
                     reported_integrity = record.get("integrity") if isinstance(record, Mapping) else None
