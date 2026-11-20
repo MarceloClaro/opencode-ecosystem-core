@@ -21,6 +21,7 @@ evidence_contract:
       - tests/test_r1232_isolated_external_tools.py::test_install_without_confirmation_is_plan_only
       - tests/test_r1232_isolated_external_tools.py::test_npm_integrity_mismatch_stops_before_install
       - tests/test_r1232_isolated_external_tools.py::test_npm_install_uses_only_tarball_verified_against_pinned_integrity
+      - tests/test_r1232_isolated_external_tools.py::test_npm_install_blocks_unexpected_unpacked_size_before_install
     R1232-UOS:
       - tests/test_r1232_isolated_external_tools.py::test_universal_os_isolated_and_mcp_disabled_by_default
       - tests/test_r1232_isolated_external_tools.py::test_universal_os_never_accepts_iso_or_vm_execution_in_this_scope
@@ -73,7 +74,8 @@ exige revisão jurídica humana explícita.
 2. Rust Anything, Universal OS e Caveman usam diretórios/ambientes isolados.
    Pacotes npm são obtidos por `npm pack --ignore-scripts`; o SRI reportado e o
    SHA-512 local do tarball precisam coincidir com o pin antes de instalar o
-   tarball local. Universal OS fixa o commit completo e configura `UV_TOOL_DIR`,
+   tarball local; Rust Anything também exige igualdade do tamanho desempacotado
+   reportado. Universal OS fixa o commit completo e configura `UV_TOOL_DIR`,
    `UV_TOOL_BIN_DIR` e cache privados. Subprocessos usam argv fechado, sem shell
    e com timeout; instalação só ocorre por chamada explícita confirmada. `status`,
    doctor e testes não instalam nem consultam serviços externos.
