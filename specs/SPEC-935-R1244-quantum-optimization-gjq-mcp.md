@@ -8,23 +8,30 @@ evidence_contract:
   version: 1
   mode: criterion-runtime-v1
   criteria:
-    problem:
+    AC1:
       - tests/test_r1244_quantum_optimization.py::test_qubo_validation_energy_and_canonical_hash
+      - tests/test_r1244_quantum_optimization.py::test_qubo_rejects_invalid_schema_and_coefficients
+    AC2:
       - tests/test_r1244_quantum_optimization.py::test_exact_classical_baseline_and_limits
       - tests/test_r1244_quantum_optimization.py::test_qubo_to_ising_and_qaoa_ir
-    optimizer:
+    AC3:
       - tests/test_r1244_quantum_optimization.py::test_bounded_optimizer_respects_evaluation_budget
       - tests/test_r1244_quantum_optimization.py::test_counts_to_energy_uses_qiskit_bit_order
-    remote_gate:
+    AC4:
+      - tests/test_r1244_quantum_optimization.py::test_remote_runner_uses_fake_provider_without_network
+      - tests/test_r1244_quantum_optimization.py::test_mcp_catalog_and_tools
+    AC5:
       - tests/test_r1244_quantum_optimization.py::test_remote_runner_requires_per_call_consent_before_secret_or_sdk
       - tests/test_r1244_quantum_optimization.py::test_remote_runner_requires_rotated_environment_credential
       - tests/test_r1244_quantum_optimization.py::test_hardware_classifier_rejects_simulators_and_unknown_types
-      - tests/test_r1244_quantum_optimization.py::test_remote_runner_uses_fake_provider_without_network
-    mcp:
+      - tests/test_r1244_quantum_optimization.py::test_mcp_unexpected_remote_failure_preserves_uncertain_effect_state
+    AC6:
       - tests/test_r1244_quantum_optimization.py::test_mcp_catalog_and_tools
       - tests/test_r1244_quantum_optimization.py::test_mcp_stdio_transport_read_only_operations
-    agents:
+    AC7:
       - tests/test_r1244_quantum_optimization.py::test_managed_quantum_research_profiles_are_valid
+    AC8:
+      - tests/test_r1244_quantum_optimization.py::test_quantum_documentation_and_mcp_disabled_by_default
 ---
 
 # R1244 — Aplicabilidade e otimização quântica com GJQ
@@ -85,26 +92,27 @@ aceita `GJQ_API_KEY` do ambiente em uma chamada remota explicitamente confirmada
   falso, sem webfetch/tarefa/shell arbitrário; cada um referencia esta spec e
   o teste focal. Criação/registro não significam execução de pesquisa.
 
-## Critérios de aceitação
+## Critérios de aceitação executáveis
 
-- AC1: validar QUBO finito e canônico, calcular energia e hash determinístico;
+- `AC1` — validar QUBO finito e canônico, calcular energia e hash determinístico;
   rejeitar esquemas, booleanos, índices, duplicatas e limites inválidos.
-- AC2: baseline clássico exato e conversão QUBO→Ising têm resultados
+- `AC2` — baseline clássico exato e conversão QUBO→Ising têm resultados
   reproduzíveis para fixtures conhecidas; o limite de dimensão é fail-closed.
-- AC3: QAOA IR respeita convenções de fase documentadas e o otimizador não
+- `AC3` — QAOA IR respeita convenções de fase documentadas e o otimizador não
   ultrapassa o orçamento de avaliações; não promete otimalidade.
-- AC4: caminho GJQ usa Qiskit/Sampler/transpilação da documentação primária,
+- `AC4` — caminho GJQ usa Qiskit/Sampler/transpilação da documentação primária,
   dependências opcionais importadas sob demanda e backend remoto identificado
   por metadado do provedor. Testes usam provider falso, sem rede.
-- AC5: nenhuma consulta/execução remota antes da confirmação explícita em cada
+- `AC5` — nenhuma consulta/execução remota antes da confirmação explícita em cada
   chamada; credencial ausente ou backend não comprovadamente hardware bloqueia
-  sem expor dados sensíveis. Nenhum job de hardware é enviado neste ciclo.
-- AC6: MCP inclui quatro ferramentas e passa teste de transporte stdio para as
+  sem expor dados sensíveis. Erros pós-submissão preservam incerteza e não fazem
+  retry automático. Nenhum job de hardware é enviado neste ciclo.
+- `AC6` — MCP inclui quatro ferramentas e passa teste de transporte stdio para as
   operações locais; anúncio do MCP fica desabilitado por padrão na configuração
   de exemplo V2.
-- AC7: dois perfis gerenciados distintos são válidos, subordinados a MarceloClaro,
+- `AC7` — dois perfis gerenciados distintos são válidos, subordinados a MarceloClaro,
   somente leitura e não alegam execução nem vantagem quântica.
-- AC8: documentação cita fontes primárias, compatibilidade/limites/licenças,
+- `AC8` — documentação cita fontes primárias, compatibilidade/limites/licenças,
   segredo rotacionado e instruções de ativação; nenhuma dependência foi
   instalada e nenhum código terceiro foi copiado.
 

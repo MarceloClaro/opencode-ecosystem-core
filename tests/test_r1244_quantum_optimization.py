@@ -362,3 +362,21 @@ def test_managed_quantum_research_profiles_are_valid():
         assert profile["permission"]["task"] == "deny"
         assert profile["permission"]["webfetch"] == "deny"
         assert profile["permission"]["bash"]["*"] == "deny"
+
+
+def test_quantum_documentation_and_mcp_disabled_by_default():
+    doc = (ROOT / "docs/quantum/QUANTUM_OPTIMIZATION_GJQ.md").read_text(encoding="utf-8")
+    for required in (
+        '"enabled": false',
+        "revogado/rotacionado",
+        "AGPL-3.0-or-later",
+        "https://tiangongqs.com/docs/en/",
+        "https://github.com/guoji-quantum/gjq_client",
+        "custo em",
+        "tarefa enviada a uma",
+    ):
+        assert required in doc
+
+    generated = json.loads((ROOT / "opencode.json").read_text(encoding="utf-8"))
+    remote = generated.get("mcp", {}).get("quantum-optimization")
+    assert remote is None or remote.get("enabled") is False
