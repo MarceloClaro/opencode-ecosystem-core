@@ -25119,6 +25119,35 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1241",
+      "objective": "Implementar o adaptador opcional OpenReverseLab no Core sob SPEC-935-R1237 sem instalar, ativar ou analisar alvos.",
+      "changes": [
+        "Criados manifesto independente e adaptador Core original que inspeciona checkout local explícito, fixa commit e blobs relevantes e emite somente fragmento MCP OpenCode v2 com disabled=true.",
+        "Mantida separação entre Apache-2.0 declarada na raiz e GPL-3.0-only declarado no MCP; autorização do usuário registrada sem parecer jurídico.",
+        "Mantido o registro histórico R1232 bloqueado e sem alterar opencode.json ou arquivos do checkout upstream.",
+        "Adicionados testes offline de proveniência, pin/dirty/symlink, drift de blobs/licenças, CLI e configuração desabilitada."
+      ],
+      "score": 0.75,
+      "lessons": [
+        "O workflow A2A foi bloqueado em preflight por exigir associação explícita de SDD/RED; não houve inferência externa nem agente concluinte. Relatar o bloqueio e seguir com recursos locais, sem atribuir mérito ao roteamento.",
+        "TDDHistory exige falhas de assertion para RED; uma mutação que causa exceção torna o recibo inválido. Usar mutação mínima que produza falha de assertion e conferir reason_codes.",
+        "O auto-checkpoint altera git_head que integra o recibo TDD. Revalidar o par após checkpoint e fazer a verificação final depois que a árvore estiver estável.",
+        "Status limpo de Git sozinho não garante que fontes-alvo correspondam ao commit se houver assume-unchanged; comparar blobs dos arquivos usados no comando gerado.",
+        "Autorização para integração não autoriza instalação, ativação, exposição do ambiente herdado nem análise de alvos; declarar explicitamente as fronteiras."
+      ],
+      "timestamp": 1795169472.995993,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
