@@ -25716,6 +25716,31 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1269",
+      "objective": "SPEC-935-R1268: registrar suspensão segura da integração Burp MCP",
+      "changes": [
+        "Build oficial fixado do PortSwigger/mcp-server concluído em /tmp/opencode; artefato mantido fora do repositório.",
+        "Carregamento do BApp e negociação MCP não concluídos por perda de acessibilidade AT-SPI; listener 127.0.0.1:9876 ausente.",
+        "Nenhuma configuração Burp foi alterada e nenhuma ferramenta MCP Burp, requisição a alvo ou scanner foi acionado."
+      ],
+      "score": 0.25,
+      "lessons": [
+        "Não avançar para configuração OpenCode até observar o listener exclusivamente em 127.0.0.1:9876.",
+        "Quando a árvore AT-SPI desaparecer durante a inicialização, interromper ações e solicitar decisão/intervenção humana; não substituir o canal aprovado por automação não autorizada."
+      ],
+      "timestamp": 1795218276.1726015,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
