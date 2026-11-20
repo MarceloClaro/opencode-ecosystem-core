@@ -2,7 +2,7 @@
 spec_id: SPEC-935-R1235
 title: Integrar Claude-BugHunter como referência de segurança defensiva com escopo limitado
 component: .opencode/skills/claude-bughunter-safe
-status: specified
+status: implemented
 test_file: tests/test_r1235_claude_bughunter_safe.py
 evidence_contract:
   version: 1
