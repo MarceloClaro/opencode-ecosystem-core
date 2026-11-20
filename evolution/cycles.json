@@ -25460,6 +25460,39 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1256",
+      "objective": "Concluir validação SDD/TDD da adaptação Burp MCP HTTP direto + AT-SPI para WSL2 (R1249)",
+      "changes": [
+        "R1249 configurado como plano documental fail-closed: PortSwigger MCP oficial via Streamable HTTP /mcp em 127.0.0.1:9876; Java/proxy stdio desnecessários; OpenCode MCP permanece não configurado por ausência do BApp/endpoint.",
+        "AT-SPI preparado sem instalação global: .deb Ubuntu Noble gir1.2-atspi-2.0 e gir1.2-freedesktop baixados, hashes conferidos e extraídos em /tmp/opencode; sudo apt não prosseguiu por senha requerida.",
+        "Status local AT-SPI observado ok=true, accessibility=granted, apps=0; nenhum clique, Burp, endpoint MCP, alvo ou requisição foi acionado.",
+        "Trilha TDD isolada retida em /tmp/opencode/r1249-verified-_9tark1a: RED tdd-b7a4ba3c7d7147649fbfd10518b92852 aceito (4 falhas de asserção, 1 teste aprovado); GREEN tdd-6fb3e6bae8774dcba2729f7586fdd739 aceito (5/5); SpecVerifier 3/3, red_history_valid=true.",
+        "Validação corrente focal/regressiva: R1249 + R1239, 11/11 aprovados; git diff --check limpo; doctor estrutural overall=degraded, 0 falhas, 6 avisos por CLIs/provedores opcionais ausentes.",
+        "Uma tentativa de TDD com SpecRegistry compartilhado entre checkout principal e worktree foi bloqueada por IDs duplicados; correção: subprocesso isolado com CWD/PYTHONPATH no worktree.",
+        "Primeira RED foi rejeitada porque o teste AT-SPI dependia do manifesto ainda ausente na baseline; o teste foi corrigido para consultar diretamente o staging documentado e o ciclo subsequente foi aceito."
+      ],
+      "score": 0.65,
+      "lessons": [
+        "Para TDDHistory em worktree, execute SpecRegistry/SpecVerifier em subprocesso cuja raiz e PYTHONPATH sejam o próprio worktree; não carregue antes o singleton do checkout principal.",
+        "Testes RED devem falhar por asserções da funcionalidade ausente, não por setup/test fixture inexistente; dados de pré-condição precisam existir também na baseline.",
+        "Preserve os recibos RED/GREEN e a raiz validada se a trilha for usada como evidência; exclusão do workspace após verificação destrói possibilidade de revalidação posterior.",
+        "A prova cobre contrato de configuração/catálogo, teste AT-SPI e ausência de chamadas a alvo; não demonstra que Burp/BApp esteja instalado, que o endpoint responda ou que o MCP conecte.",
+        "A extração do typelib em diretório de usuário não equivale à instalação apt; não solicitar/guardar senha nem executar ações na GUI sem a aprovação aplicável.",
+        "Nenhum agente foi executado nesta rodada; não há stake externo a penalizar. Score é avaliação interna, não revisão independente."
+      ],
+      "timestamp": 1795194292.923694,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
