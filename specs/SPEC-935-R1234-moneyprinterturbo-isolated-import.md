@@ -86,6 +86,14 @@ acrescentadas a `requirements.txt`.
 5. Evidência pós-instalação limita-se a `pip show`/`pip check` no venv isolado,
    SHA-256 do pacote instalado e diagnóstico do Core. Não executar MPT.
 
+## Critérios de aceitação executáveis
+
+- `R1234-PROVENANCE` Manifesto e installer plan fixam PyPI, release, commit, hash do wheel e Python mínimo.
+- `R1234-ISOLATION` O plano aponta apenas para venv/data root privados, sem modificar dependências do Core, configurar credenciais ou criar `config.toml`.
+- `R1234-IMPORT` O importador copia um `task_id/final-N.mp4` local, verifica hash, sonda a mídia e cria projeto não sobrescrevível com clipe no frame zero.
+- `R1234-BOUNDARIES` Path traversal, symlink, arquivo não-MP4, ID inválido, silêncio não consentido, colisão e escopo de geração/render/publicação são bloqueados ou explicitamente falsos.
+- `R1234-EDITOR-INTEGRATION` Ferramenta MCP confinada e catálogo do toolchain expõem somente importação quando a raiz local estiver configurada.
+
 ## Fora de escopo
 
 - Executar WebUI, API, CLI, agente ou qualquer gerador do MoneyPrinterTurbo.
