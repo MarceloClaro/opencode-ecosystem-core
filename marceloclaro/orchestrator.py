@@ -808,37 +808,11 @@ class MarceloClaroOrchestrator:
         payload = event.get("payload", {})
         task_id = payload.get("task_id")
         description = payload.get("description", "")
-        raw_eligible = payload.get("eligible_agents", [])
-        if not isinstance(task_id, str) or not task_id.strip():
-            logger.warning("[%s] CFP sem task_id válido; ignorado", self.id)
-            return
-        if not isinstance(raw_eligible, (list, tuple)):
-            raw_eligible = []
-        task_id = task_id.strip()
-        task = blackboard.tasks.get(task_id)
-        if task is None or task.status != "open":
-            logger.warning("[%s] CFP para tarefa inexistente ou não aberta: %s", self.id, task_id)
-            return
-        current_cfp_agents = set(task.eligible_agents)
+        eligible = payload.get("eligible_agents", [])
 
-        # Política explícita: BehavioralGate precisa autorizar; scores abaixo de
-        # 0.30 não são elegíveis à atribuição autônoma e exigem supervisão.
-        # O confidence_ledger continua sendo um sinal distinto de ranking.
+        # Gate comportamental (Trust Engine): qualquer erro ou negação exclui.
         gated = []
-        low_trust = []
-        for raw_agent_id in raw_eligible:
-            if not isinstance(raw_agent_id, str) or not raw_agent_id.strip():
-                continue
-            agent_id = raw_agent_id.strip()
-            if agent_id not in current_cfp_agents:
-                continue
-            card = blackboard.registry.get(agent_id)
-            if (
-                card is None
-                or card.status != "available"
-                or not set(task.required_capabilities).issubset(set(card.capabilities))
-            ):
-                continue
+        for agent_id in eligible:
             try:
                 decision = self.trust.execute(f"delegate:{agent_id}")
             except Exception as exc:
@@ -849,70 +823,24 @@ class MarceloClaroOrchestrator:
                     exc,
                 )
                 continue
-            if not bool(getattr(decision, "allowed", False)):
+            if bool(getattr(decision, "allowed", False)):
+                gated.append(agent_id)
+            else:
                 logger.info(
                     "[%s] BehavioralGate bloqueou %s: %s",
                     self.id,
                     agent_id,
                     getattr(decision, "reason", "decisão sem justificativa"),
                 )
-                continue
-
-            raw_trust_score = getattr(decision, "trust_score", None)
-            if raw_trust_score is None:
-                # Compatibilidade com doubles/integrações legadas sem score:
-                # confiança neutra explícita; não copiar o confidence_ledger.
-                trust_score = 0.5
-                trust_score_source = "legacy_neutral_default"
-            else:
-                trust_score = self._unit_metric(raw_trust_score)
-                trust_score_source = "behavioral_gate"
-                if trust_score is None:
-                    logger.warning("[%s] Trust score inválido para %s; fail-closed", self.id, agent_id)
-                    continue
-
-            confidence_score = card.to_dict().get("confidence_score", 0.5) if card is not None else 0.5
-            confidence_score = self._unit_metric(confidence_score)
-            if confidence_score is None:
-                confidence_score = 0.5
-
-            if trust_score < 0.30:
-                low_trust.append({
-                    "agent_id": agent_id,
-                    "trust_score": trust_score,
-                    "trust_score_source": trust_score_source,
-                    "confidence_score": confidence_score,
-                    "confidence_score_source": "metabus.confidence_ledger",
-                })
-                continue
-            gated.append(agent_id)
-
         eligible = gated
-        # Revalida e publica somente o subconjunto que passou pelo gate de
-        # comportamento e pelo limiar de supervisão.
-        task.eligible_agents = list(eligible)
         self.pending_cfps[task_id] = list(eligible)
 
         if not eligible:
-            if low_trust:
-                task.status = "awaiting_supervision"
-                task.supervision_required = True
-                task.supervision_candidates = list(low_trust)
-                task.blocked_reason = "trust_below_supervision_threshold"
-                metabus.publish("task.supervision_required", {
-                    "task_id": task_id,
-                    "threshold": 0.30,
-                    "candidates": low_trust,
-                    "approval_status": "awaiting_human_supervision",
-                    "automatic_assignment": False,
-                }, source_agent=self.id)
-                logger.warning("[%s] Tarefa %s retida para supervisão humana", self.id, task_id)
-                return
-
             logger.warning(f"[{self.id}] Nenhum agente elegível para {task_id}")
-            task.status = "blocked"
-            task.assigned_to = None
-            task.blocked_reason = "no_agent_passed_behavioral_gate"
+            task = blackboard.tasks.get(task_id)
+            if task is not None:
+                task.status = "blocked"
+                task.assigned_to = None
             return
 
         # ─── LLM Reduction Layer (SPEC-967): tenta roteamento determinístico ───
@@ -934,7 +862,8 @@ class MarceloClaroOrchestrator:
             )
         else:
             # Fallback: roteamento por atenção multi-cabeça
-            required = task.required_capabilities
+            task = blackboard.tasks.get(task_id)
+            required = task.required_capabilities if task else []
             cards = [blackboard.registry[a].to_dict() for a in eligible if a in blackboard.registry]
 
             self._task_counter += 1

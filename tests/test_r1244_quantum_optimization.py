@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -75,6 +76,32 @@ def test_exact_classical_baseline_and_limits():
     }
     with pytest.raises(qo.QuantumContractError, match="exact baseline"):
         qo.exact_classical_baseline(qo.parse_qubo(too_large))
+
+    near_tie = qo.parse_qubo({
+        "schema_version": 1, "name": "sub-picounit-improvement", "num_variables": 1,
+        "constant": 0.0, "linear": [-5e-13], "quadratic": [],
+    })
+    near_tie_result = qo.exact_classical_baseline(near_tie)
+    assert near_tie_result["assignment"] == [1]
+    assert near_tie_result["objective"] == pytest.approx(-5e-13)
+
+    near_tie_ising = qo.qubo_to_ising(near_tie)
+    assert near_tie_ising["constant"] == pytest.approx(-2.5e-13)
+    assert near_tie_ising["fields"] == [[0, pytest.approx(2.5e-13)]]
+    near_tie_ir = qo.build_qaoa_ir(near_tie, depth=1)
+    assert any(row["gate"] == "RZ" and row["scale"] == pytest.approx(5e-13)
+               for row in near_tie_ir["operations"])
+
+
+def test_energy_and_ising_reject_nonrepresentable_float_sums():
+    large = qo.parse_qubo({
+        "schema_version": 1, "name": "overflow-guard", "num_variables": 2,
+        "constant": 1e308, "linear": [1e308, 1e308], "quadratic": [],
+    })
+    with pytest.raises(qo.QuantumContractError, match="finite"):
+        large.energy([1, 1])
+    with pytest.raises(qo.QuantumContractError, match="finite"):
+        qo.qubo_to_ising(large)
 
 
 def test_qubo_to_ising_and_qaoa_ir():
@@ -311,10 +338,12 @@ def _send(proc, message):
 
 
 def test_mcp_stdio_transport_read_only_operations():
+    environment = os.environ.copy()
+    environment.pop("GJQ_API_KEY", None)
     proc = subprocess.Popen(
         [sys.executable, "-m", "integrations.quantum_optimization_mcp"],
         cwd=str(ROOT), stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE, text=True,
+        stderr=subprocess.PIPE, text=True, env=environment,
     )
     try:
         _send(proc, {
@@ -338,6 +367,40 @@ def test_mcp_stdio_transport_read_only_operations():
         body = json.loads(called["result"]["content"][0]["text"])
         assert body["status"] == "success"
         assert body["result"]["network"] is False
+
+        _send(proc, {
+            "jsonrpc": "2.0", "id": 4, "method": "tools/call",
+            "params": {"name": "qubo_inspect", "arguments": {"problem": _problem()}},
+        })
+        inspected = _read_message(proc)
+        inspected_body = json.loads(inspected["result"]["content"][0]["text"])
+        assert inspected_body["status"] == "success"
+        assert inspected_body["result"]["network"] is False
+
+        _send(proc, {
+            "jsonrpc": "2.0", "id": 5, "method": "tools/call",
+            "params": {"name": "qaoa_prepare", "arguments": {
+                "problem": _problem(), "depth": 1, "shots": 128, "max_evaluations": 1,
+            }},
+        })
+        prepared = _read_message(proc)
+        prepared_body = json.loads(prepared["result"]["content"][0]["text"])
+        assert prepared_body["status"] == "success"
+        assert prepared_body["result"]["remote_submission"] is False
+
+        _send(proc, {
+            "jsonrpc": "2.0", "id": 6, "method": "tools/call",
+            "params": {"name": "qaoa_optimize_gjq", "arguments": {
+                "problem": _problem(), "backend_name": "unused-backend",
+                "shots": 128, "max_evaluations": 1, "max_total_shots": 128,
+                "confirm_remote": False,
+            }},
+        })
+        blocked = _read_message(proc)
+        blocked_body = json.loads(blocked["result"]["content"][0]["text"])
+        assert blocked_body["status"] == "blocked"
+        assert blocked_body["result"]["code"] == "remote_confirmation_required"
+        assert blocked_body["evidence"]["jobs_submitted"] == 0
     finally:
         proc.stdin.close()
         try:

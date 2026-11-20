@@ -11,6 +11,7 @@ evidence_contract:
     AC1:
       - tests/test_r1244_quantum_optimization.py::test_qubo_validation_energy_and_canonical_hash
       - tests/test_r1244_quantum_optimization.py::test_qubo_rejects_invalid_schema_and_coefficients
+      - tests/test_r1244_quantum_optimization.py::test_energy_and_ising_reject_nonrepresentable_float_sums
     AC2:
       - tests/test_r1244_quantum_optimization.py::test_exact_classical_baseline_and_limits
       - tests/test_r1244_quantum_optimization.py::test_qubo_to_ising_and_qaoa_ir
