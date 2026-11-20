@@ -25175,6 +25175,37 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1244",
+      "objective": "Conectar snapshot Claude-BugHunter ao orquestrador MarceloClaro sem expor instruções upstream; registrar pedido de Burp MCP oficial e bloquear habilitação por dependências ausentes",
+      "changes": [
+        "SPEC-935-R1239 formaliza catálogo reference-only, rota explícita para a skill local defensiva e gate Burp",
+        "Integrações de status e plano foram expostas por MarceloClaro, CLI e MCP existente, sem criar rota para skills/comandos upstream",
+        "Manifesto R1239 registra autorização para PortSwigger oficial, mas status blocked_missing_local_runtime após busca read-only sem Java/proxy JAR; nenhuma configuração Burp foi adicionada",
+        "TDDHistory aceitou RED 6/6 falhas e GREEN 6/6 passes em worktree isolado; par validado e SpecVerifier 3/3 critérios verificados localmente",
+        "69 testes focais/regressivos passaram; doctor estrutural: 16 aprovações, 6 avisos e 0 falhas"
+      ],
+      "score": 0.65,
+      "lessons": [
+        "A autorização do usuário é para o servidor oficial PortSwigger, mas a escolha explícita foi usar somente componentes já instalados; sem Java/proxy JAR, não inventar configuração MCP e reportar bloqueio com precisão de escopo.",
+        "A documentação consultada aponta transporte SSE no Burp e proxy stdio para clientes; o cliente remoto OpenCode usa Streamable HTTP, logo apontar diretamente para o SSE seria incompatível.",
+        "A rota Core deve expor apenas uma entrada first-party defensiva; o inventário upstream permanece não carregado e não invocável.",
+        "Falhas instrumentais: seletor de ecossistema desconhecido; busca web HTTP 402; subagente de revisão bloqueado por região; uma tentativa GREEN foi rejeitada porque a configuração OpenCode foi copiada entre fases e alterou o contexto TDD. A segunda execução manteve as entradas estáveis e passou.",
+        "Não houve agente voluntário/atribuído nem stake individual, portanto não havia agente a penalizar; falhas foram ambientais/processuais e foram registradas, sem fingir slashing.",
+        "CFP de revisão continua aberto sem voluntários; avaliação independente externa não ocorreu."
+      ],
+      "timestamp": 1795181221.9946444,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
