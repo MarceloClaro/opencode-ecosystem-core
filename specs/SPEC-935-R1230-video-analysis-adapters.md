@@ -1,0 +1,80 @@
+---
+spec_id: SPEC-935-R1230
+title: Adaptadores de análise e cortes propostos para o editor de vídeo
+component: integrations.video_analysis
+status: specified
+test_file: tests/test_r1230_video_analysis.py
+depends_on:
+  - SPEC-935-R1042
+  - SPEC-935-R1043
+  - SPEC-935-R1034
+---
+
+# SPEC-935-R1230 — análise de cenas e propostas de corte
+
+## Objetivo
+
+Ampliar o editor local, mantendo planos separados de execução, com:
+
+1. diagnóstico executável de `ffmpeg` e `ffprobe` no ambiente atual;
+2. marcadores de cena por PySceneDetect, sem alterar ou dividir o arquivo;
+3. proposta de corte Auto-Editor convertida em segmentos revisáveis, sem render;
+4. registro do LongCat-Video como gerador opcional de assets, sem baixar pesos;
+5. preservação do Remotion como backend existente.
+
+O pedido explícito de timestamps por palavra já é atendido no fluxo existente:
+`integrations.video_cpu_pipeline.transcribe_cpu` chama faster-whisper com
+`word_timestamps=True`, e os consumidores de timing/caption usam esses dados.
+Portanto, esta entrega **não instala nem integra WhisperX**. Reavaliá-lo apenas
+se uma medição em corpus PT-BR demonstrar falha de alinhamento no backend atual.
+
+## Contrato e segurança
+
+- O diagnóstico roda `-version` sem shell, apresenta caminho, versão, código de
+  saída e erro de cada binário; ausência ou falha permanece explícita.
+- A análise aceita somente mídia local regular, sem symlink, e calcula SHA-256
+  da fonte. Não aceita URL, não envia arquivos e não faz upload/download.
+- PySceneDetect retorna marcadores de início/fim em frames e timebase, com
+  detector/parâmetros informados. O resultado é análise, não decisão editorial.
+- Auto-Editor é invocado somente para exportar o formato de timeline v1, nunca
+  para produzir arquivo final. O comando não usa shell; saída temporária é
+  isolada e não sobrescreve arquivos do usuário; há timeout e limite de leitura.
+- O parser v1 valida versão, timebase racional positiva, sequência contígua,
+  intervalos half-open, valores finitos e velocidade suportada. Só converte
+  limites para frames quando o mapeamento é exato; conversão ambígua/VFR bloqueia.
+- O objeto resultante é `proposal` com `review_required=true` e
+  `approval_state="pending"`; não é plano renderizável nem executa cortes.
+- Nenhum subprocesso aceita argumentos livres do usuário. Falta de dependência
+  gera erro acionável, não fallback silencioso.
+- O inventário corrige Auto-Editor para CLI nativa/Nim, versionada, e registra
+  LongCat-Video como `reference_only`, GPU/high-resource e sem adapter. Nenhum
+  checkpoint ou modelo é instalado/baixado por esta entrega.
+- Remotion, seu guard de licença/aprovação e o backend FFmpeg existentes não
+  são substituídos nem relaxados.
+
+## Critérios de aceitação verificáveis
+
+1. Diagnóstico identifica `ffmpeg` e `ffprobe` separadamente, incluindo ausência,
+   falha de execução e versão.
+2. PySceneDetect gera marcadores corretos em clipe sintético de cortes conhecidos;
+   entrada symlink, VFR não suportado e parâmetros inválidos são recusados.
+3. Parser Auto-Editor v1 converte `timebase` para frames sem deriva; rejeita
+   JSON inválido, chunks com lacunas/sobreposição, tempos não alinháveis e
+   velocidades não suportadas.
+4. Execução com runner falso demonstra argv fixo, sem shell, sem render, timeout,
+   saída temporária e preservação do original; proposta fica pendente de revisão.
+5. Smoke test Auto-Editor real gera timeline v1 para clipe sintético e a converte
+   em proposta sem criar MP4 de saída.
+6. `video_toolchain` registra Auto-Editor com runtime atual e LongCat-Video como
+   gerador opcional não executável; WhisperX não é apresentado como requisito.
+7. Testes focais, regressões de R1042/R1043 e doctor do `.venv` passam; limitações
+   de execução e disponibilidade externa são registradas sem overclaim.
+
+## Fora de escopo
+
+- Instalar WhisperX, baixar modelos de ASR ou LongCat-Video, ou acessar token HF.
+- Renderizar/editar mídia do usuário, aprovar cortes automaticamente ou criar
+  animação generativa.
+- Expor GUI/editor visual novo; Remotion continua um backend programático.
+- Alegar qualidade narrativa, precisão geral dos detectores ou validação
+  perceptual a partir de clipes sintéticos.
