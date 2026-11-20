@@ -9,9 +9,11 @@ write active OpenCode configuration.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import subprocess
 try:
     import tomllib
@@ -217,6 +219,8 @@ def _git_environment(root: Path) -> dict[str, str]:
         "GIT_CONFIG_NOSYSTEM": "1",
         "GIT_CONFIG_GLOBAL": os.devnull,
         "GIT_OPTIONAL_LOCKS": "0",
+        "GIT_NO_LAZY_FETCH": "1",
+        "GIT_TERMINAL_PROMPT": "0",
         "LC_ALL": "C",
         "LANG": "C",
     }
@@ -276,6 +280,28 @@ def _read_project_metadata(project_file: Path) -> Mapping[str, Any]:
     return project
 
 
+def _git_blob_id(root: Path, relative: Path, runner: Runner | None) -> str:
+    result = _git_probe(root, ("rev-parse", f"HEAD:{relative.as_posix()}"), runner)
+    blob_id = result.stdout.strip().lower()
+    if not re.fullmatch(r"[0-9a-f]{40}", blob_id):
+        raise CheckoutValidationError("source_blob_unavailable", f"Blob pin ausente para {relative.as_posix()}.")
+    return blob_id
+
+
+def _local_git_blob_id(path: Path, *, max_bytes: int) -> str:
+    try:
+        size = path.stat().st_size
+        if size > max_bytes:
+            raise CheckoutValidationError("source_file_too_large", f"Arquivo excede limite: {path.name}.")
+        content = path.read_bytes()
+    except CheckoutValidationError:
+        raise
+    except OSError as error:
+        raise CheckoutValidationError("source_file_unreadable", f"Não foi possível ler {path.name}.") from error
+    object_header = f"blob {len(content)}\0".encode("ascii")
+    return hashlib.sha1(object_header + content).hexdigest()
+
+
 def _inspect_checkout(path: str | os.PathLike[str], *, runner: Runner | None = None) -> dict[str, Any]:
     """Internal validating path; never imports or runs the checkout."""
     manifest = load_manifest()
@@ -320,6 +346,17 @@ def _inspect_checkout(path: str | os.PathLike[str], *, runner: Runner | None = N
     ):
         raise CheckoutValidationError("mcp_license_mismatch", "Nome, versão ou licença declarada do MCP diverge do pin observado.")
 
+    tracked_sources = (
+        (Path("LICENSE"), root_license, 1024 * 1024),
+        (Path("DISCLAIMER.md"), disclaimer, 1024 * 1024),
+        (MCP_RELATIVE / "pyproject.toml", project_file, 256 * 1024),
+        (ENTRYPOINT_RELATIVE, entrypoint, 8 * 1024 * 1024),
+    )
+    for relative, local_path, max_bytes in tracked_sources:
+        pinned_blob = _git_blob_id(root, relative, runner)
+        if _local_git_blob_id(local_path, max_bytes=max_bytes) != pinned_blob:
+            raise CheckoutValidationError("source_file_mismatch", f"Conteúdo local diverge do commit pinado: {relative.as_posix()}.")
+
     return {
         "status": "ready",
         "root": str(root),
@@ -331,6 +368,7 @@ def _inspect_checkout(path: str | os.PathLike[str], *, runner: Runner | None = N
         "mcp_project": str(project_file.parent),
         "entrypoint": str(entrypoint),
         "disclaimer_present": disclaimer.is_file(),
+        "pinned_source_files_verified": True,
         "code_imported": False,
         "code_executed": False,
         "mcp_enabled": False,

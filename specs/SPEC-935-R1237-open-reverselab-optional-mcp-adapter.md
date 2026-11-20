@@ -16,6 +16,7 @@ evidence_contract:
       - tests/test_r1237_open_reverselab_adapter.py::test_inspection_accepts_only_exact_clean_local_checkout_without_running_project_code
       - tests/test_r1237_open_reverselab_adapter.py::test_inspection_rejects_wrong_commit_dirty_tree_and_missing_mcp_files
       - tests/test_r1237_open_reverselab_adapter.py::test_inspection_rejects_upstream_license_declaration_drift
+      - tests/test_r1237_open_reverselab_adapter.py::test_inspection_rejects_source_file_drift_even_if_git_status_reports_clean
       - tests/test_r1237_open_reverselab_adapter.py::test_inspection_rejects_symlinked_root_and_mcp_components
     R1237-OPT-IN:
       - tests/test_r1237_open_reverselab_adapter.py::test_generated_opencode_entry_is_disabled_and_never_mutates_active_config
@@ -65,8 +66,10 @@ altera retroativamente o estado histórico de R1232.
    somente metadados Git por argv fixo, sem shell e com timeout limitado.
 3. Recusar caminhos inexistentes, não absolutos, symlinkados ou fora da raiz
    Git; recusar commit divergente, working tree suja, arquivos MCP ausentes ou
-   symlinkados e declaração de licença/versão diferente. Não seguir caminhos
-   que escapem do checkout.
+   symlinkados e declaração de licença/versão diferente. Conferir os blobs das
+   fontes relevantes no commit fixado contra os bytes locais, mesmo se o Git
+   informar uma working tree aparentemente limpa. Não seguir caminhos que
+   escapem do checkout.
 4. A configuração candidata é apenas saída JSON: servidor MCP local com
   `disabled: true`, `command` em lista argv, `cwd` explícito e execução de
   `uv run --no-sync`. Não escrever `opencode.json`, `.opencode/` ou arquivos do
@@ -93,7 +96,8 @@ altera retroativamente o estado histórico de R1232.
   inerte e R1232 continua historicamente bloqueado.
 - `R1237-CHECKOUT` A inspeção só aceita checkout local limpo no commit fixado,
   valida arquivos e metadados sem importar/executar código do projeto, e falha
-  de modo fechado para caminhos, symlinks, dirty tree, pin ou licença inválidos.
+  de modo fechado para caminhos, symlinks, dirty tree, blobs locais, pin ou
+  licença inválidos.
 - `R1237-OPT-IN` A saída candidata usa o schema OpenCode local MCP com
   `disabled: true`, `uv run --no-sync`, argv sem shell e caminhos absolutos; as
   operações não alteram `opencode.json`, não instalam, não ativam e não lançam

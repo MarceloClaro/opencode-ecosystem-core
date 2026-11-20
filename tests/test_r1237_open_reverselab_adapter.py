@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
+import hashlib
 import importlib
 import json
 from pathlib import Path
@@ -13,6 +14,17 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 PIN = "c42da86aadcbea4f2dd20822653f83da5f6aba54"
 DISCLAIMER_BLOB = "025efb705062b5782b826d317388674bfe88a5ff"
+FIXTURE_FILES = {
+    "LICENSE": b"Apache License\nVersion 2.0, January 2004\n",
+    "DISCLAIMER.md": b"upstream disclaimer fixture\n",
+    "tools/skills/mcp/ReverseLabToolsMCP/pyproject.toml": (
+        b'[project]\nname = "reverselab-tools-mcp"\nversion = "0.1.0"\n'
+        b'license = "GPL-3.0-only"\nrequires-python = ">=3.10"\n'
+    ),
+    "tools/skills/mcp/ReverseLabToolsMCP/reverse_lab_tools_mcp.py": (
+        b'raise RuntimeError("upstream entrypoint must not be executed")\n'
+    ),
+}
 
 
 def _adapter():
@@ -27,16 +39,12 @@ def _checkout(tmp_path: Path) -> Path:
     mcp = root / "tools" / "skills" / "mcp" / "ReverseLabToolsMCP"
     mcp.mkdir(parents=True)
     (root / ".git").mkdir()
-    (root / "LICENSE").write_text("Apache License\nVersion 2.0, January 2004\n", encoding="utf-8")
-    (root / "DISCLAIMER.md").write_text("upstream disclaimer fixture\n", encoding="utf-8")
-    (mcp / "pyproject.toml").write_text(
-        '[project]\nname = "reverselab-tools-mcp"\nversion = "0.1.0"\n'
-        'license = "GPL-3.0-only"\nrequires-python = ">=3.10"\n',
-        encoding="utf-8",
-    )
+    (root / "LICENSE").write_bytes(FIXTURE_FILES["LICENSE"])
+    (root / "DISCLAIMER.md").write_bytes(FIXTURE_FILES["DISCLAIMER.md"])
+    (mcp / "pyproject.toml").write_bytes(FIXTURE_FILES["tools/skills/mcp/ReverseLabToolsMCP/pyproject.toml"])
     # Deliberately not executable Python: the adapter must inspect, never import/run it.
-    (mcp / "reverse_lab_tools_mcp.py").write_text(
-        'raise RuntimeError("upstream entrypoint must not be executed")\n', encoding="utf-8"
+    (mcp / "reverse_lab_tools_mcp.py").write_bytes(
+        FIXTURE_FILES["tools/skills/mcp/ReverseLabToolsMCP/reverse_lab_tools_mcp.py"]
     )
     return root
 
@@ -52,6 +60,10 @@ def _git_runner(root: Path, *, commit: str = PIN, dirty: str = "", calls: list |
             stdout = commit
         elif argv[-2:] == ["--porcelain=v1", "--untracked-files=all"]:
             stdout = dirty
+        elif len(argv) >= 2 and argv[-2] == "rev-parse" and argv[-1].startswith("HEAD:"):
+            relative = argv[-1][len("HEAD:"):]
+            content = FIXTURE_FILES[relative]
+            stdout = hashlib.sha1(f"blob {len(content)}\0".encode("ascii") + content).hexdigest()
         else:
             raise AssertionError(f"unexpected subprocess argv: {argv!r}")
         return subprocess.CompletedProcess(argv, 0, stdout, "")
@@ -116,10 +128,11 @@ def test_inspection_accepts_only_exact_clean_local_checkout_without_running_proj
     assert result["commit"] == PIN
     assert result["license"] == "GPL-3.0-only"
     assert result["project_version"] == "0.1.0"
-    assert len(calls) == 3
+    assert len(calls) == 7
     assert all(kwargs["shell"] is False for _, kwargs in calls)
     assert all(kwargs["timeout"] <= 10 for _, kwargs in calls)
     assert all(argv[0] == "git" for argv, _ in calls)
+    assert result["pinned_source_files_verified"] is True
 
 
 def test_inspection_rejects_wrong_commit_dirty_tree_and_missing_mcp_files(tmp_path):
@@ -150,6 +163,15 @@ def test_inspection_rejects_upstream_license_declaration_drift(tmp_path):
     (root / "LICENSE").write_text("MIT License\n", encoding="utf-8")
     root_license = adapter.inspect_checkout(root, runner=_git_runner(root))
     assert root_license["status"] == "root_license_mismatch"
+
+
+def test_inspection_rejects_source_file_drift_even_if_git_status_reports_clean(tmp_path):
+    adapter = _adapter()
+    root = _checkout(tmp_path)
+    entrypoint = root / "tools" / "skills" / "mcp" / "ReverseLabToolsMCP" / "reverse_lab_tools_mcp.py"
+    entrypoint.write_text("# replaced but test runner reports clean\n", encoding="utf-8")
+    result = adapter.inspect_checkout(root, runner=_git_runner(root, dirty=""))
+    assert result["status"] == "source_file_mismatch"
 
 
 def test_inspection_rejects_symlinked_root_and_mcp_components(tmp_path):
