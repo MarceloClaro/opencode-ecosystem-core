@@ -208,3 +208,30 @@ def test_mcp_exposes_only_local_import_not_generation(tmp_path, monkeypatch):
     assert not any(name.startswith("mpt_") for name in names)
     imported = next(tool for tool in tools if tool.name == "editor_import_mpt_output")
     assert imported.annotations.openWorldHint is False
+
+
+def test_mcp_import_creates_project_from_configured_local_root(tmp_path, monkeypatch):
+    from integrations import video_editor, video_editor_mcp
+
+    mpt_root, editor_root, source = roots(tmp_path)
+    monkeypatch.setattr(video_editor, "probe_media", lambda path, **kwargs: probe_for(path))
+    server = video_editor_mcp.create_server(editor_root, mpt_output_root=mpt_root)
+    result = asyncio.run(server.call_tool("editor_import_mpt_output", {
+        "media_path": "8f4f8a75-1c27-47ed-b2d3-45a9940e9ed1/final-1.mp4",
+        "project_id": "mcp-mpt-demo",
+    }))
+    text = "\n".join(getattr(item, "text", "") for item in result)
+    assert "imported" in text
+    project = json.loads((editor_root / "editor-projects" / "mcp-mpt-demo.json").read_text())
+    video = next(track for track in project["tracks"] if track["kind"] == "video")
+    assert len(video["clips"]) == 1
+    assert video["clips"][0]["source"] == "editor-assets/moneyprinterturbo/" + digest(source) + ".mp4"
+
+
+def test_mpt_mcp_tool_is_not_exposed_without_explicit_output_root(tmp_path):
+    from integrations import video_editor_mcp
+
+    _mpt_root, editor_root, _ = roots(tmp_path)
+    server = video_editor_mcp.create_server(editor_root)
+    tools = asyncio.run(server.list_tools())
+    assert "editor_import_mpt_output" not in {tool.name for tool in tools}

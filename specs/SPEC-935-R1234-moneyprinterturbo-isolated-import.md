@@ -21,6 +21,9 @@ evidence_contract:
     R1234-BOUNDARIES:
       - tests/test_r1234_moneyprinterturbo_import.py::test_import_does_not_launch_mpt_or_render_or_publish
       - tests/test_r1234_moneyprinterturbo_import.py::test_release_import_contract_does_not_assume_scene_clips
+    R1234-EDITOR-INTEGRATION:
+      - tests/test_r1234_moneyprinterturbo_import.py::test_mcp_import_creates_project_from_configured_local_root
+      - tests/test_r1234_moneyprinterturbo_import.py::test_toolchain_registers_only_confined_asset_import
 ---
 
 # SPEC-935-R1234 — MoneyPrinterTurbo isolado e importação local
@@ -75,8 +78,11 @@ acrescentadas a `requirements.txt`.
 3. Testes RED→GREEN exercitam importação bem-sucedida, áudio/silêncio, hash,
    path traversal, symlink, extensão não permitida, projeto repetido e
    bloqueios de escopo sem executar o binário `mpt` ou FFmpeg real.
-4. O teste verifica que o projeto do Core contém o clipe em timeline; apenas
-   copiar o arquivo ou abrir projeto vazio não satisfaz o contrato.
+4. O teste do importador e da ferramenta MCP verifica que o projeto do Core
+   contém o clipe em timeline; apenas copiar o arquivo ou abrir projeto vazio
+   não satisfaz o contrato. A ferramenta só aparece quando `MPT_OUTPUT_ROOT`
+   (ou parâmetro de inicialização equivalente) aponta para diretório local
+   existente e não symlink.
 5. Evidência pós-instalação limita-se a `pip show`/`pip check` no venv isolado,
    SHA-256 do pacote instalado e diagnóstico do Core. Não executar MPT.
 

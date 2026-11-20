@@ -332,3 +332,16 @@ def test_manifest_policy_validation_fails_closed_for_contradictory_states():
     prompts = next(item for item in broken["repositories"] if item["id"] == "prompts-chat")
     prompts["license_status"] = "approved"
     assert any("prompts-chat: license_status" in error for error in ext.validate_manifest(broken))
+
+
+def test_formal_spec_contract_is_valid_and_maps_all_criteria():
+    from sdd.spec_engine import spec_registry
+
+    spec = spec_registry.get("SPEC-935-R1232")
+    assert spec is not None
+    assert spec.evidence_contract_valid is True
+    assert {criterion.criterion_id for criterion in spec.criteria} == {
+        "R1232-CATALOG", "R1232-RUST", "R1232-UOS", "R1232-CAVEMAN",
+        "R1232-SKILLS", "R1232-REA", "R1232-REGRESSION",
+    }
+    assert set(spec.criterion_test_targets) == {criterion.criterion_id for criterion in spec.criteria}

@@ -2,7 +2,7 @@
 spec_id: SPEC-935-R1232
 title: Integrar ferramentas externas isoladas e referências curadas
 component: integrations.external_tools_isolated
-status: specified
+status: implemented
 test_file: tests/test_r1232_isolated_external_tools.py
 evidence_contract:
   version: 1
@@ -15,6 +15,7 @@ evidence_contract:
       - tests/test_r1232_isolated_external_tools.py::test_manifest_records_license_and_adoption_states_without_collapsing_them
       - tests/test_r1232_isolated_external_tools.py::test_manifest_policy_validation_fails_closed_for_contradictory_states
       - tests/test_r1232_isolated_external_tools.py::test_status_is_read_only_local_inventory
+      - tests/test_r1232_isolated_external_tools.py::test_formal_spec_contract_is_valid_and_maps_all_criteria
     R1232-RUST:
       - tests/test_r1232_isolated_external_tools.py::test_rust_anything_install_plan_isolated_and_integrity_pinned
       - tests/test_r1232_isolated_external_tools.py::test_rust_anything_runner_never_uses_shell_or_global_install
@@ -103,29 +104,28 @@ exige revisão jurídica humana explícita.
    novo catálogo aponta para a integração existente, sem recapturar sua
    instalação nem declarar que suas camadas externas estejam disponíveis.
 
-## Critérios de aceitação
+## Critérios de aceitação executáveis (RED → GREEN → REFACTOR)
 
-1. O manifesto JSON é validado por schema/testes, registra proveniência e
-   mantém estados de instalação, execução e ativação separados.
-2. O plano de Rust Anything fixa pacote, versão, integridade, diretório e
-   tamanho estimado; a instalação aborta antes de extrair se SRI/metadados/hash
-   local divergirem. Nenhuma instalação global ou análise de alvo ocorre.
-3. Universal OS fica isolado e desabilitado; os testes provam que ISO, QEMU,
-   VM, MCP e comandos de reconstrução não são invocados.
-4. Caveman fica isolado, com telemetria e rede de cloud desativadas no processo,
-   sem escrita em configs globais nem comandos de setup/login/hooks/agent.
-5. Apenas `mcp-builder` e `skill-creator` são incluídas no commit Anthropic
-   fixado; arquivos, licenças e SHA-256 são reconciliáveis; invocação implícita
-   fica desativada.
-6. OpenReverseLab não é baixado nem executado; o conflito de licenças permanece
-   marcado como bloqueio. Awesome REA, CC Switch e prompts.chat não alegam
-   instalação nem uso; prompts.chat mantém separadas as licenças do código e do
-   corpus de prompts.
-7. REA existente é reutilizado sem alteração da versão, instalação ou MCP.
-8. Testes focais, regressões pertinentes, `python -m marceloclaro.cli doctor`
-   com o Python de `.venv` e revisão de diff passam; testes de instalação usam
-   runners mockados e não baixam pacotes. Todo estado externo não observado é
-   relatado como não observado.
+- `R1232-CATALOG` — O manifesto valida proveniência, licença e estados de
+  adoção distintos; referências ficam sem instalação/execução, OpenReverseLab
+  permanece bloqueado, prompts.chat mantém MIT/CC0-1.0 separados e `status` é
+  somente leitura local.
+- `R1232-RUST` — O plano fixa pacote npm, versão, SRI, diretório e tamanho. A
+  instalação só é possível com confirmação, confere SRI e tamanho antes do
+  tarball local, usa argv sem shell e não instala globalmente nem analisa alvos.
+- `R1232-UOS` — Universal OS fica isolado, com diretórios uv privados e MCP
+  desligado; ISO, QEMU, VM e comandos de reconstrução não podem ser invocados.
+- `R1232-CAVEMAN` — Caveman recebe HOME/CAVEMAN_HOME privados, telemetria
+  desligada, modo offline e config/cache npm privados; setup, login, hooks,
+  cloud e integração global de agentes não são executáveis.
+- `R1232-SKILLS` — Somente `mcp-builder` e `skill-creator` do commit Anthropic
+  pinado são importadas com todos os arquivos, licenças e hashes reconciliáveis;
+  scripts permanecem inertes e invocação implícita fica desativada.
+- `R1232-REA` — REA 6.8.0 instalado é reutilizado sem duplicação, upgrade ou
+  ampliação de permissões.
+- `R1232-REGRESSION` — Nenhum MCP de terceiro fica registrado; testes usam
+  runners mockados sem baixar pacotes; integração de referência não executa
+  fontes nem alvos.
 
 ## Fora de escopo
 
