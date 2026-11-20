@@ -62,6 +62,14 @@ def test_catalog_fails_closed_when_package_manifest_is_tampered(tmp_path):
     with pytest.raises(ValueError, match="proveniência|commit|manifesto"):
         load_catalog(tmp_path)
 
+    manifest_path.write_bytes((ROOT / "federation/claude-bughunter-package-r1236.json").read_bytes())
+    burp_path = federation / "claude-bughunter-mcp-r1239.json"
+    tampered_burp = json.loads(burp_path.read_text(encoding="utf-8"))
+    tampered_burp["enabled"] = True
+    burp_path.write_text(json.dumps(tampered_burp), encoding="utf-8")
+    with pytest.raises(ValueError, match="Burp MCP|fail-closed|estado"):
+        load_catalog(tmp_path)
+
 
 def test_status_and_plan_are_exposed_through_marcelo_claro():
     from marceloclaro.integration_service import CoreIntegrationService
@@ -112,6 +120,10 @@ def test_cli_and_mcp_plan_dispatch_only_to_primary_orchestrator(monkeypatch, cap
     result = asyncio.run(ecosystem_mcp.ecosystem_claude_bughunter_plan())
     assert result["status"] == "instruction_only"
     assert orchestrator.calls == 2
+    from integrations.opencode_cli import build_config
+    generated = build_config()
+    assert "ecosystem_claude_bughunter_plan" in generated["command"]["integracoes"]["template"]
+    assert "burp" not in json.dumps(generated.get("mcp", {}), ensure_ascii=False).casefold()
 
 
 def test_official_burp_mcp_authorization_is_recorded_but_prerequisites_block_enablement():
@@ -128,9 +140,10 @@ def test_official_burp_mcp_authorization_is_recorded_but_prerequisites_block_ena
     assert readiness["opencode_server_configured"] is False
     assert readiness["observed_prerequisites"] == {
         "java_executable_found": False,
-        "proxy_jar_found": False,
-        "burp_directories_found_in_searched_roots": False,
+        "proxy_jar_found_in_search_roots": False,
+        "burp_directories_found_under_home": False,
     }
+    assert readiness["observation"]["scope_is_comprehensive"] is False
     assert readiness["burp_started"] is False
     assert readiness["mcp_connected"] is False
     assert readiness["http_requests_sent"] is False

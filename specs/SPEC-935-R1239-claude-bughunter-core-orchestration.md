@@ -73,9 +73,10 @@ etapa separada depois que os componentes locais existirem e forem identificados.
   componentes locais estiverem disponíveis. A autorização não cobre instalação
   de Burp/extensão/proxy, leitura de credenciais, inicialização do Burp,
   conexão MCP, chamadas a ferramentas ou requisições HTTP.
-- Observação local read-only: `java`, proxy JAR e diretórios Burp não foram
-  encontrados nas raízes pesquisadas (`~/.BurpSuite`, `~/.local`, `/opt`,
-  `/usr/local`; busca de diretórios sob o home limitada a profundidade 4).
+- Observação local read-only: `java` não foi encontrado no `PATH`, o proxy JAR
+  não foi encontrado nas raízes pesquisadas (`~/.BurpSuite`, `~/.local`, `/opt`,
+  `/usr/local`) e diretórios Burp não foram encontrados sob o home até
+  profundidade 4. A busca não é exaustiva.
 - A configuração MCP não será adicionada ou habilitada enquanto faltarem
   launcher e proxy previamente instalados. Não usar `type=remote` diretamente:
   a documentação OpenCode consultada descreve transporte remoto Streamable HTTP,

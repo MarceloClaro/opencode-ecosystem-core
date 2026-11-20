@@ -57,6 +57,13 @@ def _validate_package(manifest: dict[str, Any], repo_root: Path) -> dict[str, An
         raise ValueError("seções obrigatórias ausentes no manifesto do pacote")
     if source.get("commit") != COMMIT or source.get("archive_sha256") != ARCHIVE_SHA256:
         raise ValueError("proveniência ou hash do pacote Claude-BugHunter divergente")
+    if (source.get("url") != f"https://github.com/{REPOSITORY}"
+            or source.get("commit_url") != f"https://github.com/{REPOSITORY}/commit/{COMMIT}"
+            or source.get("archive_url") != f"https://codeload.github.com/{REPOSITORY}/zip/{COMMIT}"
+            or source.get("observed_via") != "github_commits_atom_feed"
+            or source.get("archive_bytes") != 2_145_462
+            or source.get("archive_crc_check") != "passed"):
+        raise ValueError("localizadores ou recibo do arquivo-fonte divergentes")
     if not _SHA256.fullmatch(str(source.get("archive_sha256", ""))):
         raise ValueError("hash SHA-256 do arquivo-fonte inválido")
     if source.get("signature_status") != "not_observed" or source.get("branch_head_status") != "not_verified":
@@ -99,6 +106,16 @@ def _validate_package(manifest: dict[str, Any], repo_root: Path) -> dict[str, An
         "legal_review": "not_performed",
     }:
         raise ValueError("declarações de licença do pacote divergentes")
+    evidence = manifest.get("evidence")
+    if not isinstance(evidence, dict) or any(
+        evidence.get(field) != expected_path
+        for field, expected_path in (
+            ("license_code", "LICENSE"),
+            ("license_content", "LICENSE-CONTENT"),
+            ("notice", "NOTICE"),
+        )
+    ):
+        raise ValueError("referências de licença/NOTICE divergentes")
     if manifest.get("adoption") != "inert_snapshot":
         raise ValueError("pacote não está marcado como snapshot inerte")
     if activation != {
@@ -145,8 +162,8 @@ def _validate_burp(manifest: dict[str, Any]) -> dict[str, Any]:
     observed = manifest.get("observed_prerequisites")
     if observed != {
         "java_executable_found": False,
-        "proxy_jar_found": False,
-        "burp_directories_found_in_searched_roots": False,
+        "proxy_jar_found_in_search_roots": False,
+        "burp_directories_found_under_home": False,
     }:
         raise ValueError("pré-requisitos locais Burp MCP não correspondem à observação")
     for field in (

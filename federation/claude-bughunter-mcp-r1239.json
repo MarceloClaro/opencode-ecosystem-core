@@ -11,18 +11,20 @@
   "opencode_server_configured": false,
   "observed_prerequisites": {
     "java_executable_found": false,
-    "proxy_jar_found": false,
-    "burp_directories_found_in_searched_roots": false
+    "proxy_jar_found_in_search_roots": false,
+    "burp_directories_found_under_home": false
   },
   "observation": {
     "method": "read_only_local_discovery",
-    "searched_roots": [
+    "proxy_jar_search_roots": [
       "/home/marceloclaro/.BurpSuite",
       "/home/marceloclaro/.local",
       "/opt",
       "/usr/local"
     ],
+    "burp_directory_search_root": "/home/marceloclaro",
     "home_directory_search_max_depth": 4,
+    "scope_is_comprehensive": false,
     "network_probe_performed": false,
     "credentials_read": false
   },

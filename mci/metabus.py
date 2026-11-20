@@ -18,6 +18,8 @@ import json
 import uuid
 import logging
 import tempfile
+import math
+from numbers import Real
 from typing import Dict, List, Any, Optional, Callable
 from datetime import datetime, timezone
 
@@ -46,6 +48,29 @@ os.makedirs(STATE_DIR, exist_ok=True)
 
 MEMORY_FILE = os.path.join(STATE_DIR, "shared_memory.json")
 EVENTS_FILE = os.path.join(STATE_DIR, "metabus_events.jsonl")
+MAX_MEMORY_LIMIT = 1000
+MAX_AGENT_ID_LENGTH = 256
+MAX_CONTEXT_LENGTH = 2000
+MAX_REFLECTION_LENGTH = 16384
+
+
+def _validate_memory_limit(limit: int) -> int:
+    """Valida um limite inteiro explícito, sem aceitar bool como inteiro."""
+    if isinstance(limit, bool) or not isinstance(limit, int):
+        raise ValueError("limit deve ser um inteiro entre 0 e 1000.")
+    if not 0 <= limit <= MAX_MEMORY_LIMIT:
+        raise ValueError("limit deve estar entre 0 e 1000.")
+    return limit
+
+
+def _validate_reflection_text(value: Any, field: str, max_length: int) -> str:
+    if not isinstance(value, str):
+        raise TypeError(f"{field} deve ser texto.")
+    if not value.strip():
+        raise ValueError(f"{field} não pode ser vazio.")
+    if len(value) > max_length:
+        raise ValueError(f"{field} excede {max_length} caracteres.")
+    return value
 
 
 def memory_entry_text(entry: Dict[str, Any]) -> str:
@@ -105,6 +130,19 @@ class MetacognitiveMemory:
 
     def add_reflection(self, agent_id: str, task_context: str, reflection: str, score: float):
         """Adiciona uma reflexão pós-execução (padrão Reflexion)."""
+        agent_id = _validate_reflection_text(agent_id, "agent_id", MAX_AGENT_ID_LENGTH)
+        task_context = _validate_reflection_text(
+            task_context, "task_context", MAX_CONTEXT_LENGTH
+        )
+        reflection = _validate_reflection_text(
+            reflection, "reflection", MAX_REFLECTION_LENGTH
+        )
+        if isinstance(score, bool) or not isinstance(score, Real):
+            raise TypeError("score deve ser numérico e não booleano.")
+        score = float(score)
+        if not math.isfinite(score) or not 0.0 <= score <= 1.0:
+            raise ValueError("score deve ser finito e estar entre 0 e 1.")
+
         entry = {
             "id": str(uuid.uuid4()),
             "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -114,13 +152,26 @@ class MetacognitiveMemory:
             "reflection": reflection,
             "score": score
         }
+        had_prior_confidence = agent_id in self.confidence_ledger
+        prior_confidence = self.confidence_ledger.get(agent_id)
         self.episodic.append(entry)
-        
-        # Atualiza confidence ledger via EMA (Exponential Moving Average)
-        current_conf = self.confidence_ledger.get(agent_id, 0.5)
-        self.confidence_ledger[agent_id] = (current_conf * 0.7) + (score * 0.3)
-        
-        self._save()
+
+        try:
+            # Atualiza confidence ledger via EMA somente para score válido.
+            current_conf = self.confidence_ledger.get(agent_id, 0.5)
+            self.confidence_ledger[agent_id] = (current_conf * 0.7) + (score * 0.3)
+            if self._save(strict=True) is not True:
+                raise RuntimeError("Falha ao persistir memória metacognitiva.")
+        except Exception:
+            self.episodic.remove(entry)
+            if had_prior_confidence:
+                self.confidence_ledger[agent_id] = prior_confidence
+            else:
+                self.confidence_ledger.pop(agent_id, None)
+            raise
+
+        if len(self.episodic) > MAX_MEMORY_LIMIT:
+            del self.episodic[:-MAX_MEMORY_LIMIT]
         return entry["id"]
 
     def record_observation(self, agent_id: str, task_context: str,
@@ -140,10 +191,13 @@ class MetacognitiveMemory:
                  "observation": json.loads(payload)}
         self.episodic.append(entry)
         try:
-            self._save(strict=True)
-        except RuntimeError:
+            if self._save(strict=True) is not True:
+                raise RuntimeError("Falha ao persistir memória metacognitiva.")
+        except Exception:
             self.episodic.remove(entry)
             raise
+        if len(self.episodic) > MAX_MEMORY_LIMIT:
+            del self.episodic[:-MAX_MEMORY_LIMIT]
         return entry["id"]
 
     def extract_lessons(self, topic: str) -> List[str]:
@@ -152,10 +206,16 @@ class MetacognitiveMemory:
         
     def get_recent_context(self, limit: int = 5) -> List[Dict[str, Any]]:
         """Recupera contexto recente do Global Workspace."""
+        limit = _validate_memory_limit(limit)
+        if limit == 0:
+            return []
         return self.episodic[-limit:]
 
     def search_memory(self, query: str, limit: int = 10) -> List[Dict[str, Any]]:
         """Busca simples em memória episódica e semântica por substring normalizada."""
+        limit = _validate_memory_limit(limit)
+        if limit == 0:
+            return []
         q = (query or "").lower().strip()
         if not q:
             return []
@@ -340,6 +400,9 @@ class MetaBus:
                           topic_prefix: Optional[str] = None,
                           source: Optional[str] = None) -> List[Dict[str, Any]]:
         """Lê eventos recentes persistidos com filtros opcionais."""
+        limit = _validate_memory_limit(limit)
+        if limit == 0:
+            return []
         events: List[Dict[str, Any]] = []
         if not os.path.exists(EVENTS_FILE):
             return events

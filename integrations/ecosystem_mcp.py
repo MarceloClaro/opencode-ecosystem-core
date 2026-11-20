@@ -294,9 +294,9 @@ async def ecosystem_skill_plan(skill_name: IntegrationText) -> dict[str, Any]:
 async def ecosystem_claude_bughunter_plan() -> dict[str, Any]:
     """Prepara somente o handoff defensivo local Claude-BugHunter sob MarceloClaro.
 
-    Não carrega skills/comandos upstream, não habilita Burp MCP e não executa a
-    skill. O status registra autorização de integração separada da prontidão do
-    runtime e de autorização para testar alvos.
+    Não carrega skills/comandos upstream, não inicia o Burp MCP e não executa a
+    skill. O status separa autorização de integração, prontidão do runtime e
+    autorização para testar alvos.
     """
     return await asyncio.to_thread(
         lambda: get_library_orchestrator().claude_bughunter_plan()
