@@ -2,7 +2,7 @@
 spec_id: SPEC-935-R1236
 title: Importar Claude-BugHunter como snapshot completo inerte com Burp MCP desligado
 component: external.claude_bughunter_snapshot
-status: specified
+status: implemented
 test_file: tests/test_r1236_claude_bughunter_package_snapshot.py
 evidence_contract:
   version: 1

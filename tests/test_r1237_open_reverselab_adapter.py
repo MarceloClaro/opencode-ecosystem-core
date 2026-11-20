@@ -125,15 +125,24 @@ def test_inspection_accepts_only_exact_clean_local_checkout_without_running_proj
 def test_inspection_rejects_wrong_commit_dirty_tree_and_missing_mcp_files(tmp_path):
     adapter = _adapter()
     root = _checkout(tmp_path)
-    wrong = adapter.inspect_checkout(root, runner=_git_runner(root, commit="f" * 40))
-    assert wrong["status"] == "commit_mismatch"
-
-    dirty = adapter.inspect_checkout(root, runner=_git_runner(root, dirty=" M README.md\n"))
-    assert dirty["status"] == "dirty_checkout"
+    for runner, expected in (
+        (_git_runner(root, commit="f" * 40), "commit_mismatch"),
+        (_git_runner(root, dirty=" M README.md\n"), "dirty_checkout"),
+    ):
+        try:
+            adapter.inspect_checkout(root, runner=runner)
+        except adapter.CheckoutValidationError as error:
+            assert error.status == expected
+        else:
+            raise AssertionError(f"inspection must reject {expected}")
 
     (root / "tools" / "skills" / "mcp" / "ReverseLabToolsMCP" / "reverse_lab_tools_mcp.py").unlink()
-    missing = adapter.inspect_checkout(root, runner=_git_runner(root))
-    assert missing["status"] == "required_file_missing"
+    try:
+        adapter.inspect_checkout(root, runner=_git_runner(root))
+    except adapter.CheckoutValidationError as error:
+        assert error.status == "required_file_missing"
+    else:
+        raise AssertionError("inspection must reject missing MCP entrypoint")
 
 
 def test_inspection_rejects_symlinked_root_and_mcp_components(tmp_path):
@@ -141,15 +150,23 @@ def test_inspection_rejects_symlinked_root_and_mcp_components(tmp_path):
     real = _checkout(tmp_path)
     root_link = tmp_path / "root-link"
     root_link.symlink_to(real, target_is_directory=True)
-    linked_root = adapter.inspect_checkout(root_link, runner=_git_runner(real))
-    assert linked_root["status"] == "symlink_path"
+    try:
+        adapter.inspect_checkout(root_link, runner=_git_runner(real))
+    except adapter.CheckoutValidationError as error:
+        assert error.status == "symlink_path"
+    else:
+        raise AssertionError("inspection must reject a symlinked root")
 
     mcp = real / "tools" / "skills" / "mcp" / "ReverseLabToolsMCP"
     moved = tmp_path / "mcp-real"
     mcp.rename(moved)
     mcp.symlink_to(moved, target_is_directory=True)
-    linked_component = adapter.inspect_checkout(real, runner=_git_runner(real))
-    assert linked_component["status"] == "symlink_path"
+    try:
+        adapter.inspect_checkout(real, runner=_git_runner(real))
+    except adapter.CheckoutValidationError as error:
+        assert error.status == "symlink_path"
+    else:
+        raise AssertionError("inspection must reject a symlinked MCP component")
 
 
 def test_generated_opencode_entry_is_disabled_and_never_mutates_active_config(tmp_path):

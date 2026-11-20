@@ -25090,6 +25090,35 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1240",
+      "objective": "Importar o pacote Claude-BugHunter autorizado como snapshot inerte, mantendo Burp MCP desligado",
+      "changes": [
+        "SPEC-935-R1236 formalizou pacote estático completo sem ativação nem execução",
+        "Snapshot do commit 0e70a021e59d6875004e7a563f8511aca2ba3bc1 em external/claude-bughunter-snapshot",
+        "341 arquivos, 4.402.146 bytes, 83 skills e 15 comandos inventariados com SHA-256; arquivos sem bit executável",
+        "Manifesto preserva licenças, proveniência e estados runtime/MCP; skill defensiva aponta para referência inerte",
+        "Quatro testes R1236 e quatro R1235 passaram; TDD RED/GREEN e SpecVerifier 2/2 aceitos em worktree isolado"
+      ],
+      "score": 0.7,
+      "lessons": [
+        "A autorização do pacote permite vendorização de conteúdo, mas não equivale a habilitar ferramentas nem autoriza testes em alvos; Burp MCP permanece desabilitado.",
+        "A extração do ZIP foi fail-closed para paths e tipos de arquivo, CRC validado e bits executáveis removidos; nenhum script ou teste upstream foi executado.",
+        "Licenças MIT e CC BY 4.0 foram confirmadas no snapshot fixado; os recursos comunitários citados continuam com licenças próprias não auditadas.",
+        "Blackboard CFP de revisão foi postado, mas permaneceu aberto sem voluntário; não alegar revisão independente nem validação externa."
+      ],
+      "timestamp": 1795168421.8737519,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [

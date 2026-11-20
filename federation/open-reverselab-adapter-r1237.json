@@ -1,0 +1,62 @@
+{
+  "schema_version": "open-reverselab-adapter.r1237.v1",
+  "spec_id": "SPEC-935-R1237",
+  "supersedes": {
+    "historical_spec": "SPEC-935-R1232",
+    "historical_status": "blocked_legal_review",
+    "new_state": "authorized_optional_adapter",
+    "historical_record_preserved": true
+  },
+  "authorization": {
+    "source": "explicit_user_instruction_in_conversation",
+    "observed_at": "2026-11-20",
+    "scope": "core_adapter_only",
+    "legal_review": "not_performed",
+    "installation_authorized": false,
+    "activation_authorized": false,
+    "target_analysis_authorized": false
+  },
+  "source": {
+    "repository": "LING71671/open-reverselab",
+    "url": "https://github.com/LING71671/open-reverselab",
+    "commit": "c42da86aadcbea4f2dd20822653f83da5f6aba54",
+    "root_license": {
+      "file": "LICENSE",
+      "declared": "Apache-2.0",
+      "verification": "upstream_license_text_observed_not_legal_review"
+    },
+    "nested_mcp": {
+      "path": "tools/skills/mcp/ReverseLabToolsMCP",
+      "package": "reverselab-tools-mcp",
+      "version": "0.1.0",
+      "declared": "GPL-3.0-only",
+      "verification": "upstream_pyproject_observed_not_legal_review"
+    },
+    "disclaimer": {
+      "path": "DISCLAIMER.md",
+      "github_blob": "025efb705062b5782b826d317388674bfe88a5ff",
+      "legal_assessment": "not_performed"
+    }
+  },
+  "license_status": "source_declared_unreviewed",
+  "adoption": "optional_external_mcp_adapter",
+  "integration_status": "implemented_disabled",
+  "runtime": {
+    "installed": false,
+    "executed": false,
+    "enabled": false,
+    "mcp_enabled": false,
+    "content_imported": false
+  },
+  "default_config": {
+    "disabled": true,
+    "writes_active_opencode_config": false,
+    "command_mode": "uv_run_no_sync"
+  },
+  "scope": {
+    "cloned": false,
+    "downloaded": false,
+    "installed": false,
+    "target_analysis": false
+  }
+}
