@@ -1,29 +1,31 @@
-"""SPEC-935-R1237: optional OpenReverseLab metadata and MCP-config adapter.
+"""SPEC-935-R1237/R1238: OpenReverseLab adapter and isolated installation.
 
-This module never imports or runs the upstream MCP project. It can inspect an
-explicit local checkout using fixed, read-only Git commands and emit a disabled
-OpenCode configuration candidate to stdout. It does not install dependencies or
-write active OpenCode configuration.
+This module never imports or starts the upstream MCP project. It can inspect an
+explicit local checkout using fixed Git commands, install a pinned checkout and
+locked dependencies into a separate managed prefix after explicit confirmation,
+and emit a disabled OpenCode configuration candidate. It never writes active
+OpenCode configuration or analyzes targets.
 """
 
 from __future__ import annotations
 
 import argparse
-from datetime import datetime, timezone
 import hashlib
 import json
 import os
-from pathlib import Path
 import re
 import shutil
 import subprocess
 import tempfile
+from collections.abc import Callable, Mapping, Sequence
+from datetime import datetime, timezone
+from pathlib import Path
+
 try:
     import tomllib
 except ModuleNotFoundError:  # Python 3.10 compatibility without a new dependency.
     tomllib = None  # type: ignore[assignment]
-from typing import Any, Callable, Mapping, Sequence
-
+from typing import Any
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH = REPOSITORY_ROOT / "federation" / "open-reverselab-adapter-r1237.json"
@@ -55,7 +57,7 @@ def load_manifest() -> dict[str, Any]:
     """Load the Core-owned provenance record; do not consult the network."""
     data = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
     if not isinstance(data, dict):
-        raise ValueError("O manifesto OpenReverseLab deve ser um objeto JSON.")
+        raise TypeError("O manifesto OpenReverseLab deve ser um objeto JSON.")
     return data
 
 
@@ -758,9 +760,8 @@ def _read_project_metadata(project_file: Path) -> Mapping[str, Any]:
         if not in_project or "=" not in line:
             continue
         key, value = (part.strip() for part in line.split("=", 1))
-        if key in {"name", "version", "license"}:
-            if len(value) >= 2 and value[0] == value[-1] and value[0] in {"'", '"'}:
-                project[key] = value[1:-1]
+        if key in {"name", "version", "license"} and len(value) >= 2 and value[0] == value[-1] and value[0] in {"'", '"'}:
+            project[key] = value[1:-1]
     return project
 
 

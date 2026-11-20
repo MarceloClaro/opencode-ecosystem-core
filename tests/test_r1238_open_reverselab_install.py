@@ -5,10 +5,9 @@ from __future__ import annotations
 import hashlib
 import importlib
 import json
-from pathlib import Path
 import subprocess
 import sys
-
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PIN = "c42da86aadcbea4f2dd20822653f83da5f6aba54"
@@ -31,7 +30,18 @@ def _adapter():
     module_path = ROOT / "integrations" / "open_reverselab.py"
     assert module_path.is_file()
     sys.modules.pop("integrations.open_reverselab", None)
-    return importlib.import_module("integrations.open_reverselab")
+    module = importlib.import_module("integrations.open_reverselab")
+    required = (
+        "default_install_root",
+        "installation_paths",
+        "install_plan",
+        "install_isolated",
+        "verify_pinned_lockfile",
+        "create_install_receipt",
+        "managed_installation_status",
+    )
+    assert all(callable(getattr(module, name, None)) for name in required), "R1238 install API not implemented"
+    return module
 
 
 def _git_blob(content: bytes) -> str:
@@ -128,6 +138,9 @@ def test_install_plan_pins_commit_lock_and_separates_checkout_environment_cache(
     assert "--no-install-project" in sync
     assert "--no-build" in sync
     assert "reverse_lab_tools_mcp.py" not in " ".join(sync)
+    assert plan["source"]["url"] in plan["commands"]["git_clone"]
+    assert PIN in plan["commands"]["git_checkout"]
+    assert "core.hooksPath=/dev/null" in plan["commands"]["git_clone"]
     assert plan["environment"]["UV_PROJECT_ENVIRONMENT"] == paths["environment"]
     assert plan["environment"]["UV_CACHE_DIR"] == paths["cache"]
     assert "GITHUB_TOKEN" not in plan["environment"]
@@ -181,10 +194,13 @@ def test_install_success_uses_staging_locked_wheels_and_never_starts_mcp(monkeyp
     uv = next(argv for argv in commands if Path(argv[0]).name == "uv")
     assert uv[1] == "sync"
     assert {"--locked", "--no-install-project", "--no-build"}.issubset(set(uv))
-    assert not any(
-        "reverse_lab_tools_mcp.py" in part and ("python" in argv or "run" in argv)
-        for argv in commands for part in argv
-    )
+    _, sync_kwargs = next((argv, kwargs) for argv, kwargs in calls if Path(argv[0]).name == "uv")
+    assert sync_kwargs["env"]["UV_PROJECT_ENVIRONMENT"] == result["paths"]["environment"]
+    assert sync_kwargs["env"]["HOME"] == result["paths"]["private_home"]
+    assert sync_kwargs["env"]["UV_CACHE_DIR"] == result["paths"]["cache"]
+    assert "GITHUB_TOKEN" not in sync_kwargs["env"]
+    assert not any("reverse_lab_tools_mcp.py" in part and ("python" in argv or "run" in argv)
+                   for argv in commands for part in argv)
     assert not any("opencode.json" in part for argv in commands for part in argv)
     assert all(kwargs["shell"] is False for _, kwargs in calls)
     if before_config is not None:
@@ -216,7 +232,6 @@ def test_install_lockfile_must_match_pinned_git_blob(monkeypatch, tmp_path):
 
     def git_runner(argv, **kwargs):
         calls.append((list(argv), kwargs))
-        relative = argv[-1][len("HEAD:"):]
         return subprocess.CompletedProcess(argv, 0, pinned_fixture_blob, "")
 
     accepted = adapter.verify_pinned_lockfile(checkout, runner=git_runner)
@@ -272,6 +287,17 @@ def test_existing_or_partial_destination_fails_closed_without_overwrite(monkeypa
     partial = adapter.install_isolated(yes=True, runner=forbidden)
     assert partial["status"] == "partial_installation"
     assert shutil_env.is_dir()
+
+    linked_checkout = tmp_path / "managed" / "linked-open-reverselab"
+    real_checkout = tmp_path / "real-open-reverselab"
+    real_checkout.mkdir()
+    marker = real_checkout / "preserve.txt"
+    marker.write_text("not followed", encoding="utf-8")
+    linked_checkout.symlink_to(real_checkout, target_is_directory=True)
+    monkeypatch.setattr(adapter, "default_install_root", lambda: linked_checkout)
+    linked = adapter.install_isolated(yes=True, runner=forbidden)
+    assert linked["status"] == "symlink_path"
+    assert marker.read_text(encoding="utf-8") == "not followed"
 
 
 def test_install_receipt_records_provenance_and_forbids_activation(monkeypatch, tmp_path):
