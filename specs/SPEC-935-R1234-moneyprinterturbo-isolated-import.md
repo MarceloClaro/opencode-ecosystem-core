@@ -110,3 +110,28 @@ acrescentadas a `requirements.txt`.
 - Alterar a timeline de um projeto já existente, preservar alpha, ou aprovar
   qualidade estética/editorial do vídeo.
 - Alterar dependências do ambiente compartilhado do Core.
+
+## Evidência observada (2026-11-20)
+
+- RED observado antes do módulo: a suíte focal falhou com `16 failed` porque
+  `integrations.moneyprinterturbo` ainda não existia. Esse resultado foi uma
+  execução pytest manual, não um recibo RED do `TDDHistory`; o histórico formal
+  não deve ser alegado retrospectivamente.
+- GREEN focal: `./.venv/bin/python -m pytest
+  tests/test_r1234_moneyprinterturbo_import.py -q` → `21 passed` (um aviso de
+  Pydantic/FastMCP de dependência, sem falha).
+- Regressão do editor: cinco suítes R1042/R1043/R1046 → `66 passed` (o mesmo
+  aviso de dependência).
+- Instalação: wheel obtido do PyPI e SHA-256 confrontado com o manifesto, sem
+  divergência. `mpt==1.3.10` instalado somente em
+  `~/.local/share/marceloclaro/tools/mpt/1.3.10/venv` com pacotes binários;
+  `pip check` → `No broken requirements found`; `pip show mpt` → `1.3.10`.
+  Instalação não executou o CLI/WebUI/API e não criou `config.toml` nem chaves.
+- Doctor pelo `.venv` do Core → `overall=degraded`, 16 checks pass, 6 warnings,
+  0 failed; avisos são capacidades/provedores opcionais ausentes. A execução
+  estrutural confirmou specs, registro de evolução e memória disponíveis.
+- `git diff --check` sem erro de whitespace. Não houve render, geração,
+  publicação, alteração de dependências do `.venv` Core nem mudança em dados
+  do usuário.
+- O gate `TDDHistory` e revisão independente não têm recibo nesta sessão; o
+  resultado acima comprova testes locais executados, não validação externa.

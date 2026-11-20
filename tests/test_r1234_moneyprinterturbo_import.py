@@ -108,22 +108,23 @@ def test_import_preserves_audio_and_accepts_explicit_silent_media(tmp_path, monk
     assert len(next(t for t in project["tracks"] if t["kind"] == "video")["clips"]) == 1
 
 
-@pytest.mark.parametrize("relative,project_id", [
-    ("../outside/final-1.mp4", "bad"),
-    ("8f4f8a75-1c27-47ed-b2d3-45a9940e9ed1/../final-1.mp4", "bad"),
-    ("8f4f8a75-1c27-47ed-b2d3-45a9940e9ed1/nested/final-1.mp4", "bad"),
-    ("8f4f8a75-1c27-47ed-b2d3-45a9940e9ed1/clip-1.mp4", "bad"),
-    ("8f4f8a75-1c27-47ed-b2d3-45a9940e9ed1/final-1.mov", "bad"),
-    ("8f4f8a75-1c27-47ed-b2d3-45a9940e9ed1/final-1.mp4", "../bad"),
-])
 def test_import_rejects_traversal_nested_intermediate_non_mp4_and_invalid_id(
-        tmp_path, monkeypatch, relative, project_id):
+        tmp_path, monkeypatch):
     from integrations import video_editor
 
     mpt_root, editor_root, _ = roots(tmp_path)
     monkeypatch.setattr(video_editor, "probe_media", lambda path, **kwargs: probe_for(path))
-    with pytest.raises(ValueError):
-        api().import_task_output(mpt_root, editor_root, relative, project_id)
+    cases = [
+        ("../outside/final-1.mp4", "bad"),
+        ("8f4f8a75-1c27-47ed-b2d3-45a9940e9ed1/../final-1.mp4", "bad"),
+        ("8f4f8a75-1c27-47ed-b2d3-45a9940e9ed1/nested/final-1.mp4", "bad"),
+        ("8f4f8a75-1c27-47ed-b2d3-45a9940e9ed1/clip-1.mp4", "bad"),
+        ("8f4f8a75-1c27-47ed-b2d3-45a9940e9ed1/final-1.mov", "bad"),
+        ("8f4f8a75-1c27-47ed-b2d3-45a9940e9ed1/final-1.mp4", "../bad"),
+    ]
+    for relative, project_id in cases:
+        with pytest.raises(ValueError):
+            api().import_task_output(mpt_root, editor_root, relative, project_id)
 
 
 def test_import_rejects_symlink_source(tmp_path, monkeypatch):
