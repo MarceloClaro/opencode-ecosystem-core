@@ -28,8 +28,8 @@ def isolated_metabus(monkeypatch, tmp_path):
     monkeypatch.setattr(metabus_module, "DATABASE_FILE", str(database_path), raising=False)
     memory = metabus_module.MetacognitiveMemory()
     bus = metabus_module.MetaBus()
-    bus.memory = memory
-    bus.subscribers = {}
+    monkeypatch.setattr(bus, "memory", memory)
+    monkeypatch.setattr(bus, "subscribers", {})
     return memory, bus, memory_path, events_path, database_path
 
 

@@ -10,6 +10,7 @@ evidence_contract:
   criteria:
     AC1:
       - tests/test_r1247_quantum_research.py::test_catalog_covers_nisq_methods_and_preserves_tiangong_labels
+      - tests/test_r1247_quantum_research.py::test_user_supplied_tiangong_resources_are_unverified_and_non_executable
     AC2:
       - tests/test_r1247_quantum_research.py::test_invalid_payloads_fail_closed
       - tests/test_r1247_quantum_research.py::test_cli_rejects_duplicate_json_keys
@@ -28,6 +29,8 @@ evidence_contract:
       - tests/test_r1247_quantum_research.py::test_skill_and_managed_profiles_route_without_editing_cards
     AC8:
       - tests/test_r1247_quantum_research.py::test_plan_is_gap_aware_deterministic_and_never_claims_execution
+    AC9:
+      - tests/test_r1247_quantum_research.py::test_user_supplied_tiangong_resources_are_unverified_and_non_executable
 ---
 
 # SPEC-935-R1247 — Planejador de pesquisa NISQ e auditoria das aplicações Tiangong
@@ -82,7 +85,7 @@ orquestrador primário.
 
 - `AC1` — catálogo determinístico cobre baselines clássicos, métodos híbridos,
   simulação clássica, annealing, autômatos celulares quânticos e mitigação de
-  erros, com pré-requisitos e limites explícitos.
+  erros e registra recursos declarados pelo operador com proveniência explícita.
 - `AC2` — validação da entrada rejeita versões, campos, tipos, métodos, chaves JSON
   duplicadas e valores
   numéricos inválidos; listas e recursos têm limites documentados.
@@ -99,6 +102,9 @@ orquestrador primário.
   `allow_edit: false` é editado diretamente.
 - `AC8` — testes RED→GREEN focais e regressão quantum/Tiangong passam; doctor é
   executado; limitações, recibos e reflexão não alegam revisão externa ausente.
+- `AC9` — inventário de hardware/simuladores recebido do usuário é preservado
+  como snapshot não verificado; não é tratado como estado live, elegibilidade,
+  autorização de job ou prova de acesso ao provedor.
 
 ## Evidência e estado inicial
 
@@ -114,6 +120,10 @@ orquestrador primário.
 - Fetch direto em 20/11/2026 bloqueado porque `robots.txt` respondeu HTTP 500;
   busca web respondeu HTTP 402. Uma chamada Antigravity devolveu task/prompt,
   não resultado observado de navegador.
+- O usuário informou um inventário Tiangong em 20/11/2026 (backend, qubits,
+  estado, calibração e métricas T1/T2). O dado será rotulado como `user_supplied`,
+  sem consulta live ou confirmação independente; listar recursos não autoriza
+  job, autenticação ou uso de credenciais.
 - Árvore inicial tinha modificações concorrentes em `mci/metabus_store.py`,
   `evolution/cycles.json` e testes R1243/R886 em checkpoints distintos; preservar
   integralmente e validar o diff antes de concluir.

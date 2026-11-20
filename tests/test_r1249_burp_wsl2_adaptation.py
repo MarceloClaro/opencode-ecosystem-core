@@ -55,6 +55,22 @@ def test_catalog_surfaces_plan_without_claiming_burp_enabled():
     assert "burp" not in json.dumps(config.get("mcp", {}), ensure_ascii=False).casefold()
 
 
+def test_primary_plan_exposes_wsl2_transport():
+    from marceloclaro.integration_service import CoreIntegrationService
+
+    class Registry:
+        def inventory(self):
+            return {"by_kind": {}, "ecosystems_present": [], "ecosystems_missing": []}
+
+    service = CoreIntegrationService(ROOT, registry=Registry())
+    plan = service.claude_bughunter_plan()
+    assert plan["status"] == "instruction_only"
+    assert plan["wsl2_transport_plan"]["transport"] == "remote_streamable_http"
+    assert plan["wsl2_transport_plan"]["endpoint"] == "http://127.0.0.1:9876/mcp"
+    assert plan["executed"] is False
+    assert plan["execution_verified"] is False
+
+
 def test_atspi_backend_is_available_after_typelib_staging():
     env = dict(os.environ)
     env["DESKTOP_OPERATOR_BACKEND"] = "atspi"

@@ -79,6 +79,9 @@ declara vantagem quântica.
 2. Fixar baseline(s) clássicos e orçamento comparável antes de qualquer
    comparação híbrida/quântica. Registrar limites de qubits, shots, memória e
    tempo de simulação, custo de amostragem e fonte de ruído/calibração.
+   O snapshot de backends fornecido pelo usuário em 20/11/2026 está listado em
+   `docs/QUANTUM_NISQ_TIANGONG_AUDIT.md`; ele é não verificado e não é status live,
+   prova de acesso/conta, autorização de job ou elegibilidade para submissão.
 3. Para método híbrido, explicitar codificação, ansatz/profundidade,
    otimizador, observáveis, orçamento de medições e hipóteses de execução.
    Simulação statevector/MPS/tensor network deve declarar tamanho, memória,

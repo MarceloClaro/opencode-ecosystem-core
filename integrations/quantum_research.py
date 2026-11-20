@@ -157,6 +157,29 @@ _APP_LOCAL_STATUS: dict[str, dict[str, str | None]] = {
 }
 
 
+_USER_SUPPLIED_RESOURCES: tuple[dict[str, Any], ...] = (
+    {"backend": "Guoji No.1", "resource_family": "superconducting", "resource_type": "quantum_hardware", "reported_status": "Maintenance", "reported_queue_state": "Idle", "qubits": 20, "jobs_reported": 0, "last_calibrated": "2026-11-20 11:33:56", "t1_mean_us": 15.92, "t2_mean_us": 4.53},
+    {"backend": "Guoji No.4", "resource_family": "superconducting", "resource_type": "quantum_hardware", "reported_status": "Maintenance", "reported_queue_state": "Idle", "qubits": 100, "jobs_reported": 0, "last_calibrated": "2026-11-20 11:33:56", "t1_mean_us": 12.89, "t2_mean_us": 2.54},
+    {"backend": "Guoji No.7", "resource_family": "superconducting", "resource_type": "quantum_hardware", "reported_status": "Maintenance", "reported_queue_state": "Idle", "qubits": 100, "jobs_reported": 0, "last_calibrated": "2026-11-20 11:33:56", "t1_mean_us": 20.57, "t2_mean_us": 5.43},
+    {"backend": "Guoji No.8（simulate）", "resource_family": "superconducting_service", "resource_type": "simulator", "reported_status": "Online", "reported_queue_state": "Idle", "qubits": 20, "jobs_reported": 0, "last_calibrated": "2026-11-20 10:04:37", "t1_mean_us": 85.2, "t2_mean_us": 48.6},
+    {"backend": "Baihua", "resource_family": "superconducting", "resource_type": "quantum_hardware", "reported_status": "Online", "reported_queue_state": "Idle", "qubits": 156, "jobs_reported": 0, "last_calibrated": "2026-11-20 21:47:35", "t1_mean_us": 73.1, "t2_mean_us": 26.36},
+    {"backend": "Yudu", "resource_family": "superconducting", "resource_type": "quantum_hardware", "reported_status": "Maintenance", "reported_queue_state": "Idle", "qubits": 72, "jobs_reported": 0, "last_calibrated": "2026-11-20 11:33:57", "t1_mean_us": 46.2, "t2_mean_us": 10.21},
+    {"backend": "Jiuxiao-Full Amplitude Simulator", "resource_family": "cpu_simulator", "resource_type": "simulator", "reported_status": "Online", "reported_queue_state": "Idle", "qubits": 20, "jobs_reported": 68},
+    {"backend": "Jiuyun-Noise Simulator", "resource_family": "cpu_simulator", "resource_type": "simulator", "reported_status": "Online", "reported_queue_state": "Idle", "qubits": 20, "jobs_reported": 0},
+    {"backend": "Jiuyuan-Single Amplitude Simulator", "resource_family": "cpu_simulator", "resource_type": "simulator", "reported_status": "Online", "reported_queue_state": "Idle", "qubits": 200, "jobs_reported": 3},
+    {"backend": "Jiuci-Partial Amplitude Simulator", "resource_family": "cpu_simulator", "resource_type": "simulator", "reported_status": "Online", "reported_queue_state": "Idle", "qubits": 20, "jobs_reported": 0},
+    {"backend": "Qilv-Full Amplitude Simulator", "resource_family": "gpu_simulator", "resource_type": "simulator", "reported_status": "Online", "reported_queue_state": "Idle", "qubits": 29, "jobs_reported": 8},
+    {"backend": "Qijian-Noise Simulator", "resource_family": "gpu_simulator", "resource_type": "simulator", "reported_status": "Online", "reported_queue_state": "Idle", "qubits": 29, "jobs_reported": 0},
+    {"backend": "Qiyao-Single Amplitude Simulator", "resource_family": "gpu_simulator", "resource_type": "simulator", "reported_status": "Online", "reported_queue_state": "Idle", "qubits": 29, "jobs_reported": 1},
+    {"backend": "Qijing-Partial Amplitude Simulator", "resource_family": "gpu_simulator", "resource_type": "simulator", "reported_status": "Online", "reported_queue_state": "Idle", "qubits": 29, "jobs_reported": 0},
+    {"backend": "MPS Simulator", "resource_family": "mps_simulator", "resource_type": "simulator", "reported_status": "Online", "reported_queue_state": "Idle", "qubits": 997, "jobs_reported": 51},
+    {"backend": "Liangshi-Full Amplitude Simulator", "resource_family": "npu_simulator", "resource_type": "simulator", "reported_status": "Online", "reported_queue_state": "Idle", "qubits": 10, "jobs_reported": 0},
+    {"backend": "Weina-Noise Simulator", "resource_family": "npu_simulator", "resource_type": "simulator", "reported_status": "Online", "reported_queue_state": "Idle", "qubits": 10, "jobs_reported": 0},
+    {"backend": "Weichi-Single Amplitude Simulator", "resource_family": "npu_simulator", "resource_type": "simulator", "reported_status": "Online", "reported_queue_state": "Idle", "qubits": 10, "jobs_reported": 0},
+    {"backend": "Weixin-Partial Amplitude Simulator", "resource_family": "npu_simulator", "resource_type": "simulator", "reported_status": "Online", "reported_queue_state": "Idle", "qubits": 10, "jobs_reported": 0},
+)
+
+
 def _json_hash(value: Any) -> str:
     try:
         encoded = json.dumps(
@@ -173,6 +196,7 @@ def research_catalog() -> dict[str, Any]:
     return {
         "schema_version": 1,
         "methods": copy.deepcopy(list(_METHODS)),
+        "resource_snapshot": tiangong_resource_snapshot(),
         "existing_local_routes": [
             {
                 "id": "qubo_ising_qaoa_planning",
@@ -202,6 +226,30 @@ def research_catalog() -> dict[str, Any]:
         "limitations": [
             "Catálogo metodológico estático; não avalia adequação sem problema, dados e evidência.",
             "Presença de um método no catálogo não significa implementação, disponibilidade de dependência, simulador ou QPU.",
+        ],
+    }
+
+
+def tiangong_resource_snapshot() -> dict[str, Any]:
+    """Return the operator-reported inventory without treating it as live state."""
+    inventory = copy.deepcopy(list(_USER_SUPPLIED_RESOURCES))
+    for item in inventory:
+        item["availability_assessed"] = False
+        item["status_provenance"] = "user_supplied_not_independently_verified"
+    return {
+        "provider": "Tiangong",
+        "snapshot_date": "2026-11-20",
+        "provenance": "user_supplied",
+        "verification": "not_independently_verified",
+        "submission_authorized": False,
+        "query_performed": False,
+        "jobs_reported_semantics": "not independently established",
+        "inventory": inventory,
+        "limitations": [
+            "Valores reproduzem informação fornecida pelo usuário; não foram consultados no provedor.",
+            "Online, Idle, Jobs, qubits e calibração são estados reportados, não disponibilidade atual confirmada nem autorização de job.",
+            "Guoji No.8（simulate） é classificado como simulador com base no rótulo fornecido; nenhum backend foi selecionado ou chamado.",
+            "A lista não identifica conectividade, gate set, fidelidade por operação, fila real, preço ou elegibilidade de conta.",
         ],
     }
 
@@ -453,6 +501,7 @@ def build_research_plan(payload: Any) -> dict[str, Any]:
         "baseline_methods": request["baseline_methods"],
         "evaluation_metrics": request["evaluation_metrics"],
         "resource_limits": request["resource_limits"],
+        "resource_snapshot_provenance": "user_supplied_not_independently_verified",
         "seed": request["seed"],
         "methods": methods,
         "gaps": gaps,

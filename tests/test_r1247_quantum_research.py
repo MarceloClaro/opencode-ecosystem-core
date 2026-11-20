@@ -69,6 +69,26 @@ def test_catalog_covers_nisq_methods_and_preserves_tiangong_labels():
     assert {"qubo_ising_qaoa_planning", "vrp_classical_baseline", "hdr_preprocessing"} <= routes
 
 
+def test_user_supplied_tiangong_resources_are_unverified_and_non_executable():
+    snapshot_fn = getattr(qr, "tiangong_resource_snapshot", None)
+    assert callable(snapshot_fn), "snapshot de recursos declarado pelo usuário não foi integrado"
+    if not callable(snapshot_fn):
+        return
+    snapshot = snapshot_fn()
+    assert snapshot["provenance"] == "user_supplied"
+    assert snapshot["verification"] == "not_independently_verified"
+    assert snapshot["submission_authorized"] is False
+    inventory = {row["backend"]: row for row in snapshot["inventory"]}
+    assert len(inventory) == 19
+    assert inventory["Guoji No.1"]["reported_status"] == "Maintenance"
+    assert inventory["Guoji No.1"]["qubits"] == 20
+    assert inventory["Baihua"]["t2_mean_us"] == pytest.approx(26.36)
+    assert inventory["Guoji No.8（simulate）"]["resource_type"] == "simulator"
+    assert inventory["MPS Simulator"]["qubits"] == 997
+    assert inventory["MPS Simulator"]["jobs_reported"] == 51
+    assert all(row["availability_assessed"] is False for row in inventory.values())
+
+
 def test_plan_is_gap_aware_deterministic_and_never_claims_execution():
     payload = _complete_payload()
     first = qr.build_research_plan(payload)

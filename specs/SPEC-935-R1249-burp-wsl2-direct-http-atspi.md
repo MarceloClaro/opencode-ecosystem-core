@@ -11,6 +11,7 @@ evidence_contract:
     R1249-TRANSPORT:
       - tests/test_r1249_burp_wsl2_adaptation.py::test_plan_selects_official_streamable_http_without_java_or_proxy
       - tests/test_r1249_burp_wsl2_adaptation.py::test_catalog_surfaces_plan_without_claiming_burp_enabled
+      - tests/test_r1249_burp_wsl2_adaptation.py::test_primary_plan_exposes_wsl2_transport
     R1249-SAFETY:
       - tests/test_r1249_burp_wsl2_adaptation.py::test_plan_remains_loopback_only_and_does_not_claim_target_activity
     R1249-AT-SPI:

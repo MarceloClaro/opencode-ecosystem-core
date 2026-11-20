@@ -64,6 +64,42 @@ checagem independente nem prontidão para hardware. Não recomenda método
 automaticamente, não otimiza parâmetros, não transforma lacunas em fatos e não
 mede vantagem quântica.
 
+## Snapshot de recursos informado pelo usuário
+
+O usuário forneceu a lista abaixo em 20/11/2026. O planejador a preserva em
+`tiangong_resource_snapshot()` com `provenance=user_supplied`,
+`verification=not_independently_verified`, `query_performed=false` e
+`submission_authorized=false`. É contexto para planejamento, não inventário live:
+`Online`, `Idle`, `Jobs` e calibração não foram consultados nem validados pelo
+provedor. A semântica do contador `Jobs`, fuso dos horários, fila e disponibilidade
+para a conta permanecem desconhecidos.
+
+| Backend | Tipo inferido apenas do rótulo informado | Estado informado | Qubits | Jobs informado | Calibração reportada | T1/T2 médios (μs) |
+|---|---|---:|---:|---:|---|---:|
+| Guoji No.1 | Hardware supercondutor | Maintenance / Idle | 20 | 0 | 2026-11-20 11:33:56 | 15.92 / 4.53 |
+| Guoji No.4 | Hardware supercondutor | Maintenance / Idle | 100 | 0 | 2026-11-20 11:33:56 | 12.89 / 2.54 |
+| Guoji No.7 | Hardware supercondutor | Maintenance / Idle | 100 | 0 | 2026-11-20 11:33:56 | 20.57 / 5.43 |
+| Guoji No.8（simulate） | Simulador | Online / Idle | 20 | 0 | 2026-11-20 10:04:37 | 85.2 / 48.6 |
+| Baihua | Hardware supercondutor | Online / Idle | 156 | 0 | 2026-11-20 21:47:35 | 73.1 / 26.36 |
+| Yudu | Hardware supercondutor | Maintenance / Idle | 72 | 0 | 2026-11-20 11:33:57 | 46.2 / 10.21 |
+| Jiuxiao-Full Amplitude Simulator | Simulador CPU | Online / Idle | 20 | 68 | — | — |
+| Jiuyun-Noise Simulator | Simulador CPU | Online / Idle | 20 | 0 | — | — |
+| Jiuyuan-Single Amplitude Simulator | Simulador CPU | Online / Idle | 200 | 3 | — | — |
+| Jiuci-Partial Amplitude Simulator | Simulador CPU | Online / Idle | 20 | 0 | — | — |
+| Qilv-Full Amplitude Simulator | Simulador GPU | Online / Idle | 29 | 8 | — | — |
+| Qijian-Noise Simulator | Simulador GPU | Online / Idle | 29 | 0 | — | — |
+| Qiyao-Single Amplitude Simulator | Simulador GPU | Online / Idle | 29 | 1 | — | — |
+| Qijing-Partial Amplitude Simulator | Simulador GPU | Online / Idle | 29 | 0 | — | — |
+| MPS Simulator | Simulador MPS | Online / Idle | 997 | 51 | — | — |
+| Liangshi-Full Amplitude Simulator | Simulador NPU | Online / Idle | 10 | 0 | — | — |
+| Weina-Noise Simulator | Simulador NPU | Online / Idle | 10 | 0 | — | — |
+| Weichi-Single Amplitude Simulator | Simulador NPU | Online / Idle | 10 | 0 | — | — |
+| Weixin-Partial Amplitude Simulator | Simulador NPU | Online / Idle | 10 | 0 | — | — |
+
+“Tipo inferido” na tabela é classificação prudente a partir do cabeçalho/nome
+fornecido; não é prova de arquitetura ou capacidade do serviço. O snapshot não
+seleciona backend nem submete, testa ou reserva qualquer trabalho.
+
 ## Rotas locais que já existem
 
 - `integrations.quantum_optimization.qaoa_plan`: valida QUBO, gera representação
