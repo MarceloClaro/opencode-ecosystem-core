@@ -152,6 +152,13 @@ def test_scene_markers_reject_symlink_vfr_and_bad_detector_output(tmp_path):
             probe_fn=lambda path, **kwargs: media_probe(Path(path)),
             scene_detect_fn=lambda *a, **k: [(0, 130)],
         )
+    with pytest.raises(ValueError, match="min_scene_len"):
+        m.detect_scene_markers(
+            source,
+            min_scene_len=121,
+            probe_fn=lambda path, **kwargs: media_probe(Path(path)),
+            scene_detect_fn=lambda *a, **k: [(0, 120)],
+        )
 
 
 def test_auto_editor_v1_becomes_pending_cut_proposal_without_frame_drift(tmp_path):
@@ -176,6 +183,8 @@ def test_auto_editor_v1_becomes_pending_cut_proposal_without_frame_drift(tmp_pat
     [[0, 70, 1], [60, 120, 1]],              # overlap
     [[0, 60, 2], [60, 120, 1]],              # retime unsupported by cut proposal
     [[0, 120, float("nan")]],                # non-finite speed
+    [[0, "60", 1], [60, 120, 1]],            # timestamps must be JSON numbers
+    [[0, 10**100, 1]],                       # bounded numeric range
 ])
 def test_auto_editor_parser_rejects_invalid_or_unmapped_chunks(tmp_path, chunks):
     m = api()

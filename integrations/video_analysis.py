@@ -62,7 +62,10 @@ def _fraction(value, name: str) -> Fraction:
                 raise ValueError
             parsed = Fraction(numerator, denominator)
         else:
-            parsed = Fraction(str(value))
+            text = str(value)
+            if len(text) > 64:
+                raise ValueError
+            parsed = Fraction(text)
     except (ValueError, ZeroDivisionError, TypeError, OverflowError) as exc:
         raise ValueError(f"invalid {name} rational") from exc
     if parsed <= 0:
@@ -71,14 +74,14 @@ def _fraction(value, name: str) -> Fraction:
 
 
 def _finite_number(value, name: str) -> Fraction:
-    if isinstance(value, bool) or value is None:
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
         raise ValueError(f"{name} must be finite numeric data")
     try:
         number = float(value)
         exact = Fraction(str(value))
     except (ValueError, TypeError, OverflowError, ZeroDivisionError) as exc:
         raise ValueError(f"invalid {name}") from exc
-    if not math.isfinite(number):
+    if not math.isfinite(number) or abs(number) > 1_000_000_000_000_000:
         raise ValueError(f"{name} must be finite")
     return exact
 
@@ -214,6 +217,8 @@ def detect_scene_markers(path: str | Path, *, threshold: float = 27.0,
         raise ValueError("min_scene_len must be a positive frame count")
     source = _regular_media(path)
     details = _source_details(source, _probe(source, probe_fn))
+    if min_scene_len > details["frames"]:
+        raise ValueError("min_scene_len cannot exceed source frame count")
     detector = scene_detect_fn or _default_scene_detect
     scenes = detector(str(source), threshold=float(threshold), min_scene_len=min_scene_len)
     if not isinstance(scenes, (list, tuple)):
