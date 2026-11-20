@@ -1239,6 +1239,11 @@ def build_config() -> Dict[str, Any]:
         if isinstance(local_cfg.get("skill"), dict):
             config["skill"] = local_cfg["skill"]
 
+        # R1268: preservar regras V2 de permissões locais, inclusive negações
+        # explícitas de ferramentas MCP, durante a regeneração do arquivo.
+        if isinstance(local_cfg.get("permissions"), list):
+            config["permissions"] = local_cfg["permissions"]
+
     return config
 
 
