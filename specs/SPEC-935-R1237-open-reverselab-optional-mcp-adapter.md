@@ -15,6 +15,7 @@ evidence_contract:
     R1237-CHECKOUT:
       - tests/test_r1237_open_reverselab_adapter.py::test_inspection_accepts_only_exact_clean_local_checkout_without_running_project_code
       - tests/test_r1237_open_reverselab_adapter.py::test_inspection_rejects_wrong_commit_dirty_tree_and_missing_mcp_files
+      - tests/test_r1237_open_reverselab_adapter.py::test_inspection_rejects_upstream_license_declaration_drift
       - tests/test_r1237_open_reverselab_adapter.py::test_inspection_rejects_symlinked_root_and_mcp_components
     R1237-OPT-IN:
       - tests/test_r1237_open_reverselab_adapter.py::test_generated_opencode_entry_is_disabled_and_never_mutates_active_config
@@ -67,10 +68,12 @@ altera retroativamente o estado histórico de R1232.
    symlinkados e declaração de licença/versão diferente. Não seguir caminhos
    que escapem do checkout.
 4. A configuração candidata é apenas saída JSON: servidor MCP local com
-   `disabled: true`, `command` em lista argv, `cwd` explícito e execução de
-   `uv run --no-sync`. Não escrever `opencode.json`, `.opencode/` ou arquivos do
-   checkout. `--no-sync` evita sincronização automática de dependências; o
-   adaptador não instala nem garante dependências previamente instaladas.
+  `disabled: true`, `command` em lista argv, `cwd` explícito e execução de
+  `uv run --no-sync`. Não escrever `opencode.json`, `.opencode/` ou arquivos do
+  checkout. `--no-sync` evita sincronização automática de dependências; o
+  adaptador não instala nem garante dependências previamente instaladas. Como
+  o processo herdaria ambiente do OpenCode, o fragmento exige revisão explícita
+  dessa exposição antes de qualquer ativação posterior.
 5. Não copiar, adaptar, importar, empacotar ou executar código, documentação,
    scripts, skills, ferramentas, binários ou conteúdo do OpenReverseLab. O Core
    mantém somente o adaptador próprio, metadados de proveniência e caminhos

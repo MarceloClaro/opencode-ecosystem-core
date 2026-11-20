@@ -137,6 +137,7 @@ def validate_manifest(data: Mapping[str, Any]) -> list[str]:
         default_config.get("disabled") is not True
         or default_config.get("writes_active_opencode_config") is not False
         or default_config.get("command_mode") != "uv_run_no_sync"
+        or default_config.get("activation_requires_environment_review") is not True
     ):
         errors.append("default_config deve permanecer desabilitada e sem escrita ativa")
     expected_scope = {"cloned": False, "downloaded": False, "installed": False, "target_analysis": False}
@@ -151,7 +152,7 @@ def status() -> dict[str, Any]:
     errors = validate_manifest(manifest)
     return {
         "spec_id": manifest.get("spec_id"),
-        "status": "metadata_only" if not errors else "invalid_manifest",
+        "status": "wrong_status" if not errors else "invalid_manifest",
         "manifest_valid": not errors,
         "adoption": manifest.get("adoption"),
         "integration_status": manifest.get("integration_status"),
@@ -226,7 +227,6 @@ def _git_probe(root: Path, args: Sequence[str], runner: Runner | None) -> subpro
         "git",
         "-c", "core.fsmonitor=false",
         "-c", "core.untrackedCache=false",
-        "-c", "core.hooksPath=/dev/null",
         "-C", str(root),
         *args,
     ]
