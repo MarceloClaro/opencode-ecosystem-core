@@ -45,17 +45,27 @@ class Qubo:
             if isinstance(bit, bool) or not isinstance(bit, int) or bit not in (0, 1):
                 raise QuantumContractError("assignment aceita somente inteiros 0 ou 1.")
             bits.append(bit)
-        value = self.constant + sum(coefficient * bits[i]
-                                    for i, coefficient in enumerate(self.linear))
-        value += sum(coefficient * bits[i] * bits[j]
+        terms = [self.constant]
+        terms.extend(coefficient * bits[i]
+                     for i, coefficient in enumerate(self.linear))
+        terms.extend(coefficient * bits[i] * bits[j]
                      for i, j, coefficient in self.quadratic)
-        return float(value)
+        try:
+            value = math.fsum(terms)
+        except OverflowError as exc:
+            raise QuantumContractError("energy deve permanecer finita no domínio float.") from exc
+        if not math.isfinite(value):
+            raise QuantumContractError("energy deve permanecer finita no domínio float.")
+        return value
 
 
 def _finite_number(value: Any, field: str) -> float:
     if isinstance(value, bool) or not isinstance(value, (int, float)):
         raise QuantumContractError(f"{field} deve ser numérico.")
-    number = float(value)
+    try:
+        number = float(value)
+    except (OverflowError, ValueError) as exc:
+        raise QuantumContractError(f"{field} deve ser finito e representável.") from exc
     if not math.isfinite(number):
         raise QuantumContractError(f"{field} deve ser finito.")
     return number
@@ -124,7 +134,7 @@ def exact_classical_baseline(qubo: Qubo) -> dict[str, Any]:
     best_energy = math.inf
     for assignment in itertools.product((0, 1), repeat=qubo.num_variables):
         energy = qubo.energy(assignment)
-        if energy < best_energy - 1e-12:
+        if energy < best_energy:
             best_energy = energy
             best_assignment = assignment
     assert best_assignment is not None
@@ -132,7 +142,7 @@ def exact_classical_baseline(qubo: Qubo) -> dict[str, Any]:
         "backend": "classical-exact-baseline",
         "quantum": False,
         "optimality": "exact_for_model",
-        "objective": round(best_energy, 12),
+        "objective": best_energy,
         "assignment": list(best_assignment),
         "evaluated_assignments": 1 << qubo.num_variables,
         "problem_sha256": qubo.problem_sha256,
@@ -141,19 +151,27 @@ def exact_classical_baseline(qubo: Qubo) -> dict[str, Any]:
 
 def qubo_to_ising(qubo: Qubo) -> dict[str, Any]:
     """Convert x=(1-Z)/2 while retaining the constant energy offset."""
-    constant = qubo.constant + sum(value / 2.0 for value in qubo.linear)
-    fields = [-value / 2.0 for value in qubo.linear]
+    constant_terms = [qubo.constant]
+    fields_by_index: list[list[float]] = [[-value / 2.0] for value in qubo.linear]
+    constant_terms.extend(value / 2.0 for value in qubo.linear)
     couplers: list[tuple[int, int, float]] = []
     for i, j, coefficient in qubo.quadratic:
         quarter = coefficient / 4.0
-        constant += quarter
-        fields[i] -= quarter
-        fields[j] -= quarter
+        constant_terms.append(quarter)
+        fields_by_index[i].append(-quarter)
+        fields_by_index[j].append(-quarter)
         couplers.append((i, j, quarter))
+    try:
+        constant = math.fsum(constant_terms)
+        fields = [math.fsum(terms) for terms in fields_by_index]
+    except OverflowError as exc:
+        raise QuantumContractError("coeficientes Ising devem permanecer finitos no domínio float.") from exc
+    if not math.isfinite(constant) or any(not math.isfinite(value) for value in fields):
+        raise QuantumContractError("coeficientes Ising devem permanecer finitos no domínio float.")
     return {
-        "constant": round(constant, 12),
-        "fields": [[i, round(value, 12)] for i, value in enumerate(fields) if value != 0.0],
-        "couplers": [[i, j, round(value, 12)] for i, j, value in couplers if value != 0.0],
+        "constant": constant,
+        "fields": [[i, value] for i, value in enumerate(fields) if value != 0.0],
+        "couplers": [[i, j, value] for i, j, value in couplers if value != 0.0],
         "encoding": "x=(1-Z)/2",
         "problem_sha256": qubo.problem_sha256,
     }
@@ -175,14 +193,20 @@ def build_qaoa_ir(qubo: Qubo, depth: int = 1) -> dict[str, Any]:
         for index in range(qubo.num_variables):
             coefficient = fields.get(index, 0.0)
             if coefficient:
+                scale = 2.0 * coefficient
+                if not math.isfinite(scale):
+                    raise QuantumContractError("escala QAOA deve permanecer finita no domínio float.")
                 operations.append({
                     "gate": "RZ", "qubits": [index], "parameter": gamma,
-                    "scale": round(2.0 * coefficient, 12),
+                    "scale": scale,
                 })
         for first, second, coefficient in couplers:
+            scale = 2.0 * coefficient
+            if not math.isfinite(scale):
+                raise QuantumContractError("escala QAOA deve permanecer finita no domínio float.")
             operations.append({
                 "gate": "RZZ", "qubits": [first, second], "parameter": gamma,
-                "scale": round(2.0 * coefficient, 12),
+                "scale": scale,
             })
         for index in range(qubo.num_variables):
             operations.append({
@@ -207,7 +231,7 @@ def energy_from_counts(qubo: Qubo, counts: Any) -> dict[str, Any]:
     """Compute sample mean from Qiskit/GJQ bitstrings (q0 at right)."""
     if not isinstance(counts, dict) or not counts:
         raise QuantumContractError("counts deve ser um mapa não vazio de bitstrings.")
-    weighted_energy = 0.0
+    weighted_energies: list[tuple[float, int]] = []
     total = 0
     for key, raw_count in counts.items():
         if not isinstance(key, str) or len(key) != qubo.num_variables or any(bit not in "01" for bit in key):
@@ -215,10 +239,19 @@ def energy_from_counts(qubo: Qubo, counts: Any) -> dict[str, Any]:
         if isinstance(raw_count, bool) or not isinstance(raw_count, int) or raw_count < 1:
             raise QuantumContractError("cada contagem deve ser inteiro positivo.")
         assignment = [int(bit) for bit in reversed(key)]
-        weighted_energy += qubo.energy(assignment) * raw_count
         total += raw_count
+        weighted_energies.append((qubo.energy(assignment), raw_count))
+    if total > MAX_REMOTE_SHOTS:
+        raise QuantumContractError(f"samples não pode exceder {MAX_REMOTE_SHOTS} shots.")
+    try:
+        mean_energy = math.fsum(energy * (count / total)
+                                for energy, count in weighted_energies)
+    except OverflowError as exc:
+        raise QuantumContractError("mean_energy deve permanecer finita no domínio float.") from exc
+    if not math.isfinite(mean_energy):
+        raise QuantumContractError("mean_energy deve permanecer finita no domínio float.")
     return {
-        "mean_energy": weighted_energy / total,
+        "mean_energy": mean_energy,
         "samples": total,
         "counts": counts,
         "problem_sha256": qubo.problem_sha256,

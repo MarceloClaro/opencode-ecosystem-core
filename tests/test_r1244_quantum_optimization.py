@@ -45,6 +45,7 @@ def test_qubo_validation_energy_and_canonical_hash():
     lambda p: p.update(num_variables=0),
     lambda p: p.update(linear=[1.0]),
     lambda p: p.update(linear=[True, 0.0]),
+    lambda p: p.update(constant=10**10000),
     lambda p: p.update(quadratic=[[0, 0, 1.0]]),
     lambda p: p.update(quadratic=[[0, 1, float("nan")]]),
     lambda p: p.update(quadratic=[[0, 1, 1.0], [1, 0, 2.0]]),
@@ -98,9 +99,9 @@ def test_energy_and_ising_reject_nonrepresentable_float_sums():
         "schema_version": 1, "name": "overflow-guard", "num_variables": 2,
         "constant": 1e308, "linear": [1e308, 1e308], "quadratic": [],
     })
-    with pytest.raises(qo.QuantumContractError, match="finite"):
+    with pytest.raises(qo.QuantumContractError, match="finit"):
         large.energy([1, 1])
-    with pytest.raises(qo.QuantumContractError, match="finite"):
+    with pytest.raises(qo.QuantumContractError, match="finit"):
         qo.qubo_to_ising(large)
 
 
