@@ -24,7 +24,9 @@ DENIED_FLAGS = frozenset({
 })
 WAIT_PREDICATES = frozenset({"exists", "enabled", "visible", "actionable", "value"})
 WAIT_ACTIONS = frozenset({"click", "type", "set-value", "clear"})
-APP_RE = re.compile(r"^[A-Za-z0-9._@/-]{1,120}\Z")
+APP_RE = re.compile(
+    r"^(?=.{1,120}\Z)[A-Za-z0-9._@/-](?:[A-Za-z0-9._@/ -]*[A-Za-z0-9._@/-])?\Z"
+)
 REF_RE = re.compile(r"^@[a-z0-9]{6,64}:e[0-9]{1,6}\Z")
 DEFAULT_STATE = "~/.local/state/opencode-desktop-operator"
 DEFAULT_CACHE_BINARY = "~/.cache/opencode-pilot/desktop-operator/node_modules/.bin/agent-desktop"
