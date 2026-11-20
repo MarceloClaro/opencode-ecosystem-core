@@ -77,6 +77,19 @@ def test_primary_plan_exposes_wsl2_transport():
 
 def test_atspi_backend_is_available_after_typelib_staging():
     env = dict(os.environ)
+    manifest = json.loads(
+        (ROOT / "federation/burp-wsl2-adaptation-r1249.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    staged_typelibs = Path(
+        manifest["wsl2_observation"]["atspi_typelib_stage_path"]
+    )
+    assert (staged_typelibs / "Atspi-2.0.typelib").is_file()
+    system_typelibs = Path("/usr/lib/x86_64-linux-gnu/girepository-1.0")
+    env["GI_TYPELIB_PATH"] = os.pathsep.join(
+        (str(staged_typelibs), str(system_typelibs))
+    )
     env["DESKTOP_OPERATOR_BACKEND"] = "atspi"
     result = subprocess.run(
         ["/usr/bin/python3", "-m", "integrations.desktop_operator", "status"],
