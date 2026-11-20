@@ -25148,6 +25148,33 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1242",
+      "objective": "SPEC-935-R1238 — instalar condicionalmente o MCP OpenReverseLab no prefixo externo gerenciado sem ativá-lo",
+      "changes": [
+        "Instalado checkout detached no commit c42da86aadcbea4f2dd20822653f83da5f6aba54.",
+        "uv sync --locked --no-install-project --no-build concluiu com retorno 0 em ambiente e cache isolados.",
+        "Recibo externo confirma blob Git do uv.lock 30c5bbb363442264d3b0581e33455a791944196b.",
+        "Status e configuração candidata confirmam instalado, porém MCP disabled=true; nenhuma análise de alvo ou configuração ativa foi feita.",
+        "Regressão R1237/R1238: 19 testes passaram; Ruff e git diff --check passaram."
+      ],
+      "score": 6.5,
+      "lessons": [
+        "O checkpoint formal, o recibo de instalação e a verificação local permitem afirmar apenas que checkout e dependências foram instalados segundo o pin; não comprovam segurança, execução funcional, adequação jurídica ou qualidade do MCP.",
+        "Revisão externa independente continuou bloqueada por falta de agente elegível; nenhum executor realizou trabalho, portanto não cabe slashing. Não habilitar nem iniciar o MCP sem nova autorização explícita."
+      ],
+      "timestamp": 1795178727.0280974,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
