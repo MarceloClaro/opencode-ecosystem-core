@@ -163,6 +163,8 @@ def validate_manifest(data: Mapping[str, Any]) -> list[str]:
                         errors.append("universal-os: commit instalado diverge do pin")
             else:
                 errors.append(f"{tool_id}: CLI isolada exige estado planejado ou instalado isoladamente")
+        elif entry.get("installation_observation") is not None:
+            errors.append(f"{tool_id}: observação de instalação não é válida para esta política de adoção")
         if adoption != "existing_reuse" and runtime.get("mcp_enabled"):
             errors.append(f"{tool_id}: MCP externo não pode estar habilitado por esta integração")
         if entry.get("mcp_config") is not None:

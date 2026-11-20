@@ -170,7 +170,7 @@ def create_server(root=None, *, mpt_output_root=None):
                 'frames': info['video']['frames'], 'fps': info['video']['fps'],
                 'artifact': str(target.relative_to(root))}
 
-    if False and configured_mpt_root is not None:
+    if configured_mpt_root is not None:
         @server.tool(annotations=create_only)
         def editor_import_mpt_output(media_path: str, project_id: str,
                                      allow_silent: bool = False) -> dict:

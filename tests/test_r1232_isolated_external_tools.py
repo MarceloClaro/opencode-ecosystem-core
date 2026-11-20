@@ -418,7 +418,9 @@ def test_manifest_records_license_and_adoption_states_without_collapsing_them():
     assert entries["prompts-chat"]["license_status"] == "source_declared_unreviewed"
     assert entries["prompts-chat"]["integration_status"] == "reference_only"
     assert entries["anthropic-mcp-builder"]["integration_status"] == "imported_explicit_only"
-    assert entries["rust-anything"]["integration_status"] == "planned_isolated"
+    assert entries["rust-anything"]["integration_status"] == "installed_isolated"
+    assert entries["universal-os"]["integration_status"] == "installed_isolated"
+    assert entries["caveman"]["integration_status"] == "installed_isolated"
 
 
 def test_manifest_policy_validation_fails_closed_for_contradictory_states():
@@ -437,6 +439,7 @@ def test_manifest_policy_validation_fails_closed_for_contradictory_states():
     rust = next(item for item in broken["repositories"] if item["id"] == "rust-anything")
     rust["integration_status"] = "installed_isolated"
     rust["runtime"]["installed"] = True
+    rust.pop("installation_observation", None)
     assert any("rust-anything" in error for error in ext.validate_manifest(broken))
 
 

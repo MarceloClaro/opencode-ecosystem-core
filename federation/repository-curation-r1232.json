@@ -17,14 +17,24 @@
       "license": {"package": "MIT"},
       "license_status": "source_declared_unreviewed",
       "adoption": "isolated_cli",
-      "integration_status": "planned_isolated",
+      "integration_status": "installed_isolated",
       "runtime": {
-        "installed": false,
+        "installed": true,
         "executed": false,
         "enabled": false,
         "mcp_enabled": false
       },
-      "isolation": "dedicated npm prefix; no global install; no target execution"
+      "isolation": "dedicated npm prefix; no global install; no target execution",
+      "installation_observation": {
+        "status": "installed",
+        "observed_at": "2026-11-20T07:42:30Z",
+        "returncode": 0,
+        "target": "~/.local/share/opencode-core/external-tools/r1232/rust-anything",
+        "integrity_verified": true,
+        "unpacked_size_verified": true,
+        "target_executed": false,
+        "mcp_enabled": false
+      }
     },
     {
       "id": "awesome-reverse-engineer-anything",
@@ -69,9 +79,20 @@
       "license": {"package": "MIT"},
       "license_status": "source_declared_unreviewed",
       "adoption": "isolated_cli",
-      "integration_status": "planned_isolated",
-      "runtime": {"installed": false, "executed": false, "enabled": false, "mcp_enabled": false},
-      "isolation": "dedicated uv tool directory; UOS_HOME private; no ISO, QEMU, VM, or target execution"
+      "integration_status": "installed_isolated",
+      "runtime": {"installed": true, "executed": false, "enabled": false, "mcp_enabled": false},
+      "isolation": "dedicated uv tool directory; UOS_HOME private; no ISO, QEMU, VM, or target execution",
+      "installation_observation": {
+        "status": "installed",
+        "observed_at": "2026-11-20T07:42:30Z",
+        "returncode": 0,
+        "target": "~/.local/share/opencode-core/external-tools/r1232/universal-os",
+        "source_commit": "661f15fc1afbbe1158ac5d14673e188238f29c0c",
+        "source_commit_observed_in_direct_url": true,
+        "build_backend_invoked": true,
+        "target_executed": false,
+        "mcp_enabled": false
+      }
     },
     {
       "id": "anthropic-mcp-builder",
@@ -134,9 +155,19 @@
       "license": {"package": "Apache-2.0"},
       "license_status": "source_declared_unreviewed",
       "adoption": "isolated_cli",
-      "integration_status": "planned_isolated",
-      "runtime": {"installed": false, "executed": false, "enabled": false, "mcp_enabled": false},
-      "isolation": "dedicated npm prefix and CAVEMAN_HOME; telemetry off; offline; no global agent hooks or cloud"
+      "integration_status": "installed_isolated",
+      "runtime": {"installed": true, "executed": false, "enabled": false, "mcp_enabled": false},
+      "isolation": "dedicated npm prefix and CAVEMAN_HOME; telemetry off; offline; no global agent hooks or cloud",
+      "installation_observation": {
+        "status": "installed",
+        "observed_at": "2026-11-20T07:42:30Z",
+        "returncode": 0,
+        "target": "~/.local/share/opencode-core/external-tools/r1232/caveman",
+        "integrity_verified": true,
+        "target_executed": false,
+        "mcp_enabled": false,
+        "telemetry_disabled_in_installer_environment": true
+      }
     },
     {
       "id": "cc-switch",
