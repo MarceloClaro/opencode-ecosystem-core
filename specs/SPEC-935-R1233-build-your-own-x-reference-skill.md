@@ -60,19 +60,25 @@ ou implementação, preservando proveniência e fronteiras de licença.
 7. A integração não habilita nem autoriza o conector Tunnel no workspace ou na
    conversa ChatGPT; essa configuração externa não é controlada pelo Core local.
 
-## Critérios de aceitação
+## Critérios de aceitação executáveis
 
-- RED válido antes de adicionar os artefatos de integração.
-- Manifesto JSON válido, commit completo de 40 caracteres, URL canônica e
-  distinção explícita entre declaração CC0 do README e metadado `null` da API.
-- `installed`, `executed`, `enabled` e `mcp_enabled` permanecem `false`, com
-  adoção `reference_only`.
-- Skill fica em diretório de descoberta automática do projeto, contém a URL e
-  o commit fixado, descreve roteiro e saída, e declara limites sobre licenças e
-  execução de fontes vinculadas.
-- Testes focais são offline e não baixam nem executam conteúdo de terceiros.
-- `python3 -m marceloclaro.cli doctor` executado pelo `.venv` continua sem
-  falhas; `git diff --check` passa.
+- `R1233-PROVENANCE` O manifesto fixa repositório e commit observado, registra a
+  assinatura declarada pela API e distingue CC0 declarado no README de licença
+  não informada pela API e de revisão jurídica não realizada.
+- `R1233-REFERENCE-ONLY` A adoção permanece `reference_only`; instalação,
+  execução, ativação e MCP permanecem falsos, e nenhum conteúdo upstream é
+  importado.
+- `R1233-SKILL` A skill é descoberta no diretório de projeto, cita URL e commit
+  fixados, descreve fluxo e saída originais e preserva a licença independente
+  de cada recurso vinculado.
+
+## Verificação e limites
+
+- Executar primeiro os testes novos e registrar RED antes de adicionar o
+  manifesto e a skill. Os testes são offline e não baixam nem executam conteúdo
+  de terceiros.
+- Executar testes focais, `python3 -m marceloclaro.cli doctor` pelo `.venv` e
+  `git diff --check`.
 - Mudanças preexistentes em `SPEC-935-R1232` e artefatos associados são
   preservadas; nenhum estado externo é declarado executado ou habilitado.
 
