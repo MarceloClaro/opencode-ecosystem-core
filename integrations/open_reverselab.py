@@ -13,8 +13,10 @@ import json
 import os
 from pathlib import Path
 import subprocess
-import sys
-import tomllib
+try:
+    import tomllib
+except ModuleNotFoundError:  # Python 3.10 compatibility without a new dependency.
+    tomllib = None  # type: ignore[assignment]
 from typing import Any, Callable, Mapping, Sequence
 
 
@@ -169,7 +171,7 @@ def _absolute_checkout(path: str | os.PathLike[str]) -> Path:
     for component in candidate.parts[1:]:
         cursor = cursor / component
         try:
-            mode = cursor.lstat().st_mode
+            cursor.lstat()
         except OSError as error:
             raise CheckoutValidationError("checkout_not_found", "O caminho local informado não existe.") from error
         if cursor.is_symlink():
@@ -247,13 +249,43 @@ def _git_probe(root: Path, args: Sequence[str], runner: Runner | None) -> subpro
     return result
 
 
-def inspect_checkout(path: str | os.PathLike[str], *, runner: Runner | None = None) -> dict[str, Any]:
-    """Inspect a user-supplied local checkout without importing or running it."""
+def _read_project_metadata(project_file: Path) -> Mapping[str, Any]:
+    text = project_file.read_text(encoding="utf-8")
+    if tomllib is not None:
+        parsed = tomllib.loads(text)
+        project = parsed.get("project")
+        return project if isinstance(project, Mapping) else {}
+
+    # The source contract uses three simple quoted TOML strings. On Python 3.10,
+    # parse only those fields under [project] rather than adding a dependency.
+    project: dict[str, str] = {}
+    in_project = False
+    for raw_line in text.splitlines():
+        line = raw_line.strip()
+        if line.startswith("[") and line.endswith("]"):
+            if in_project:
+                break
+            in_project = line == "[project]"
+            continue
+        if not in_project or "=" not in line:
+            continue
+        key, value = (part.strip() for part in line.split("=", 1))
+        if key in {"name", "version", "license"}:
+            if len(value) >= 2 and value[0] == value[-1] and value[0] in {"'", '"'}:
+                project[key] = value[1:-1]
+    return project
+
+
+def _inspect_checkout(path: str | os.PathLike[str], *, runner: Runner | None = None) -> dict[str, Any]:
+    """Internal validating path; never imports or runs the checkout."""
     manifest = load_manifest()
     errors = validate_manifest(manifest)
     if errors:
         raise CheckoutValidationError("invalid_manifest", "; ".join(errors))
     root = _absolute_checkout(path)
+    git_marker = root / ".git"
+    if git_marker.is_symlink() or not (git_marker.is_dir() or git_marker.is_file()):
+        raise CheckoutValidationError("not_git_root", "O checkout precisa ter metadado Git regular, não symlink.")
 
     top_level = _git_probe(root, ("rev-parse", "--show-toplevel"), runner).stdout.strip()
     try:
@@ -278,10 +310,9 @@ def inspect_checkout(path: str | os.PathLike[str], *, runner: Runner | None = No
     if "Apache License" not in license_text or "Version 2.0" not in license_text:
         raise CheckoutValidationError("root_license_mismatch", "A declaração LICENSE raiz não corresponde ao registro observado.")
     try:
-        project_data = tomllib.loads(project_file.read_text(encoding="utf-8"))
-    except (OSError, tomllib.TOMLDecodeError) as error:
+        project = _read_project_metadata(project_file)
+    except (OSError, ValueError) as error:
         raise CheckoutValidationError("mcp_metadata_invalid", "pyproject.toml do MCP não pôde ser validado.") from error
-    project = project_data.get("project")
     if not isinstance(project, Mapping) or (
         project.get("name") != "reverselab-tools-mcp"
         or project.get("version") != "0.1.0"
@@ -306,9 +337,25 @@ def inspect_checkout(path: str | os.PathLike[str], *, runner: Runner | None = No
     }
 
 
+def inspect_checkout(path: str | os.PathLike[str], *, runner: Runner | None = None) -> dict[str, Any]:
+    """Inspect a user-supplied checkout and return structured failure states."""
+    try:
+        return _inspect_checkout(path, runner=runner)
+    except CheckoutValidationError as error:
+        return {
+            "status": error.status,
+            "error": str(error),
+            "code_imported": False,
+            "code_executed": False,
+            "mcp_enabled": False,
+        }
+
+
 def mcp_config(path: str | os.PathLike[str], *, runner: Runner | None = None) -> dict[str, Any]:
     """Emit an OpenCode v2 config fragment with the external server disabled."""
     inspected = inspect_checkout(path, runner=runner)
+    if inspected.get("status") != "ready":
+        raise CheckoutValidationError(str(inspected.get("status", "checkout_invalid")), str(inspected.get("error", "Checkout inválido.")))
     server = {
         "type": "local",
         "command": [
@@ -336,6 +383,7 @@ def mcp_config(path: str | os.PathLike[str], *, runner: Runner | None = None) ->
             "OpenCode MCP schema v2",
             "uv and MCP dependencies must already be available",
             "enabling the server requires a separate explicit user decision",
+            "review inherited environment exposure before activation",
         ],
         "config": {"mcp": {"servers": {"reverse-lab-tools": server}}},
     }
@@ -362,7 +410,7 @@ def main(argv: Sequence[str] | None = None, *, runner: Runner | None = None) -> 
         else:
             result = mcp_config(args.path, runner=runner)
         _emit(result)
-        return 0 if result.get("status") not in {"invalid_manifest"} else 2
+        return 0 if result.get("status") in {"metadata_only", "ready", "candidate_disabled"} else 2
     except CheckoutValidationError as error:
         _emit({"status": error.status, "error": str(error), "runtime": {"executed": False, "mcp_enabled": False}})
         return 2
