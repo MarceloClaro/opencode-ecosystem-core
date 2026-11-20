@@ -460,7 +460,9 @@ def _write_install_receipt(path: Path, data: Mapping[str, Any]) -> None:
             stream.write("\n")
             stream.flush()
             os.fsync(stream.fileno())
-        os.replace(temporary, path)
+        # Hard-link publication is atomic and fails if another file already owns
+        # the destination; never replace an operator-created receipt.
+        os.link(temporary, path)
     finally:
         temporary.unlink(missing_ok=True)
 
@@ -473,10 +475,10 @@ def install_isolated(
 ) -> dict[str, Any]:
     """Install pinned source/dependencies only on explicit confirmation; never start MCP."""
     plan = install_plan()
-    if not yes:
-        return plan
     if isinstance(timeout, bool) or not isinstance(timeout, int) or timeout <= 0 or timeout > MAX_INSTALL_TIMEOUT_SECONDS:
         raise ValueError(f"timeout deve estar entre 1 e {MAX_INSTALL_TIMEOUT_SECONDS} segundos.")
+    if not yes:
+        return plan
 
     paths = plan["paths"]
     checkout = Path(paths["checkout"])
@@ -511,9 +513,15 @@ def install_isolated(
 
         checkout.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
         _assert_no_symlink_components(checkout.parent)
-        cache.mkdir(mode=0o700, exist_ok=True)
-        private_home.mkdir(mode=0o700, exist_ok=True)
-        (Path(paths["private_home"]) / ".config").mkdir(mode=0o700, exist_ok=True)
+        for private_directory in (cache, private_home):
+            if private_directory.exists() and not private_directory.is_dir():
+                raise CheckoutValidationError("managed_path_conflict", f"Caminho privado não é diretório: {private_directory}.")
+            private_directory.mkdir(mode=0o700, exist_ok=True)
+        config_home = Path(paths["private_home"]) / ".config"
+        _assert_no_symlink_components(config_home)
+        if config_home.exists() and not config_home.is_dir():
+            raise CheckoutValidationError("managed_path_conflict", "XDG_CONFIG_HOME privado não é diretório.")
+        config_home.mkdir(mode=0o700, exist_ok=True)
 
         invoke = runner or subprocess.run
         environment_vars = dict(plan["environment"])
@@ -853,12 +861,23 @@ def mcp_config(path: str | os.PathLike[str], *, runner: Runner | None = None) ->
     inspected = inspect_checkout(path, runner=runner)
     if inspected.get("status") != "ready":
         raise CheckoutValidationError(str(inspected.get("status", "checkout_invalid")), str(inspected.get("error", "Checkout inválido.")))
-    server = {
-        "type": "local",
-        "command": [
+    paths = installation_paths()
+    managed = Path(inspected["root"]) == Path(paths["checkout"])
+    installed = managed and managed_installation_status().get("status") == "installed"
+    if installed:
+        lock = verify_pinned_lockfile(inspected["root"], runner=runner)
+        if not lock.get("valid"):
+            raise CheckoutValidationError("lockfile_validation_failed", "O lockfile do checkout gerenciado diverge do pin R1238.")
+        python = Path(paths["environment"]) / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
+        command = [str(python), inspected["entrypoint"]]
+    else:
+        command = [
             "uv", "run", "--no-sync", "--project", inspected["mcp_project"],
             "python", inspected["entrypoint"],
-        ],
+        ]
+    server = {
+        "type": "local",
+        "command": command,
         "cwd": inspected["root"],
         "disabled": True,
     }
@@ -870,7 +889,7 @@ def mcp_config(path: str | os.PathLike[str], *, runner: Runner | None = None) ->
             "legal_review": "not_performed",
         },
         "runtime": {
-            "installed": False,
+            "installed": bool(installed),
             "executed": False,
             "enabled": False,
             "mcp_enabled": False,
@@ -891,23 +910,28 @@ def _emit(data: Mapping[str, Any]) -> None:
 
 
 def main(argv: Sequence[str] | None = None, *, runner: Runner | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Adaptador OpenReverseLab somente leitura do Core")
+    parser = argparse.ArgumentParser(description="Adaptador OpenReverseLab com instalação isolada e ativação desabilitada")
     subparsers = parser.add_subparsers(dest="operation", required=True)
     subparsers.add_parser("status", help="valida apenas o manifesto local")
     inspect_parser = subparsers.add_parser("inspect", help="inspeciona checkout local fixado sem executar seu código")
     inspect_parser.add_argument("--path", required=True, help="caminho absoluto do checkout local")
     config_parser = subparsers.add_parser("config", help="emite fragmento MCP desabilitado em stdout")
     config_parser.add_argument("--path", required=True, help="caminho absoluto do checkout local")
+    install_parser = subparsers.add_parser("install", help="instala commit e dependências isoladas; exige --yes para executar")
+    install_parser.add_argument("--yes", action="store_true", help="confirmar instalação no prefixo gerenciado")
+    install_parser.add_argument("--timeout", type=int, default=MAX_INSTALL_TIMEOUT_SECONDS)
     args = parser.parse_args(argv)
     try:
         if args.operation == "status":
             result = status()
         elif args.operation == "inspect":
             result = inspect_checkout(args.path, runner=runner)
+        elif args.operation == "install":
+            result = install_isolated(yes=args.yes, timeout=args.timeout, runner=runner)
         else:
             result = mcp_config(args.path, runner=runner)
         _emit(result)
-        return 0 if result.get("status") in {"metadata_only", "ready", "candidate_disabled"} else 2
+        return 0 if result.get("status") in {"metadata_only", "ready", "candidate_disabled", "dry_run", "installed", "already_installed"} else 2
     except CheckoutValidationError as error:
         _emit({"status": error.status, "error": str(error), "runtime": {"executed": False, "mcp_enabled": False}})
         return 2

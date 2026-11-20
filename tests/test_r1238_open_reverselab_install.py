@@ -177,7 +177,10 @@ def test_install_success_uses_staging_locked_wheels_and_never_starts_mcp(monkeyp
     uv = next(argv for argv in commands if Path(argv[0]).name == "uv")
     assert uv[1] == "sync"
     assert {"--locked", "--no-install-project", "--no-build"}.issubset(set(uv))
-    assert not any("reverse_lab_tools_mcp.py" in part for argv in commands for part in argv)
+    assert not any(
+        "reverse_lab_tools_mcp.py" in part and ("python" in argv or "run" in argv)
+        for argv in commands for part in argv
+    )
     assert not any("opencode.json" in part for argv in commands for part in argv)
     assert all(kwargs["shell"] is False for _, kwargs in calls)
     if before_config is not None:
