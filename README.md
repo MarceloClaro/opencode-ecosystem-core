@@ -538,9 +538,12 @@ projetos como MLT, libopenshot e OpenTimelineIO está registrada em
 `reports/r1046/github-research.json`.
 
 **MCPs locais:** `editor-local` expõe `editor_open`, `editor_list_projects`,
-`editor_plan`, `editor_render` e `editor_status`; `dubbing-local` expõe o lote de
-dublagem. Render real exige arquivo de aprovação do operador; dry-run é livre.
-Caminhos são confinados à raiz configurada; não há shell arbitrário.
+`editor_plan`, `editor_render`, `editor_status`, `editor_analyze_scenes` e
+`editor_propose_auto_cuts`; `dubbing-local` expõe o lote de dublagem. Análise de
+cenas e cortes Auto-Editor são locais e revisáveis; propostas ficam `pending` e
+nunca renderizam automaticamente. Render real exige arquivo de aprovação do
+operador; dry-run é livre. Caminhos são confinados à raiz configurada; não há
+shell arbitrário.
 
 **Dublagem (P0006 e lote):** o pipeline separa ASR, diarização, tradução, TTS,
 stems, mix e legenda. O piloto P0006 permanece **reprovado para montagem**:
@@ -720,7 +723,7 @@ dublagem](docs/DUBBING_PIPELINE_R1041_R1045.md), [editor universal](docs/EDITOR_
 [evidência real R1026](reports/r1046/QUANTUM-REAL-EVIDENCE.md)
 e [catálogo de ferramentas](docs/VIDEO_EDITOR_TOOLCHAIN_R1043.md).
 
-**Limites:** o catálogo de 46 ferramentas/modelos não instala nem executa nada;
+**Limites:** o catálogo de 47 ferramentas/modelos não instala nem executa nada;
 licença é triagem, não parecer jurídico. Diarização é hipótese, não identidade.
 Nenhuma publicação foi feita; upload exige direito de distribuição e credenciais
 OAuth, documentados em `reports/r1045/UPLOAD-BLOCKERS.md`.

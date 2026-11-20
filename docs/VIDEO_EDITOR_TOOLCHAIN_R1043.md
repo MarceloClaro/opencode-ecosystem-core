@@ -1,7 +1,8 @@
 # Ferramentas, modelos e skills para o editor universal — R1043
 
-Data da curadoria: 2026-11-02. Fontes: livros e skills locais em
-`biblioteca ai/`, `.claude/skills/`, GitHub API e Hugging Face API.
+Data da curadoria original: 2026-11-02; entradas R1230 atualizadas em
+2026-11-20. Fontes: livros e skills locais em `biblioteca ai/`, `.claude/skills/`,
+GitHub API, Hugging Face API e documentação upstream.
 Nada foi clonado, instalado ou executado sem autorização; o que foi instalado
 está marcado. Licença é triagem, não parecer jurídico.
 
@@ -36,8 +37,8 @@ Sinais de estrelas/licença foram lidos na API em 2026-11-02; não são benchmar
 | `krillinai/OpenCreator` | 14.098 | Apache-2.0 | localização/dublagem | referência |
 | `Vincentwei1021/video-shotcraft` | 16.180 | Apache-2.0 | receitas Remotion | referência |
 | `kajisho5/ffmpeg-skill` | 4.382 | MIT | 42 ferramentas FFmpeg + MCP | referência para ampliar operações |
-| `Breakthrough/PySceneDetect` | 5.321 | BSD-3 | detecção de cortes | candidato |
-| `WyattBlue/auto-editor` | 5.721 | Unlicense | corte por silêncio/movimento | candidato |
+| `Breakthrough/PySceneDetect` | 5.321 | BSD-3 | detecção de cortes | integrado: marcadores CFR revisáveis |
+| `WyattBlue/auto-editor` | 5.721 | Unlicense | corte por silêncio/movimento | integrado: export v1 pendente de revisão |
 | `AcademySoftwareFoundation/OpenTimelineIO` | 2.053 | Apache-2.0 | interchange de timeline | candidato |
 | `mifi/editly` | 5.577 | MIT | edição declarativa | candidato |
 | `bytedance/LatentSync` | 6.236 | Apache-2.0 + OpenRAIL++ | lip sync | candidato GPU |
@@ -65,6 +66,7 @@ Downloads/likes são sinais de uso, não prova de qualidade.
 | `Wan-AI/Wan2.1-VACE-14B` | 116.242 | Apache-2.0 | edição/controle de vídeo | candidato GPU |
 | `Wan-AI/Wan2.2-T2V-A14B` | 3.507 | Apache-2.0 | geração de vídeo | candidato GPU |
 | `Lightricks/LTX-Video` | 1.123.672 | custom | geração de vídeo | revisar termos |
+| `meituan-longcat/LongCat-Video` | 3.839 | MIT | geração de clipes/assets | referência opcional; pesos não baixados; GPU e grande download |
 | `tencent/HunyuanVideo` | 20.235 | custom | geração de vídeo | revisar termos |
 | `genmo/mochi-1-preview` | 3.585 | Apache-2.0 | geração de vídeo | candidato GPU |
 | `facebook/sam2-hiera-large` | 13.850 | Apache-2.0 | segmentação/tracking | candidato GPU |
@@ -87,6 +89,10 @@ Ambiente isolado: `~/.cache/opencode-pilot/venvs/r1044-diarize`.
 - **Remotion CLI 4.0.540** em `editor-workspace/remotion-smoke`, com 244
   pacotes, `--ignore-scripts`, aceite de host em
   `~/.config/opencode/remotion-license-ack.json`.
+- **FFmpeg/ffprobe n8.1.3** e **Auto-Editor 31.9.0** em `~/.local/bin`; os
+  binários foram instalados em escopo de usuário após conferência dos digests
+  SHA-256 publicados nas APIs de release do GitHub. PySceneDetect 0.7.2 foi
+  instalado no `.venv` com o manifesto opcional `requirements-video-analysis.txt`.
 
 O Remotion foi verificado com `remotion --version` e
 `remotion compositions src/index.ts`: bundle e navegador iniciaram e a
@@ -101,9 +107,10 @@ locutor como nome ou gênero.
 
 ## O que ainda não foi instalado
 
-OpenTimelineIO, MoviePy, PySceneDetect, auto-editor, Motion Canvas,
-Chatterbox/Kokoro e modelos generativos de vídeo. O backend Remotion existe e
-o CLI foi instalado; render continua exigindo aprovação separada.
+OpenTimelineIO, MoviePy, Motion Canvas, Chatterbox/Kokoro e modelos generativos
+de vídeo. LongCat-Video é somente referência; seus pesos não foram baixados.
+O backend Remotion existe e o CLI foi instalado; render continua exigindo
+aprovação separada.
 
 ## Decisões de arquitetura
 

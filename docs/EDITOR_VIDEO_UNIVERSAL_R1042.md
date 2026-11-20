@@ -20,6 +20,8 @@ FFmpeg, Remotion e adaptadores explícitos.
 | `color_grade` | FFmpeg | `eq` + `colorbalance`, SDR paramétrico, sem LUT/HDR |
 | `remotion` | Remotion CLI | composição React, com licença e aprovação |
 | `dub` | adaptador | bloqueia sem adaptador; não inventa voz |
+| `scene_markers` | PySceneDetect | marcadores de cena em CFR, somente análise |
+| `rough_cut_proposal` | Auto-Editor v1 | proposta de cortes `pending`, sem render |
 
 `multitrack`, `transition` e `color_grade` foram implementados na R1046. Ainda
 **não** implementados: UI NLE, keyframes animáveis, multicam, tracking
@@ -97,17 +99,50 @@ Recibo: `reports/r1043/remotion-install-receipt.json`. Render continua exigindo
 
 ## MCP `editor-local`
 
-Ferramentas (5, superfície pequena):
+Ferramentas (7, superfície pequena):
 
 - `editor_open(media_path, project_id)`;
 - `editor_list_projects()`;
 - `editor_plan(project_id, operation, params)`;
 - `editor_render(plan_id, dry_run=True)`;
-- `editor_status()`.
+- `editor_status()` (contagens e versões de FFmpeg/ffprobe/Auto-Editor);
+- `editor_analyze_scenes(project_id, source_id, threshold=27.0, min_scene_len=15)`;
+- `editor_propose_auto_cuts(project_id, source_id, timeout=300)`.
 
 Raiz configurada por `EDITOR_PROJECT_ROOT`; caminhos do cliente são relativos e
 confinados. Não há shell, URL, upload ou comando arbitrário. Respostas são
 resumidas; detalhes ficam nos arquivos locais com hash.
+
+### Análise de cenas e proposta de cortes — R1230
+
+Instale PySceneDetect no ambiente Python do editor, de forma opcional:
+
+```bash
+.venv/bin/python -m pip install -r requirements-video-analysis.txt
+```
+
+FFmpeg e ffprobe precisam estar no `PATH` do processo do editor; Auto-Editor
+também é uma CLI externa opcional. `editor_status()` consulta e mostra o caminho,
+a versão e o código de saída de cada binário, além da presença do módulo
+PySceneDetect. A presença do executável não valida codecs ou qualidade.
+
+Depois de abrir e registrar uma fonte no projeto, chame `editor_analyze_scenes`
+para criar `editor-analysis/<sha256>.json` ou
+`editor_propose_auto_cuts` para criar `editor-proposals/<sha256>.json`. As duas
+ferramentas aceitam apenas fontes cadastradas, verificam o hash da mídia e ficam
+confinadas à raiz do projeto. Os cortes permanecem em
+`approval_state: "pending"`; o resultado do Auto-Editor é export v1 convertido
+para frames somente quando todos os limites se alinham exatamente a uma fonte
+CFR. VFR, timebase ambígua e retiming são recusados. Nenhuma dessas chamadas
+altera a mídia nem produz render; a decisão editorial e a criação de um plano de
+render continuam manuais e sujeitas ao gate de aprovação já existente.
+
+O fluxo não instala WhisperX: `integrations.video_cpu_pipeline.transcribe_cpu`
+já solicita `word_timestamps=True` ao faster-whisper. Reavaliar outro alinhador
+somente se uma falha concreta for medida. LongCat-Video consta no catálogo como
+gerador opcional `reference_only`; nenhum peso foi baixado e não substitui o
+editor. Remotion segue como backend de animação programática, com os mesmos
+gates de licença e aprovação.
 
 ## Outros motores
 
@@ -126,7 +161,7 @@ Entram como adaptadores/plugins, nunca como dependência implícita:
 - `video-editor-universal` orquestra as 10 skills `cp-*`/`meia-*` extraídas do
   pacote **Caixa Preta IA** e o método dos dois livros de Tiago Lemos.
 - `docs/VIDEO_EDITOR_TOOLCHAIN_R1043.md` e `reports/r1043/toolchain.json`
-  registram 46 ferramentas/modelos GitHub/Hugging Face, licença, papel e
+  registram 47 ferramentas/modelos GitHub/Hugging Face, licença, papel e
   status. O catálogo não instala nem executa nada.
 
 `register_operation(name, validate, plan)` adiciona operações;
