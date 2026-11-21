@@ -25766,6 +25766,29 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1271",
+      "objective": "SPEC-935-R1268: registrar referência AT-SPI obsoleta durante inspeção do resultado do carregamento",
+      "changes": [
+        "A ação aprovada sobre o ref de Close foi recusada pelo backend como STALE_REF; nenhuma repetição foi feita.",
+        "O listener 127.0.0.1:9876 permanece não observado; configuração OpenCode não alterada."
+      ],
+      "score": 0.4,
+      "lessons": [
+        "Refs AT-SPI podem expirar por mudança assíncrona da árvore; obter snapshot novo antes de ação e não reutilizar aprovação consumida."
+      ],
+      "timestamp": 1795219869.1865656,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
