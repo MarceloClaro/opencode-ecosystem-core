@@ -25812,6 +25812,32 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1273",
+      "objective": "SPEC-935-R1268: registrar handshake/catalog OpenCode e falha formal de custódia, sem ultrapassar o limite de tools/list",
+      "changes": [
+        "OpenCode v2.2.7 registrou conexão MCP Burp com 24 ferramentas listadas; somente handshake/catalog observado.",
+        "O transporte registrou erros de stream SSE HTTP 404 após o catálogo; a conexão TCP permaneceu loopback no último snapshot.",
+        "pytest focal passou 3/3, mas TDD GREEN continua rejeitado e SpecVerifier falhou fechado por falta de TrustedTestEvidence/par válido."
+      ],
+      "score": 0.4,
+      "lessons": [
+        "Distinguir catálogo inicial de estabilidade do transporte de notificações; registrar reconexões 404 sem reexecutar ferramentas.",
+        "A validação operacional pelo daemon existente não substitui a conexão isolada; se a CLI isolada não carregar configuração, reportar o bloqueio em vez de alegar execução.",
+        "Não reescrever recibos TDD; mudanças de configuração podem invalidar pareamento e exigem suporte formal ao caso ou revisão humana antes de nova rodada."
+      ],
+      "timestamp": 1795222336.3489685,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
