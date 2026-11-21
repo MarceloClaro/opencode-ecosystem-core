@@ -11376,6 +11376,12 @@
         "type": "remote",
         "url": "http://127.0.0.1:8765/mcp",
         "oauth": false
+      },
+      "burp": {
+        "type": "remote",
+        "url": "http://127.0.0.1:9876/mcp",
+        "protocol": "legacy",
+        "disabled": false
       }
     }
   },
@@ -11598,5 +11604,12 @@
         "monitoramento_de_padroes"
       ]
     }
-  }
+  },
+  "permissions": [
+    {
+      "action": "burp_*",
+      "resource": "*",
+      "effect": "deny"
+    }
+  ]
 }
