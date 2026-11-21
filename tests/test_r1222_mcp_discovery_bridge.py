@@ -2,13 +2,12 @@
 from __future__ import annotations
 
 import asyncio
+import ast
 import importlib
+import io
 import json
-import os
 from pathlib import Path
-import select
-import subprocess
-import sys
+import queue
 import zipfile
 
 import pytest
@@ -44,7 +43,7 @@ def test_discover_result_advertises_only_legacy_protocol(bridge):
     assert result['resultType'] == 'complete'
     assert result['supportedVersions'] == ['2025-11-25']
     assert '2026-07-28' not in result['supportedVersions']
-    assert set(result['capabilities']) >= {'tools', 'resources', 'prompts'}
+    assert result['capabilities'] == {'tools': {'listChanged': False}}
     info = result['_meta']['io.modelcontextprotocol.serverInfo']
     assert info == {'name': 'ecosystem-network', 'version': '1.28.1'}
     assert result['ttlMs'] == 0
@@ -76,64 +75,117 @@ def test_process_line_answers_discover_without_child(bridge):
     assert json.loads(to_client[0]) == parsed
 
 
-def test_process_line_forwards_all_other_messages(bridge):
+def test_process_line_forwards_only_valid_protocol_messages(bridge):
     sent = []
 
     async def send(line):
         sent.append(line)
 
     for line in (
-        json.dumps({'jsonrpc': '2.0', 'id': 1, 'method': 'initialize', 'params': {}}) + '\n',
+        json.dumps({'jsonrpc': '2.0', 'id': 1, 'method': 'ping', 'params': {}}) + '\n',
         json.dumps({'jsonrpc': '2.0', 'method': 'notifications/initialized'}) + '\n',
-        'linha-invalida\n',
     ):
         assert asyncio.run(bridge.process_line(line, send)) is None
-    assert sent == [
-        json.dumps({'jsonrpc': '2.0', 'id': 1, 'method': 'initialize', 'params': {}}) + '\n',
-        json.dumps({'jsonrpc': '2.0', 'method': 'notifications/initialized'}) + '\n',
-        'linha-invalida\n',
+    assert [json.loads(line) for line in sent] == [
+        {'jsonrpc': '2.0', 'id': 'tunnel-1', 'method': 'ping', 'params': {}},
+        {'jsonrpc': '2.0', 'method': 'notifications/initialized'},
     ]
 
 
-def _write(proc, payload):
-    proc.stdin.write(json.dumps(payload, ensure_ascii=False) + '\n')
-    proc.stdin.flush()
+CORE_NAMES = {
+    'ecosystem_agent_profile', 'ecosystem_local_ci', 'ecosystem_knowledge_plan',
+    'ecosystem_scientific_run', 'ecosystem_scientific_verify',
+    'ecosystem_integration_status', 'ecosystem_rea', 'ecosystem_production',
+    'ecosystem_code_context', 'ecosystem_browser', 'ecosystem_scientific_runtime',
+    'ecosystem_dataset_download', 'ecosystem_dataset_custom',
+    'ecosystem_scientific_plugins', 'ecosystem_gemini_notebook',
+    'ecosystem_artifact_handoff', 'ecosystem_skill_plan',
+    'ecosystem_claude_bughunter_plan', 'ecosystem_library_search',
+    'ecosystem_quantum_catalog', 'ecosystem_knowledge_query',
+    'ecosystem_text_spec', 'ecosystem_status', 'ecosystem_route',
+    'ecosystem_run', 'ecosystem_workflow', 'ecosystem_workflow_status',
+}
+READ_NAMES = {
+    'ecosystem_integration_status', 'ecosystem_artifact_handoff',
+    'ecosystem_skill_plan', 'ecosystem_claude_bughunter_plan',
+    'ecosystem_library_search', 'ecosystem_quantum_catalog',
+    'ecosystem_knowledge_query', 'ecosystem_status', 'ecosystem_route',
+    'ecosystem_workflow_status',
+}
 
 
-def _read_response(proc, request_id, timeout=20):
-    ready, _, _ = select.select([proc.stdout], [], [], timeout)
-    if not ready:
-        raise AssertionError(f'sem resposta para id={request_id}')
-    while True:
-        line = proc.stdout.readline()
-        if not line:
-            raise AssertionError(f'stdout fechado antes do id={request_id}')
-        payload = json.loads(line)
-        if payload.get('id') == request_id:
-            return payload
+def test_core_tools_match_named_contract_without_import_or_call(bridge):
+    tree = ast.parse((ROOT / 'integrations/ecosystem_mcp.py').read_text())
+    names = {node.name for node in tree.body
+             if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+             and any(isinstance(dec, ast.Call) and isinstance(dec.func, ast.Attribute)
+                     and isinstance(dec.func.value, ast.Name)
+                     and dec.func.value.id == 'mcp' and dec.func.attr == 'tool'
+                     for dec in node.decorator_list)}
+    assert names == CORE_NAMES
+    assert bridge.CORE_TOOL_NAMES == CORE_NAMES
 
 
-def test_bridge_end_to_end_discover_initialize_and_tools(bridge):
-    proc = subprocess.Popen(
-        [sys.executable, '-B', '-m', 'integrations.ecosystem_mcp_tunnel'],
-        cwd=ROOT,
-        stdin=subprocess.PIPE,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-        bufsize=1,
-    )
-    try:
-        _write(proc, {
+def test_bridge_end_to_end_discover_initialize_and_tools_with_mock_child(bridge, monkeypatch, tmp_path):
+    messages = queue.Queue()
+    forwarded = []
+
+    class Input:
+        def write(self, line):
+            payload = json.loads(line)
+            forwarded.append(payload)
+            method = payload['method']
+            if method == 'initialize':
+                result = {'protocolVersion':'2025-11-25',
+                          'capabilities':{'tools':{},'resources':{},'prompts':{}},
+                          'serverInfo':{'name':'mock-core','version':'test'}}
+            elif method == 'tools/list':
+                result = {'tools':[{'name':name,'inputSchema':{'type':'object'}}
+                                   for name in sorted(CORE_NAMES | {'future_admin','burp_scan'})]}
+            elif method == 'tools/call':
+                assert payload['params'] == {'name':'ecosystem_integration_status','arguments':{}}
+                result = {'content':[{'type':'text','text':'mock-status'}],
+                          'structuredContent':{'executed':False,'execution_verified':False}}
+            else:
+                assert method == 'notifications/initialized'
+                return
+            messages.put(json.dumps({'jsonrpc':'2.0','id':payload['id'],'result':result})+'\n')
+
+        def flush(self):
+            pass
+
+        def close(self):
+            messages.put(None)
+
+    class Output:
+        def __iter__(self):
+            while True:
+                line = messages.get(timeout=5)
+                if line is None:
+                    return
+                yield line
+
+    class Child:
+        stdin = Input()
+        stdout = Output()
+        def wait(self, timeout=None):
+            return 0
+
+    def popen(argv, **kwargs):
+        assert argv[-1] == 'integrations.ecosystem_mcp'
+        assert kwargs['stderr'] == bridge.subprocess.DEVNULL
+        return Child()
+
+    policy = bridge.ToolPolicy(root=tmp_path, authorizations=tmp_path/'absent')
+    session = bridge.TunnelBridge(policy)
+    monkeypatch.setattr(bridge, 'TunnelBridge', lambda: session)
+    monkeypatch.setattr(bridge.subprocess, 'Popen', popen)
+    payloads = [{
             'jsonrpc': '2.0',
             'id': 1,
             'method': 'server/discover',
             'params': {'_meta': {}},
-        })
-        discover = _read_response(proc, 1)
-        assert discover['result']['supportedVersions'] == ['2025-11-25']
-
-        _write(proc, {
+        }, {
             'jsonrpc': '2.0',
             'id': 2,
             'method': 'initialize',
@@ -142,17 +194,8 @@ def test_bridge_end_to_end_discover_initialize_and_tools(bridge):
                 'capabilities': {},
                 'clientInfo': {'name': 'r1222-probe', 'version': '1.0'},
             },
-        })
-        initialize = _read_response(proc, 2)
-        assert initialize['result']['protocolVersion'] == '2025-11-25'
-
-        _write(proc, {'jsonrpc': '2.0', 'method': 'notifications/initialized'})
-        _write(proc, {'jsonrpc': '2.0', 'id': 3, 'method': 'tools/list', 'params': {}})
-        tools = _read_response(proc, 3)
-        names = {item['name'] for item in tools['result']['tools']}
-        assert len(names) == 26
-        assert 'ecosystem_integration_status' in names
-        _write(proc, {
+        }, {'jsonrpc': '2.0', 'method': 'notifications/initialized'},
+        {'jsonrpc': '2.0', 'id': 3, 'method': 'tools/list', 'params': {}}, {
             'jsonrpc': '2.0',
             'id': 4,
             'method': 'tools/call',
@@ -160,25 +203,19 @@ def test_bridge_end_to_end_discover_initialize_and_tools(bridge):
                 'name': 'ecosystem_integration_status',
                 'arguments': {},
             },
-        })
-        called = _read_response(proc, 4)
-        result = called['result']
-        assert result.get('isError') is not True
-        report = result.get('structuredContent')
-        if not isinstance(report, dict):
-            report = json.loads(result['content'][0]['text'])
-        assert report['readiness']['state'] == 'CONFIG_ONLY'
-        assert report['readiness']['external_clients'] == 'not_observable'
-        assert report['executed'] is False
-        assert report['execution_verified'] is False
-    finally:
-        if proc.poll() is None:
-            proc.terminate()
-        try:
-            proc.wait(timeout=10)
-        except subprocess.TimeoutExpired:
-            proc.kill()
-            proc.wait(timeout=5)
+        }, {'jsonrpc':'2.0','id':5,'method':'tools/call',
+            'params':{'name':'burp_scan','arguments':{}}}]
+    output = io.StringIO()
+    monkeypatch.setattr(bridge.sys, 'stdin', io.StringIO(''.join(json.dumps(p)+'\n' for p in payloads)))
+    monkeypatch.setattr(bridge.sys, 'stdout', output)
+    assert bridge.main() == 0
+    responses = {p['id']:p for p in map(json.loads,output.getvalue().splitlines())}
+    assert responses[1]['result']['supportedVersions'] == ['2025-11-25']
+    assert responses[2]['result']['capabilities'] == {'tools':{'listChanged':False}}
+    assert {t['name'] for t in responses[3]['result']['tools']} == READ_NAMES
+    assert responses[4]['result']['structuredContent'] == {'executed':False,'execution_verified':False}
+    assert responses[5]['error']['code'] == -32602
+    assert [p['method'] for p in forwarded] == ['initialize','notifications/initialized','tools/list','tools/call']
 
 
 def test_runner_uses_discovery_bridge_by_default():
